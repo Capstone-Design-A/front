@@ -1,4 +1,4 @@
-// 공동구매 Item 컴포넌트
+// 공동구매 Item 컴포넌트입니다.
 import Button from './../components/button/Button'
 import Container from './shared/Container';
 import styles from './Group.module.css';
