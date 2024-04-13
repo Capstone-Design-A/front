@@ -1,0 +1,29 @@
+.banner {
+  position: relative;
+  /* background-image: linear-gradient(rgba(428, 220, 220, 0.9), rgba(201, 172, 172, 0.9)); */
+  background-image: #000;
+  background-repeat: no-repeat;
+  background-position: cover;
+  background-size: cover;
+  text-align: center;
+  height: 300px;
+  width: 100%;
+}
+
+.banner :hover{
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 80%;
+  transition: all 1s;
+}
+
+/* 반응형 구현 필요 */
+.banner img {
+  width: 100%;
+}
+
+.back {
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-position: cover;
+  background-size: cover;
+}

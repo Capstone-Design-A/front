@@ -1,0 +1,50 @@
+.courseItem .thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-top: 0px;
+}
+
+.courseItem .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 10px;
+  padding: 20px 20px 0px;
+  background-color: #f9f9f9;
+}
+
+.courseItem .title {
+  margin: 0 0 5px;
+  overflow: hidden;
+  font-size: 17px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.courseItem .description {
+  display: -webkit-box;
+  margin: 7px 0 5px;
+  padding: 0 0 10px 0;
+  overflow: hidden;
+  font-size: 17px;
+  font-weight: 500;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 17px;
+  font-weight: 300;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.courseItem .price {
+  display: -webkit-box;
+  margin: 0 0 20px;
+  overflow: hidden;
+  font-size: 17px;
+  font-weight: 900;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}

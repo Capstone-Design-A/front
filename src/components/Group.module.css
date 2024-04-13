@@ -1,0 +1,48 @@
+.banner img {
+  width: 390px;
+  margin-right: 900px;
+}
+
+.banner text {
+  margin-left: 900px
+}
+
+li {
+  position: flex; 
+}
+
+.page {
+  width: 100%;
+  background-image: url('../assets/img-group.png');
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: 40%;
+  height: 500px;
+  text-align: left;
+}
+
+.text {
+  padding: 20px 30px;
+}
+
+.price {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.button {
+  padding: 12px 70px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  cursor: pointer;
+  background-color: #48735d;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  margin: 10px 0px;
+}
+
+div.button {
+  display: inline-block;
+}

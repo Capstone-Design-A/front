@@ -1,0 +1,47 @@
+.category {
+  position: relative;
+  z-index: 1;
+  padding: 20px 0px 80px 0px;
+  background-color: #fff;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+ul.menu {
+  display: block;
+  align-items: center;
+  padding: 30px;
+  margin: 10px 0px;
+  list-style: none;
+  font-size: 18px;
+  background-color: #000;
+  opacity: 37%;
+  color: #fff;
+}
+
+ul.menu > li:not(:last-child) {
+  margin-right: 20px;
+}
+
+ul.menu a:hover,
+ul.menu a:active {
+  color: #fff;
+}
+
+.h1 {
+  font-size: 20px;
+  margin: 10px 0px 30px 0px;
+}
+
+.link{
+  margin: 10px 0px;
+}
+
+.home {
+  margin: 20px 0px 0px 0px;
+  background-image: #000;
+}

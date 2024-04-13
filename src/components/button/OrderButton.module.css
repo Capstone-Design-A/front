@@ -1,0 +1,24 @@
+.button {
+  padding: 13px 41px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background-color: #494949;
+  border-color: #48735d;
+  border-radius: 5px;
+  outline: none;
+}
+
+div.button {
+  display: inline-block;
+}
+
+.button.round {
+  padding: 15px 22px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #48735d;
+  background-color: #fff;
+  border-radius: 8px;
+}
