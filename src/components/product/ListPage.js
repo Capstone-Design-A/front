@@ -1,12 +1,8 @@
-import classNames from 'classnames';
-import Container from '../shared/Container';
-import styles from './ListPage.module.css';
+import classNames from "classnames";
+import Container from "../shared/Container";
+import styles from "./ListPage.module.css";
 
-function ListPage({
-  title = '',
-  description = '',
-  children,
-}) {
+function ListPage({ title = "", description = "", children }) {
   return (
     <>
       <div className={classNames(styles.bg)}>

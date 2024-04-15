@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-.banner :hover{
+.banner a:hover {
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 80%;
   transition: all 1s;
@@ -22,7 +22,10 @@
 }
 
 .back {
-  background-color: #000;
+  background-image: linear-gradient(
+    rgba(428, 220, 220, 0.9),
+    rgba(201, 172, 172, 0.9)
+  );
   background-repeat: no-repeat;
   background-position: cover;
   background-size: cover;

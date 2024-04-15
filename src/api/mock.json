@@ -1,2 +1,255 @@
-{"products":[{"id":"5e71ac5d8b427122575e1d92","title":"[영인산한우]","difficulty":1,"slug":"hanwoo","summary":"굿뜨래 한우 목심 600g","photoUrl":"img8","price":"17,900", "topics":[{"topic":{"id":".","slug":".","title":".","summary":"."}},{"topic":{"id":"5e71b98d855e806094b57ad0","slug":".","title":".","summary":"."}},{"topic":{"id":"5e71b9ce8b427122577e26f1","slug":".","title":".","summary":"."}},{"topic":{"id":"5e71ba1e855e806094b6ea9b","slug":".","title":".","summary":"."}}]},{"id":"5f44779ba1fe743841ae7939","title":"[영인산한우]","difficulty":2,"slug":"hanwoo2","summary":"굿뜨래 한우 목심 600g","photoUrl":"img8","price":"17,900", "topics":[{"topic":{"id":"5f4478daa1fe743841b42acf","slug":".","title":".","summary":"."}},{"topic":{"id":"5f4872fe372038687eb80444","slug":".","title":".","summary":"."}}]},{"id":"5e345223b3aa703b8a9a4f38","title":"[영인산한우]","difficulty":2,"slug":"hanwoo3","summary":"굿뜨래 한우 목심 600g","photoUrl":"img8","price":"17,900", "topics":[{"topic":{"id":"5e345230d909cbb85ba2eb41","slug":".","title":".","summary":"."}},{"topic":{"id":"5e345230d909cbb85ba2eb42","slug":".","title":".","summary":"."}},{"topic":{"id":"5e345230d909cbb85ba2eb43","slug":".","title":".","summary":"."}}]},{"id":"5e345223b3aa703b8a9a4f37","title":"[영인산한우]","difficulty":2,"slug":"hanwoo4","summary":"굿뜨래 한우 목심 600g","photoUrl":"img8","price":"17,900", "topics":[{"topic":{"id":"5e345230d909cbb85ba2eb3d","slug":".","title":".","summary":"."}},{"topic":{"id":"5e345230d909cbb85ba2eb3e","slug":".","title":".","summary":"."}},{"topic":{"id":"5e345230d909cbb85ba2eb3f","slug":".","title":".","summary":"."}},{"topic":{"id":"5e345230d909cbb85ba2eb40","slug":".","title":".","summary":"."}}]},{"id":"5e345223b3aa703b8a9a4f39","title":"[영인산한우]","difficulty":2,"slug":"hanwoo5","summary":"굿뜨래 한우 목심 600g","photoUrl":"img8","price":"17,900", "topics":[{"topic":{"id":"5e345230d909cbb85ba2eb45","slug":".","title":".","summary":"."}},{"topic":{"id":"5e345230d909cbb85ba2eb46","slug":".","title":".","summary":"."}},{"topic":{"id":"5e345230d909cbb85ba2eb47","slug":".","title":".","summary":"."}}]},{"id":"5e345223b3aa703b8a9a4f32","title":"[영인산한우]","difficulty":2,"slug":"hanwoo6","summary":"굿뜨래 한우 목심 600g","photoUrl":"img8","price":"17,900", "topics":[{"topic":{"id":"5e345230d909cbb85ba2eb38","slug":".","title":".","summary":"."}},{"topic":{"id":"5e345230d909cbb85ba2eb39","slug":".","title":".","summary":"."}},{"topic":{"id":"5e345230d909cbb85ba2eb3a","slug":".","title":".","summary":"."}},{"topic":{"id":"5e345230d909cbb85ba2eb3b","slug":".","title":".","summary":"."}},{"topic":{"id":"5e345230d909cbb85ba2eb3c","slug":".","title":".","summary":"."}}]}],
-"questions":[{"id":"616825","title":"상품 문의합니다","content":"상품 관련 문의드립니다.","answers":[{"createdAt":"2024-04-12T16:34:20.477Z","updatedAt":"2024-04-13T16:34:20.477Z","content":"답변내용","writer":{"name":"[영인산한우]"},"id":"CuN8x9cWKR"}],"createdAt":"2024-04-13T12:42:25.27Z","updatedAt":"2024-04-13T16:34:20.478Z","writer":{"name":"소비자이름"}},{"id":"616933d8715928349b3a11b7","title":"배송 문의","content":"배송 문의합니다.","answers":[{"createdAt":"2024-04-12T08:26:45.875Z","updatedAt":"2024-04-12T08:26:45.875Z","content":"답변 내용","writer":{"name":"소비자이름"},"id":"aE6CnXYTzj"}],"like":null,"likeCount":0,"totalLikeCount":0,"createdAt":"2024-04-12T07:55:04.808Z","updatedAt":"2024-04-12T08:26:45.88Z","writer":{"name":"소비자이름"}},{"id":"61690a","title":"상품 문의","content":"상품 문의합니다.","answers":[],"createdAt":"2024-04-11T04:57:48.152Z","updatedAt":"2024-04-11T04:57:48.467Z","writer":{"name":"소비자이름"}},{"id":"6168c5","title":"환불 문의","content":"환불 문의합니다.","answers":[{"createdAt":"2024-04-10T04:12:21.523Z","updatedAt":"2024-04-10T04:12:21.523Z","content":"답변드립니다.","writer":{"name":"[영인산한우]"},"id":"1aOaXCLtar"}],"createdAt":"2024-04-10T00:04:21.247Z","updatedAt":"2024-04-10T04:12:21.525Z","writer":{"name":"소비자이름"}},{"id":"616878","title":"배송 문의","content":"배송 문의합니다.","answers":[{"createdAt":"2024-04-09T04:15:29.513Z","updatedAt":"2024-04-09T04:15:29.513Z","content":"답변드립니다.","writer":{"name":"[영인산한우]"},"id":"JQk6tz8JdJ"}],"createdAt":"2024-04-09T18:34:02.059Z","updatedAt":"2024-04-09T06:26:50.477Z","writer":{"name":"소비자이름"}},{"id":"616861","title":"상품 문의","content":"상품 문의드립니다.","answers":[{"createdAt":"2024-04-08T04:32:30.64Z","updatedAt":"2024-04-08T04:32:30.64Z","content":"답변드립니다.","writer":{"name":"[영인산한우]"},"id":"LX5e5LuMms"}],"createdAt":"2024-04-08T16:55:46.394Z","updatedAt":"2024-04-08T06:47:48.12Z","writer":{"name":"소비자이름"}},{"id":"61682a","title":"상품 문의합니다","content":"상품 문의합니다.","answers":[{"createdAt":"2024-04-07T13:29:56.575Z","updatedAt":"2024-04-07T13:29:56.575Z","content":"답변드립니다.","writer":{"name":"[영인산한우]"},"id":"1eEedACi4K"}],"createdAt":"2024-04-07T13:05:02.287Z","updatedAt":"2024-04-07T04:00:29.582Z","writer":{"name":"소비자이름"}}]}
+{
+  "products": [
+    {
+      "id": "1",
+      "title": "[영인산한우]",
+      "slug": "hanwoo1234",
+      "summary": "굿뜨래 한우 목심 600g",
+      "photoUrl": "img1",
+      "price": "17,900",
+      "category": "meat"
+    },
+    {
+      "id": "2",
+      "title": "[동천안농협]",
+      "slug": "salad1234",
+      "summary": "유럽샐러드 채소 1kg 랜덤",
+      "photoUrl": "img2",
+      "price": "11,800",
+      "category": "vegetable"
+    },
+    {
+      "id": "3",
+      "title": "[영인산한우]",
+      "slug": "hanwoo5678",
+      "summary": "부채살(냉장) 300g",
+      "photoUrl": "img3",
+      "price": "22,300",
+      "category": "meat"
+    },
+    {
+      "id": "4",
+      "title": "[금산오미자농원]",
+      "slug": "processed1234",
+      "summary": "오미자원액",
+      "photoUrl": "img4",
+      "price": "20,600",
+      "category": "processed"
+    },
+    {
+      "id": "5",
+      "title": "[친황경농가]",
+      "slug": "fruit",
+      "summary": "정성 듬뿍 배 5kg(6~10과)",
+      "photoUrl": "img5",
+      "price": "17,900",
+      "category": "fruit"
+    },
+    {
+      "id": "6",
+      "title": "[공주식품]",
+      "slug": "kimchi",
+      "summary": "알밤포기김치 5kg",
+      "photoUrl": "img6",
+      "price": "31,800",
+      "category": "kimchi"
+    }
+  ],
+
+  "categories": [
+    {
+      "id": "1",
+      "title": "과일",
+      "slug": "fruit"
+    },
+    {
+      "id": "2",
+      "title": "채소",
+      "slug": "vegetable"
+    },
+    {
+      "id": "3",
+      "title": "축산",
+      "slug": "meat"
+    },
+    {
+      "id": "4",
+      "title": "쌀/잡곡",
+      "slug": "grain"
+    },
+    {
+      "id": "5",
+      "title": "가공",
+      "slug": "processed"
+    },
+    {
+      "id": "6",
+      "title": "김치",
+      "slug": "kimchi"
+    }
+  ],
+
+  "questions": [
+    {
+      "id": "1",
+      "title": "상품 문의합니다",
+      "content": "상품 관련 문의드립니다.",
+      "answers": [
+        {
+          "createdAt": "2024-04-12T16:34:20.477Z",
+          "updatedAt": "2024-04-13T16:34:20.477Z",
+          "content": "답변내용",
+          "writer": { "name": "[영인산한우]" },
+          "id": "11"
+        }
+      ],
+      "createdAt": "2024-04-13T12:42:25.27Z",
+      "updatedAt": "2024-04-13T16:34:20.478Z",
+      "writer": { "name": "소비자이름" }
+    },
+    {
+      "id": "2",
+      "title": "배송 문의",
+      "content": "배송 문의합니다.",
+      "answers": [
+        {
+          "createdAt": "2024-04-12T08:26:45.875Z",
+          "updatedAt": "2024-04-12T08:26:45.875Z",
+          "content": "답변 내용",
+          "writer": { "name": "소비자이름" },
+          "id": "22"
+        }
+      ],
+      "likeCount": 0,
+      "totalLikeCount": 0,
+      "createdAt": "2024-04-12T07:55:04.808Z",
+      "updatedAt": "2024-04-12T08:26:45.88Z",
+      "writer": { "name": "소비자이름" }
+    },
+    {
+      "id": "3",
+      "title": "상품 문의",
+      "content": "상품 문의합니다.",
+      "answers": [],
+      "createdAt": "2024-04-11T04:57:48.152Z",
+      "updatedAt": "2024-04-11T04:57:48.467Z",
+      "writer": { "name": "소비자이름" }
+    },
+    {
+      "id": "4",
+      "title": "환불 문의",
+      "content": "환불 문의합니다.",
+      "answers": [
+        {
+          "createdAt": "2024-04-10T04:12:21.523Z",
+          "updatedAt": "2024-04-10T04:12:21.523Z",
+          "content": "답변드립니다.",
+          "writer": { "name": "[영인산한우]" },
+          "id": "44"
+        }
+      ],
+      "createdAt": "2024-04-10T00:04:21.247Z",
+      "updatedAt": "2024-04-10T04:12:21.525Z",
+      "writer": { "name": "소비자이름" }
+    },
+    {
+      "id": "5",
+      "title": "배송 문의",
+      "content": "배송 문의합니다.",
+      "answers": [
+        {
+          "createdAt": "2024-04-09T04:15:29.513Z",
+          "updatedAt": "2024-04-09T04:15:29.513Z",
+          "content": "답변드립니다.",
+          "writer": { "name": "[영인산한우]" },
+          "id": "55"
+        }
+      ],
+      "createdAt": "2024-04-09T18:34:02.059Z",
+      "updatedAt": "2024-04-09T06:26:50.477Z",
+      "writer": { "name": "소비자이름" }
+    },
+    {
+      "id": "6",
+      "title": "상품 문의",
+      "content": "상품 문의드립니다.",
+      "answers": [
+        {
+          "createdAt": "2024-04-08T04:32:30.64Z",
+          "updatedAt": "2024-04-08T04:32:30.64Z",
+          "content": "답변드립니다.",
+          "writer": { "name": "[영인산한우]" },
+          "id": "66"
+        }
+      ],
+      "createdAt": "2024-04-08T16:55:46.394Z",
+      "updatedAt": "2024-04-08T06:47:48.12Z",
+      "writer": { "name": "소비자이름" }
+    },
+    {
+      "id": "7",
+      "title": "상품 문의합니다",
+      "content": "상품 문의합니다.",
+      "answers": [
+        {
+          "createdAt": "2024-04-07T13:29:56.575Z",
+          "updatedAt": "2024-04-07T13:29:56.575Z",
+          "content": "답변드립니다.",
+          "writer": { "name": "[영인산한우]" },
+          "id": "77"
+        }
+      ],
+      "createdAt": "2024-04-07T13:05:02.287Z",
+      "updatedAt": "2024-04-07T04:00:29.582Z",
+      "writer": { "name": "소비자이름" }
+    }
+  ],
+
+  "reviews": [
+    {
+      "id": 1,
+      "title": "리뷰 제목",
+      "rating": 5,
+      "content": "리뷰 내용을 작성합니다.",
+      "createdAt": 1591714800000,
+      "updatedAt": 1591714800000,
+      "writer": "소비자이름"
+    },
+    {
+      "id": 2,
+      "title": "리뷰 제목",
+      "rating": 4,
+      "content": "리뷰 내용을 작성합니다.",
+      "createdAt": 1591714800000,
+      "updatedAt": 1591714800000,
+      "writer": "소비자이름"
+    },
+    {
+      "id": 1,
+      "title": "리뷰 제목",
+      "rating": 3,
+      "content": "리뷰 내용을 작성합니다.",
+      "createdAt": 1591714800000,
+      "updatedAt": 1591714800000,
+      "writer": "소비자이름"
+    },
+    {
+      "id": 1,
+      "title": "리뷰 제목",
+      "rating": 2,
+      "content": "리뷰 내용을 작성합니다.",
+      "createdAt": 1591714800000,
+      "updatedAt": 1591714800000,
+      "writer": "소비자이름"
+    },
+    {
+      "id": 1,
+      "title": "리뷰 제목",
+      "rating": 1,
+      "content": "리뷰 내용을 작성합니다.",
+      "createdAt": 1591714800000,
+      "updatedAt": 1591714800000,
+      "writer": "소비자이름"
+    }
+  ]
+}
