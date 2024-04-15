@@ -1,6 +1,6 @@
 .form {
   display: flex;
-  height: 40px;
+  height: 37px;
   box-shadow: var(--box-shadow);
 }
 
@@ -9,13 +9,17 @@
   padding: 12px 20px;
   font-size: 14px;
   font-weight: 500;
-  border: none;
-  border-radius: 5px 0 0 5px;
+  /* border: none; */
+  border-width: 0.05px;
+  border-color: #878787;
+  border-radius: 10px 0 0 10px;
+  opacity: 60%;
   outline: none;
 }
 
 .form input::placeholder {
-  color: #878787;
+  color: #000;
+  font-weight: 300;
 }
 
 .form button[type="submit"] {
@@ -23,7 +27,7 @@
   padding: 8px 10px;
   color: #fff;
   cursor: pointer;
-  background-color: #545454;
+  background-color: #878787;
   border: none;
   border-radius: 0 10px 10px 0;
   outline: none;

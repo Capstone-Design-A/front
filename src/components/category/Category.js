@@ -1,54 +1,34 @@
-// CSS 수정해야됨 - 폰트색상, ...
-// NavLink 수정 - 이건 데이터 정리되면 하기
-// 카테고리 목록 배열로 받아오기
-import { NavLink } from 'react-router-dom';
-import Container from '../shared/Container';
-import styles from './Category.module.css';
+// 페이지 사이즈 줄이면 CategoryList가 오른쪽으로 이동함 - 수정 필요
+import { useSearchParams } from "react-router-dom";
+import Container from "../shared/Container";
+import styles from "./Category.module.css";
+import { getCategories } from "../../api";
+import { Navigate } from "react-router-dom";
+import CategoryItem from "./CategoryItem";
 
 function Category() {
+  // eslint-disable-next-line
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initKeyword = searchParams.get("keyword");
+  const categories = getCategories(initKeyword);
+
+  if (!categories) {
+    return <Navigate to="/" />;
+  }
+
   return (
-    <div className={styles.category}>
-      <Container className={styles.container}>
-        <ul className={styles.menu}>
-          <h1 className={styles.h1}>카테고리</h1>
-          <li className={styles.link}>
-            <NavLink to="/products">
-              과일
-            </NavLink>
-          </li>
-          <li className={styles.link}>
-            <NavLink to="/products">
-              채소
-            </NavLink>
-          </li>
-          <li className={styles.link}>
-            <NavLink to="/products">
-              축산
-            </NavLink>
-          </li>
-          <li className={styles.link}>
-            <NavLink to="/products">
-              쌀/잡곡
-            </NavLink>
-          </li>
-          <li className={styles.link}>
-            <NavLink to="/products">
-              가공
-            </NavLink>
-          </li>
-          <li className={styles.link}>
-            <NavLink to="/products">
-              김치
-            </NavLink>
-          </li>
-          <li className={styles.home}>
-            <NavLink to="/">
-              Home
-            </NavLink>
-          </li>
-        </ul>
+    <>
+      <Container>
+        <div className={styles.menu}>
+          <h1 className={styles.category}>카테고리</h1>
+          <div className={styles.categoryList}>
+            {categories.map((category) => (
+              <CategoryItem key={category.id} category={category} />
+            ))}
+          </div>
+        </div>
       </Container>
-    </div>
+    </>
   );
 }
 
