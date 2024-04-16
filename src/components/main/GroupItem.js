@@ -1,7 +1,7 @@
 // 공동구매 Item 컴포넌트입니다.
 // 코드 정리 필요 - 데이터 받아오는 형식으로
-import Button from "./button/Button";
-import Container from "./shared/Container";
+import Button from "../button/Button";
+import Container from "../shared/Container";
 import styles from "./GroupItem.module.css";
 import { Link } from "react-router-dom";
 

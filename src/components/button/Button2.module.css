@@ -1,0 +1,50 @@
+.Button {
+  display: inline-block;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 13px 41px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background-color: #494949;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+a.Button {
+  text-decoration: none;
+}
+
+.Button.primary {
+  color: #ffffff;
+  background-color: var(--primary-color);
+}
+
+.Button.secondary {
+  color: #000000;
+  background-color: #e7e7e7;
+}
+
+.Button.outline {
+  background-color: #ffffff;
+  border: 1px solid #e1e1e1;
+}
+
+/* 붙여넣은거 */
+
+div.button {
+  display: inline-block;
+}
+
+.Button.round {
+  padding: 15px 22px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  background-color: #48735d;
+  border-radius: 8px;
+}

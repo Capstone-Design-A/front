@@ -1,0 +1,74 @@
+.container {
+  margin: 50px auto 100px;
+  text-align: center;
+}
+
+.Heading {
+  font-size: 30px;
+  margin: 32px auto 70px;
+  text-align: center;
+}
+
+.Label,
+.Input,
+.Button,
+.GoogleButton {
+  display: block;
+  width: 100%;
+}
+
+.Label {
+  margin: 0 0 0 5px;
+  text-align: left;
+}
+
+.Input {
+  margin: 8px 0 30px;
+}
+
+.Button {
+  background-color: #fff;
+  opacity: 70%;
+  border-color: #000;
+  border-width: 0.05px;
+  border-radius: 8px;
+  color: #48735d;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+  width: 40%;
+  padding: 15px 22px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  background-color: #48735d;
+  margin: 20px;
+}
+
+.HorizontalRule {
+  margin: 50px 0;
+}
+
+.GoogleButton {
+  display: flex;
+  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+  color: #000000;
+}
+
+.register {
+  margin: 5px 0 40px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.register span {
+  text-align: center;
+  font-weight: 600;
+  margin: 0 0 0 5px;
+}

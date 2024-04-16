@@ -1,6 +1,6 @@
 // 메인 페이지의 메인 배너
-import Category from './category/Category';
-import styles from './Banner.module.css';
+import Category from "../category/Category";
+import styles from "./Banner.module.css";
 
 function Banner() {
   return (
