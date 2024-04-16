@@ -1,6 +1,6 @@
 // 최상위 컴포넌트
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import App from "./components/App";
+import App from "./components/shared/App";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
