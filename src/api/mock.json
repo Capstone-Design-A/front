@@ -1,61 +1,179 @@
 {
+  "isSuccess": true,
+  "code": "common_200",
+  "message": "성공입니다.",
+  "alarms": {
+    "numberAlarms": 5
+  },
   "products": [
     {
-      "id": "1",
-      "title": "[영인산한우]",
-      "slug": "hanwoo1234",
-      "summary": "굿뜨래 한우 목심 600g",
-      "photoUrl": "img1",
-      "price": "17,900",
+      "id": "1544",
+      "name": "[영인산한우]",
+      "content": "굿뜨래 한우 목심 600g",
+      "imageUrl": "./assets/img1",
+      "price": "17900",
       "category": "meat"
     },
     {
-      "id": "2",
-      "title": "[동천안농협]",
-      "slug": "salad1234",
-      "summary": "유럽샐러드 채소 1kg 랜덤",
-      "photoUrl": "img2",
-      "price": "11,800",
+      "id": "2253",
+      "name": "[동천안농협]",
+      "content": "유럽샐러드 채소 1kg 랜덤",
+      "imageUrl": "img2",
+      "price": "11800",
       "category": "vegetable"
     },
     {
-      "id": "3",
-      "title": "[영인산한우]",
-      "slug": "hanwoo5678",
-      "summary": "부채살(냉장) 300g",
-      "photoUrl": "img3",
-      "price": "22,300",
+      "id": "3243",
+      "name": "[영인산한우]",
+      "content": "부채살(냉장) 300g",
+      "imageUrl": "img3",
+      "price": "22300",
       "category": "meat"
     },
     {
-      "id": "4",
-      "title": "[금산오미자농원]",
-      "slug": "processed1234",
-      "summary": "오미자원액",
-      "photoUrl": "img4",
-      "price": "20,600",
+      "id": "4534",
+      "name": "[금산오미자농원]",
+      "content": "오미자원액",
+      "imageUrl": "img4",
+      "price": "20600",
       "category": "processed"
     },
     {
-      "id": "5",
+      "id": "5325",
       "title": "[친황경농가]",
-      "slug": "fruit",
-      "summary": "정성 듬뿍 배 5kg(6~10과)",
-      "photoUrl": "img5",
-      "price": "17,900",
+      "content": "정성 듬뿍 배 5kg(6~10과)",
+      "imageUrl": "img5",
+      "price": "17900",
       "category": "fruit"
     },
     {
-      "id": "6",
-      "title": "[공주식품]",
-      "slug": "kimchi",
-      "summary": "알밤포기김치 5kg",
-      "photoUrl": "img6",
-      "price": "31,800",
+      "id": "6533",
+      "name": "[공주식품]",
+      "content": "알밤포기김치 5kg",
+      "imageUrl": "img6",
+      "price": "31800",
       "category": "kimchi"
     }
   ],
-
+  "groupPurchaseItemsPreview": {
+    "listSize": 5,
+    "totlPage": 1,
+    "totalElements": 5,
+    "isFirst": true,
+    "isLast": true,
+    "items": [
+      {
+        "id": 123,
+        "name": "성주 꿀 참외 2.5kg 구성",
+        "price": 33000,
+        "discountPrice": 27900,
+        "targetQuantity": 10,
+        "imageUrl": "imgGroup"
+      },
+      {
+        "id": 135,
+        "name": "논산 딸기 2kg",
+        "price": 40000,
+        "discountPrice": 29900,
+        "targetQuantity": 32,
+        "imageUrl": "https://www.test.com/group/135"
+      },
+      {
+        "id": 187,
+        "name": "영인산한우 부채살(냉장)*300g",
+        "price": 22000,
+        "discountPrice": 17000,
+        "targetQuantity": 25,
+        "imageUrl": "https://www.test.com/group/135"
+      },
+      {
+        "id": 145,
+        "name": "23년 아산 맑은(삼광/특)",
+        "price": 22000,
+        "discountPrice": 17000,
+        "targetQuantity": 60,
+        "imageUrl": "https://www.test.com/group/135"
+      },
+      {
+        "id": 1,
+        "name": "공주 알밤 찹쌀떡 70g*6개",
+        "price": 17900,
+        "discountPrice": 14900,
+        "targetQuantity": 19,
+        "imageUrl": "https://www.test.com/group/135"
+      },
+      {
+        "id": 1,
+        "name": "가득팜 모둠쌈채소 800g",
+        "price": 13300,
+        "discountPrice": 11000,
+        "targetQuantity": 33,
+        "imageUrl": "https://www.test.com/group/135"
+      }
+    ]
+  },
+  "lastMinuteItemsPreview": [
+    {
+      "id": 932,
+      "name": "[영인산한우]",
+      "content": "부채살(냉장)*300g",
+      "category": "meat",
+      "price": 22000,
+      "discountPrice": 19800,
+      "imageUrl": "img1",
+      "dadeline": "2024-08-06T23:59:59"
+    },
+    {
+      "id": 10523,
+      "name": "[가득팜]",
+      "content": "모둠쌈채소 800g",
+      "category": "vegetable",
+      "price": 13300,
+      "discountPrice": 0,
+      "imageUrl": "img2",
+      "dadeline": "2024-08-06T23:59:59"
+    }
+  ],
+  "subscriptionSellerItemsPreview": [
+    {
+      "id": 19341,
+      "name": "[부여군지역농협조합공동사업법인]",
+      "content": " GAP 대추방울토마토 2kg",
+      "category": "vegetable",
+      "price": 21000,
+      "discountPrice": 0,
+      "imageUrl": "https://www.test.com/item/19341"
+    },
+    {
+      "id": 3174953832,
+      "name": "[둔포농협미곡종합처리장]",
+      "content": "23년 아산 맑은(삼광/특)",
+      "category": "grain",
+      "price": 17900,
+      "discountPrice": 0,
+      "imageUrl": "https://www.test.com/item/3174953832"
+    }
+  ],
+  "purchaseRankingItemsPreview": [
+    {
+      "id": 193415312,
+      "name": "[부청정태안식품]",
+      "content": "맛있구마 군고 구마 말랭이 75g(1봉지)",
+      "category": "processed",
+      "price": 21000,
+      "discountPrice": 0,
+      "imageUrl": "https://www.test.com/item/193415312"
+    },
+    {
+      "id": 3174953832,
+      "name": "[공주알밤홍보판매장]",
+      "content": "알밤 찹쌀떡 70g*6개",
+      "category": "processed",
+      "price": 17900,
+      "discountPrice": 0,
+      "imageUrl": "https://www.test.com/item/3174953832"
+    }
+  ],
   "categories": [
     {
       "id": "1",
@@ -120,8 +238,6 @@
           "id": "22"
         }
       ],
-      "likeCount": 0,
-      "totalLikeCount": 0,
       "createdAt": "2024-04-12T07:55:04.808Z",
       "updatedAt": "2024-04-12T08:26:45.88Z",
       "writer": { "name": "소비자이름" }

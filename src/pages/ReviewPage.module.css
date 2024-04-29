@@ -1,0 +1,37 @@
+.button {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+
+.sort {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sort button {
+  margin: auto 10px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.create {
+  margin-left: auto;
+}
+
+.create button {
+  background-color: #fff;
+  opacity: 70%;
+  border-color: #000;
+  border-width: 0.05px;
+  border-radius: 5px;
+  color: #48735d;
+  padding: 7px 13px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+
+  margin: 15px 0px 15px 6px;
+  cursor: pointer;
+}

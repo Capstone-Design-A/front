@@ -1,0 +1,52 @@
+.amount {
+  position: relative;
+  width: 130px;
+  height: 50px;
+  border: 1px solid #fff;
+  border-radius: 30px;
+  margin-bottom: 30px;
+  background-color: #fff;
+  border-color: #e6e6e6;
+}
+
+.amount .minus {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  padding: 7px;
+}
+
+.amount .count {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.amount .count span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.amount .plus {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  padding: 7px;
+}

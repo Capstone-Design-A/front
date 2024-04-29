@@ -1,67 +1,44 @@
-// 상품 상세 페이지입니다.
-import Button from "../components/button/Button";
-import OrderButton from "../components/button/OrderButton";
-import { Navigate, useParams } from "react-router-dom";
-import { addWishlist, getProductBySlug } from "../api";
+import React, { useEffect } from "react";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import { getProductBySlug } from "../api";
+import ProductDetail from "../components/detail/ProductDetail";
+import DetailNav from "../components/detail/DetailNav";
 import Container from "../components/shared/Container";
-import ProductIcon from "../components/product/ProductIcon";
-import getProductColor from "../utils/getProductColor";
 import styles from "./ProductDetailPage.module.css";
-import { useNavigate } from "react-router-dom";
-import QuestionList from "../components/question/QuestionList";
 
 function ProductDetailPage() {
-  const navigate = useNavigate();
   const { productSlug } = useParams();
   const product = getProductBySlug(productSlug);
-  const productColor = getProductColor(product?.code);
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const navigate = useNavigate();
 
-  if (!product) {
-    return <Navigate to="/products" />;
-  }
-
-  const headerStyle = {
-    borderTopColor: productColor,
-  };
-
-  // 판매자 소개 바로가기 버튼도 만들기
-  const handleAddWishlistClick = () => {
-    addWishlist(product?.slug);
-    navigate("/cart");
-  };
+  // /products/:productSlug 경로로 들어오면 ProductDetailPage로 자동 이동
+  useEffect(() => {
+    if (
+      currentPath === `/products/${product}` ||
+      currentPath === `/products/${product}/`
+    ) {
+      navigate(`/products/${product}`);
+    }
+  }, [product, currentPath, navigate]);
 
   return (
     <>
-      <div className={styles.header} style={headerStyle}>
-        <Container className={styles.content}>
-          <ProductIcon className={styles.img} photoUrl={product.photoUrl} />
-          <button className={styles.button}>판매자 소개 바로가기</button>
-          <h1 className={styles.title}>{product.title}</h1>
-          <p className={styles.summary}>{product.summary}</p>
-          <p className={styles.price}>{product.price}</p>
-          <Container className={styles.order}>
-            <OrderButton
-              className={styles.orderbutton}
-              variant="round"
-              onClick={handleAddWishlistClick}
-            >
-              바로구매
-            </OrderButton>
-            <Button
-              className={styles.cartbutton}
-              variant="round"
-              onClick={handleAddWishlistClick}
-            >
-              장바구니 담기
-            </Button>
-          </Container>
-        </Container>
-      </div>
-      <QuestionList />
+      <Container>
+        <div className={styles.containerStyle}>
+          <ProductDetail />
+          <div className={styles.detailNav}>
+            <DetailNav />
+            <div className={styles.divStyle}>
+              {/* 메뉴 바 밑에 보여줄 페이지 */}
+              <Outlet />
+            </div>
+          </div>
+        </div>
+      </Container>
     </>
   );
 }
 
 export default ProductDetailPage;
-
-// 리뷰, QnA 데이터 개수 제한하기

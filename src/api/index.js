@@ -1,5 +1,14 @@
 import mock from "./mock.json";
-const { products, categories, questions, reviews } = mock;
+const {
+  products,
+  groupPurchaseItemsPreview,
+  lastMinuteItemsPreview,
+  subscriptionSellerItemsPreview,
+  purchaseRankingItemsPreview,
+  categories,
+  questions,
+  reviews,
+} = mock;
 
 function filterByKeyword(items, keyword) {
   const lowered = keyword.toLowerCase();
@@ -12,7 +21,58 @@ export function getProducts(keyword) {
 }
 
 export function getProductBySlug(productSlug) {
-  return products.find((product) => product.slug === productSlug);
+  return products.find((product) => product.id === productSlug);
+}
+
+/*
+export function getGroupPurchaseItemsPreview(keyword) {
+  if (!keyword) return groupPurchaseItemsPreview;
+  return filterByKeyword(groupPurchaseItemsPreview, keyword);
+}
+*/
+export function getGroupPurchaseItemsPreview(keyword) {
+  if (!keyword) return groupPurchaseItemsPreview;
+  const filteredItems = groupPurchaseItemsPreview.items.filter((item) =>
+    item.name.includes(keyword)
+  );
+  return { ...groupPurchaseItemsPreview, items: filteredItems };
+}
+
+export function getGroupPurchaseItemsPreviewBySlug(productSlug) {
+  return groupPurchaseItemsPreview.find(
+    (product) => product.id === productSlug
+  );
+}
+
+export function getLastMinuteItemsPreview(keyword) {
+  if (!keyword) return lastMinuteItemsPreview;
+  return filterByKeyword(lastMinuteItemsPreview, keyword);
+}
+
+export function getLastMinuteItemsPreviewBySlug(productSlug) {
+  return lastMinuteItemsPreview.find((product) => product.id === productSlug);
+}
+
+export function getSubscriptionSellerItemsPreview(keyword) {
+  if (!keyword) return subscriptionSellerItemsPreview;
+  return filterByKeyword(subscriptionSellerItemsPreview, keyword);
+}
+
+export function getSubscriptionSellerItemsPreviewBySlug(productSlug) {
+  return subscriptionSellerItemsPreview.find(
+    (product) => product.id === productSlug
+  );
+}
+
+export function getPurchaseRankingItemsPreview(keyword) {
+  if (!keyword) return purchaseRankingItemsPreview;
+  return filterByKeyword(purchaseRankingItemsPreview, keyword);
+}
+
+export function getPurchaseRankingItemsPreviewBySlug(productSlug) {
+  return purchaseRankingItemsPreview.find(
+    (product) => product.id === productSlug
+  );
 }
 
 export function getCategories(keyword) {
@@ -21,7 +81,11 @@ export function getCategories(keyword) {
 }
 
 export function getCategoryBySlug(categorySlug) {
-  return categories.find((category) => category.slug === categorySlug);
+  return categories.find((category) => category.id === categorySlug);
+}
+
+export function getProductsByCategory(categorySlug) {
+  return products.filter((product) => product.category === categorySlug);
 }
 
 export function getQuestions(keyword) {
@@ -56,5 +120,5 @@ export function deleteWishlist(productSlug) {
 }
 
 export function getWishlist() {
-  return products.filter((product) => wishlist[product.slug]);
+  return products.filter((product) => wishlist[product.id]);
 }

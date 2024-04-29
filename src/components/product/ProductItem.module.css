@@ -1,27 +1,27 @@
-.courseItem {
-  background-color: #f9f9f9;
+.Item {
+  background-color: #fff;
   max-height: 370px;
 }
 
-.courseItem .thumb {
+.img {
   display: flex;
   align-items: center;
   padding: 0;
   border-top: 0px;
   height: 200px;
-  background-color: #f9f9f9;
+  background-color: #fff;
 }
 
-.courseItem .content {
+.text {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 10px;
   padding: 50px 20px 0px;
-  background-color: #f9f9f9;
+  background-color: #fff;
 }
 
-.courseItem .title {
+.name {
   margin: 0 0 5px;
   overflow: hidden;
   font-size: 17px;
@@ -30,27 +30,17 @@
   white-space: nowrap;
 }
 
-.courseItem .description {
-  display: -webkit-box;
+.content {
   margin: 7px 0 3px;
   padding: 0 0 10px 0;
   overflow: hidden;
   font-size: 17px;
-  font-weight: 500;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  font-size: 17px;
   font-weight: 300;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
 }
 
-.courseItem .price {
-  display: -webkit-box;
+.price {
   margin: 0 0 20px;
   overflow: hidden;
   font-size: 17px;
   font-weight: 900;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
 }

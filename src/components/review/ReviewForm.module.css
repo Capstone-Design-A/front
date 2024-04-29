@@ -1,0 +1,41 @@
+.ReviewForm {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 10px;
+  background-color: #f9f9f9;
+  margin: 20px auto;
+}
+
+.ReviewForm > :not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.buttonCancel {
+  background-color: #fff;
+  opacity: 70%;
+  border-color: #000;
+  border-width: 0.05px;
+  border-radius: 5px;
+  color: #48735d;
+  padding: 7px 13px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 15px 0px 15px 6px;
+  cursor: pointer;
+}
+
+.button {
+  background-color: #fff;
+  opacity: 70%;
+  border-color: #000;
+  border-width: 0.05px;
+  border-radius: 5px;
+  color: #48735d;
+  padding: 8px 13px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0px 0px 15px 6px;
+  cursor: pointer;
+}
