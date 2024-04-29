@@ -81,7 +81,7 @@ export function getCategories(keyword) {
 }
 
 export function getCategoryBySlug(categorySlug) {
-  return categories.find((category) => category.id === categorySlug);
+  return categories.find((category) => category.slug === categorySlug);
 }
 
 export function getProductsByCategory(categorySlug) {

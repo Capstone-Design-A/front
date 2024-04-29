@@ -12,13 +12,13 @@ function ProductItem({ product }) {
   return (
     <Card className={styles.Item}>
       <div className={styles.img}>
-        <Link to={`/products/${product.slug}`}>
+        <Link to={`/products/${product.id}`}>
           {/* 지금은 assets 경로로 이미지를 받아오고 있다 */}
           <ProductIcon imageUrl={product.imageUrl} />
         </Link>
       </div>
       <div className={styles.text}>
-        <Link to={`/prducts/${product.slug}`}>
+        <Link to={`/products/${product.id}`}>
           <h2 className={styles.name}>{product.name}</h2>
           <p className={styles.content}>{showSummary && product.content}</p>
         </Link>

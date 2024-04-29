@@ -10,8 +10,8 @@
       "id": "1544",
       "name": "[영인산한우]",
       "content": "굿뜨래 한우 목심 600g",
-      "imageUrl": "./assets/img1",
-      "price": "17900",
+      "imageUrl": "img1",
+      "price": 17900,
       "category": "meat"
     },
     {
@@ -19,7 +19,7 @@
       "name": "[동천안농협]",
       "content": "유럽샐러드 채소 1kg 랜덤",
       "imageUrl": "img2",
-      "price": "11800",
+      "price": 11800,
       "category": "vegetable"
     },
     {
@@ -27,7 +27,7 @@
       "name": "[영인산한우]",
       "content": "부채살(냉장) 300g",
       "imageUrl": "img3",
-      "price": "22300",
+      "price": 22300,
       "category": "meat"
     },
     {
@@ -35,15 +35,15 @@
       "name": "[금산오미자농원]",
       "content": "오미자원액",
       "imageUrl": "img4",
-      "price": "20600",
+      "price": 20600,
       "category": "processed"
     },
     {
       "id": "5325",
-      "title": "[친황경농가]",
+      "name": "[친황경농가]",
       "content": "정성 듬뿍 배 5kg(6~10과)",
       "imageUrl": "img5",
-      "price": "17900",
+      "price": 17900,
       "category": "fruit"
     },
     {
@@ -51,7 +51,7 @@
       "name": "[공주식품]",
       "content": "알밤포기김치 5kg",
       "imageUrl": "img6",
-      "price": "31800",
+      "price": 31800,
       "category": "kimchi"
     }
   ],
