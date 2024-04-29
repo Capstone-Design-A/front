@@ -1,0 +1,7 @@
+.star {
+  color: slategray;
+}
+
+.star .selected {
+  color: yellowgreen;
+}

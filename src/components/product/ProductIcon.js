@@ -6,6 +6,7 @@ import img3 from "../../assets/img3.png";
 import img4 from "../../assets/img4.png";
 import img5 from "../../assets/img5.png";
 import img6 from "../../assets/img6.png";
+import imgGroup from "../../assets/img-group.png";
 import styles from "./ProductIcon.module.css";
 
 const ICONS = {
@@ -15,14 +16,15 @@ const ICONS = {
   img4: img4,
   img5: img5,
   img6: img6,
+  imgGroup: imgGroup,
 };
 
-function ProductIcon({ className, photoUrl = "default" }) {
+function ProductIcon({ className, imageUrl = "default" }) {
   return (
     <img
-      className={classNames(styles.courseIcon, className)}
-      src={ICONS[photoUrl]}
-      alt={photoUrl}
+      className={classNames(styles.image, className)}
+      src={ICONS[imageUrl]}
+      alt={imageUrl}
     />
   );
 }

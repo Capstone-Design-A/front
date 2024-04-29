@@ -1,6 +1,4 @@
 .button {
-  padding: 13px 41px;
-  font-size: 16px;
   font-weight: 600;
   color: #fff;
   cursor: pointer;
@@ -15,8 +13,6 @@ div.button {
 }
 
 .button.round {
-  padding: 15px 22px;
-  font-size: 16px;
   font-weight: 400;
   color: #48735d;
   background-color: #fff;

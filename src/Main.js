@@ -7,10 +7,11 @@ import SignUpPage from "./pages/SignUpPage";
 import OrderPage from "./pages/OrderPage";
 import MyPage from "./pages/MyPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import Description from "./components/detail/Description";
+import ReviewPage from "./pages/ReviewPage";
 import ProductListPage from "./pages/ProductListPage";
 import ProductCategoryPage from "./pages/ProductCategoryPage";
 import QuestionPage from "./pages/QuestionPage";
-import QuestionList from "./components/question/QuestionList";
 import CartPage from "./pages/CartPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -23,15 +24,19 @@ function Main() {
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="order" element={<OrderPage />} />
+          <Route path="last-minute-products" element={<ProductListPage />} />
+          <Route path="new-products" element={<ProductListPage />} />
+          <Route path="purchase-ranking" element={<ProductListPage />} />
           <Route path="products">
             <Route index element={<ProductListPage />} />
-            <Route path=":productSlug" element={<ProductDetailPage />} />
+            <Route path=":productSlug" element={<ProductDetailPage />}>
+              <Route index element={<Description />} />
+              <Route path="description" element={<Description />} />
+              <Route path="review" element={<ReviewPage />} />
+              <Route path="question" element={<QuestionPage />} />
+            </Route>
           </Route>
           <Route path=":categorySlug" element={<ProductCategoryPage />} />
-          <Route path="questions">
-            <Route index element={<QuestionList />} />
-            <Route path=":questionId" element={<QuestionPage />} />
-          </Route>
           <Route path="my" element={<MyPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="*" element={<NotFoundPage />} />

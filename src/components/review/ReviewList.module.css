@@ -1,0 +1,77 @@
+.reviewList {
+  margin: 20px auto;
+}
+
+.emptyList {
+  margin: 40px auto;
+}
+
+.reviewItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+.reviewItem:not(:last-child) {
+  margin-bottom: 11px;
+}
+
+.reviewItem .info {
+  display: inline-flex;
+  align-items: center;
+}
+
+.img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.reviewItem .rating {
+  margin-right: 50px;
+}
+
+.reviewItem .title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #494949;
+  margin-right: 50px;
+  cursor: pointer;
+}
+
+.reviewItem .title a {
+  font-family: var(--notosans);
+}
+
+.reviewItem .writer {
+  flex: none;
+  margin-left: auto;
+}
+
+.reviewItem .date {
+  margin-left: 50px;
+  font-size: 12px;
+  color: #c4c4c4;
+}
+
+.pageButton {
+  border: none;
+  background-color: transparent;
+  color: #333;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.pageButton:hover {
+  background-color: #f0f0f0;
+}
+
+.active {
+  font-weight: bold;
+  color: #fff;
+  background-color: #b3b3b3;
+  border-radius: 4px;
+}
