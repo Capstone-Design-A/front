@@ -53,6 +53,54 @@
       "imageUrl": "img6",
       "price": 31800,
       "category": "kimchi"
+    },
+    {
+      "id": "6042",
+      "name": "[팔공상강한우]",
+      "content": "팔공상강한우 1++ 한우 등심 300g",
+      "imageUrl": "imgMeat3",
+      "price": 24600,
+      "category": "meat"
+    },
+    {
+      "id": "6193",
+      "name": "[환경농협]",
+      "content": "제주산 흑오겹살500g + 백되지 앞다리살(구이용)500g",
+      "imageUrl": "imgMeat4",
+      "price": 27500,
+      "category": "meat"
+    },
+    {
+      "id": "6983",
+      "name": "[라이블리]",
+      "content": "한우 곱창대창 세트 500g",
+      "imageUrl": "imgMeat5",
+      "price": 38800,
+      "category": "meat"
+    },
+    {
+      "id": "6051",
+      "name": "[안심계란]",
+      "content": "신선란 특란 10구 원산지:국내산",
+      "imageUrl": "imgMeat6",
+      "price": 4000,
+      "category": "meat"
+    },
+    {
+      "id": "6329",
+      "name": "[포크빌]",
+      "content": "한방편육 1kg (500g*2팩)",
+      "imageUrl": "imgMeat7",
+      "price": 16000,
+      "category": "meat"
+    },
+    {
+      "id": "6110",
+      "name": "[나주 해두루]",
+      "content": "무항생제 삼목세트 1kg(삼겹살500g+목살500g)",
+      "imageUrl": "imgMeat8",
+      "price": 26500,
+      "category": "meat"
     }
   ],
   "groupPurchaseItemsPreview": {

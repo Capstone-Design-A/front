@@ -1,10 +1,13 @@
-import { useSearchParams, Link, Navigate } from "react-router-dom";
+// 메인페이지 카테고리 아이템 컴포넌트
+// 페이지 사이즈 줄이면 CategoryList가 오른쪽으로 이동함 - 수정 필요
+import { useSearchParams } from "react-router-dom";
 import Container from "../shared/Container";
-import styles from "./Category.module.css";
+import styles from "./CategoryMain.module.css";
 import { getCategories } from "../../api";
+import { Navigate } from "react-router-dom";
 import CategoryItem from "./CategoryItem";
 
-function Category() {
+function CategoryMain() {
   // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
   const initKeyword = searchParams.get("keyword");
@@ -24,17 +27,14 @@ function Category() {
               <CategoryItem
                 key={category.id}
                 category={category}
-                color="#000"
+                color="#fff"
               />
             ))}
           </div>
-        </div>
-        <div className={styles.home}>
-          <Link to="/">홈으로</Link>
         </div>
       </Container>
     </>
   );
 }
 
-export default Category;
+export default CategoryMain;

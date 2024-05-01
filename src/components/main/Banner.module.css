@@ -1,32 +1,28 @@
 .banner {
   position: relative;
-  /* background-image: linear-gradient(rgba(428, 220, 220, 0.9), rgba(201, 172, 172, 0.9)); */
-  background-image: #000;
+  height: 364px; /* 이미지의 높이 364px로 설정 */
+  background-image: url("../../assets/banner-sample.png");
   background-repeat: no-repeat;
-  background-position: cover;
+  background-position: center;
   background-size: cover;
-  text-align: center;
-  height: 300px;
+  margin-bottom: 100px;
+}
+
+.category {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 }
 
-.banner a:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-  opacity: 80%;
-  transition: all 1s;
-}
-
-/* 반응형 구현 필요 */
-.banner img {
-  width: 100%;
-}
-
-.back {
-  background-image: linear-gradient(
-    rgba(428, 220, 220, 0.9),
-    rgba(201, 172, 172, 0.9)
-  );
-  background-repeat: no-repeat;
-  background-position: cover;
-  background-size: cover;
+@media (max-width: 768px) {
+  .category {
+    padding-left: 0;
+    height: 654px;
+  }
 }

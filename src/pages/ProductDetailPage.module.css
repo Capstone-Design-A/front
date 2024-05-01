@@ -1,4 +1,4 @@
-.containerStyle {
+.container {
   height: 4000px;
   margin-bottom: 100px;
 }
@@ -8,7 +8,7 @@
   top: 10px;
 }
 
-.divStyle {
+.content {
   width: 100%;
   text-align: center;
 }

@@ -1,6 +1,8 @@
 .Item {
   background-color: #fff;
-  max-height: 370px;
+  max-height: 500px;
+  position: relative;
+  margin-bottom: 5px;
 }
 
 .img {
@@ -8,7 +10,7 @@
   align-items: center;
   padding: 0;
   border-top: 0px;
-  height: 200px;
+  height: 180px;
   background-color: #fff;
 }
 
@@ -16,31 +18,33 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 10px;
+  min-height: 0px;
   padding: 50px 20px 0px;
   background-color: #fff;
 }
 
 .name {
-  margin: 0 0 5px;
+  margin: 5px 0 5px;
   overflow: hidden;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .content {
-  margin: 7px 0 3px;
-  padding: 0 0 10px 0;
+  margin: 5px 0 3px;
+  padding: 0 0 35px 0;
   overflow: hidden;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 300;
 }
 
-.price {
+.Item .price {
   margin: 0 0 20px;
-  overflow: hidden;
   font-size: 17px;
   font-weight: 900;
+  position: absolute;
+  bottom: -25px;
+  padding-bottom: 20px;
 }

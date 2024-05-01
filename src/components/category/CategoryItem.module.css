@@ -3,10 +3,6 @@
   text-align: left;
 }
 
-.title {
-  color: #fff;
-}
-
 .title a:hover,
 .title a:active {
   color: #000;
