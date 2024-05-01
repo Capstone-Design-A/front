@@ -2,9 +2,94 @@
   margin: 40px auto;
 }
 
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryContainer {
+  width: 100%;
+  max-width: 200px;
+  position: fixed;
+  top: 205px;
+  left: 0;
+  z-index: 1;
+}
+
+.contentContainer {
+  overflow-y: auto;
+}
+
+/* 화면이 작아지면(아이폰 14pro 기준) 카테고리 숨긴 상태*/
+@media screen and (max-width: 980px) {
+  .categoryContainer {
+    display: none;
+  }
+
+  .contentContainer {
+    padding-top: 20px;
+  }
+}
+
+.category {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  padding: 20px;
+  background-color: #fff;
+  z-index: 999;
+}
+
+.categoryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.categoryItem {
+  margin-bottom: 10px;
+}
+
+.categoryItem:last-child {
+  margin-bottom: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.content {
+  flex: 1;
+}
+
 .count {
   margin: 20px 0;
   font-size: 14px;
   font-weight: 300;
   color: #878787;
+}
+
+.loadMore {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  font-size: 15px;
+  background-color: #fff;
+  opacity: 70%;
+  border-color: #000;
+  border-width: 0.05px;
+  border-radius: 5px;
+  color: #48735d;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 0 15px 6px;
+  cursor: pointer;
 }
