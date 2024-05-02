@@ -1,4 +1,3 @@
-/*
 import { useState, useEffect } from "react";
 import styles from "./GroupPurchase.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,59 +6,8 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { getGroupPurchaseItemsPreview } from "../../api"; // api 파일의 경로에 따라 수정해주세요
-import GroupItem from "./GroupItem"; // GroupItem 컴포넌트의 경로에 따라 수정해주세요
-
-SwipeCore.use([Navigation, Pagination, Autoplay]);
-
-function GroupPurchase() {
-  const [groupItems, setGroupItems] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getGroupPurchaseItemsPreview();
-        setGroupItems(data.items);
-      } catch (error) {
-        console.error("Error fetching group purchase items:", error);
-      }
-    }
-    fetchData();
-  }, []);
-
-  return (
-    <>
-      <Swiper
-        className={styles.banner}
-        spaceBetween={50}
-        slidesPerView={1}
-        navigation
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 5000 }}
-      >
-        {groupItems.map((item) => (
-          <SwiperSlide key={item.id}>
-            <GroupItem {...item} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </>
-  );
-}
-
-export default GroupPurchase;
-*/
-
-import { useState, useEffect } from "react";
-import styles from "./GroupPurchase.module.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwipeCore, { Navigation, Pagination, Autoplay } from "swiper";
-import "swiper/css";
-import "swiper/css/autoplay";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { getGroupPurchaseItemsPreview } from "../../api"; // api 파일의 경로에 따라 수정해주세요
-import GroupItem from "./GroupItem"; // GroupItem 컴포넌트의 경로에 따라 수정해주세요
+import { getGroupPurchaseItemsPreview } from "../../api";
+import GroupPurchaseItem from "./GroupPurchaseItem";
 
 SwipeCore.use([Navigation, Pagination, Autoplay]);
 
@@ -97,7 +45,7 @@ function GroupPurchase() {
         >
           {groupItems.map((item) => (
             <SwiperSlide key={item.id}>
-              <GroupItem item={item} />
+              <GroupPurchaseItem item={item} />
             </SwiperSlide>
           ))}
         </Swiper>
