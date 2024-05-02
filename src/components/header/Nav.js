@@ -1,14 +1,14 @@
 // 헤더(네비바) 컴포넌트
-import { Link, NavLink } from 'react-router-dom';
-import Container from '../shared/Container';
-import UserMenu from './UserMenu';
-import logoImg from '../../assets/logo.png';
-import styles from './Nav.module.css';
-import SearchBar from './SearchBar';
+import { Link, NavLink } from "react-router-dom";
+import Container from "../shared/Container";
+import Notifications from "./Notifications";
+import logoImg from "../../assets/logo.png";
+import styles from "./Nav.module.css";
+import SearchBar from "./SearchBar";
 
 function getLinkStyle({ isActive }) {
   return {
-    textDecoration: isActive ? 'underline' : '',
+    textDecoration: isActive ? "underline" : "",
   };
 }
 
@@ -24,21 +24,15 @@ function Nav() {
           </li>
           <li> | </li>
           <li>
-            <NavLink to="/signup">
-              회원가입
-            </NavLink>
+            <NavLink to="/signup">회원가입</NavLink>
           </li>
           <li> | </li>
           <li>
-            <NavLink to="/order">
-              주문배송
-            </NavLink>
+            <NavLink to="/order">주문배송</NavLink>
           </li>
           <li> | </li>
           <li>
-            <NavLink to="/signup">
-              고객센터
-            </NavLink>
+            <NavLink to="/signup">고객센터</NavLink>
           </li>
         </ul>
       </Container>
@@ -60,7 +54,7 @@ function Nav() {
             </NavLink>
           </li>
           <li className={styles.user}>
-            <UserMenu />
+            <Notifications />
           </li>
         </ul>
       </Container>

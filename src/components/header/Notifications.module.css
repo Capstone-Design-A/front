@@ -1,0 +1,73 @@
+/* <a href="https://www.flaticon.com/kr/free-icons/" title="벨 아이콘">벨 아이콘 제작자: srip - Flaticon</a> */
+
+.notification {
+  position: relative;
+}
+
+.iconContainer {
+  position: relative;
+}
+
+.icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.iconButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.notificationCount {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #e35252;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.popup {
+  position: absolute;
+  top: 70px; /* 수정 가능 */
+  right: 0;
+  z-index: 1;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 400px; /* 수정 가능 */
+}
+
+.notificationHeader {
+  padding: 15px 3px;
+  font-size: 16px;
+  border-bottom: 1px solid #ccc;
+  margin: 8px 17px;
+}
+
+.notificationList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.notificationLink {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 15px 3px 10px;
+  font-size: 13px;
+  border-top: 1px solid #ccc;
+  margin: 5px 15px;
+}
+
+.notificationLink:hover {
+  font-weight: bold;
+  text-decoration: none;
+}
