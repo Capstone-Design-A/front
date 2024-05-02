@@ -43,6 +43,12 @@ function ProductCategoryPage() {
     setProductCount((prevCount) => prevCount + 6);
   };
 
+  const [productCount, setProductCount] = useState(6);
+
+  const handleLoadMore = () => {
+    setProductCount((prevCount) => prevCount + 6);
+  };
+
   return (
     <>
       <div className={styles.categoryContainer}>

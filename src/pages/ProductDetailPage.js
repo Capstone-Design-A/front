@@ -26,12 +26,12 @@ function ProductDetailPage() {
   return (
     <>
       <Container>
-        <div className={styles.containerStyle}>
+        <div className={styles.container}>
           <ProductDetail />
           <div className={styles.detailNav}>
             <DetailNav />
-            <div className={styles.divStyle}>
-              {/* 메뉴 바 밑에 보여줄 페이지 */}
+            <div className={styles.content}>
+              {/* 메뉴 바 밑에 보여줄 페이지 - 상품 상세 정보, 상품 후기, 상품 문의 */}
               <Outlet />
             </div>
           </div>

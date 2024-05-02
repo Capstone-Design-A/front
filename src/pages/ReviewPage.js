@@ -91,7 +91,6 @@ function ReviewPage() {
           </Button>
         </div>
       </div>
-      {/* ReviewForm이 활성화된 경우에만 렌더링 */}
       {isFormVisible && (
         <ReviewForm
           onSubmit={createReview}

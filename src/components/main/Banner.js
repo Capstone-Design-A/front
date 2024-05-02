@@ -5,8 +5,8 @@ import styles from "./Banner.module.css";
 function Banner() {
   return (
     <>
-      <div className={styles.back}>
-        <CategoryMain className={styles.banner} />
+      <div className={styles.banner}>
+        <CategoryMain className={styles.category} />
       </div>
     </>
   );

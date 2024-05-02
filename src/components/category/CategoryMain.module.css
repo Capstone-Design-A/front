@@ -1,0 +1,29 @@
+.category {
+  padding: 0;
+  color: #fff;
+  font-size: 23px;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.categoryList {
+  color: #fff;
+}
+
+.menu {
+  display: relative;
+  padding: 30px;
+  margin-bottom: 100px;
+  list-style: none;
+  font-size: 13px;
+  background-color: #000;
+  opacity: 37%;
+  color: #fff;
+  width: 150px;
+  text-align: left;
+}
+
+.categoryList a:hover,
+.categoryList a:active {
+  font-weight: 700;
+}
