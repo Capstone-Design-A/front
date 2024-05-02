@@ -36,7 +36,7 @@ function Main() {
               <Route path="question" element={<QuestionPage />} />
             </Route>
           </Route>
-          <Route path=":categorySlug" element={<ProductCategoryPage />} />
+          <Route path=":categoryId" element={<ProductCategoryPage />} />
           <Route path="my" element={<MyPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="*" element={<NotFoundPage />} />

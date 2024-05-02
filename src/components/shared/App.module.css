@@ -14,10 +14,10 @@ body {
   margin: 0;
 }
 
-a,
-a:hover,
-a:active,
-a:visited {
+a:not(.home),
+a:not(.home):hover,
+a:not(.home):active,
+a:not(.home):visited {
   color: #494949;
   text-decoration: none;
 }

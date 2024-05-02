@@ -5,7 +5,6 @@ const {
   lastMinuteItemsPreview,
   subscriptionSellerItemsPreview,
   purchaseRankingItemsPreview,
-  categories,
   questions,
   reviews,
 } = mock;
@@ -75,6 +74,7 @@ export function getPurchaseRankingItemsPreviewBySlug(productSlug) {
   );
 }
 
+/*
 export function getCategories(keyword) {
   if (!keyword) return categories;
   return filterByKeyword(categories, keyword);
@@ -87,6 +87,7 @@ export function getCategoryBySlug(categorySlug) {
 export function getProductsByCategory(categorySlug) {
   return products.filter((product) => product.category === categorySlug);
 }
+*/
 
 export function getQuestions(keyword) {
   if (!keyword) return questions;

@@ -5,7 +5,7 @@ import Container from "../shared/Container";
 
 function CategoryItem({ category, color }) {
   return (
-    <Container className={styles.container}>
+    <Container className={styles.containerMain}>
       <Link to={`/${category.id}`}>
         <h2 className={styles.title} style={{ color: color }}>
           {category.name}

@@ -1,13 +1,18 @@
 .container {
   margin: 0px;
   text-align: left;
+  transition: background-color 0.3s ease;
 }
 
-.title {
-  color: #fff;
+.container:hover {
+  background-color: rgba(72, 115, 93, 0.5);
+  border-radius: 10px;
+  margin: 5px;
+  width: 80%;
 }
 
-.title a:hover,
-.title a:active {
-  color: #000;
+.containerMain:hover {
+  border-radius: 0px;
+  margin: 5px;
+  width: 80%;
 }
