@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Container from "../shared/Container";
-import styles from "./Category.module.css";
+import styles from "./CategoryMain.module.css";
 import { getCategories } from "../../api/api.js";
 import { Navigate } from "react-router-dom";
 import CategoryItemMain from "./CategoryItemMain";
@@ -36,7 +36,7 @@ function CategoryMain() {
     <>
       <Container>
         <div className={styles.menu}>
-          <h1 className={styles.categoryMain}>카테고리</h1>
+          <h1 className={styles.category}>카테고리</h1>
           <div className={styles.categoryList}>
             {categories.map((category) => (
               <CategoryItemMain
