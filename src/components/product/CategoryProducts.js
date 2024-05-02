@@ -1,17 +1,14 @@
+import React from "react";
 import Container from "../shared/Container";
 import ProductItem from "./ProductItem";
 import styles from "./ProductList.module.css";
 
-function CategoryProducts({ products, category }) {
-  const categoryProducts = products.filter(
-    (product) => product.category === category
-  );
-
+function CategoryProducts({ products }) {
   return (
     <>
       <Container className={styles.container}>
         <div className={styles.productList}>
-          {categoryProducts.map((product) => (
+          {products.map((product) => (
             <ProductItem key={product.id} product={product} />
           ))}
         </div>
