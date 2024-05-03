@@ -25,6 +25,7 @@
 
 .name {
   margin: 5px 0 5px;
+  padding: 0 0 35px 0;
   overflow: hidden;
   font-size: 16px;
   font-weight: 500;
@@ -34,7 +35,7 @@
 
 .content {
   margin: 5px 0 3px;
-  padding: 0 0 35px 0;
+
   overflow: hidden;
   font-size: 16px;
   font-weight: 300;

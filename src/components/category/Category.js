@@ -1,8 +1,11 @@
+// 메인페이지 카테고리 아이템 컴포넌트
+// 페이지 사이즈 줄이면 CategoryList가 오른쪽으로 이동함 - 수정 필요
 import React, { useState, useEffect } from "react";
-import { useSearchParams, Link, Navigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Container from "../shared/Container";
 import styles from "./Category.module.css";
 import { getCategories } from "../../api/api.js";
+import { Navigate } from "react-router-dom";
 import CategoryItem from "./CategoryItem";
 
 function Category() {
@@ -14,6 +17,7 @@ function Category() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("initKeyword:", initKeyword);
         const categoriesData = await getCategories(initKeyword);
         setCategories(categoriesData);
       } catch (error) {
@@ -31,7 +35,7 @@ function Category() {
   return (
     <>
       <Container>
-        <div className={styles.categories}>
+        <div className={styles.menu}>
           <h1 className={styles.category}>카테고리</h1>
           <div className={styles.categoryList}>
             {categories.map((category) => (
@@ -42,11 +46,6 @@ function Category() {
               />
             ))}
           </div>
-        </div>
-        <div className={styles.home}>
-          <Link to="/">
-            <button>홈으로</button>
-          </Link>
         </div>
       </Container>
     </>

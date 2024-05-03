@@ -1,52 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import ListPage from "../components/product/ListPage";
+import { useParams, useLocation } from "react-router-dom";
+import Container from "../components/shared/Container";
+import styles from "./ProductCategoryPage.module.css";
 import CategoryProducts from "../components/product/CategoryProducts";
 import { getCategories, getItemsByCategory } from "../api/api.js";
-import styles from "./ProductCategoryPage.module.css";
-import Button from "../components/button/Button";
+import ListPage from "../components/product/ListPage";
 import Category from "../components/category/Category";
 
 function ProductCategoryPage() {
   const { categoryId } = useParams();
-  console.log("Received categoryId:", categoryId);
+  const location = useLocation();
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
-  // eslint-disable-next-line
-  const [size, setSize] = useState(10);
+  const size = 10;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("Fetching categories...");
-
+        // 카테고리 정보 가져오기
         const categories = await getCategories();
-        console.log("Categories:", categories);
-
         const parsedCategoryId = parseInt(categoryId);
-        if (isNaN(parsedCategoryId)) {
-          throw new Error("Invalid categoryId: NaN");
-        }
-
         const categoryData = categories.find(
           (cat) => cat.id === parsedCategoryId
         );
-        console.log("Selected category data:", categoryData);
         setCategory(categoryData);
 
-        console.log("Fetching products...");
-
+        // 상품 목록 가져오기
         const currentPage = page || 1;
-        const pageSize = size || 10;
-
         const productsData = await getItemsByCategory(
           parsedCategoryId,
           currentPage,
-          pageSize,
+          size,
           "JWT_TOKEN"
         );
-        console.log("Products:", productsData);
         setProducts(productsData);
       } catch (error) {
         console.error("Error fetching category and products:", error);
@@ -63,27 +50,30 @@ function ProductCategoryPage() {
 
   return (
     <>
-      <div className={styles.categoryContainer}>
-        <Category />
+      <div>
+        <Container>
+          <h1>{category ? "" : "Loading..."}</h1>
+        </Container>
       </div>
-      <div className={styles.contentContainer}>
-        <ListPage title={category ? category.name : ""}>
-          <div className={styles.content}>
-            <p className={styles.count}>총 {products.length}개의 상품</p>
-            <div>
-              <CategoryProducts products={products} />
+      <div className={styles.pageContainer}>
+        <div className={styles.categoryContainer}>
+          {/* <Category /> Category 컴포넌트를 추가하면 페이지 이동이 이루어지지 않는 문제 발생 */}
+        </div>
+        <div className={styles.pageContainer}>
+          <ListPage title={category ? category.name : ""}>
+            <div className={styles.content}>
+              <p className={styles.count}>총 {products.length}개의 상품</p>
+              <div>
+                <CategoryProducts products={products} />
+              </div>
+              <div className={styles.loadMore}>
+                <button className={styles.button} onClick={handleLoadMore}>
+                  더보기
+                </button>
+              </div>
             </div>
-            <div className={styles.loadMore}>
-              <Button
-                className={styles.button}
-                variant="round"
-                onClick={handleLoadMore}
-              >
-                더보기
-              </Button>
-            </div>
-          </div>
-        </ListPage>
+          </ListPage>
+        </div>
       </div>
     </>
   );
