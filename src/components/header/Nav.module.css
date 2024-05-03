@@ -51,11 +51,6 @@ ul.nav_bottom > li:not(:last-child) {
   margin-right: 20px;
 }
 
-ul.nav_bottom a:hover,
-ul.nav_bottom a:active {
-  text-decoration: underline;
-}
-
 .user {
   margin: 0px 0px 0px 10px;
 }

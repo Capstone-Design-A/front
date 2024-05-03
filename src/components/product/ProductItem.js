@@ -17,7 +17,12 @@ function ProductItem({ id, name, price, imageUrl }) {
       <div className={styles.text}>
         <Link to={`/products/${id}`}>
           <h2 className={styles.name}>{name}</h2>
-          {price && <p className={styles.price}>{price.toLocaleString()}원</p>}
+          {price && (
+            <p className={styles.price}>
+              {price.toLocaleString()}
+              <span className={styles.won}>원</span>
+            </p>
+          )}
         </Link>
       </div>
     </Card>

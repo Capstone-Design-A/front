@@ -17,7 +17,6 @@ function CategoryMain() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("initKeyword:", initKeyword);
         const categoriesData = await getCategories(initKeyword);
         setCategories(categoriesData);
       } catch (error) {
