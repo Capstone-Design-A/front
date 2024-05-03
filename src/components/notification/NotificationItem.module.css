@@ -1,3 +1,7 @@
+.notificationLink {
+  text-decoration: none;
+}
+
 .notificationItem {
   display: flex;
   align-items: center;

@@ -9,11 +9,13 @@ import Category from "../components/category/Category";
 
 function ProductCategoryPage() {
   const { categoryId } = useParams();
+  // eslint-disable-next-line
   const location = useLocation();
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const size = 10;
+  const [isCategoryVisible, setIsCategoryVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +50,10 @@ function ProductCategoryPage() {
     setPage(nextPage);
   };
 
+  const toggleCategoryVisibility = () => {
+    setIsCategoryVisible((prev) => !prev);
+  };
+
   return (
     <>
       <div>
@@ -56,8 +62,20 @@ function ProductCategoryPage() {
         </Container>
       </div>
       <div className={styles.pageContainer}>
-        <div className={styles.categoryContainer}>
-          {/* <Category /> Category 컴포넌트를 추가하면 페이지 이동이 이루어지지 않는 문제 발생 */}
+        <div
+          className={styles.toggleCategory}
+          onClick={toggleCategoryVisibility}
+        >
+          <span className={styles.icon}>☰</span>
+        </div>
+        <div
+          className={`${styles.categoryContainer} ${
+            isCategoryVisible ? styles.visible : ""
+          }`}
+        >
+          <div className={styles.categoryContent}>
+            <Category />
+          </div>
         </div>
         <div className={styles.pageContainer}>
           <ListPage title={category ? category.name : ""}>

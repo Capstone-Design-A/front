@@ -19,13 +19,13 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 0px;
-  padding: 50px 20px 0px;
+  padding: 10px 20px 0px;
   background-color: #fff;
 }
 
 .name {
   margin: 5px 0 5px;
-  padding: 0 0 35px 0;
+  padding: 0 0 40px 0;
   overflow: hidden;
   font-size: 16px;
   font-weight: 500;
@@ -35,7 +35,6 @@
 
 .content {
   margin: 5px 0 3px;
-
   overflow: hidden;
   font-size: 16px;
   font-weight: 300;
@@ -44,8 +43,13 @@
 .Item .price {
   margin: 0 0 20px;
   font-size: 17px;
-  font-weight: 900;
+  font-weight: 600;
   position: absolute;
   bottom: -25px;
   padding-bottom: 20px;
+}
+
+.Item .won {
+  font-weight: 400;
+  padding-left: 2px;
 }

@@ -6,12 +6,6 @@ import logoImg from "../../assets/logo.png";
 import styles from "./Nav.module.css";
 import SearchBar from "./SearchBar";
 
-function getLinkStyle({ isActive }) {
-  return {
-    textDecoration: isActive ? "underline" : "",
-  };
-}
-
 function Nav() {
   return (
     <div className={styles.nav}>
@@ -43,15 +37,11 @@ function Nav() {
         <SearchBar />
         <ul className={styles.nav_bottom}>
           <li>
-            <NavLink style={getLinkStyle} to="/my">
-              마이 페이지
-            </NavLink>
+            <NavLink to="/my">마이 페이지</NavLink>
           </li>
           <li> | </li>
           <li>
-            <NavLink style={getLinkStyle} to="/cart">
-              장바구니
-            </NavLink>
+            <NavLink to="/cart">장바구니</NavLink>
           </li>
           <li className={styles.user}>
             <Notifications />

@@ -11,24 +11,50 @@
   width: 100%;
   max-width: 200px;
   position: fixed;
-  top: 205px;
+  top: 215px;
   left: 0;
   z-index: 1;
+  transition: transform 0s ease;
+  transform: translateX(-100%);
+  display: none;
+}
+
+.categoryContainer.visible {
+  transform: translateX(0);
+  display: block;
+}
+
+.toggleCategory {
+  cursor: pointer;
+  position: fixed;
+  top: 235px;
+  left: 10px;
+  z-index: 1000;
+  display: block;
+  opacity: 80%;
+}
+
+.toggleCategory .icon {
+  font-size: 30px;
 }
 
 .contentContainer {
   overflow-y: auto;
 }
 
-/* 화면이 작아지면(아이폰 14pro 기준) 카테고리 숨긴 상태*/
-@media screen and (max-width: 980px) {
+@media screen and (min-width: 980px) {
   .categoryContainer {
-    display: none;
+    transform: translateX(0);
+    display: block;
   }
 
   .contentContainer {
     padding-top: 20px;
   }
+}
+
+.hidden {
+  display: none;
 }
 
 .category {
@@ -79,7 +105,7 @@
 }
 
 .button {
-  font-size: 15px;
+  font-size: 17px;
   background-color: #fff;
   opacity: 70%;
   border-color: #000;
