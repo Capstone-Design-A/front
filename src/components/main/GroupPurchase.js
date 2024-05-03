@@ -12,7 +12,7 @@ import GroupPurchaseItem from "./GroupPurchaseItem";
 SwipeCore.use([Navigation, Pagination, Autoplay]);
 
 function GroupPurchase() {
-  const [groupItems, setGroupItems] = useState([]);
+  const [groupPurchaseItems, setGroupPurchaseItems] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -24,7 +24,7 @@ function GroupPurchase() {
         );
         // 상위 5개의 아이템만 선택
         const top5Items = sortedItems.slice(0, 5);
-        setGroupItems(top5Items);
+        setGroupPurchaseItems(top5Items);
       } catch (error) {
         console.error("Error fetching group purchase items:", error);
       }
@@ -43,7 +43,7 @@ function GroupPurchase() {
           pagination={{ clickable: true }}
           autoplay={{ delay: 5000 }}
         >
-          {groupItems.map((item) => (
+          {groupPurchaseItems.map((item) => (
             <SwiperSlide key={item.id}>
               <GroupPurchaseItem item={item} />
             </SwiperSlide>

@@ -13,7 +13,6 @@ function ProductItem({ product }) {
     <Card className={styles.Item}>
       <div className={styles.img}>
         <Link to={`/products/${product.id}`}>
-          {/* 지금은 assets 경로로 이미지를 받아오고 있다 */}
           <ProductIcon imageUrl={product.imageUrl} />
         </Link>
       </div>
