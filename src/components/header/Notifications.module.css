@@ -8,6 +8,12 @@
   position: relative;
 }
 
+.icon {
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
 .icon img {
   width: 30px;
   height: 30px;
