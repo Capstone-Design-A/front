@@ -9,27 +9,44 @@ import Category from "../components/category/Category";
 
 function ProductCategoryPage() {
   const { categoryId } = useParams();
+  console.log("Received categoryId:", categoryId);
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState([]);
-  const [productCount, setProductCount] = useState(6);
+  const [page, setPage] = useState(1);
+  // eslint-disable-next-line
+  const [size, setSize] = useState(10);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 카테고리 데이터 가져오기
+        console.log("Fetching categories...");
+
         const categories = await getCategories();
+        console.log("Categories:", categories);
+
+        const parsedCategoryId = parseInt(categoryId);
+        if (isNaN(parsedCategoryId)) {
+          throw new Error("Invalid categoryId: NaN");
+        }
+
         const categoryData = categories.find(
-          (cat) => cat.id === parseInt(categoryId)
+          (cat) => cat.id === parsedCategoryId
         );
+        console.log("Selected category data:", categoryData);
         setCategory(categoryData);
 
-        // 카테고리별 상품 목록 가져오기
+        console.log("Fetching products...");
+
+        const currentPage = page || 1;
+        const pageSize = size || 10;
+
         const productsData = await getItemsByCategory(
-          parseInt(categoryId),
-          1,
-          10,
+          parsedCategoryId,
+          currentPage,
+          pageSize,
           "JWT_TOKEN"
         );
+        console.log("Products:", productsData);
         setProducts(productsData);
       } catch (error) {
         console.error("Error fetching category and products:", error);
@@ -37,10 +54,11 @@ function ProductCategoryPage() {
     };
 
     fetchData();
-  }, [categoryId]);
+  }, [categoryId, page, size]);
 
   const handleLoadMore = () => {
-    setProductCount((prevCount) => prevCount + 6);
+    const nextPage = page !== undefined ? page + 1 : 1;
+    setPage(nextPage);
   };
 
   return (
@@ -53,18 +71,16 @@ function ProductCategoryPage() {
           <div className={styles.content}>
             <p className={styles.count}>총 {products.length}개의 상품</p>
             <div>
-              <CategoryProducts products={products.slice(0, productCount)} />
+              <CategoryProducts products={products} />
             </div>
             <div className={styles.loadMore}>
-              {products.length > productCount && (
-                <Button
-                  className={styles.button}
-                  variant="round"
-                  onClick={handleLoadMore}
-                >
-                  더보기
-                </Button>
-              )}
+              <Button
+                className={styles.button}
+                variant="round"
+                onClick={handleLoadMore}
+              >
+                더보기
+              </Button>
             </div>
           </div>
         </ListPage>

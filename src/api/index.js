@@ -37,11 +37,13 @@ export function getGroupPurchaseItemsPreview(keyword) {
   return { ...groupPurchaseItemsPreview, items: filteredItems };
 }
 
+/*
 export function getGroupPurchaseItemsPreviewBySlug(productSlug) {
   return groupPurchaseItemsPreview.find(
     (product) => product.id === productSlug
   );
 }
+*/
 
 export function getLastMinuteItemsPreview(keyword) {
   if (!keyword) return lastMinuteItemsPreview;
