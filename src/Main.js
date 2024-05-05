@@ -8,10 +8,10 @@ import OrderPage from "./pages/OrderPage";
 import MyPage from "./pages/MyPage";
 import ProductDeadlinePage from "./pages/ProductDeadlinePage";
 import ProductRankingPage from "./pages/ProductRankingPage";
+import ProductSubscriptionPage from "./pages/ProductSubscriptionPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Description from "./components/detail/Description";
 import ReviewPage from "./pages/ReviewPage";
-import ProductListPage from "./pages/ProductListPage";
 import ProductCategoryPage from "./pages/ProductCategoryPage";
 import QuestionPage from "./pages/QuestionPage";
 import CartPage from "./pages/CartPage";
@@ -28,16 +28,15 @@ function Main() {
           <Route path="order" element={<OrderPage />} />
           <Route path="item/deadline" element={<ProductDeadlinePage />} />
           <Route path="item/ranking" element={<ProductRankingPage />} />
-          <Route path="new-products" element={<ProductListPage />} />
-          <Route path="purchase-ranking" element={<ProductListPage />} />
-          <Route path="products">
-            <Route index element={<ProductListPage />} />
-            <Route path=":productSlug" element={<ProductDetailPage />}>
-              <Route index element={<Description />} />
-              <Route path="description" element={<Description />} />
-              <Route path="review" element={<ReviewPage />} />
-              <Route path="question" element={<QuestionPage />} />
-            </Route>
+          <Route
+            path="item/subscription"
+            element={<ProductSubscriptionPage />}
+          />
+          <Route path="products:productSlug" element={<ProductDetailPage />}>
+            <Route index element={<Description />} />
+            <Route path="description" element={<Description />} />
+            <Route path="review" element={<ReviewPage />} />
+            <Route path="question" element={<QuestionPage />} />
           </Route>
           <Route path="item/:categoryId" element={<ProductCategoryPage />} />
           <Route path="my" element={<MyPage />} />

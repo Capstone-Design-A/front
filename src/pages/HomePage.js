@@ -7,9 +7,13 @@ import Banner from "../components/main/Banner";
 import GroupPurchase from "../components/main/GroupPurchase";
 import DeadlineItems from "../components/product/DeadlineItems";
 import RankingItems from "../components/product/RankingItems";
-import SubscriptionSellerItems from "../components/product/SubscriptionSellerItems";
+import SubscriptionItems from "../components/product/SubscriptionItems";
 import styles from "./HomePage.module.css";
-import { getDeadlineItems, getRankingItems } from "../api/api.js";
+import {
+  getDeadlineItems,
+  getRankingItems,
+  getSubscriptionItems,
+} from "../api/api.js";
 
 function getLinkStyle({ isActive }) {
   return {
@@ -20,8 +24,11 @@ function getLinkStyle({ isActive }) {
 function HomePage() {
   const [deadlineProducts, setDeadlineProducts] = useState([]);
   const [rankingProducts, setRankingProducts] = useState([]);
+  const [subscriptionProducts, setSubscriptionProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
+  const [type, setType] = useState(0); // 0: 로그인한 유저, 1: 비로그인한 유저
+  const [fromMember, setFromMember] = useState(2); // 로그인이 구현 전이므로 임의의 값으로 설정
 
   useEffect(() => {
     const fetchDeadlineItems = async () => {
@@ -52,9 +59,32 @@ function HomePage() {
       }
     };
 
+    const fetchSubscriptionItems = async () => {
+      try {
+        let fetchedProducts;
+        // (로그인 상태 && fromMember 값이 null이 아닌 경우) API 호출
+        if (type === 0 && fromMember !== null) {
+          fetchedProducts = await getSubscriptionItems(
+            fromMember,
+            null,
+            page,
+            size,
+            type,
+            "JWT_TOKEN"
+          );
+          setSubscriptionProducts(fetchedProducts);
+        } else {
+          console.error("Invalid fromMember value:", fromMember);
+        }
+      } catch (error) {
+        console.error("Error fetching subscription items:", error);
+      }
+    };
+
     fetchDeadlineItems();
     fetchRankingItems();
-  }, [page, size]);
+    fetchSubscriptionItems();
+  }, [page, size, type, fromMember]);
 
   return (
     <>
@@ -87,12 +117,19 @@ function HomePage() {
       <Container>
         <h1 className={styles.title}>
           <Lined>New! 구독하고 있는 판매자의 새 상품</Lined>
-          <NavLink style={getLinkStyle} to="/new-products">
+          <NavLink
+            style={getLinkStyle}
+            to={`/item/subscription?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`}
+          >
             >
           </NavLink>
         </h1>
       </Container>
-      <SubscriptionSellerItems />
+      <SubscriptionItems
+        products={subscriptionProducts}
+        type={type}
+        fromMember={fromMember}
+      />
     </>
   );
 }
