@@ -5,11 +5,11 @@ import Lined from "../components/shared/Lined";
 import Container from "../components/shared/Container";
 import Banner from "../components/main/Banner";
 import GroupPurchase from "../components/main/GroupPurchase";
-import DeadlineItems from "../components/product/DeadlineItems"; // 수정 필요
-import PurchaseRankingItems from "../components/product/PurchaseRankingItems";
+import DeadlineItems from "../components/product/DeadlineItems";
+import RankingItems from "../components/product/RankingItems";
 import SubscriptionSellerItems from "../components/product/SubscriptionSellerItems";
 import styles from "./HomePage.module.css";
-import { getDeadlineItems } from "../api/api";
+import { getDeadlineItems, getRankingItems } from "../api/api.js";
 
 function getLinkStyle({ isActive }) {
   return {
@@ -18,12 +18,13 @@ function getLinkStyle({ isActive }) {
 }
 
 function HomePage() {
-  const [products, setProducts] = useState([]); // 추가된 상태
+  const [deadlineProducts, setDeadlineProducts] = useState([]);
+  const [rankingProducts, setRankingProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDeadlineItems = async () => {
       try {
         const fetchedProducts = await getDeadlineItems(
           page,
@@ -31,13 +32,28 @@ function HomePage() {
           null,
           "JWT_TOKEN"
         );
-        setProducts(fetchedProducts);
+        setDeadlineProducts(fetchedProducts);
       } catch (error) {
         console.error("Error fetching deadline items:", error);
       }
     };
 
-    fetchData();
+    const fetchRankingItems = async () => {
+      try {
+        const fetchedProducts = await getRankingItems(
+          page,
+          size,
+          null,
+          "JWT_TOKEN"
+        );
+        setRankingProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error fetching ranking items:", error);
+      }
+    };
+
+    fetchDeadlineItems();
+    fetchRankingItems();
   }, [page, size]);
 
   return (
@@ -55,7 +71,19 @@ function HomePage() {
           </NavLink>
         </h1>
       </Container>
-      <DeadlineItems products={products} />
+      <DeadlineItems products={deadlineProducts} />
+      <Container>
+        <h1 className={styles.title}>
+          <Lined>구매 랭킹</Lined>
+          <NavLink
+            style={getLinkStyle}
+            to={`/item/ranking?page=${page}&size=${size}`}
+          >
+            >
+          </NavLink>
+        </h1>
+      </Container>
+      <RankingItems products={rankingProducts} />
       <Container>
         <h1 className={styles.title}>
           <Lined>New! 구독하고 있는 판매자의 새 상품</Lined>
@@ -65,15 +93,6 @@ function HomePage() {
         </h1>
       </Container>
       <SubscriptionSellerItems />
-      <Container>
-        <h1 className={styles.title}>
-          <Lined>구매 랭킹</Lined>
-          <NavLink style={getLinkStyle} to="/purchase-ranking">
-            >
-          </NavLink>
-        </h1>
-      </Container>
-      <PurchaseRankingItems />
     </>
   );
 }
