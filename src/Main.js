@@ -6,13 +6,14 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import OrderPage from "./pages/OrderPage";
 import MyPage from "./pages/MyPage";
+import ProductCategoryPage from "./pages/ProductCategoryPage";
+import ProductSearchPage from "./pages/ProductSearchPage";
 import ProductDeadlinePage from "./pages/ProductDeadlinePage";
 import ProductRankingPage from "./pages/ProductRankingPage";
 import ProductSubscriptionPage from "./pages/ProductSubscriptionPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Description from "./components/detail/Description";
 import ReviewPage from "./pages/ReviewPage";
-import ProductCategoryPage from "./pages/ProductCategoryPage";
 import QuestionPage from "./pages/QuestionPage";
 import CartPage from "./pages/CartPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -26,6 +27,8 @@ function Main() {
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="order" element={<OrderPage />} />
+          <Route path="item/:categoryId" element={<ProductCategoryPage />} />
+          <Route path="item/search" element={<ProductSearchPage />} />
           <Route path="item/deadline" element={<ProductDeadlinePage />} />
           <Route path="item/ranking" element={<ProductRankingPage />} />
           <Route
@@ -38,7 +41,7 @@ function Main() {
             <Route path="review" element={<ReviewPage />} />
             <Route path="question" element={<QuestionPage />} />
           </Route>
-          <Route path="item/:categoryId" element={<ProductCategoryPage />} />
+
           <Route path="my" element={<MyPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="*" element={<NotFoundPage />} />

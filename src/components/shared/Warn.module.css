@@ -5,6 +5,7 @@
 .icon {
   display: block;
   margin: 0 auto;
+  width: 80px;
 }
 
 .title {
@@ -14,11 +15,12 @@
 }
 
 .big .title {
-  font-size: 24px;
+  font-size: 30px;
+  margin-top: 30px;
 }
 
 .description {
-  margin: 0;
+  margin-top: 20px;
   font-weight: 500;
   line-height: 2.07;
   color: #878787;

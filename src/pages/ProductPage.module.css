@@ -119,3 +119,15 @@
   margin: 0 0 15px 6px;
   cursor: pointer;
 }
+
+.noResult {
+  text-align: center;
+  font-size: 30px;
+  text-align: center;
+}
+
+.noResult p {
+  margin-bottom: 150px;
+  font-size: 20px;
+  color: #878787;
+}
