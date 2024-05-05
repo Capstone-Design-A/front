@@ -102,11 +102,60 @@ export const getDeadlineItems = async (page, size, keyword, token) => {
 };
 
 export const getRankingItems = async (page, size, keyword, token) => {
-  const DEADLINE_ITEMS_ENDPOINT = "/item/ranking";
+  const Ranking_ITEMS_ENDPOINT = "/item/ranking";
 
   try {
     const response = await fetch(
-      `${DEADLINE_ITEMS_ENDPOINT}?page=${page}&size=${size}`,
+      `${Ranking_ITEMS_ENDPOINT}?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "X-ACCESS-TOKEN": token,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    let items = responseData.result.itemList;
+
+    if (keyword) {
+      items = items.filter((item) =>
+        item.name.toLowerCase().includes(keyword.toLowerCase())
+      );
+    }
+
+    return items;
+  } catch (error) {
+    console.error("Error fetching deadline items:", error);
+    throw error;
+  }
+};
+
+export const getSubscriptionItems = async (
+  fromMember,
+  keyword,
+  page,
+  size,
+  type,
+  token
+) => {
+  const Subscription_ITEMS_ENDPOINT = "/item/subscription";
+
+  try {
+    const response = await fetch(
+      `${Subscription_ITEMS_ENDPOINT}?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
