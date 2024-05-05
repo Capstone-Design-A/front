@@ -1,4 +1,4 @@
-// 구독하고 있는 판매자의 새 상품
+// 구독하고 있는 판매자의 새 상품 목록
 import React from "react";
 import Container from "../shared/Container";
 import ProductItem from "./ProductItem";

@@ -1,4 +1,4 @@
-// 마감 임박 상품
+// 마감 임박 상품 목록
 import React from "react";
 import Container from "../shared/Container";
 import ProductItem from "./ProductItem";

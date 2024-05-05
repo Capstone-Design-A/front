@@ -1,5 +1,47 @@
 const BASE_URL = "https://dev.agriculturalproducts.store";
 
+export const getSearchItems = async (page, size, keyword, token) => {
+  const SEARCH_ITEMS_ENDPOINT = "/item/search";
+
+  try {
+    const response = await fetch(
+      `${SEARCH_ITEMS_ENDPOINT}?keyword=${keyword}&page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "X-ACCESS-TOKEN": token,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    let items = responseData.result.itemList;
+
+    if (keyword) {
+      items = items.filter((item) =>
+        item.name.toLowerCase().includes(keyword.toLowerCase())
+      );
+    }
+
+    return items;
+  } catch (error) {
+    console.error("Error fetching deadline items:", error);
+    throw error;
+  }
+};
+
 export const getItemsByCategory = async (categoryId, page, size, token) => {
   const ITEM_ENDPOINT = "/item";
 
@@ -102,11 +144,11 @@ export const getDeadlineItems = async (page, size, keyword, token) => {
 };
 
 export const getRankingItems = async (page, size, keyword, token) => {
-  const Ranking_ITEMS_ENDPOINT = "/item/ranking";
+  const RANKING_ITEMS_ENDPOINT = "/item/ranking";
 
   try {
     const response = await fetch(
-      `${Ranking_ITEMS_ENDPOINT}?page=${page}&size=${size}`,
+      `${RANKING_ITEMS_ENDPOINT}?page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
@@ -151,11 +193,11 @@ export const getSubscriptionItems = async (
   type,
   token
 ) => {
-  const Subscription_ITEMS_ENDPOINT = "/item/subscription";
+  const SUBSCRIPTION_ITEMS_ENDPOINT = "/item/subscription";
 
   try {
     const response = await fetch(
-      `${Subscription_ITEMS_ENDPOINT}?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`,
+      `${SUBSCRIPTION_ITEMS_ENDPOINT}?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {

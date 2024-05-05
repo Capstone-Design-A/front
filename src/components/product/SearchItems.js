@@ -1,10 +1,10 @@
-// 구매 랭킹 상품 목록
+// 검색 결과 상품 목록
 import React from "react";
 import Container from "../shared/Container";
 import ProductItem from "./ProductItem";
 import styles from "./ProductList.module.css";
 
-function RankingItems({ products }) {
+function SearchItems({ products }) {
   return (
     <Container className={styles.container}>
       <div className={styles.productList}>
@@ -23,4 +23,4 @@ function RankingItems({ products }) {
   );
 }
 
-export default RankingItems;
+export default SearchItems;
