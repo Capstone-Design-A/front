@@ -3,7 +3,7 @@ import { useSearchParams, useLocation } from "react-router-dom";
 import styles from "./ProductListPage.module.css";
 import DeadlineItems from "../components/product/DeadlineItems";
 import SubscriptionSellerItems from "../components/product/SubscriptionSellerItems";
-import PurchaseRankingItems from "../components/product/PurchaseRankingItems";
+import RankingItems from "../components/product/RankingItems";
 import ListPage from "../components/product/ListPage";
 import { getDeadlineItems } from "../api/api.js";
 
@@ -26,7 +26,7 @@ function ProductListPage() {
           case "/item/new-products":
             // 다른 컴포넌트에 대한 API 호출 함수 추가
             break;
-          case "/item/purchase-ranking":
+          case "/item/-ranking":
             // 다른 컴포넌트에 대한 API 호출 함수 추가
             break;
           default:
@@ -49,8 +49,8 @@ function ProductListPage() {
     case "/item/new-products":
       productListComponent = <SubscriptionSellerItems keyword={initKeyword} />;
       break;
-    case "/item/purchase-ranking":
-      productListComponent = <PurchaseRankingItems keyword={initKeyword} />;
+    case "/item/-ranking":
+      productListComponent = <RankingItems keyword={initKeyword} />;
       break;
     default:
       productListComponent = null;
@@ -86,7 +86,7 @@ function getTitle(pathname) {
       return "마감 임박 상품";
     case "/item/new-products":
       return "New! 구독하고 있는 판매자의 새 상품";
-    case "/item/purchase-ranking":
+    case "/item/-ranking":
       return "구매 랭킹";
     default:
       return "상품 목록";
@@ -99,7 +99,7 @@ function getDescription(pathname) {
       return "상품 판매 종료가 얼마 남지 않았어요";
     case "/item/new-products":
       return "최신 상품을 만나보세요";
-    case "/item/purchase-ranking":
+    case "/item/-ranking":
       return "가장 많이 팔린 상품을 확인하세요";
     default:
       return "다양한 상품을 살펴보세요";

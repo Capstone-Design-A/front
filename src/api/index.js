@@ -2,7 +2,6 @@ import mock from "./mock.json";
 const {
   products,
   groupPurchaseItemsPreview,
-  deadlineItemsPreview,
   subscriptionSellerItemsPreview,
   purchaseRankingItemsPreview,
   questions,
