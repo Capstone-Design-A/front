@@ -2,7 +2,7 @@ import mock from "./mock.json";
 const {
   products,
   groupPurchaseItemsPreview,
-  lastMinuteItemsPreview,
+  deadlineItemsPreview,
   subscriptionSellerItemsPreview,
   purchaseRankingItemsPreview,
   questions,
@@ -43,16 +43,16 @@ export function getGroupPurchaseItemsPreviewBySlug(productSlug) {
     (product) => product.id === productSlug
   );
 }
+
+export function getDeadlineItemsPreview(keyword) {
+  if (!keyword) return deadlineItemsPreview;
+  return filterByKeyword(deadlineItemsPreview, keyword);
+}
+
+export function getdeadlineItemsPreviewBySlug(productSlug) {
+  return deadlineItemsPreview.find((product) => product.id === productSlug);
+}
 */
-
-export function getLastMinuteItemsPreview(keyword) {
-  if (!keyword) return lastMinuteItemsPreview;
-  return filterByKeyword(lastMinuteItemsPreview, keyword);
-}
-
-export function getLastMinuteItemsPreviewBySlug(productSlug) {
-  return lastMinuteItemsPreview.find((product) => product.id === productSlug);
-}
 
 export function getSubscriptionSellerItemsPreview(keyword) {
   if (!keyword) return subscriptionSellerItemsPreview;

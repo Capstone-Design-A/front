@@ -1,5 +1,4 @@
 // 상품 아이템 컴포넌트
-// 이미지,판매자,상품명,가격을 Card 컴포넌트로 감싸서 구현 - 페이지 전체에서 재사용 가능
 import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../shared/Card";

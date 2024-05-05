@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import OrderPage from "./pages/OrderPage";
 import MyPage from "./pages/MyPage";
+import ProductDeadlinePage from "./pages/ProductDeadlinePage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Description from "./components/detail/Description";
 import ReviewPage from "./pages/ReviewPage";
@@ -24,7 +25,7 @@ function Main() {
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="order" element={<OrderPage />} />
-          <Route path="last-minute-products" element={<ProductListPage />} />
+          <Route path="item/deadline" element={<ProductDeadlinePage />} />
           <Route path="new-products" element={<ProductListPage />} />
           <Route path="purchase-ranking" element={<ProductListPage />} />
           <Route path="products">
