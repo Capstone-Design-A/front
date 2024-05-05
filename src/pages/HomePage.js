@@ -25,10 +25,15 @@ function HomePage() {
   const [deadlineProducts, setDeadlineProducts] = useState([]);
   const [rankingProducts, setRankingProducts] = useState([]);
   const [subscriptionProducts, setSubscriptionProducts] = useState([]);
+  // eslint-disable-next-line
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line
   const [size, setSize] = useState(10);
+  // eslint-disable-next-line
   const [type, setType] = useState(0); // 0: 로그인한 유저, 1: 비로그인한 유저
+  // eslint-disable-next-line
   const [fromMember, setFromMember] = useState(2); // 로그인이 구현 전이므로 임의의 값으로 설정
+  const displayLimit = 6;
 
   useEffect(() => {
     const fetchDeadlineItems = async () => {
@@ -39,7 +44,7 @@ function HomePage() {
           null,
           "JWT_TOKEN"
         );
-        setDeadlineProducts(fetchedProducts);
+        setDeadlineProducts(fetchedProducts.slice(0, displayLimit));
       } catch (error) {
         console.error("Error fetching deadline items:", error);
       }
@@ -53,7 +58,7 @@ function HomePage() {
           null,
           "JWT_TOKEN"
         );
-        setRankingProducts(fetchedProducts);
+        setRankingProducts(fetchedProducts.slice(0, displayLimit));
       } catch (error) {
         console.error("Error fetching ranking items:", error);
       }
@@ -72,7 +77,7 @@ function HomePage() {
             type,
             "JWT_TOKEN"
           );
-          setSubscriptionProducts(fetchedProducts);
+          setSubscriptionProducts(fetchedProducts.slice(0, displayLimit));
         } else {
           console.error("Invalid fromMember value:", fromMember);
         }
@@ -84,7 +89,7 @@ function HomePage() {
     fetchDeadlineItems();
     fetchRankingItems();
     fetchSubscriptionItems();
-  }, [page, size, type, fromMember]);
+  }, [page, size, type, fromMember, displayLimit]);
 
   return (
     <>
