@@ -13,6 +13,7 @@ import {
   getDeadlineItems,
   getRankingItems,
   getSubscriptionItems,
+  getGroupItems,
 } from "../api/api.js";
 
 function getLinkStyle({ isActive }) {
@@ -25,6 +26,8 @@ function HomePage() {
   const [deadlineProducts, setDeadlineProducts] = useState([]);
   const [rankingProducts, setRankingProducts] = useState([]);
   const [subscriptionProducts, setSubscriptionProducts] = useState([]);
+  // eslint-disable-next-line
+  const [groupProducts, setGroupProducts] = useState([]);
   // eslint-disable-next-line
   const [page, setPage] = useState(1);
   // eslint-disable-next-line
@@ -86,14 +89,39 @@ function HomePage() {
       }
     };
 
+    const fetchGroupItems = async () => {
+      try {
+        const fetchedProducts = await getGroupItems(
+          page,
+          size,
+          null,
+          "JWT_TOKEN"
+        );
+        setGroupProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error fetching group items:", error);
+      }
+    };
+
     fetchDeadlineItems();
     fetchRankingItems();
     fetchSubscriptionItems();
+    fetchGroupItems();
   }, [page, size, type, fromMember, displayLimit]);
 
   return (
     <>
       <Banner />
+      <Container>
+        <h1 className={styles.group}>
+          <NavLink
+            style={getLinkStyle}
+            to={`/groupItem?page=${page}&size=${size}`}
+          >
+            공동 구매 상품을 둘러보세요 >
+          </NavLink>
+        </h1>
+      </Container>
       <GroupPurchase className={styles.margin} />
       <Container>
         <h1 className={styles.title}>

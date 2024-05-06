@@ -12,11 +12,11 @@ function Cart({ product }) {
     <Container>
       <div className={styles.all}>
         <div className={styles.img}>
-          <Link to={`/products/${product.slug}`}>
+          <Link to={`/${product.slug}`}>
             <ProductIcon photoUrl={product.photoUrl} />
           </Link>
         </div>
-        <Link to={`/products/${product.slug}`}>
+        <Link to={`/product/${product.slug}`}>
           <h2 className={styles.title}>{product.title}</h2>
           <p className={styles.description}>{showSummary && product.summary}</p>
         </Link>
@@ -42,11 +42,11 @@ function Cart({ product }) {
     <Container>
       <div className={styles.all}>
         <div className={styles.img}>
-          <Link to={`/products/${product.id}`}>
+          <Link to={`/product/${product.id}`}>
             <ProductIcon imageUrl={product.imageUrl} />
           </Link>
         </div>
-        <Link to={`/products/${product.id}`}>
+        <Link to={`/product/${product.id}`}>
           <h2 className={styles.title}>{product.name}</h2>
           <p className={styles.description}>{showSummary && product.content}</p>
         </Link>

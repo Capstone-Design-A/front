@@ -1,32 +1,20 @@
-// 상품 아이템 컴포넌트
+// 공동 구매 상품 아이템 컴포넌트
 import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../shared/Card";
 import ProductIcon from "./ProductIcon";
 import styles from "./ProductItem.module.css";
 
-function ProductItem({ id, name, price, imageUrl, content }) {
-  const productData = { id, name, price, imageUrl, content };
-
+function ProductGroupItem({ id, name, price, imageUrl }) {
   return (
     <Card className={styles.Item}>
       <div className={styles.img}>
-        <Link
-          to={{
-            pathname: `/product/${id}`,
-            state: { product: productData },
-          }}
-        >
+        <Link to={`/product/${id}`}>
           <ProductIcon imageUrl={imageUrl} />
         </Link>
       </div>
       <div className={styles.text}>
-        <Link
-          to={{
-            pathname: `/product/${id}`,
-            state: { product: productData },
-          }}
-        >
+        <Link to={`/product/${id}`}>
           <h2 className={styles.name}>{name}</h2>
           {price && (
             <p className={styles.price}>
@@ -40,4 +28,4 @@ function ProductItem({ id, name, price, imageUrl, content }) {
   );
 }
 
-export default ProductItem;
+export default ProductGroupItem;

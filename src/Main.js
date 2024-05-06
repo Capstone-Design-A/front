@@ -8,6 +8,7 @@ import OrderPage from "./pages/OrderPage";
 import MyPage from "./pages/MyPage";
 import ProductCategoryPage from "./pages/ProductCategoryPage";
 import ProductSearchPage from "./pages/ProductSearchPage";
+import ProductGroupPage from "./pages/ProductGroupPage";
 import ProductDeadlinePage from "./pages/ProductDeadlinePage";
 import ProductRankingPage from "./pages/ProductRankingPage";
 import ProductSubscriptionPage from "./pages/ProductSubscriptionPage";
@@ -29,13 +30,14 @@ function Main() {
           <Route path="order" element={<OrderPage />} />
           <Route path="item/:categoryId" element={<ProductCategoryPage />} />
           <Route path="item/search" element={<ProductSearchPage />} />
+          <Route path="groupItem" element={<ProductGroupPage />} />
           <Route path="item/deadline" element={<ProductDeadlinePage />} />
           <Route path="item/ranking" element={<ProductRankingPage />} />
           <Route
             path="item/subscription"
             element={<ProductSubscriptionPage />}
           />
-          <Route path="products:productSlug" element={<ProductDetailPage />}>
+          <Route path="product/:productId" element={<ProductDetailPage />}>
             <Route index element={<Description />} />
             <Route path="description" element={<Description />} />
             <Route path="review" element={<ReviewPage />} />

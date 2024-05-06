@@ -8,7 +8,7 @@ function DetailNav() {
     <ul className={styles.menu}>
       <li className={styles.line}>
         <NavLink
-          to={`/products/${productSlug}/description`}
+          to={`/product/${productSlug}/description`}
           className={({ isActive }) =>
             isActive ? styles.activeLinkStyle : styles.inactiveLinkStyle
           }
@@ -18,7 +18,7 @@ function DetailNav() {
       </li>
       <li className={styles.line}>
         <NavLink
-          to={`/products/${productSlug}/review`}
+          to={`/product/${productSlug}/review`}
           className={({ isActive }) =>
             isActive ? styles.activeLinkStyle : styles.inactiveLinkStyle
           }
@@ -28,7 +28,7 @@ function DetailNav() {
       </li>
       <li className={styles.line}>
         <NavLink
-          to={`/products/${productSlug}/question`}
+          to={`/product/${productSlug}/question`}
           className={({ isActive }) =>
             isActive ? styles.activeLinkStyle : styles.inactiveLinkStyle
           }
