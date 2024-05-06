@@ -42,6 +42,49 @@ export const getSearchItems = async (page, size, keyword, token) => {
   }
 };
 
+export const getAlarmItems = async (
+  fromMember,
+  keyword,
+  page,
+  size,
+  type,
+  token
+) => {
+  const SUBSCRIPTION_ITEMS_ENDPOINT = "/alarm";
+
+  try {
+    const response = await fetch(
+      `${SUBSCRIPTION_ITEMS_ENDPOINT}?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "X-ACCESS-TOKEN": token,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    let items = responseData.result.alarmList;
+
+    return items;
+  } catch (error) {
+    console.error("Error fetching deadline items:", error);
+    throw error;
+  }
+};
+
 export const getItemsByCategory = async (categoryId, page, size, token) => {
   const ITEM_ENDPOINT = "/item";
 
@@ -98,6 +141,50 @@ export const getCategories = async () => {
   } catch (error) {
     console.error("Error fetching categories:", error);
     return [];
+  }
+};
+
+export const getGroupItems = async (page, size, keyword, token) => {
+  const GROUP_ITEMS_ENDPOINT = "/groupItem";
+
+  try {
+    const response = await fetch(
+      `${GROUP_ITEMS_ENDPOINT}?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "X-ACCESS-TOKEN": token,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    let items = responseData.result.groupItemList;
+
+    if (keyword) {
+      items = items.filter((item) =>
+        item.item.name.toLowerCase().includes(keyword.toLowerCase())
+      );
+    }
+
+    items = items.map((item) => item.item);
+
+    return items;
+  } catch (error) {
+    console.error("Error fetching group items:", error);
+    throw error;
   }
 };
 

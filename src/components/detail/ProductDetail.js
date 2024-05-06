@@ -1,7 +1,7 @@
 import Button from "../button/Button";
 import OrderButton from "../button/OrderButton";
-import { Navigate, useParams } from "react-router-dom";
-import { addWishlist, getProductBySlug } from "../../api";
+import { Navigate } from "react-router-dom";
+import { addWishlist } from "../../api";
 import Container from "../shared/Container";
 import ProductIcon from "../product/ProductIcon";
 import styles from "./ProductDetail.module.css";
@@ -9,13 +9,11 @@ import { useNavigate } from "react-router-dom";
 import HorizontalRule from "../shared/HorizontalRule";
 import Amount from "./Amount";
 
-function ProductDetail() {
+function ProductDetail({ product }) {
   const navigate = useNavigate();
-  const { productSlug } = useParams();
-  const product = getProductBySlug(productSlug);
 
   if (!product) {
-    return <Navigate to="/products" />;
+    return <Navigate to="/product" />;
   }
 
   // 판매자 소개 바로가기 버튼도 만들기

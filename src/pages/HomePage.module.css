@@ -7,3 +7,11 @@
   justify-content: space-between;
   margin: 100px 0 0 0;
 }
+
+.group {
+  font-size: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}

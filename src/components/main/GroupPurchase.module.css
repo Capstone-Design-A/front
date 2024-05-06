@@ -6,7 +6,10 @@
   background-size: cover;
   height: 300px;
   --swiper-theme-color: #b3b3b3;
-  background-color: #fff;
+  background-image: linear-gradient(
+    rgba(235, 240, 237, 0.5),
+    rgba(170, 181, 175, 0.5)
+  );
   box-shadow: var(--box-shadow);
 }
 
