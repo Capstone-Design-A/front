@@ -1,0 +1,28 @@
+.postItem {
+  width: 300px;
+  height: 300px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  overflow: hidden;
+}
+
+.postImage {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+  border-radius: 0px;
+}
+
+.postContent {
+  padding: 10px;
+}
+
+.postTitle {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.postDescription {
+  font-size: 14px;
+}
