@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserProfile from "../components/userIntro/UserProfile";
 import PostList from "../components/userIntro/PostList";
+import PostModal from "../components/userIntro/PostModal";
 import styles from "./UserIntroductionPage.module.css";
 import Category from "../components/category/Category";
 import Container from "../components/shared/Container";
@@ -9,6 +10,7 @@ function UserIntroductionPage() {
   const [userData, setUserData] = useState(null);
   const [postList, setPostList] = useState([]);
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -17,10 +19,9 @@ function UserIntroductionPage() {
         const userData = {
           username: "user123",
           subscriptionInfo: "2.4천",
-          introduction: "맛있고 싱싱한 사과를 팝니다~^^",
-          content:
-            "우리 사과의 자랑은 친환경이라는 것입니다. 맛있는 우리 사과를 먹고 일상에 비타민을 충전해보아요 ^0^",
-          profilePicture: "https://example.com/profile.jpg",
+          introduction: "한 줄 소개란입니다.",
+          content: "상세 소개란입니다.",
+          profilePicture: null,
           product: "판매 중인 상품 보러가기",
         };
         setUserData(userData);
@@ -35,39 +36,40 @@ function UserIntroductionPage() {
         const postList = [
           {
             id: 1,
-            imageUrl: "https://example.com/post1.jpg",
-            content: "첫 번째 게시물입니다.",
-            createdDate: "작성일 2024.03.14",
+            imageUrl: null,
+            content:
+              "첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.",
+            createdAt: "2024.03.14",
           },
           {
             id: 2,
-            imageUrl: "https://example.com/post2.jpg",
+            imageUrl: null,
             content: "두 번째 게시물입니다.",
-            createdDate: "작성일 2024.03.14",
+            createdAt: "2024.03.14",
           },
           {
             id: 3,
-            imageUrl: "https://example.com/post3.jpg",
-            contnet: "세 번째 게시물입니다.",
-            createdDate: "작성일 2024.03.14",
+            imageUrl: null,
+            content: "세 번째 게시물입니다.",
+            createdAt: "2024.03.14",
           },
           {
             id: 4,
-            imageUrl: "https://example.com/post4.jpg",
+            imageUrl: null,
             content: "네 번째 게시물입니다.",
-            createdDate: "작성일 2024.03.14",
+            createdAt: "2024.03.14",
           },
           {
             id: 5,
-            imageUrl: "https://example.com/post5.jpg",
+            imageUrl: null,
             content: "다섯 번째 게시물입니다.",
-            createdDate: "작성일 2024.03.14",
+            createdAt: "2024.03.14",
           },
           {
             id: 6,
-            imageUrl: "https://example.com/post6.jpg",
+            imageUrl: null,
             content: "여섯 번째 게시물입니다.",
-            createdDate: "작성일 2024.03.14",
+            createdAt: "2024.03.14",
           },
         ];
         setPostList(postList);
@@ -82,6 +84,10 @@ function UserIntroductionPage() {
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);
+  };
+
+  const handlePostClick = (post) => {
+    setSelectedPost(post);
   };
 
   return (
@@ -113,11 +119,19 @@ function UserIntroductionPage() {
               <h1>게시물 {postList.length}개</h1>
             </div>
             <div className={styles.postListTitle}>
-              <PostList postList={postList} />
+              <PostList postList={postList} onPostClick={handlePostClick} />
             </div>
           </div>
         </Container>
       </div>
+      {selectedPost && (
+        <div className={styles.backdrop} onClick={() => setSelectedPost(null)}>
+          <PostModal
+            post={selectedPost}
+            onClose={() => setSelectedPost(null)}
+          />
+        </div>
+      )}
     </>
   );
 }
