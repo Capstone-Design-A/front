@@ -13,7 +13,7 @@ function ProductItem({ id, name, price, imageUrl, content }) {
       <div className={styles.img}>
         <Link
           to={{
-            pathname: `/product/${id}`,
+            pathname: `/detail/${id}`,
             state: { product: productData },
           }}
         >
@@ -23,7 +23,7 @@ function ProductItem({ id, name, price, imageUrl, content }) {
       <div className={styles.text}>
         <Link
           to={{
-            pathname: `/product/${id}`,
+            pathname: `/detail/${id}`,
             state: { product: productData },
           }}
         >

@@ -9,12 +9,12 @@ function ProductGroupItem({ id, name, price, imageUrl }) {
   return (
     <Card className={styles.Item}>
       <div className={styles.img}>
-        <Link to={`/product/${id}`}>
+        <Link to={`/item/${id}`}>
           <ProductIcon imageUrl={imageUrl} />
         </Link>
       </div>
       <div className={styles.text}>
-        <Link to={`/product/${id}`}>
+        <Link to={`/item/${id}`}>
           <h2 className={styles.name}>{name}</h2>
           {price && (
             <p className={styles.price}>
