@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Container from "../components/shared/Container";
 import styles from "./ProductPage.module.css";
 import CategoryProducts from "../components/product/CategoryProducts";
@@ -8,7 +8,6 @@ import ListPage from "../components/product/ListPage";
 import Category from "../components/category/Category";
 
 function ProductCategoryPage() {
-  const { categoryId } = useParams();
   const location = useLocation();
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState([]);
@@ -19,10 +18,13 @@ function ProductCategoryPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // categoryId가 유효한지 확인하고 제거된 값으로 설정
-        const parsedCategoryId = parseInt(
-          categoryId.replace("category-id=", "")
-        );
+        const searchParams = new URLSearchParams(location.search);
+        const categoryId = searchParams.get("category-id");
+        if (!categoryId) {
+          return;
+        }
+
+        const parsedCategoryId = parseInt(categoryId);
         if (isNaN(parsedCategoryId)) {
           throw new Error(`Invalid categoryId: ${categoryId}`);
         }
@@ -43,7 +45,7 @@ function ProductCategoryPage() {
     };
 
     fetchData();
-  }, [categoryId, page, size]);
+  }, [location.search, page, size]);
 
   const handleLoadMore = () => {
     const nextPage = page !== undefined ? page + 1 : 1;

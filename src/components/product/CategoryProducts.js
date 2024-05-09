@@ -14,6 +14,7 @@ function CategoryProducts({ products }) {
             name={product.name}
             price={product.price}
             imageUrl={product.imageUrl}
+            category={product.category}
           />
         ))}
       </div>
