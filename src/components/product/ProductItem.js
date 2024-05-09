@@ -5,15 +5,16 @@ import Card from "../shared/Card";
 import ProductIcon from "./ProductIcon";
 import styles from "./ProductItem.module.css";
 
-function ProductItem({ id, name, price, imageUrl, content }) {
-  const productData = { id, name, price, imageUrl, content };
+function ProductItem({ id, name, price, imageUrl, category }) {
+  const productData = { id, name, price, imageUrl, category };
 
   return (
     <Card className={styles.Item}>
       <div className={styles.img}>
         <Link
           to={{
-            pathname: `/detail/${id}`,
+            pathname: "/item",
+            search: `?${id}`,
             state: { product: productData },
           }}
         >
@@ -23,7 +24,8 @@ function ProductItem({ id, name, price, imageUrl, content }) {
       <div className={styles.text}>
         <Link
           to={{
-            pathname: `/detail/${id}`,
+            pathname: "/item",
+            search: `?${id}`,
             state: { product: productData },
           }}
         >

@@ -29,7 +29,7 @@ function Main() {
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="order" element={<OrderPage />} />
-          <Route path="item/:categoryId" element={<ProductCategoryPage />} />
+          <Route path="item" element={<ProductCategoryPage />} />
           <Route path="item/search" element={<ProductSearchPage />} />
           <Route path="item/groupItem" element={<ProductGroupPage />} />
           <Route path="item/deadline" element={<ProductDeadlinePage />} />
@@ -38,7 +38,7 @@ function Main() {
             path="item/subscription"
             element={<ProductSubscriptionPage />}
           />
-          <Route path="detail/:productId" element={<ProductDetailPage />}>
+          <Route path="item/detail/:id" element={<ProductDetailPage />}>
             <Route index element={<Description />} />
             <Route path="description" element={<Description />} />
             <Route path="review" element={<ReviewPage />} />

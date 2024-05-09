@@ -16,8 +16,8 @@ function GroupItems({ products }) {
               name={product.name}
               price={product.price}
               imageUrl={product.imageUrl}
-              targetQuantity={product.targetQuantity} // 추가된 부분
-              discountPrice={product.discountPrice} // 추가된 부분
+              targetQuantity={product.targetQuantity}
+              discountPrice={product.discountPrice}
             />
           ))}
       </div>
