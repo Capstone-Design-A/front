@@ -88,15 +88,9 @@ export const getAlarmItems = async (
 export const getItemsByCategory = async (categoryId, page, size, token) => {
   const ITEM_ENDPOINT = "/item";
 
-  if (isNaN(categoryId)) {
-    throw new Error(`Invalid categoryId: ${categoryId}`);
-  }
-
   try {
     const response = await fetch(
-      `${ITEM_ENDPOINT}?category-id=${parseInt(
-        categoryId
-      )}&page=${page}&size=${size}`,
+      `${ITEM_ENDPOINT}?category-id=${categoryId}&page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
@@ -135,6 +129,7 @@ export const getCategories = async () => {
       { id: 4, name: "쌀/잡곡" },
       { id: 5, name: "가공" },
       { id: 6, name: "김치" },
+      { id: 7, name: "기타" },
     ];
 
     return categories;

@@ -3,13 +3,12 @@ import { useParams, useLocation } from "react-router-dom";
 import Container from "../components/shared/Container";
 import styles from "./ProductPage.module.css";
 import CategoryProducts from "../components/product/CategoryProducts";
-import { getCategories, getItemsByCategory } from "../api/api.js";
+import { getItemsByCategory } from "../api/api.js";
 import ListPage from "../components/product/ListPage";
 import Category from "../components/category/Category";
 
 function ProductCategoryPage() {
   const { categoryId } = useParams();
-  // eslint-disable-next-line
   const location = useLocation();
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState([]);
@@ -20,13 +19,14 @@ function ProductCategoryPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 카테고리 정보 가져오기 - api 연결 전
-        const categories = await getCategories();
-        const parsedCategoryId = parseInt(categoryId);
-        const categoryData = categories.find(
-          (cat) => cat.id === parsedCategoryId
+        // categoryId가 유효한지 확인하고 제거된 값으로 설정
+        const parsedCategoryId = parseInt(
+          categoryId.replace("category-id=", "")
         );
-        setCategory(categoryData);
+        if (isNaN(parsedCategoryId)) {
+          throw new Error(`Invalid categoryId: ${categoryId}`);
+        }
+        setCategory({ id: parsedCategoryId });
 
         // 상품 목록 가져오기
         const currentPage = page || 1;

@@ -31,14 +31,14 @@ function Main() {
           <Route path="order" element={<OrderPage />} />
           <Route path="item/:categoryId" element={<ProductCategoryPage />} />
           <Route path="item/search" element={<ProductSearchPage />} />
-          <Route path="groupItem" element={<ProductGroupPage />} />
+          <Route path="item/groupItem" element={<ProductGroupPage />} />
           <Route path="item/deadline" element={<ProductDeadlinePage />} />
           <Route path="item/ranking" element={<ProductRankingPage />} />
           <Route
             path="item/subscription"
             element={<ProductSubscriptionPage />}
           />
-          <Route path="product/:productId" element={<ProductDetailPage />}>
+          <Route path="detail/:productId" element={<ProductDetailPage />}>
             <Route index element={<Description />} />
             <Route path="description" element={<Description />} />
             <Route path="review" element={<ReviewPage />} />
