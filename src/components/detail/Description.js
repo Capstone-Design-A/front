@@ -1,5 +1,11 @@
-function Description() {
-  return <h1>상품 상세 정보</h1>;
+import React from "react";
+
+function Description({ itemDetailsImageUrl }) {
+  return (
+    <div>
+      <img src={itemDetailsImageUrl} alt="itemDetailsImageUrl" />
+    </div>
+  );
 }
 
 export default Description;

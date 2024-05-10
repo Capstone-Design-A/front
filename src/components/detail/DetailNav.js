@@ -1,14 +1,14 @@
 import { NavLink, useParams } from "react-router-dom";
 import styles from "./DetailNav.module.css";
 
-function DetailNav() {
-  const { productSlug } = useParams();
+function DetailNav({ item }) {
+  const { id } = useParams();
 
   return (
     <ul className={styles.menu}>
       <li className={styles.line}>
         <NavLink
-          to={`/product/${productSlug}/description`}
+          to={`/item/${id}/description`}
           className={({ isActive }) =>
             isActive ? styles.activeLinkStyle : styles.inactiveLinkStyle
           }
@@ -18,7 +18,7 @@ function DetailNav() {
       </li>
       <li className={styles.line}>
         <NavLink
-          to={`/product/${productSlug}/review`}
+          to={`/item/${id}/review`}
           className={({ isActive }) =>
             isActive ? styles.activeLinkStyle : styles.inactiveLinkStyle
           }
@@ -28,7 +28,7 @@ function DetailNav() {
       </li>
       <li className={styles.line}>
         <NavLink
-          to={`/product/${productSlug}/question`}
+          to={`/item/${id}/question`}
           className={({ isActive }) =>
             isActive ? styles.activeLinkStyle : styles.inactiveLinkStyle
           }

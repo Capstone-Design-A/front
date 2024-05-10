@@ -3,7 +3,6 @@
   color: #fff;
   cursor: pointer;
   background-color: #494949;
-  border-color: #48735d;
   border-radius: 5px;
   outline: none;
 }
@@ -17,4 +16,5 @@ div.button {
   color: #48735d;
   background-color: #fff;
   border-radius: 8px;
+  border: 0.05px solid #48735d;
 }
