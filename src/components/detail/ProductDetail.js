@@ -1,9 +1,8 @@
 import Button from "../button/Button";
 import OrderButton from "../button/OrderButton";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { addWishlist } from "../../api";
 import Container from "../shared/Container";
-import ProductIcon from "../product/ProductIcon";
 import styles from "./ProductDetail.module.css";
 import { useNavigate } from "react-router-dom";
 import HorizontalRule from "../shared/HorizontalRule";
@@ -16,7 +15,6 @@ function ProductDetail({ item }) {
     return <Navigate to="/product" />;
   }
 
-  // 판매자 소개 바로가기 버튼도 만들기
   const handleAddWishlistClick = () => {
     addWishlist(item?.id);
     navigate("/cart");
@@ -24,13 +22,18 @@ function ProductDetail({ item }) {
 
   return (
     <>
-      <div className={styles.header}>
+      <div className={styles.layout}>
         <Container className={styles.content}>
-          <ProductIcon className={styles.img} imageUrl={item.imageUrl} />
-          <button className={styles.button}>판매자 소개 바로가기</button>
+          <div className={styles.image}>
+            <img className={styles.img} src={item.imageUrl} alt={item.name} />
+            <Link to="/introduction">
+              <button className={styles.button}>판매자 소개 바로가기</button>
+            </Link>
+          </div>
           <h1 className={styles.title}>{item.name}</h1>
-          <p className={styles.summary}>{item.content}</p>
-          <Amount className={styles.amount} />
+          <div className={styles.amountWrapper}>
+            <Amount className={styles.amount} />
+          </div>
           <HorizontalRule />
           <p className={styles.price}>
             총 상품 금액<span>{item.price.toLocaleString()}</span>원

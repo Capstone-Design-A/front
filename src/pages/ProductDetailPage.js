@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams, Navigate } from "react-router-dom";
 import ProductDetail from "../components/detail/ProductDetail";
 import DetailNav from "../components/detail/DetailNav";
 import Container from "../components/shared/Container";
@@ -35,7 +35,7 @@ function ProductDetailPage() {
   }
 
   if (!item) {
-    return <div>상품 데이터가 없습니다.</div>;
+    return <Navigate to="/" />;
   }
 
   return (
@@ -43,7 +43,7 @@ function ProductDetailPage() {
       <div className={styles.container}>
         <ProductDetail item={item} />
         <div className={styles.detailNav}>
-          <DetailNav />
+          <DetailNav item={item} />
           <div className={styles.content}>
             <Outlet />
           </div>
