@@ -316,6 +316,44 @@ export const getSubscriptionItems = async (
   }
 };
 
+export const getItemDetail = async (itemId, token) => {
+  const RANKING_ITEMS_ENDPOINT = "/item";
+
+  try {
+    const response = await fetch(`${RANKING_ITEMS_ENDPOINT}/${itemId}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "X-ACCESS-TOKEN": token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const { result } = responseData;
+
+    const imageUrls = result.imageUrl.map((image) => image.imageUrl);
+
+    result.imageUrls = imageUrls;
+    console.log("ItemDetail:", result);
+
+    return result;
+  } catch (error) {
+    console.error("Error fetching item detail:", error);
+    throw error;
+  }
+};
+
 // 리뷰
 export const getReviews = async ({
   order = "createdAt",

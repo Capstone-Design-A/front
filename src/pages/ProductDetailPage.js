@@ -1,27 +1,50 @@
-import React from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Outlet, useParams } from "react-router-dom";
 import ProductDetail from "../components/detail/ProductDetail";
 import DetailNav from "../components/detail/DetailNav";
 import Container from "../components/shared/Container";
 import styles from "./ProductDetailPage.module.css";
+import { getItemDetail } from "../api/api";
 
 function ProductDetailPage() {
-  const location = useLocation();
-  const { id, name, price, imageUrl, content } = location.state || {};
-  const product = { id, name, price, imageUrl, content };
+  const { id } = useParams();
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!product.id) {
+  useEffect(() => {
+    const fetchItemDetail = async () => {
+      try {
+        if (!id) return;
+
+        const token = "YOUR_JWT_TOKEN_HERE";
+        const itemData = await getItemDetail(id, token);
+
+        setItem(itemData);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching product detail:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchItemDetail();
+  }, [id]);
+
+  if (loading) {
+    return <div>로딩 중입니다.</div>;
+  }
+
+  if (!item) {
     return <div>상품 데이터가 없습니다.</div>;
   }
 
   return (
     <Container>
       <div className={styles.container}>
-        <ProductDetail product={product} />
+        <ProductDetail item={item} />
         <div className={styles.detailNav}>
           <DetailNav />
           <div className={styles.content}>
-            {/* 메뉴 바 밑에 보여줄 페이지 - 상품 상세 정보, 상품 후기, 상품 문의 */}
             <Outlet />
           </div>
         </div>

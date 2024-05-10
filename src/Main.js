@@ -38,13 +38,12 @@ function Main() {
             path="item/subscription"
             element={<ProductSubscriptionPage />}
           />
-          <Route path="item/detail/:id" element={<ProductDetailPage />}>
+          <Route path="item/:id" element={<ProductDetailPage />}>
             <Route index element={<Description />} />
             <Route path="description" element={<Description />} />
             <Route path="review" element={<ReviewPage />} />
             <Route path="question" element={<QuestionPage />} />
           </Route>
-
           <Route path="my" element={<MyPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="introduction" element={<UserIntroductionPage />} />
