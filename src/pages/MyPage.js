@@ -10,7 +10,10 @@ function MyPage() {
       <My />
       <div className={styles.introduction}>
         <Link to="/introduction">
-          <button>소개 페이지 바로가기(임시)</button>
+          <button>판매자 소개 페이지 바로가기(임시)</button>
+        </Link>
+        <Link to="/management">
+          <button>판매자 관리 페이지 바로가기(임시)</button>
         </Link>
       </div>
     </>

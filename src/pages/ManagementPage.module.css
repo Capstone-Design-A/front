@@ -1,0 +1,56 @@
+.categoryContainer {
+  width: 100%;
+  max-width: 200px;
+  position: fixed;
+  top: 215px;
+  left: 0;
+  z-index: 1;
+  transition: transform 0s ease;
+  transform: translateX(-100%);
+  display: none;
+}
+
+.categoryContainer.visible {
+  transform: translateX(0);
+  display: block;
+}
+
+.toggleCategory {
+  cursor: pointer;
+  position: fixed;
+  top: 235px;
+  left: 10px;
+  z-index: 1000;
+  display: block;
+  opacity: 80%;
+}
+
+.toggleCategory .icon {
+  font-size: 30px;
+}
+
+.contentContainer {
+  overflow-y: auto;
+}
+
+@media screen and (min-width: 980px) {
+  .categoryContainer {
+    transform: translateX(0);
+    display: block;
+  }
+}
+
+.orderList {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.productList {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.monthlySales {
+  margin-top: 80px;
+  margin-bottom: 150px;
+}

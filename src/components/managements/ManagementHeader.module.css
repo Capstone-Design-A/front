@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.item {
+  background-color: #fff;
+  width: 220px;
+  height: 150px;
+  position: relative;
+  margin: 10px;
+  flex-shrink: 0;
+}
+
+.img {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  margin-top: 20px;
+  margin-left: 5px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 20px 0px;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+.title {
+  margin: 5px 0 5px;
+  padding: 0 0 40px 0;
+  font-size: 16px;
+  font-weight: 300;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.content {
+  margin: 5px 0 3px;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.price {
+  margin: 0 0 20px;
+  font-size: 22px;
+  font-weight: 500;
+  position: absolute;
+  bottom: 35px;
+  padding-bottom: 20px;
+  display: inline-block;
+  position: relative;
+}
+
+.percentage {
+  margin: 0 0 20px;
+  font-size: 13px;
+  font-weight: 500;
+  position: absolute;
+  bottom: -1px;
+  margin-left: 10px;
+  border-radius: 20px;
+  background-color: #e7f4ee;
+  padding: 3px 8px 5px;
+  color: #48735d;
+}
+
+.Item .won {
+  font-weight: 400;
+  padding-left: 2px;
+}

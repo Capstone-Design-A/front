@@ -3,6 +3,7 @@
   max-width: 840px;
   margin: 0 auto;
   /* overflow: hidden; */
+  flex-shrink: 0;
 }
 
 @media (max-width: 840px) {

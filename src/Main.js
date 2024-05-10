@@ -18,6 +18,7 @@ import ReviewPage from "./pages/ReviewPage";
 import QuestionPage from "./pages/QuestionPage";
 import CartPage from "./pages/CartPage";
 import UserIntroductionPage from "./pages/UserIntroductionPage";
+import ManagementPage from "./pages/ManagementPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function Main() {
@@ -47,6 +48,7 @@ function Main() {
           <Route path="my" element={<MyPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="introduction" element={<UserIntroductionPage />} />
+          <Route path="management" element={<ManagementPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

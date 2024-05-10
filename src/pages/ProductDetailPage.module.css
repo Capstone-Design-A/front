@@ -12,3 +12,15 @@
   width: 100%;
   text-align: center;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.loadingMessage {
+  font-size: 20px;
+  color: #888;
+}
