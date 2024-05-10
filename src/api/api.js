@@ -50,11 +50,11 @@ export const getAlarmItems = async (
   type,
   token
 ) => {
-  const SUBSCRIPTION_ITEMS_ENDPOINT = "/alarm";
+  const ALARM_ITEMS_ENDPOINT = "/alarm";
 
   try {
     const response = await fetch(
-      `${SUBSCRIPTION_ITEMS_ENDPOINT}?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`,
+      `${ALARM_ITEMS_ENDPOINT}?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
@@ -317,10 +317,10 @@ export const getSubscriptionItems = async (
 };
 
 export const getItemDetail = async (itemId, token) => {
-  const RANKING_ITEMS_ENDPOINT = "/item";
+  const ITEM_DETAIL_ENDPOINT = "/item";
 
   try {
-    const response = await fetch(`${RANKING_ITEMS_ENDPOINT}/${itemId}`, {
+    const response = await fetch(`${ITEM_DETAIL_ENDPOINT}/${itemId}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -347,6 +347,40 @@ export const getItemDetail = async (itemId, token) => {
     result.imageUrls = imageUrls;
     console.log("ItemDetail:", result);
 
+    return result;
+  } catch (error) {
+    console.error("Error fetching item detail:", error);
+    throw error;
+  }
+};
+
+// 장바구니의 물건 종류 수 조회
+export const getCartItems = async (memberId, token) => {
+  const CART_ITEMS_ENDPOINT = "/cart";
+
+  try {
+    const response = await fetch(`${CART_ITEMS_ENDPOINT}/${memberId}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "X-ACCESS-TOKEN": token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result;
+    console.log("CartItems:", result);
     return result;
   } catch (error) {
     console.error("Error fetching item detail:", error);

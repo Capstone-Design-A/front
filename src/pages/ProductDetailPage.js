@@ -31,7 +31,11 @@ function ProductDetailPage() {
   }, [id]);
 
   if (loading) {
-    return <div>로딩 중입니다.</div>;
+    return (
+      <Container className={styles.loading}>
+        <div className={styles.loadingMessage}>로딩 중입니다 ...</div>
+      </Container>
+    );
   }
 
   if (!item) {

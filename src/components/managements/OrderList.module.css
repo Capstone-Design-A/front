@@ -1,0 +1,61 @@
+.container {
+  margin-bottom: 20px;
+  margin-left: 215px;
+  flex-shrink: 0;
+}
+
+.container h1 {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+table {
+  width: 950px;
+  border-radius: 10px;
+  border: 2px solid rgba(235, 240, 237, 0.9);
+}
+
+thead th,
+tbody td {
+  padding: 18px;
+  text-align: left;
+}
+
+thead th {
+  background-color: #f9f9fc;
+  font-weight: 300;
+}
+
+tbody td {
+  color: #494949;
+}
+
+tbody tr:hover {
+  background-color: #f9f9fc;
+}
+
+td .orderId {
+  color: #5c59e8;
+}
+
+th .orderStatus {
+  text-align: center;
+}
+
+td .orderStatus {
+  text-align: center;
+  opacity: 80%;
+  color: #fff;
+  border-radius: 100px;
+  padding: 5px 0px;
+}
+
+td .orderStatus.waiting {
+  background-color: #5c59e8;
+}
+
+td .orderStatus.completed {
+  background-color: #fff;
+  color: #5c59e8;
+  border: 0.5px solid #5c59e8;
+}
