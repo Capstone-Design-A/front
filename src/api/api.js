@@ -174,7 +174,11 @@ export const getGroupItems = async (page, size, keyword, token) => {
       );
     }
 
-    items = items.map((item) => item.item);
+    items = items.map((item) => ({
+      ...item.item,
+      targetQuantity: item.targetQuantity,
+      discountPrice: item.discountPrice,
+    }));
 
     return items;
   } catch (error) {

@@ -5,6 +5,13 @@
   margin-bottom: 5px;
 }
 
+.groupItem {
+  background-color: #fff;
+  height: 300px;
+  position: relative;
+  margin-bottom: 5px;
+}
+
 .img {
   display: flex;
   align-items: center;
@@ -12,13 +19,13 @@
   border-top: 0px;
   height: 180px;
   background-color: #fff;
+  border: 0.1px solid #888;
 }
 
 .text {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 0px;
   padding: 10px 20px 0px;
   background-color: #fff;
 }
@@ -52,4 +59,51 @@
 .Item .won {
   font-weight: 400;
   padding-left: 2px;
+}
+
+.groupItem .price {
+  margin: 0 0 20px;
+  font-size: 17px;
+  font-weight: 600;
+  position: absolute;
+  bottom: -5px;
+  padding-bottom: 20px;
+}
+
+.groupItem .won {
+  font-weight: 400;
+  padding-left: 2px;
+}
+
+.price .origin {
+  position: absolute;
+  top: -2px;
+  right: -4.2em;
+  font-size: 0.9em;
+  color: #888;
+  text-decoration: line-through;
+  font-weight: 300;
+}
+
+.targetQuantity {
+  text-align: center;
+  align-items: center;
+  background-color: #48735d;
+  opacity: 70%;
+  color: #fff;
+  margin: auto -30px;
+  padding: 1px;
+}
+
+.targetQuantity h2 {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 300;
+  padding-bottom: 20px;
+}
+
+.targetQuantity span {
+  font-weight: 500;
+  font-size: 16px;
+  margin: auto 3px;
 }
