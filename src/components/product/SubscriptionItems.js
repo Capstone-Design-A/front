@@ -15,6 +15,7 @@ function SubscriptionItems({ products, type, fromMember }) {
               id={product.id}
               name={product.name}
               price={product.price}
+              discountPrice={product.discountPrice}
               imageUrl={product.imageUrl}
               type={type}
               fromMember={fromMember}

@@ -13,6 +13,7 @@ function CategoryProducts({ products }) {
             id={product.id}
             name={product.name}
             price={product.price}
+            discountPrice={product.discountPrice}
             imageUrl={product.imageUrl}
             category={product.category}
           />

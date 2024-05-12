@@ -33,7 +33,7 @@ function Main() {
           <Route path="order" element={<OrderPage />} />
           <Route path="item" element={<ProductCategoryPage />} />
           <Route path="item/search" element={<ProductSearchPage />} />
-          <Route path="item/groupItem" element={<ProductGroupPage />} />
+          <Route path="groupItem" element={<ProductGroupPage />} />
           <Route path="item/deadline" element={<ProductDeadlinePage />} />
           <Route path="item/ranking" element={<ProductRankingPage />} />
           <Route
