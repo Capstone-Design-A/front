@@ -2,7 +2,7 @@
 import { Link, NavLink } from "react-router-dom";
 import Container from "../shared/Container";
 import Notifications from "./Notifications";
-import logoImg from "../../assets/logo.png";
+import logoImg from "../../assets/logoVer2.png";
 import styles from "./Nav.module.css";
 import SearchBar from "./SearchBar";
 

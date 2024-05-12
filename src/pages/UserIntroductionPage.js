@@ -3,7 +3,7 @@ import UserProfile from "../components/userIntro/UserProfile";
 import PostList from "../components/userIntro/PostList";
 import PostModal from "../components/userIntro/PostModal";
 import styles from "./UserIntroductionPage.module.css";
-import Category from "../components/category/Category";
+import SellerCategory from "../components/category/SellerCategory";
 import Container from "../components/shared/Container";
 
 function UserIntroductionPage() {
@@ -105,7 +105,7 @@ function UserIntroductionPage() {
           }`}
         >
           <div className={styles.categoryContent}>
-            <Category />
+            <SellerCategory />
           </div>
         </div>
         <Container>
