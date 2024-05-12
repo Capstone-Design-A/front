@@ -4,46 +4,47 @@ import styles from "./OrderList.module.css";
 function OrderList() {
   const orders = [
     {
-      id: 302012,
-      product: "사과",
-      date: "1분 전",
-      buyer: "구매자이름1",
+      orderNumber: 302012,
+      itemPreviewImageUrl: null,
+      itemName: "사과",
+      orderedDate: "1분 전",
+      consumerName: "구매자이름1",
       price: 20000,
       quantity: 1,
       status: "주문 대기",
     },
     {
-      id: 302011,
-      product: "양상추",
-      date: "5시간 전",
-      buyer: "구매자이름2",
+      orderNumber: 302011,
+      itemName: "양상추",
+      orderedDate: "5시간 전",
+      consumerName: "구매자이름2",
       price: 18000,
       quantity: 3,
       status: "처리 완료",
     },
     {
-      id: 302002,
-      product: "방울토마토",
-      date: "2024-05-09",
-      buyer: "구매자이름3",
+      orderNumber: 302002,
+      itemName: "방울토마토",
+      orderedDate: "2024-05-09",
+      consumerName: "구매자이름3",
       price: 9500,
       quantity: 2,
       status: "처리 완료",
     },
     {
-      id: 302002,
-      product: "방울토마토",
-      date: "2024-05-09",
-      buyer: "구매자이름3",
+      orderNumber: 302003,
+      itemName: "방울토마토",
+      orderedDate: "2024-05-09",
+      consumerName: "구매자이름3",
       price: 9500,
       quantity: 2,
       status: "처리 완료",
     },
     {
-      id: 302002,
-      product: "방울토마토",
-      date: "2024-05-09",
-      buyer: "구매자이름3",
+      orderNumber: 302004,
+      itemName: "방울토마토",
+      orderedDate: "2024-05-09",
+      consumerName: "구매자이름3",
       price: 9500,
       quantity: 2,
       status: "처리 완료",
@@ -70,13 +71,18 @@ function OrderList() {
           </thead>
           <tbody>
             {orders.map((order) => (
-              <tr key={order.id}>
+              <tr key={order.orderNumber}>
                 <td>
-                  <div className={styles.orderId}>#{order.id}</div>
+                  <div className={styles.orderId}>#{order.orderNumber}</div>
                 </td>
-                <td>{order.product}</td>
-                <td>{order.date}</td>
-                <td>{order.buyer}</td>
+                <td>
+                  <div className={styles.name}>
+                    <img src={order.itemPreviewImageUrl} alt={order.itemName} />
+                    <div>{order.itemName}</div>
+                  </div>
+                </td>
+                <td>{order.orderedDate}</td>
+                <td>{order.consumerName}</td>
                 <td>{order.price.toLocaleString()}</td>
                 <td>{order.quantity}</td>
                 <td>

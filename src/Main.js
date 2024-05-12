@@ -19,6 +19,7 @@ import QuestionPage from "./pages/QuestionPage";
 import CartPage from "./pages/CartPage";
 import UserIntroductionPage from "./pages/UserIntroductionPage";
 import ManagementPage from "./pages/ManagementPage";
+import OrderListPage from "./pages/OrderListPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function Main() {
@@ -49,6 +50,7 @@ function Main() {
           <Route path="cart" element={<CartPage />} />
           <Route path="introduction" element={<UserIntroductionPage />} />
           <Route path="management" element={<ManagementPage />} />
+          <Route path="seller/order-status" element={<OrderListPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

@@ -388,6 +388,42 @@ export const getCartItems = async (memberId, token) => {
   }
 };
 
+export const getOrderStatus = async (sellerId, page, size, token) => {
+  const ORDER_STATUS_ENDPOINT = "/seller/order-status";
+
+  try {
+    const response = await fetch(
+      `${ORDER_STATUS_ENDPOINT}?seller-id=${sellerId}&page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "X-ACCESS-TOKEN": token,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result.orderItemStatusList;
+    console.log("Order-status:", result);
+    return result;
+  } catch (error) {
+    console.error("Error fetching item detail:", error);
+    throw error;
+  }
+};
+
 // 리뷰
 export const getReviews = async ({
   order = "createdAt",
