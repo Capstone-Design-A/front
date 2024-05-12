@@ -1,8 +1,7 @@
 // 판매자 관리 페이지입니다.
-// Category는 판메자 카테고리로 수정
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Category from "../components/category/Category";
+import SellerCategory from "../components/category/SellerCategory";
 import ManagementHeader from "../components/managements/ManagementHeader";
 import ProductList from "../components/managements/ProductList";
 import OrderList from "../components/managements/OrderList";
@@ -11,7 +10,9 @@ import styles from "./ManagementPage.module.css";
 
 function ManagementPage() {
   const { sellerId } = useParams();
+  // eslint-disable-next-line
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line
   const [size, setSize] = useState(10);
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
 
@@ -30,7 +31,7 @@ function ManagementPage() {
         }`}
       >
         <div className={styles.categoryContent}>
-          <Category />
+          <SellerCategory sellerId={sellerId} page={page} size={size} />
         </div>
       </div>
       <div>

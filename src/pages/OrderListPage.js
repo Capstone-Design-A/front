@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import Category from "../components/category/Category";
+import SellerCategory from "../components/category/SellerCategory";
 import { getOrderStatus } from "../api/api.js";
 import styles from "./OrderListPage.module.css";
 
 function OrderListPage() {
   const location = useLocation();
-  const { sellerId } = useParams(); // sellerId를 useParams 훅을 통해 추출
+  const { sellerId } = useParams();
   const [orders, setOrders] = useState([]);
+  // eslint-disable-next-line
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line
   const [size, setSize] = useState(10);
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // sellerId가 없으면 반환
         if (!sellerId) {
           return;
         }
         const searchParams = new URLSearchParams(location.search);
-        const currentPage = searchParams.get("page") || page; // URL 파라미터에서 page 값을 가져옴
-        const pageSize = searchParams.get("size") || size; // URL 파라미터에서 size 값을 가져옴
+        const currentPage = searchParams.get("page") || page;
+        const pageSize = searchParams.get("size") || size;
         const orderStatusData = await getOrderStatus(
           sellerId,
           currentPage,
@@ -52,7 +53,7 @@ function OrderListPage() {
         }`}
       >
         <div className={styles.categoryContent}>
-          <Category />
+          <SellerCategory />
         </div>
       </div>
       <div className={styles.container}>
