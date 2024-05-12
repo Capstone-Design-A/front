@@ -1,6 +1,5 @@
 import Button from "../button/Button";
 import Container from "../shared/Container";
-import ProductIcon from "../product/ProductIcon";
 import styles from "./GroupPurchaseItem.module.css";
 import { Link } from "react-router-dom";
 import HorizontalRule from "../shared/HorizontalRule";
@@ -33,12 +32,8 @@ function GroupPurchaseItem({ item }) {
             </Link>
           </div>
         </div>
-        <div>
-          <ProductIcon
-            className={styles.image}
-            imageUrl={item.imageUrl}
-            alt={item.name}
-          />
+        <div className={styles.image}>
+          <img src={item.imageUrl} alt={item.name} />
         </div>
       </div>
     </Container>

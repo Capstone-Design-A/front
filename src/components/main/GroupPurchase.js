@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./GroupPurchase.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwipeCore, { Navigation, Pagination, Autoplay } from "swiper";
@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { getGroupPurchaseItemsPreview } from "../../api";
+import { getGroupItems } from "../../api/api.js";
 import GroupPurchaseItem from "./GroupPurchaseItem";
 
 SwipeCore.use([Navigation, Pagination, Autoplay]);
@@ -17,12 +17,12 @@ function GroupPurchase() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await getGroupPurchaseItemsPreview();
-        // targetQuantity가 적은 순서대로 정렬
-        const sortedItems = data.items.sort(
+        const data = await getGroupItems(1, 5, null, "JWT_TOKEN");
+
+        const sortedItems = data.sort(
           (a, b) => a.targetQuantity - b.targetQuantity
         );
-        // 상위 5개의 아이템만 선택
+
         const top5Items = sortedItems.slice(0, 5);
         setGroupPurchaseItems(top5Items);
       } catch (error) {
