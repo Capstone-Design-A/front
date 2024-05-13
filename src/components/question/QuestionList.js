@@ -11,16 +11,12 @@ function QuestionList() {
   const initKeyword = searchParams.get("keyword");
   const questions = getQuestions(initKeyword);
 
-  // 한 페이지에 표시될 QuestionItem 개수
   const LIMIT = 5;
 
-  // 전체 페이지 수 계산
   const totalPages = Math.ceil(questions.length / LIMIT);
 
-  // 현재 페이지 번호 설정 (1페이지 기본)
   const [currentPage, setCurrentPage] = useState(1);
 
-  // 현재 페이지에 해당하는 질문 목록 계산
   const startIndex = (currentPage - 1) * LIMIT;
   const endIndex = startIndex + LIMIT;
   const currentPageQuestions = questions.slice(startIndex, endIndex);
@@ -33,7 +29,6 @@ function QuestionList() {
         ))}
       </div>
       <div>
-        {/* 페이지 번호 표시 */}
         {Array.from({ length: totalPages }, (_, index) => index + 1).map(
           (pageNumber) => (
             <button

@@ -42,10 +42,11 @@ function Main() {
           />
           <Route path="item/:id" element={<ProductDetailPage />}>
             <Route index element={<Description />} />
-            <Route path="description" element={<Description />} />
+            <Route path="inquiry" element={<QuestionPage />} />
             <Route path="review" element={<ReviewPage />} />
             <Route path="question" element={<QuestionPage />} />
           </Route>
+          <Route path="inquiry" element={<QuestionPage />} />
           <Route path="my" element={<MyPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="introduction" element={<UserIntroductionPage />} />

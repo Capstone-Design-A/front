@@ -1,5 +1,4 @@
 .container {
-  height: 4000px;
   margin-bottom: 100px;
 }
 
@@ -23,4 +22,54 @@
 .loadingMessage {
   font-size: 20px;
   color: #888;
+}
+
+.menu {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #fff;
+  padding: 30px 0 0;
+  margin-top: 30px;
+  list-style: none;
+  display: flex;
+}
+
+.line {
+  border: 1px solid #c2c2c2;
+  text-align: center;
+  flex: 1 1 auto;
+}
+
+.button {
+  display: block;
+  padding: 10px 100px;
+  font-size: 16px;
+  text-transform: uppercase;
+  background-color: #eeeeee;
+  color: #494949;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #fff;
+  width: 100%;
+}
+
+/*
+.activeButton {
+  background-color: #fff;
+}
+
+.inactiveButton {
+  background-color: #eeeeee;
+  cursor: not-allowed;
+}
+*/
+
+.review {
+  height: 500px;
 }
