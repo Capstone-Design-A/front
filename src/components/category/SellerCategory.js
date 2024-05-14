@@ -5,7 +5,8 @@ import Container from "../shared/Container";
 import HorizontalRule from "../shared/HorizontalRule";
 import styles from "./SellerCategory.module.css";
 
-function SellerCategory({ sellerId, page = 1, size = 10 }) {
+function SellerCategory({ page = 1, size = 1 }) {
+  const sellerId = 1;
   return (
     <>
       <Container>
@@ -40,7 +41,7 @@ function SellerCategory({ sellerId, page = 1, size = 10 }) {
               <h2 className={styles.title}>주문 현황</h2>
             </Link>
             <Link
-              to={`/seller/seller-id=${sellerId}&page=${page}&size=${size}`}
+              to={`/seller/seller-id=${sellerId}?page=${page}&size=${size}`}
               className={styles.link}
             >
               <h2 className={styles.title}>판매 상품 관리</h2>

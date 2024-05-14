@@ -1,28 +1,37 @@
+// 로그인 구현 후 수정
 import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import SellerCategory from "../components/category/SellerCategory";
-import { getOrderStatus } from "../api/api.js";
+import { getOrderStatus, parseJWTToken } from "../api/api.js";
 import styles from "./OrderListPage.module.css";
 
 function OrderListPage() {
   const location = useLocation();
-  const { sellerId } = useParams();
+  const { sellerId: paramSellerId } = useParams();
   const [orders, setOrders] = useState([]);
-  // eslint-disable-next-line
   const [page, setPage] = useState(1);
-  // eslint-disable-next-line
-  const [size, setSize] = useState(10);
+  const [size, setSize] = useState(1);
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (!sellerId) {
-          return;
-        }
         const searchParams = new URLSearchParams(location.search);
+        const token = parseJWTToken();
+        const sellerId = paramSellerId || token;
         const currentPage = searchParams.get("page") || page;
         const pageSize = searchParams.get("size") || size;
+
+        if (!sellerId) {
+          console.error("sellerId is not defined");
+          return;
+        }
+
+        // Debugging logs
+        console.log("sellerId:", sellerId);
+        console.log("currentPage:", currentPage);
+        console.log("pageSize:", pageSize);
+
         const orderStatusData = await getOrderStatus(
           sellerId,
           currentPage,
@@ -36,7 +45,7 @@ function OrderListPage() {
     };
 
     fetchData();
-  }, [location.search, page, sellerId, size]);
+  }, [location.search, page, size, paramSellerId]);
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);
