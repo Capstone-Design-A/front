@@ -1,30 +1,24 @@
-// 상품 문의 게시판
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { getQuestions } from "../../api";
+import React, { useState } from "react";
 import styles from "./QuestionList.module.css";
 import QuestionItem from "./QuestionItem";
 
-function QuestionList() {
+function QuestionList({ questions, totalPages, currentPage, setCurrentPage }) {
   // eslint-disable-next-line
-  const [searchParams, setSearchParams] = useSearchParams();
-  const initKeyword = searchParams.get("keyword");
-  const questions = getQuestions(initKeyword);
+  const [loading, setLoading] = useState(false);
 
-  const LIMIT = 5;
+  // 페이지 번호 버튼
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-  const totalPages = Math.ceil(questions.length / LIMIT);
-
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const startIndex = (currentPage - 1) * LIMIT;
-  const endIndex = startIndex + LIMIT;
-  const currentPageQuestions = questions.slice(startIndex, endIndex);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <>
+    <div>
       <div className={styles.questionList}>
-        {currentPageQuestions.map((question) => (
+        {questions.map((question) => (
           <QuestionItem key={question.id} question={question} />
         ))}
       </div>
@@ -33,7 +27,7 @@ function QuestionList() {
           (pageNumber) => (
             <button
               key={pageNumber}
-              onClick={() => setCurrentPage(pageNumber)}
+              onClick={() => handlePageClick(pageNumber)}
               className={`${styles.pageButton} ${
                 pageNumber === currentPage ? styles.active : ""
               }`}
@@ -43,57 +37,8 @@ function QuestionList() {
           )
         )}
       </div>
-    </>
+    </div>
   );
 }
 
 export default QuestionList;
-
-/*
-return (
-  <>
-  {items &&
-        items.map((item) => {
-          if (item.id === editingId) {
-            const { id, imgUrl, title, rating, content } = item;
-            const initialValues = { title, rating, content, imgFile: null };
-
-            const handleSubmit = (formData) => onUpdate(id, formData);
-
-            const handleSubmitSuccess = (review) => {
-              onUpdateSuccess(review);
-              setEditingId(null);
-            };
-    <li key={item.id}>
-      <ReviewForm
-        initialValues={initialValues}
-        initialPreview={imgUrl}
-        onSubmit={handleSubmit}
-        onSubmitSuccess={handleSubmitSuccess}
-        onCancel={handleCancel}
-      />
-    </li>
-    <div className={styles.reviewList}>
-      {currentPageQuestions.map((item) => (
-        <ReviewItem key={item.id} item={item} />
-      ))}
-    </div> 
-    <div>
-      {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-        (pageNumber) => (
-          <button
-            key={pageNumber}
-            onClick={() => setCurrentPage(pageNumber)}
-            className={`${styles.pageButton} ${
-              pageNumber === currentPage ? styles.active : ""
-            }`}
-          >
-            {pageNumber}
-          </button>
-        )
-      )}
-    </div>
-  </>
-);
-}
-*/

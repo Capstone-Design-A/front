@@ -15,6 +15,9 @@ function MyPage() {
         <Link to="/management">
           <button>판매자 관리 페이지 바로가기(임시)</button>
         </Link>
+        <Link to={`/inquiry?itemId=1&page=1&size=6`}>
+          <button>상품 문의 목록 페이지</button>
+        </Link>
       </div>
     </>
   );

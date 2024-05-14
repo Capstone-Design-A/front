@@ -28,7 +28,7 @@ function DetailNav({ item }) {
       </li>
       <li className={styles.line}>
         <NavLink
-          to={`/inquiry?itemId=${id};page=1&size=6`}
+          to={`/inquiry?itemId=${id}&page=1&size=6`}
           className={({ isActive }) =>
             isActive ? styles.activeLinkStyle : styles.inactiveLinkStyle
           }

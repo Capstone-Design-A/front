@@ -1,29 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { getInquiryList } from "../api/api.js";
 import Container from "../components/shared/Container";
 import QuestionList from "../components/question/QuestionList";
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 function QuestionPage() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const query = useQuery();
+  const itemId = query.get("itemId");
+  const page = query.get("page") || 1;
+  const size = query.get("size") || 6;
+
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(Number(page));
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        if (!id) {
+        if (!itemId) {
+          console.log("No item ID found, navigating to home.");
           navigate("/");
           return;
         }
 
         const token = "YOUR_JWT_TOKEN_HERE";
-        const page = 1;
-        const size = 6;
+        console.log(
+          `Fetching questions for item ID: ${itemId}, page: ${currentPage}, size: ${size}`
+        );
 
-        const questionList = await getInquiryList(id, page, size, token);
+        const questionList = await getInquiryList(
+          itemId,
+          currentPage,
+          size,
+          token
+        );
+        console.log("Questions fetched:", questionList);
+
         setQuestions(questionList);
+        setTotalPages(questionList.totalPages || 1);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching questions:", error);
@@ -32,7 +52,7 @@ function QuestionPage() {
     };
 
     fetchQuestions();
-  }, [id, navigate]);
+  }, [itemId, currentPage, size, navigate]);
 
   if (loading) {
     return (
@@ -44,7 +64,12 @@ function QuestionPage() {
 
   return (
     <Container>
-      <QuestionList questions={questions} />
+      <QuestionList
+        questions={questions}
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </Container>
   );
 }

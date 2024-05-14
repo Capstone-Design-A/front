@@ -363,7 +363,7 @@ export const getInquiryList = async (itemId, page, size, token) => {
 
   try {
     const response = await fetch(
-      `${INQUIRY_LIST_ENDPOINT}?itemId=${itemId};page=${page}&size=${size}`,
+      `${INQUIRY_LIST_ENDPOINT}?itemId=${itemId}&page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
@@ -378,6 +378,7 @@ export const getInquiryList = async (itemId, page, size, token) => {
     }
 
     const responseData = await response.json();
+    console.log("API response data:", responseData);
 
     if (!responseData.isSuccess) {
       throw new Error(
@@ -421,42 +422,6 @@ export const getCartItems = async (memberId, token) => {
 
     const result = responseData.result;
     console.log("CartItems:", result);
-    return result;
-  } catch (error) {
-    console.error("Error fetching item detail:", error);
-    throw error;
-  }
-};
-
-export const getOrderStatus = async (sellerId, page, size, token) => {
-  const ORDER_STATUS_ENDPOINT = "/seller/order-status";
-
-  try {
-    const response = await fetch(
-      `${ORDER_STATUS_ENDPOINT}?seller-id=${sellerId}&page=${page}&size=${size}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "X-ACCESS-TOKEN": token,
-        },
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const responseData = await response.json();
-
-    if (!responseData.isSuccess) {
-      throw new Error(
-        `API error! code: ${responseData.code}, message: ${responseData.message}`
-      );
-    }
-
-    const result = responseData.result.orderItemStatusList;
-    console.log("Order-status:", result);
     return result;
   } catch (error) {
     console.error("Error fetching item detail:", error);
@@ -549,3 +514,98 @@ export const deleteReview = async (id) => {
     throw new Error("정보를 삭제하는데 실패했습니다.");
   }
 };
+
+/*
+export const getOrderStatus = async (sellerId, page, size, token) => {
+  const ORDER_STATUS_ENDPOINT = "/seller/order-status";
+
+  try {
+    const response = await fetch(
+      `${ORDER_STATUS_ENDPOINT}?seller-id=${sellerId}&page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "X-ACCESS-TOKEN": token,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result.orderItemStatusList;
+    console.log("Order-status:", result);
+    return result;
+  } catch (error) {
+    console.error("Error fetching item detail:", error);
+    throw error;
+  }
+};
+*/
+
+export const getOrderStatus = async (page, size) => {
+  const ORDER_STATUS_ENDPOINT = "/seller/order-status";
+  const token = localStorage.getItem("JWT_TOKEN");
+
+  try {
+    const response = await fetch(
+      `${ORDER_STATUS_ENDPOINT}?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "X-ACCESS-TOKEN": token,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result.orderItemStatusList;
+    console.log("Order-status:", result);
+    return result;
+  } catch (error) {
+    console.error("Error fetching item detail:", error);
+    throw error;
+  }
+};
+
+// JWT Token에서 payload 추출하고, JSON 형식으로 파싱
+export function parseJWTToken(token) {
+  if (!token) {
+    throw new Error("Token is required");
+  }
+
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const payloadJson = decodeURIComponent(
+    atob(base64)
+      .split("")
+      .map((c) => {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(payloadJson);
+}
