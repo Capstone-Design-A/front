@@ -1,6 +1,38 @@
 import styles from "./ProductList.module.css";
+import closeButton from "../../assets/closeButton.svg";
+import plus from "../../assets/icon-plus-line.svg";
+import minus from "../../assets/icon-minus-line.svg";
+import { useState } from "react";
 
 function ProductList() {
+  const [products, setProducts] = useState([
+    {
+      id: 1,
+      name: "item1",
+      price: 20000,
+      quantity: 1,
+      image: "imageURL1",
+    },
+    {
+      id: 2,
+      name: "item2",
+      price: 18000,
+      quantity: 2,
+      image: "imageUrl2",
+    },
+    {
+      id: 3,
+      name: "item 3",
+      price: 18000,
+      quantity: 2,
+      image: "imageUrl3",
+    },
+  ]);
+  const handleDelete = (productId) => {
+    const nextProducts = products.filter((product) => product.id !== productId);
+    setProducts(nextProducts);
+  };
+
   return (
     <section className={styles.cart_product_list}>
       <input type="checkbox" />
@@ -20,7 +52,7 @@ function ProductList() {
       <div className={styles.cart_product_count}>
         <img
           className={styles.minus}
-          src="/images/icon-minus-line.svg"
+          src={minus}
           alt="minus"
         />
 
@@ -29,7 +61,7 @@ function ProductList() {
         </div>
         <img
           className={styles.plus}
-          src="/images/icon-plus-line.svg"
+          src={plus}
           alt="plus"
         />
       </div>
@@ -40,9 +72,17 @@ function ProductList() {
       </div>
 
       <div className={styles.product_remove}>
-        <img src="/images/icon-delete.svg" alt="delete" />
+      <img
+         src={closeButton}
+          alt="닫기"
+       />
       </div>
     </section>
+    
+      
+
+
+    
   );
 }
 

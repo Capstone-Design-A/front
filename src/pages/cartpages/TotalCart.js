@@ -1,4 +1,7 @@
 import styles from "./TotalCart.module.css";
+import minus from "../../assets/icon-minus-line.svg";
+import plus from "../../assets/icon-plus-line.svg";
+
 
 function TotalCart() {
   return (
@@ -8,14 +11,14 @@ function TotalCart() {
         <p className={styles.cart_product_price}>0</p>
       </div>
       <div className={styles.pay_minus}>
-        <img src="/images/icon-minus-line.svg" alt="minus" />
+        <img src={minus} alt="minus" />
       </div>
       <div className={styles.sale}>
         <p className={styles.cart_product_sale}>상품 할인</p>
         <p className={styles.cart_product_sale_price}>0원</p>
       </div>
       <div className={styles.pay_plus}>
-        <img src="/images/icon-plus-line.svg" alt="plus" />
+        <img src={plus} alt="plus" />
       </div>
       <div className={styles.delivery}>
         <p className={styles.cart_product_delivery}>배송비</p>
