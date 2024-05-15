@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams, Navigate, useNavigate } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import ProductDetail from "../components/detail/ProductDetail";
 import Container from "../components/shared/Container";
 import styles from "./ProductDetailPage.module.css";
-import { getItemDetail, getInquiryList } from "../api/api";
+import { getItemDetail } from "../api/api";
 import Description from "../components/detail/Description";
-import QuestionPage from "./QuestionPage";
+import InquiryListPage from "./InquiryListPage";
 
 function ProductDetailPage() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [showQuestionPage, setShowQuestionPage] = useState(false);
-  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +19,6 @@ function ProductDetailPage() {
 
         const token = "JWT_TOKEN";
 
-        // 상품 정보 가져오기
         const itemData = await getItemDetail(id, token);
         setItem(itemData);
 
@@ -46,21 +42,6 @@ function ProductDetailPage() {
         top: ref.current.offsetTop,
         behavior: "smooth",
       });
-    }
-  };
-
-  const showQuestionPageHandler = async () => {
-    try {
-      const token = "JWT_TOKEN";
-      const page = 1;
-      const size = 6;
-      const inquiryList = await getInquiryList(id, page, size, token);
-      setQuestions(inquiryList);
-
-      navigate(`/inquiry?itemId=${id}&page=${page}&size=${size}`);
-      setShowQuestionPage(true);
-    } catch (error) {
-      console.error("Error fetching inquiry list:", error);
     }
   };
 
@@ -101,9 +82,8 @@ function ProductDetailPage() {
               </button>
             </li>
             <li className={styles.line}>
-              {/* 문의 페이지를 보여주는 버튼 추가 */}
               <button
-                onClick={showQuestionPageHandler}
+                onClick={() => scrollToSection(questionRef)}
                 className={styles.button}
               >
                 상품 문의
@@ -116,11 +96,9 @@ function ProductDetailPage() {
           <div ref={reviewRef} className={styles.review}>
             <h2>상품 리뷰</h2>
           </div>
-          {showQuestionPage && (
-            <div ref={questionRef}>
-              <QuestionPage questions={questions} />
-            </div>
-          )}
+          <div ref={questionRef}>
+            <InquiryListPage itemId={id} />
+          </div>
         </div>
       </div>
     </Container>
