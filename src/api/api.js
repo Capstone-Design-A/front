@@ -378,7 +378,6 @@ export const getInquiryList = async (itemId, page, size, token) => {
     }
 
     const responseData = await response.json();
-    console.log("API response data:", responseData);
 
     if (!responseData.isSuccess) {
       throw new Error(
