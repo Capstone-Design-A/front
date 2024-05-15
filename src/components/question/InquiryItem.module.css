@@ -1,0 +1,85 @@
+/* 문의 */
+.emptyList {
+  margin: 40px auto;
+}
+
+.inquiryListItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+.inquiryListItem:not(:last-child) {
+  margin-bottom: 11px;
+}
+
+.inquiryListItem .info {
+  display: inline-flex;
+  align-items: center;
+}
+
+.inquiryListItem .state {
+  background-color: #b3b3b3;
+  padding: 8px 25px;
+  border-radius: 30px;
+  color: #fff;
+}
+
+.inquiryListItem .title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #494949;
+  margin-left: 50px;
+  cursor: pointer;
+}
+
+.inquiryListItem .title .count {
+  margin-left: 5px;
+  color: #fe92ab;
+}
+
+.inquiryListItem .fromMemberNickname {
+  flex: none;
+  margin-left: auto;
+}
+
+.inquiryListItem .date {
+  margin-left: 50px;
+  font-size: 12px;
+  color: #c4c4c4;
+}
+
+/* 판매자 답변 */
+.answerListItem {
+  display: none;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+.answerContainer {
+  margin: 10px auto;
+  text-align: left;
+}
+
+.answers {
+  margin-left: 30px;
+}
+
+.answerTitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: #494949;
+}
+
+.answerContent {
+  font-size: 15px;
+  margin: 30px auto;
+}
+
+.answerListItem.visible {
+  display: block;
+}
+
+.answerListItem:not(:last-child) {
+  margin-bottom: 30px;
+}

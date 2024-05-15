@@ -2,15 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import ProductDetail from "../components/detail/ProductDetail";
 import Container from "../components/shared/Container";
-import styles from "./ProductDetailPage.module.css";
+import Category from "../components/category/Category";
 import { getItemDetail } from "../api/api";
 import Description from "../components/detail/Description";
 import InquiryListPage from "./InquiryListPage";
+import styles from "./ProductDetailPage.module.css";
 
 function ProductDetailPage() {
   const { id } = useParams();
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isCategoryVisible, setIsCategoryVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +47,10 @@ function ProductDetailPage() {
     }
   };
 
+  const toggleCategoryVisibility = () => {
+    setIsCategoryVisible((prev) => !prev);
+  };
+
   if (loading) {
     return (
       <Container className={styles.loading}>
@@ -58,50 +64,69 @@ function ProductDetailPage() {
   }
 
   return (
-    <Container>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <div>
-            <ProductDetail item={item} />
-          </div>
-          <ul className={styles.menu}>
-            <li className={styles.line}>
-              <button
-                onClick={() => scrollToSection(descriptionRef)}
-                className={styles.button}
-              >
-                상품 상세 정보
-              </button>
-            </li>
-            <li className={styles.line}>
-              <button
-                onClick={() => scrollToSection(reviewRef)}
-                className={styles.button}
-              >
-                상품 리뷰
-              </button>
-            </li>
-            <li className={styles.line}>
-              <button
-                onClick={() => scrollToSection(questionRef)}
-                className={styles.button}
-              >
-                상품 문의
-              </button>
-            </li>
-          </ul>
-          <div ref={descriptionRef} className={styles.description}>
-            <Description item={item} />
-          </div>
-          <div ref={reviewRef} className={styles.review}>
-            <h2>상품 리뷰</h2>
-          </div>
-          <div ref={questionRef}>
-            <InquiryListPage itemId={id} />
+    <>
+      <div className={styles.pageContainer}>
+        <div
+          className={styles.toggleCategory}
+          onClick={toggleCategoryVisibility}
+        >
+          <span className={styles.icon}>☰</span>
+        </div>
+        <div
+          className={`${styles.categoryContainer} ${
+            isCategoryVisible ? styles.visible : ""
+          }`}
+        >
+          <div className={styles.categoryContent}>
+            <Category />
           </div>
         </div>
       </div>
-    </Container>
+      <Container>
+        <div className={styles.container}>
+          <div className={styles.content}>
+            <div>
+              <ProductDetail item={item} />
+            </div>
+            <ul className={styles.menu}>
+              <li className={styles.line}>
+                <button
+                  onClick={() => scrollToSection(descriptionRef)}
+                  className={styles.button}
+                >
+                  상품 상세 정보
+                </button>
+              </li>
+              <li className={styles.line}>
+                <button
+                  onClick={() => scrollToSection(reviewRef)}
+                  className={styles.button}
+                >
+                  상품 리뷰
+                </button>
+              </li>
+              <li className={styles.line}>
+                <button
+                  onClick={() => scrollToSection(questionRef)}
+                  className={styles.button}
+                >
+                  상품 문의
+                </button>
+              </li>
+            </ul>
+            <div ref={descriptionRef} className={styles.description}>
+              <Description item={item} />
+            </div>
+            <div ref={reviewRef} className={styles.review}>
+              <h2>상품 리뷰</h2>
+            </div>
+            <div ref={questionRef}>
+              <InquiryListPage itemId={id} />
+            </div>
+          </div>
+        </div>
+      </Container>
+    </>
   );
 }
 
