@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getInquiryList } from "../api/api.js";
+import Container from "../components/shared/Container";
+import InquiryList from "../components/question/InquiryList";
+import styles from "./InquiryListPage.module.css";
 
 const InquiryListPage = ({ itemId }) => {
   const [inquiryList, setInquiryList] = useState([]);
@@ -34,20 +37,12 @@ const InquiryListPage = ({ itemId }) => {
   }
 
   return (
-    <div>
-      <h1>상품 문의</h1>
-      <ul>
-        {inquiryList.map((inquiry) => (
-          <li key={inquiry.id}>
-            <strong>작성자: {inquiry.fromMemberNickname}</strong>
-            <p>답변 상태: {inquiry.status}</p>
-            <p>문의 내용: {inquiry.content}</p>
-            <p>답변 내용: {inquiry.answer}</p>
-            <p>작성일: {new Date(inquiry.createdAt).toLocaleString()}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <h1 className={styles.title}>상품 문의</h1>
+      <Container className={styles.InquiryList}>
+        <InquiryList inquiryList={inquiryList} />
+      </Container>
+    </>
   );
 };
 

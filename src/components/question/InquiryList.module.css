@@ -1,0 +1,39 @@
+.emptyList {
+  margin: 40px auto;
+}
+
+.inquiryList {
+  margin: 20px auto;
+}
+
+.noInquiryList {
+  font-size: 18px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  border: 1px solid #fff;
+  background-color: #fff;
+  border-radius: 4px;
+  color: #333;
+  padding: 5px 10px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #888;
+}
+
+.pagination button:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination button.active {
+  font-weight: bold;
+  color: #fff;
+  background-color: #b3b3b3;
+  border-radius: 4px;
+}
