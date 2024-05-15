@@ -226,6 +226,8 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   place-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .total p,
@@ -305,6 +307,7 @@
   line-height: 20px;
   color: #000000;
   margin-bottom: 12px;
+  margin-right: -400px;
 }
 
 .payment .cart_prouct_payment_price {
@@ -312,6 +315,7 @@
   font-weight: bold;
   line-height: 30px;
   color: #eb5757;
+  margin-right: -400px;
 }
 
 .btn {

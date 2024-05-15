@@ -1,21 +1,17 @@
 import styles from "./TotalCart.module.css";
-import minus from "../../assets/icon-minus-line.svg";
 import plus from "../../assets/icon-plus-line.svg";
 
+function TotalCart({ products }) {
+  const totalAmount = products.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
 
-function TotalCart() {
   return (
     <div className={styles.total}>
       <div className={styles.total_price}>
         <p className={styles.cart_product_total_price}>총 상품금액</p>
-        <p className={styles.cart_product_price}>0</p>
-      </div>
-      <div className={styles.pay_minus}>
-        <img src={minus} alt="minus" />
-      </div>
-      <div className={styles.sale}>
-        <p className={styles.cart_product_sale}>상품 할인</p>
-        <p className={styles.cart_product_sale_price}>0원</p>
+        <p className={styles.cart_product_price}>{totalAmount}원</p>
       </div>
       <div className={styles.pay_plus}>
         <img src={plus} alt="plus" />
@@ -24,10 +20,9 @@ function TotalCart() {
         <p className={styles.cart_product_delivery}>배송비</p>
         <p className={styles.cart_product_delivery_price}>0원</p>
       </div>
-
       <div className={styles.payment}>
         <p className={styles.cart_prouct_payment}>결제 예정 금액</p>
-        <p className={styles.cart_prouct_payment_price}>0</p>
+        <p className={styles.cart_prouct_payment_price}>{totalAmount}원</p>
       </div>
     </div>
   );
