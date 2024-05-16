@@ -552,13 +552,13 @@ export const getOrderStatus = async (sellerId, page, size, token) => {
 };
 */
 
-export const getOrderStatus = async (page, size) => {
+export const getOrderStatus = async (sellerId, page, size) => {
   const ORDER_STATUS_ENDPOINT = "/seller/order-status";
   const token = localStorage.getItem("JWT_TOKEN");
 
   try {
     const response = await fetch(
-      `${ORDER_STATUS_ENDPOINT}?page=${page}&size=${size}`,
+      `${ORDER_STATUS_ENDPOINT}?seller-id=${sellerId}&page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
@@ -589,22 +589,70 @@ export const getOrderStatus = async (page, size) => {
   }
 };
 
-// JWT Token에서 payload 추출하고, JSON 형식으로 파싱
-export function parseJWTToken(token) {
-  if (!token) {
-    throw new Error("Token is required");
+export const subscribe = async (fromMemberId, toMemberId) => {
+  const SUBSCRIBE_ENDPOINT = `/subscription/${toMemberId}`;
+
+  try {
+    const response = await fetch(
+      `${SUBSCRIBE_ENDPOINT}?from-member-id=${fromMemberId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error subscribing:", error);
+    throw error;
   }
+};
 
-  const base64Url = token.split(".")[1];
-  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  const payloadJson = decodeURIComponent(
-    atob(base64)
-      .split("")
-      .map((c) => {
-        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join("")
-  );
+export const unsubscribe = async (fromMemberId, toMemberId) => {
+  const SUBSCRIBE_ENDPOINT = `/subscription/${toMemberId}`;
 
-  return JSON.parse(payloadJson);
-}
+  try {
+    const response = await fetch(
+      `${SUBSCRIBE_ENDPOINT}?from-member-id=${fromMemberId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error unsubscribing:", error);
+    throw error;
+  }
+};
+
+/* 로그인 구현 후 구독 상태 관리 필요 시 사용
+export const checkSubscription = async (fromMemberId, toMemberId) => {
+  const SUBSCRIBE_ENDPOINT = `/subscription/${toMemberId}`;
+
+  try {
+    const response = await fetch(
+      `${SUBSCRIBE_ENDPOINT}?from-member-id=${fromMemberId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to check subscription status");
+    }
+    return data;
+  } catch (error) {
+    console.error("Error checking subscription status:", error);
+    throw error;
+  }
+};
+*/
