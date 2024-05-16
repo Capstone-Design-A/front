@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./Pagination.module.css";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  // 페이지 번호 버튼을 클릭할 때 실행되는 함수
   const handlePageClick = (pageNumber) => {
-    // 해당 페이지 번호를 부모 컴포넌트로 전달
     onPageChange(pageNumber);
   };
 
@@ -18,6 +16,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           className={`${styles.pageButton} ${
             pageNumber + 1 === currentPage ? styles.active : ""
           }`}
+          disabled={currentPage === totalPages && pageNumber + 1 === totalPages}
         >
           {pageNumber + 1}
         </button>

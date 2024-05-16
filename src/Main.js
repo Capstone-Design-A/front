@@ -20,6 +20,7 @@ import CartPage from "./pages/CartPage";
 import SellerIntroductionPage from "./pages/SellerIntroductionPage";
 import ManagementPage from "./pages/ManagementPage";
 import SellerOrderListPage from "./pages/SellerOrderListPage";
+import SellerItemListPage from "./pages/SellerItemListPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function Main() {
@@ -50,6 +51,7 @@ function Main() {
           <Route path="introduction" element={<SellerIntroductionPage />} />
           <Route path="management" element={<ManagementPage />} />
           <Route path="seller/order-status" element={<SellerOrderListPage />} />
+          <Route path="seller/items" element={<SellerItemListPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

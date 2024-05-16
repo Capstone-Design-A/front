@@ -138,7 +138,7 @@ import styles from "./SellerOrderListPage.module.css";
 
 function SellerOrderListPage() {
   const location = useLocation();
-  const sellerId = "1"; // sellerId를 하드코딩하여 1로 설정
+  const sellerId = "1";
 
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -154,13 +154,13 @@ function SellerOrderListPage() {
     const fetchData = async () => {
       try {
         const token = "JWT_TOKEN";
-        const page = queryParams.get("page") || currentPage;
+        const page = queryParams.get("page") || 1;
         const size = queryParams.get("size") || 1;
 
         const orderStatusData = await getOrderStatus(
           page,
           size,
-          sellerId, // sellerId를 하드코딩하여 1로 설정
+          sellerId,
           token
         );
         setOrders(orderStatusData);

@@ -33,10 +33,10 @@
   color: #fff !important;
   font-size: 18px;
   font-weight: 700;
-  background-color: rgba(108, 93, 211, 0.6);
+  background-color: rgba(108, 93, 211, 0.4);
   width: 170px;
-
   border-radius: 8px;
+  opacity: 70%;
 }
 
 button {
@@ -48,7 +48,7 @@ button {
 }
 
 .title:hover {
-  background-color: rgba(108, 93, 211, 0.5);
+  background-color: rgba(108, 93, 211, 0.4);
   border-radius: 10px;
   margin: 5px;
   width: 90%;
