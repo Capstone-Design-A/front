@@ -41,7 +41,7 @@ function SellerCategory({ page = 1, size = 1 }) {
               <h2 className={styles.title}>주문 현황</h2>
             </Link>
             <Link
-              to={`/seller/seller-id=${sellerId}?page=${page}&size=${size}`}
+              to={`/seller/items?seller-id=${sellerId}?page=${page}&size=${size}`}
               className={styles.link}
             >
               <h2 className={styles.title}>판매 상품 관리</h2>

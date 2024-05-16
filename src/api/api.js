@@ -589,6 +589,43 @@ export const getOrderStatus = async (sellerId, page, size) => {
   }
 };
 
+export const getSellerItemList = async (sellerId, page, size) => {
+  const SELLER_ITEM_LIST_ENDPOINT = "/seller/items";
+  const token = localStorage.getItem("JWT_TOKEN");
+
+  try {
+    const response = await fetch(
+      `${SELLER_ITEM_LIST_ENDPOINT}?seller-id=${sellerId}&page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "X-ACCESS-TOKEN": token,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result.salesItemList;
+    console.log("seller item list:", result);
+    return result;
+  } catch (error) {
+    console.error("Error fetching item detail:", error);
+    throw error;
+  }
+};
+
 export const subscribe = async (fromMemberId, toMemberId) => {
   const SUBSCRIBE_ENDPOINT = `/subscription/${toMemberId}`;
 
