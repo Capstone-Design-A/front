@@ -9,14 +9,14 @@ const UserProfile = ({ user }) => {
   const handleSubscribeClick = async () => {
     try {
       if (isSubscribed) {
-        const result = await unsubscribe(2, user.id);
+        const result = await unsubscribe(2, user.fromMemberId);
         if (result.isSuccess) {
           setIsSubscribed(false);
         } else {
           setErrorMessage(result.message);
         }
       } else {
-        const result = await subscribe(2, user.id);
+        const result = await subscribe(2, user.fromMemberId);
         if (result.isSuccess) {
           setIsSubscribed(true);
         } else {

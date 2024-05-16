@@ -17,7 +17,7 @@ function SellerIntroductionPage() {
       try {
         // mock 데이터
         const userData = {
-          id: 2,
+          fromMemberId: 1,
           username: "user123",
           subscriptionInfo: "2.4천",
           introduction: "한 줄 소개란입니다.",
