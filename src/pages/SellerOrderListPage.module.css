@@ -42,7 +42,7 @@
 
 .container {
   margin-top: 80px;
-  margin-bottom: 20px;
+  margin-bottom: 150px;
   margin-left: 215px;
   flex-shrink: 0;
 }
@@ -50,6 +50,8 @@
 .container h1 {
   font-size: 18px;
   font-weight: 300;
+  margin-bottom: 30px;
+  margin-left: 10px;
 }
 
 table {
@@ -114,4 +116,8 @@ td .orderStatus.completed {
   background-color: #fff;
   color: #5c59e8;
   border: 0.5px solid #5c59e8;
+}
+
+.noItem {
+  margin: 100px auto;
 }

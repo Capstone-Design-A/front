@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import SellerCategory from "../components/category/SellerCategory";
 import ManagementHeader from "../components/managements/ManagementHeader";
-import OrderList from "../components/managements/OrderList";
 import MonthlySales from "../components/managements/MonthlySales";
 import styles from "./ManagementPage.module.css";
+import SellerOrderListPage from "./SellerOrderListPage";
 import SellerItemListPage from "./SellerItemListPage";
 
 function ManagementPage() {
@@ -38,9 +38,8 @@ function ManagementPage() {
         <ManagementHeader />
       </div>
       <div className={styles.orderList}>
-        <OrderList />
+        <SellerOrderListPage />
       </div>
-
       <div className={styles.productList}>
         <SellerItemListPage />
       </div>
