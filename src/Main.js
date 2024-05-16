@@ -17,9 +17,9 @@ import Description from "./components/detail/Description";
 import ReviewPage from "./pages/ReviewPage";
 import InquiryListPage from "./pages/InquiryListPage";
 import CartPage from "./pages/CartPage";
-import UserIntroductionPage from "./pages/UserIntroductionPage";
+import SellerIntroductionPage from "./pages/SellerIntroductionPage";
 import ManagementPage from "./pages/ManagementPage";
-import OrderListPage from "./pages/OrderListPage";
+import SellerOrderListPage from "./pages/SellerOrderListPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function Main() {
@@ -47,9 +47,9 @@ function Main() {
           <Route path="inquiry" element={<InquiryListPage />} />
           <Route path="my" element={<MyPage />} />
           <Route path="cart" element={<CartPage />} />
-          <Route path="introduction" element={<UserIntroductionPage />} />
+          <Route path="introduction" element={<SellerIntroductionPage />} />
           <Route path="management" element={<ManagementPage />} />
-          <Route path="seller/order-status" element={<OrderListPage />} />
+          <Route path="seller/order-status" element={<SellerOrderListPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

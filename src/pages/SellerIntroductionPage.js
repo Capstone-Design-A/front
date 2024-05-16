@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import UserProfile from "../components/userIntro/UserProfile";
 import PostList from "../components/userIntro/PostList";
 import PostModal from "../components/userIntro/PostModal";
-import styles from "./UserIntroductionPage.module.css";
+import styles from "./SellerIntroductionPage.module.css";
 import SellerCategory from "../components/category/SellerCategory";
 import Container from "../components/shared/Container";
 
-function UserIntroductionPage() {
+function SellerIntroductionPage() {
   const [userData, setUserData] = useState(null);
   const [postList, setPostList] = useState([]);
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
@@ -17,12 +17,14 @@ function UserIntroductionPage() {
       try {
         // mock 데이터
         const userData = {
+          id: 2,
           username: "user123",
           subscriptionInfo: "2.4천",
           introduction: "한 줄 소개란입니다.",
           content: "상세 소개란입니다.",
           profilePicture: null,
           product: "판매 중인 상품 보러가기",
+          isSubscribed: true,
         };
         setUserData(userData);
       } catch (error) {
@@ -136,4 +138,4 @@ function UserIntroductionPage() {
   );
 }
 
-export default UserIntroductionPage;
+export default SellerIntroductionPage;
