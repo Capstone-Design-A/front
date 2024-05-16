@@ -581,7 +581,7 @@ export const getOrderStatus = async (sellerId, page, size) => {
     }
 
     const result = responseData.result.orderItemStatusList;
-    console.log("Order-status:", result);
+    console.log("seller order status: ", result);
     return result;
   } catch (error) {
     console.error("Error fetching item detail:", error);
