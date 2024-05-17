@@ -1,0 +1,48 @@
+.InquiryForm {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 10px;
+  background-color: #f9f9f9;
+  margin-bottom: 40px;
+}
+
+.InquiryForm > :not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttonCancel {
+  background-color: #fff;
+  opacity: 70%;
+  border-color: #000;
+  border-width: 0.05px;
+  border-radius: 5px;
+  color: #48735d;
+  padding: 5px 13px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0px 0px 5px 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.button {
+  background-color: #fff;
+  opacity: 70%;
+  border-color: #000;
+  border-width: 0.05px;
+  border-radius: 5px;
+  color: #48735d;
+  padding: 5px 13px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0px 0px 5px 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
