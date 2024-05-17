@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import OrderPage from "./pages/OrderPage";
 import MyPage from "./pages/MyPage";
+import Notifications from "./components/header/Notifications";
 import ProductCategoryPage from "./pages/ProductCategoryPage";
 import ProductSearchPage from "./pages/ProductSearchPage";
 import ProductGroupPage from "./pages/ProductGroupPage";
@@ -34,6 +35,7 @@ function Main() {
           <Route path="order" element={<OrderPage />} />
           <Route path="item" element={<ProductCategoryPage />} />
           <Route path="item/search" element={<ProductSearchPage />} />
+          <Route path="alarm" element={<Notifications />} />
           <Route path="groupItem" element={<ProductGroupPage />} />
           <Route path="item/deadline" element={<ProductDeadlinePage />} />
           <Route path="item/ranking" element={<ProductRankingPage />} />
