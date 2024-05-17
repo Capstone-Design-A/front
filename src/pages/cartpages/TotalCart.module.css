@@ -172,7 +172,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-left:30px;
 }
 
 .cart_product_price .total_price {
@@ -192,7 +191,7 @@
   line-height: 20px;
   color: #ffffff;
   margin-right: -500px;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
 /* cart */
@@ -231,7 +230,7 @@
   place-items: center;
   justify-content: space-between;
   align-items: center;
-  gap:10px;
+  gap: 10px;
 }
 
 .total p,
@@ -257,7 +256,6 @@
   line-height: 20px;
   color: #000000;
   margin-bottom: 12px;
-  margin-left:30px;
 }
 
 .total_price .cart_product_price,
@@ -266,7 +264,6 @@
   font-size: 24px;
   line-height: 30px;
   color: #000000;
-  margin-left:30px;
 }
 
 .pay_minus {
@@ -321,7 +318,6 @@
   font-weight: bold;
   line-height: 30px;
   color: #eb5757;
-  margin-right: 0px;
 }
 
 .btn {
