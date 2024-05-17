@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DateText from "../../components/shared/DateText";
 import Card from "../../components/shared/Card";
 import Container from "../../components/shared/Container";
-import styles from "./InquiryItem.module.css";
+import styles from "../question/InquiryItem.module.css";
 
 function InquiryItem({ inquiry }) {
   const [isDetailVisible, setIsDetailVisible] = useState(false);

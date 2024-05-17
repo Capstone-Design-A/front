@@ -2,6 +2,6 @@
   color: slategray;
 }
 
-.star .selected {
-  color: yellowgreen;
+.selected {
+  color: rgb(252, 232, 3);
 }

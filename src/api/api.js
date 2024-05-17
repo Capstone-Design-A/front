@@ -427,6 +427,42 @@ export const getInquiryList = async (itemId, page, size, token) => {
   }
 };
 
+export const getReviewList = async (itemId, page, size, token) => {
+  const REVIEW_LIST_ENDPOINT = "/review";
+
+  try {
+    const response = await fetch(
+      `${REVIEW_LIST_ENDPOINT}?itemId=${itemId}&page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "X-ACCESS-TOKEN": token,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    let result = responseData.result.reviewList;
+
+    return result;
+  } catch (error) {
+    console.error("Error fetching item detail:", error);
+    throw error;
+  }
+};
+
 // 장바구니의 물건 종류 수 조회
 export const getCartItems = async (memberId, token) => {
   const CART_ITEMS_ENDPOINT = "/cart";

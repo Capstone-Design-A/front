@@ -1,85 +1,85 @@
+/* 문의 */
 .emptyList {
   margin: 40px auto;
 }
 
-.reviewItem {
+.reviewListItem {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   padding: 10px 30px;
 }
 
-.reviewItem:not(:last-child) {
+.reviewListItem:not(:last-child) {
   margin-bottom: 11px;
 }
 
-.info {
-  display: flex;
-  justify-content: space-between;
+.reviewListItem .info {
+  display: inline-flex;
   align-items: center;
-  padding: 10px;
 }
 
-.rating,
-.title {
-  align-items: left;
+.reviewListItem .state {
+  background-color: #b3b3b3;
+  padding: 8px 25px;
+  border-radius: 30px;
+  color: #fff;
 }
 
-.title {
+.reviewListItem .title {
   font-size: 14px;
   font-weight: 500;
   color: #494949;
-  cursor: pointer;
   margin-left: 50px;
+  cursor: pointer;
 }
 
-.title a {
-  font-family: var(--notosans);
+.reviewListItem .title .count {
+  margin-left: 5px;
+  color: #fe92ab;
 }
 
-.writer,
-.date {
-}
-
-.writer {
+.reviewListItem .fromMemberNickname {
+  flex: none;
   margin-left: auto;
 }
 
-.date {
-  text-align: right;
+.reviewListItem .date {
+  margin-left: 50px;
   font-size: 12px;
   color: #c4c4c4;
-  margin-left: 50px;
 }
 
-.detail {
-  display: flex;
-  flex-direction: column;
-}
-
-.detailContent {
-  display: flex;
+/* 판매자 답변 */
+.answerListItem {
+  display: none;
   align-items: center;
-  margin: 20px auto;
+  padding: 10px 30px;
 }
 
-.img {
-  width: 200px;
-  margin-left: 10px;
+.answerContainer {
+  margin: 10px auto;
+  text-align: left;
 }
 
-.content {
-  margin: auto 50px;
+.answers {
+  margin-left: 30px;
 }
 
-.buttonAll {
-  margin-left: auto;
+.answerTitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: #494949;
 }
 
-.button {
-  background-color: #fff;
-  border-radius: 10px;
-  border-width: 0.1em;
-  width: 50px;
-  padding: 3px 10px;
-  margin: 5px 10px 10px 5px;
+.answerContent {
+  font-size: 15px;
+  margin: 30px auto;
+}
+
+.answerListItem.visible {
+  display: block;
+}
+
+.answerListItem:not(:last-child) {
+  margin-bottom: 30px;
 }

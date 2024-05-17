@@ -1,0 +1,29 @@
+.title {
+  font-weight: 300;
+}
+
+.ReviewList {
+  margin-top: 20px;
+  margin-bottom: 150px;
+}
+
+.create {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.create button {
+  background-color: #fff;
+  opacity: 70%;
+  border-color: #000;
+  border-width: 0.05px;
+  border-radius: 5px;
+  color: #48735d;
+  padding: 7px 13px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  display: inline-block;
+  margin: 0px 0px 15px 6px;
+  cursor: pointer;
+}
