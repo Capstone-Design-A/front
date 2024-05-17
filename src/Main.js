@@ -17,6 +17,7 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import Description from "./components/detail/Description";
 import ReviewPage from "./pages/ReviewPage";
 import InquiryListPage from "./pages/InquiryListPage";
+import ReviewListPage from "./pages/ReviewListPage";
 import CartPage from "./pages/CartPage";
 import SellerIntroductionPage from "./pages/SellerIntroductionPage";
 import ManagementPage from "./pages/ManagementPage";
@@ -48,6 +49,7 @@ function Main() {
             <Route path="review" element={<ReviewPage />} />
           </Route>
           <Route path="inquiry" element={<InquiryListPage />} />
+          <Route path="review" element={<ReviewListPage />} />
           <Route path="my" element={<MyPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="introduction" element={<SellerIntroductionPage />} />

@@ -5,6 +5,7 @@ import Container from "../components/shared/Container";
 import Category from "../components/category/Category";
 import { getItemDetail } from "../api/api";
 import Description from "../components/detail/Description";
+import ReviewListPage from "./ReviewListPage";
 import InquiryListPage from "./InquiryListPage";
 import styles from "./ProductDetailPage.module.css";
 
@@ -102,7 +103,7 @@ function ProductDetailPage() {
                   onClick={() => scrollToSection(reviewRef)}
                   className={styles.button}
                 >
-                  상품 리뷰
+                  상품 후기
                 </button>
               </li>
               <li className={styles.line}>
@@ -115,12 +116,12 @@ function ProductDetailPage() {
               </li>
             </ul>
             <div ref={descriptionRef} className={styles.description}>
-              <Description item={item} />
+              <Description item={item} className={styles.description} />
             </div>
             <div ref={reviewRef} className={styles.review}>
-              <h2>상품 리뷰</h2>
+              <ReviewListPage itemId={id} />
             </div>
-            <div ref={questionRef}>
+            <div ref={questionRef} className={styles.inquiry}>
               <InquiryListPage itemId={id} />
             </div>
           </div>

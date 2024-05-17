@@ -37,6 +37,13 @@ module.exports = function (app) {
     })
   );
   app.use(
+    "/review",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
     "/subscription",
     createProxyMiddleware({
       target: "https://dev.agriculturalproducts.store",
