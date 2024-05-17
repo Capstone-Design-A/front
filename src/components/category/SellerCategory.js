@@ -31,7 +31,7 @@ function SellerCategory({ page = 1, size = 1 }) {
             <div className={styles.line}>
               <HorizontalRule />
             </div>
-            <Link to={`/management`} className={styles.link}>
+            <Link to={`/seller?seller-id=${sellerId}`} className={styles.link}>
               <h2 className={styles.title}>대시보드</h2>
             </Link>
             <Link

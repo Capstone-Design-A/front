@@ -12,7 +12,7 @@ function MyPage() {
         <Link to="/introduction">
           <button>판매자 소개 페이지 바로가기(임시)</button>
         </Link>
-        <Link to="/management">
+        <Link to="/seller">
           <button>판매자 관리 페이지 바로가기(임시)</button>
         </Link>
       </div>

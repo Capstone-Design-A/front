@@ -49,7 +49,7 @@ function Main() {
           <Route path="my" element={<MyPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="introduction" element={<SellerIntroductionPage />} />
-          <Route path="management" element={<ManagementPage />} />
+          <Route path="seller" element={<ManagementPage />} />
           <Route path="seller/order-status" element={<SellerOrderListPage />} />
           <Route path="seller/items" element={<SellerItemListPage />} />
           <Route path="*" element={<NotFoundPage />} />
