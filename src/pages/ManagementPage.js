@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import SellerCategory from "../components/category/SellerCategory";
-import ManagementHeader from "../components/managements/ManagementHeader";
 import MonthlySales from "../components/managements/MonthlySales";
 import styles from "./ManagementPage.module.css";
 import SellerOrderListPage from "./SellerOrderListPage";
 import SellerItemListPage from "./SellerItemListPage";
+import DashboardPage from "./DashboardPage";
 
 function ManagementPage() {
   const { sellerId } = useParams();
@@ -35,7 +35,7 @@ function ManagementPage() {
         </div>
       </div>
       <div>
-        <ManagementHeader />
+        <DashboardPage />
       </div>
       <div className={styles.orderList}>
         <SellerOrderListPage />

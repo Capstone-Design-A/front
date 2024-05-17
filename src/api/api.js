@@ -552,6 +552,43 @@ export const getOrderStatus = async (sellerId, page, size, token) => {
 };
 */
 
+export const getDashboard = async (sellerId) => {
+  const DASHBOARD_ENDPOINT = "/seller";
+  const token = localStorage.getItem("JWT_TOKEN");
+
+  try {
+    const response = await fetch(
+      `${DASHBOARD_ENDPOINT}?seller-id=${sellerId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "X-ACCESS-TOKEN": token,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result;
+    console.log("dashboard: ", result);
+    return result;
+  } catch (error) {
+    console.error("Error fetching item detail:", error);
+    throw error;
+  }
+};
+
 export const getOrderStatus = async (sellerId, page, size) => {
   const ORDER_STATUS_ENDPOINT = "/seller/order-status";
   const token = localStorage.getItem("JWT_TOKEN");
