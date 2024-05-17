@@ -16,6 +16,7 @@ function CartPage() {
       price: 20000,
       quantity: 1,
       image: "imageURL1",
+      isChecked: false,
     },
     {
       id: 2,
@@ -23,6 +24,7 @@ function CartPage() {
       price: 18000,
       quantity: 2,
       image: "imageUrl2",
+      isChecked: false,
     },
     {
       id: 3,
@@ -30,13 +32,33 @@ function CartPage() {
       price: 18000,
       quantity: 2,
       image: "imageUrl3",
+      isChecked: false,
     },
   ]);
+  
+  const [allChecked, setAllChecked] = useState(false);
+
+  const handleAllChecked = () => {
+    const newAllChecked = !allChecked;
+    setAllChecked(newAllChecked);
+    setProducts(products.map(product => ({ ...product, isChecked: newAllChecked })));
+  };
+
+  const handleProductChecked = (productId) => {
+    const nextProducts = products.map(product => {
+      if (product.id === productId) {
+        return { ...product, isChecked: !product.isChecked };
+      }
+      return product;
+    });
+    setProducts(nextProducts);
+    setAllChecked(nextProducts.every(product => product.isChecked));
+  };
 
   return (
     <Container className={styles.container}>
       <h1 className={styles.title}>장바구니</h1>
-      <CartHeader />
+      <CartHeader allChecked={allChecked} onAllChecked={handleAllChecked} />
       {products.length === 0 ? (
         <>
           <Warn
@@ -60,6 +82,7 @@ function CartPage() {
                 product={product}
                 products={products}
                 setProducts={setProducts}
+                onProductChecked={handleProductChecked}
               />
             </li>
           ))}
@@ -69,5 +92,8 @@ function CartPage() {
     </Container>
   );
 }
+
+
+
 
 export default CartPage;

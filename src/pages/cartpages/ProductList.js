@@ -4,7 +4,7 @@ import plus from "../../assets/icon-plus-line.svg";
 import minus from "../../assets/icon-minus-line.svg";
 import tmpImage from "../../assets/img-meat-4.png";
 
-function ProductList({ product, products, setProducts }) {
+function ProductList({ product, products, setProducts, onProductChecked }) {
   const handleDelete = (productId) => {
     const nextProducts = products.filter((product) => product.id !== productId);
     setProducts(nextProducts);
@@ -32,7 +32,11 @@ function ProductList({ product, products, setProducts }) {
 
   return (
     <section className={styles.cart_product_list}>
-      <input type="checkbox" />
+      <input
+        type="checkbox"
+        checked={product.isChecked}
+        onChange={() => onProductChecked(product.id)}
+      />
       <div className={styles.cart_product_wrap}>
         <div className={styles.cart_product_image}>
           <img src={tmpImage} alt="product-img" />
@@ -64,7 +68,7 @@ function ProductList({ product, products, setProducts }) {
         <p className={styles.total_price}>
           {product.price * product.quantity}원
         </p>
-        <button className={styles.btn_submit}>주문하기</button>
+        
       </div>
 
       <div className={styles.product_remove}>
