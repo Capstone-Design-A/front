@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Container from "../components/shared/Container";
 import styles from "./ProductPage.module.css";
 import CategoryProducts from "../components/product/CategoryProducts";
 import { getItemsByCategory } from "../api/api.js";
@@ -14,6 +13,7 @@ function ProductCategoryPage() {
   const [page, setPage] = useState(1);
   const size = 10;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
+  const [categoryName, setCategoryName] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +28,36 @@ function ProductCategoryPage() {
         if (isNaN(parsedCategoryId)) {
           throw new Error(`Invalid categoryId: ${categoryId}`);
         }
+
+        switch (parsedCategoryId) {
+          case 1:
+            setCategoryName("채소");
+            break;
+          case 2:
+            setCategoryName("과일");
+            break;
+          case 3:
+            setCategoryName("축산");
+            break;
+          case 4:
+            setCategoryName("쌀/잡곡");
+            break;
+          case 5:
+            setCategoryName("가공");
+            break;
+          case 6:
+            setCategoryName("김치");
+            break;
+          case 7:
+            setCategoryName("기타");
+            break;
+          default:
+            setCategoryName("");
+            break;
+        }
+
         setCategory({ id: parsedCategoryId });
 
-        // 상품 목록 가져오기
         const currentPage = page || 1;
         const productsData = await getItemsByCategory(
           parsedCategoryId,
@@ -58,11 +85,6 @@ function ProductCategoryPage() {
 
   return (
     <>
-      <div>
-        <Container>
-          <h1>{category ? "" : "Loading..."}</h1>
-        </Container>
-      </div>
       <div className={styles.pageContainer}>
         <div
           className={styles.toggleCategory}
@@ -80,7 +102,7 @@ function ProductCategoryPage() {
           </div>
         </div>
         <div className={styles.pageContainer}>
-          <ListPage title={category ? category.name : ""}>
+          <ListPage title={categoryName}>
             <div className={styles.content}>
               <p className={styles.count}>총 {products.length}개의 상품</p>
               <div>
