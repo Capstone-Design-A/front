@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import Modal from "../components/shared/Modal";
 import styles from "./RegistrationPage.module.css";
 
 function RegistrationPage() {
@@ -10,9 +11,21 @@ function RegistrationPage() {
   const [isGroupPurchase, setIsGroupPurchase] = useState(false);
   const [targetQuantity, setTargetQuantity] = useState("");
   const [detailImages, setDetailImages] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (
+      !mainImage ||
+      !productName ||
+      !productDescription ||
+      !productCategory ||
+      !productPrice ||
+      !detailImages.length
+    ) {
+      setModalIsOpen(true);
+      return;
+    }
     const formData = new FormData();
     formData.append("mainImage", mainImage);
     formData.append("productName", productName);
@@ -21,7 +34,6 @@ function RegistrationPage() {
     formData.append("productPrice", productPrice);
     formData.append("isGroupPurchase", isGroupPurchase);
     formData.append("targetQuantity", targetQuantity);
-
     detailImages.forEach((image, index) => {
       formData.append(`detailImages[${index}]`, image);
     });
@@ -160,6 +172,20 @@ function RegistrationPage() {
           상품 등록
         </button>
       </form>
+      {/*
+      <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
+        <div className={styles.modalContent}>
+          <h2>경고</h2>
+          <p>모든 필수 항목을 입력하세요.</p>
+          <button
+            className={styles.modalButton}
+            onClick={() => setModalIsOpen(false)}
+          >
+            확인
+          </button>
+        </div>
+      </Modal>
+        */}
     </div>
   );
 }
