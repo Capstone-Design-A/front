@@ -15,6 +15,9 @@ function MyPage() {
         <Link to="/seller">
           <button>판매자 관리 페이지 바로가기(임시)</button>
         </Link>
+        <Link to="/registration">
+          <button>상품 등록 페이지 바로가기(임시)</button>
+        </Link>
       </div>
     </>
   );

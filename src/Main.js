@@ -19,6 +19,7 @@ import Description from "./components/detail/Description";
 import InquiryListPage from "./pages/InquiryListPage";
 import ReviewListPage from "./pages/ReviewListPage";
 import CartPage from "./pages/CartPage";
+import RegistrationPage from "./pages/RegistrationPage";
 import SellerIntroductionPage from "./pages/SellerIntroductionPage";
 import ManagementPage from "./pages/ManagementPage";
 import SellerOrderListPage from "./pages/SellerOrderListPage";
@@ -54,6 +55,7 @@ function Main() {
           <Route path="review" element={<ReviewListPage />} />
           <Route path="my" element={<MyPage />} />
           <Route path="cart" element={<CartPage />} />
+          <Route path="registration" element={<RegistrationPage />} />
           <Route path="introduction" element={<SellerIntroductionPage />} />
           <Route path="seller" element={<ManagementPage />} />
           <Route path="seller/order-status" element={<SellerOrderListPage />} />
