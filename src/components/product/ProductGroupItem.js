@@ -28,7 +28,7 @@ function ProductGroupItem({
       <div className={styles.img}>
         <Link
           to={{
-            pathname: `/item/${id}`,
+            pathname: `/groupItem/${id}`,
             state: { product: productData },
           }}
         >
@@ -38,7 +38,7 @@ function ProductGroupItem({
       <div className={styles.text}>
         <Link
           to={{
-            pathname: `/item/${id}`,
+            pathname: `/groupItem/${id}`,
             state: { product: productData },
           }}
         >

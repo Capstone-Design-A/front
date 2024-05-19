@@ -27,7 +27,7 @@ function GroupPurchaseItem({ item }) {
             </span>
           </div>
           <div>
-            <Link to={`/product/${item.id}`}>
+            <Link to={`/groupItem/${item.id}`}>
               <Button className={styles.button}>공동구매 바로가기</Button>
             </Link>
           </div>
