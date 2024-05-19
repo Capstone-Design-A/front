@@ -14,8 +14,8 @@ import ProductDeadlinePage from "./pages/ProductDeadlinePage";
 import ProductRankingPage from "./pages/ProductRankingPage";
 import ProductSubscriptionPage from "./pages/ProductSubscriptionPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import ProductGroupDetailPage from "./pages/ProductGroupDetailPage";
 import Description from "./components/detail/Description";
-import ReviewPage from "./pages/ReviewPage";
 import InquiryListPage from "./pages/InquiryListPage";
 import ReviewListPage from "./pages/ReviewListPage";
 import CartPage from "./pages/CartPage";
@@ -46,7 +46,9 @@ function Main() {
           />
           <Route path="item/:id" element={<ProductDetailPage />}>
             <Route index element={<Description />} />
-            <Route path="review" element={<ReviewPage />} />
+          </Route>
+          <Route path="groupItem/:id" element={<ProductGroupDetailPage />}>
+            <Route index element={<Description />} />
           </Route>
           <Route path="inquiry" element={<InquiryListPage />} />
           <Route path="review" element={<ReviewListPage />} />

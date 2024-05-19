@@ -1,0 +1,135 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.content {
+  padding: 65px 10px 20px;
+}
+
+.image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.img {
+  width: 300px;
+  height: 300px;
+  border: 0.1px solid #888;
+}
+
+.title {
+  margin: 30px 0px;
+  font-size: 22px;
+  text-align: center;
+}
+
+/* 수량 조절 버튼 오른쪽 정렬 필요 */
+.amountWrapper {
+  margin-left: auto;
+}
+
+.amount {
+  /* margin-right: 0; */
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 500;
+  padding-bottom: 20px;
+  margin: 20px 0px;
+  text-align: right;
+}
+
+.price span {
+  margin-left: 10px;
+}
+
+.discountPrice {
+  font-weight: 600;
+  padding-left: 2px;
+  font-size: 26px;
+}
+
+.originPrice {
+  color: #888;
+  text-decoration: line-through;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-135deg, #c6d3cc, #7d9b8b);
+  opacity: 90%;
+  color: #fff;
+  font-size: 18px;
+  padding: 20px;
+}
+
+.orderSum {
+  margin: 0 15px;
+}
+
+.targetQuantity {
+  margin: 0 8px;
+}
+
+.targetQuantity span,
+.orderSum span {
+  margin-left: 5px;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.order {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  font-weight: 400;
+  color: #494949;
+  opacity: 80%;
+  font-size: 13px;
+  margin-top: 15px;
+  width: 300px;
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+  background-color: #fff;
+}
+
+.orderbutton {
+  padding: 15px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 15px 6px 15px 0;
+  cursor: pointer;
+  width: 60%;
+}
+
+.cartbutton {
+  opacity: 70%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 15px 0px 15px 6px;
+  cursor: pointer;
+  width: 60%;
+  padding: 15px 22px;
+}

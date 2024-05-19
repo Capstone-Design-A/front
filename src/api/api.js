@@ -391,6 +391,49 @@ export const getItemDetail = async (itemId, token) => {
   }
 };
 
+export const getGroupItemDetail = async (itemId, token) => {
+  const GROUP_ITEM_DETAIL_ENDPOINT = "/groupItem";
+
+  try {
+    const response = await fetch(`${GROUP_ITEM_DETAIL_ENDPOINT}/${itemId}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "X-ACCESS-TOKEN": token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const { result } = responseData;
+
+    const imageUrls = result.item.imageUrl.map((image) => image.imageUrl);
+
+    result.imageUgrls = imageUrls;
+    console.log("GroupItemDetail:", result);
+
+    return {
+      item: result.item,
+      orderSum: result.orderSum,
+      targetQuantity: result.targetQuantity,
+      discountPrice: result.discountPrice,
+    };
+  } catch (error) {
+    console.error("Error fetching item detail:", error);
+    throw error;
+  }
+};
+
 export const getInquiryList = async (itemId, page, size, token) => {
   const INQUIRY_LIST_ENDPOINT = "/inquiry";
 
