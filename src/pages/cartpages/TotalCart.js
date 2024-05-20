@@ -2,7 +2,7 @@ import styles from "./TotalCart.module.css";
 import plus from "../../assets/icon-plus-line.svg";
 
 function TotalCart({ products }) {
-  const checkedProducts = products.filter(product => product.isChecked);
+  const checkedProducts = products.filter((product) => product.isChecked);
   const totalAmount = checkedProducts.reduce(
     (total, product) => total + product.price * product.quantity,
     0
@@ -27,9 +27,9 @@ function TotalCart({ products }) {
       </div>
       <div className={styles.cart_product_price}>
         <p className={styles.total_price}></p>
-          <p><button className={styles.btn_submit}>주문하기</button></p>
-        
-        
+        <p>
+          <button className={styles.btn_submit}>주문하기</button>
+        </p>
       </div>
     </div>
   );

@@ -9,6 +9,9 @@ import Warn from "../../components/shared/Warn";
 import styles from "./CartPage.module.css";
 
 function CartPage() {
+  //추후 productdetail페이지에서 장바구니 담기 시
+  //새롭게 정보저장을 위한 cart페이지를 만들고 모두 거기서 빼오도록 수정 필요
+  //아니면 여기다 바로 products라는 배열로 저장
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -35,24 +38,26 @@ function CartPage() {
       isChecked: false,
     },
   ]);
-  
+
   const [allChecked, setAllChecked] = useState(false);
 
   const handleAllChecked = () => {
     const newAllChecked = !allChecked;
     setAllChecked(newAllChecked);
-    setProducts(products.map(product => ({ ...product, isChecked: newAllChecked })));
+    setProducts(
+      products.map((product) => ({ ...product, isChecked: newAllChecked }))
+    );
   };
 
   const handleProductChecked = (productId) => {
-    const nextProducts = products.map(product => {
+    const nextProducts = products.map((product) => {
       if (product.id === productId) {
         return { ...product, isChecked: !product.isChecked };
       }
       return product;
     });
     setProducts(nextProducts);
-    setAllChecked(nextProducts.every(product => product.isChecked));
+    setAllChecked(nextProducts.every((product) => product.isChecked));
   };
 
   return (
@@ -88,12 +93,9 @@ function CartPage() {
           ))}
         </ul>
       )}
-      <TotalCart products={products} />
+      {products.length === 0 ? "" : <TotalCart products={products} />}
     </Container>
   );
 }
-
-
-
 
 export default CartPage;
