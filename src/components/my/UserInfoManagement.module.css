@@ -1,0 +1,78 @@
+.editProfileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.editProfileForm h2 {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+.formGroup {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.emailInputContainer,
+.contactInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="password"],
+.formGroup select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formGroup input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.3);
+}
+
+.checkboxGroup {
+  display: flex;
+  gap: 40px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.submitButton {
+  padding: 8px 15px;
+  background-color: #48735d;
+  opacity: 90%;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  align-self: flex-end;
+}
+
+.submitButton:hover {
+  background-color: #7d9b8b;
+}

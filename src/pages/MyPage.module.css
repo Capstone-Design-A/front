@@ -9,7 +9,7 @@
 .title {
   text-align: center;
   color: #333;
-  font-size: 35px;
+  font-size: 30px;
   font-weight: 300;
 }
 
@@ -42,7 +42,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.memberContainer h2 {
+.memberContainer .memberTitle {
   font-size: 20px;
   margin-left: 2px;
   font-weight: 300;
@@ -70,6 +70,11 @@
 }
 
 .optionButton:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+.optionButton.active {
   background-color: #fff;
   color: #333;
 }

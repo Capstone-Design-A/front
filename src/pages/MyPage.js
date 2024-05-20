@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import UserInfoManagement from "../components/my/UserInfoManagement";
+import PasswordManagement from "../components/my/PasswordManagement";
+import OrderDeliveryStatus from "../components/my/OrderDeliveryStatus";
 import styles from "./MyPage.module.css";
 
 function MyPage() {
@@ -19,11 +22,11 @@ function MyPage() {
   const renderSectionContent = () => {
     switch (activeSection) {
       case "editProfile":
-        return <div>회원 정보 수정</div>;
+        return <UserInfoManagement />;
       case "changePassword":
-        return <div>비밀번호 변경</div>;
+        return <PasswordManagement />;
       case "orderHistory":
-        return <div>주문 배송 현황</div>;
+        return <OrderDeliveryStatus />;
       case "groupPurchase":
         return <div>공동구매 신청 내역</div>;
       case "sellerApplication":
@@ -36,46 +39,32 @@ function MyPage() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>마이 페이지</h1>
-
       {isSeller ? (
         <div className={styles.sellerContainer}>
-          <h2>판매 회원 정보 관리</h2>
+          <h2 className={styles.memberTitle}>판매 회원 정보 관리</h2>
           <p>판매 회원 기능은 추후 구현 예정</p>
         </div>
       ) : (
         <div className={styles.memberContainer}>
-          <h2>일반 회원 정보 관리</h2>
+          <h2 className={styles.memberTitle}>일반 회원 정보 관리</h2>
           <div className={styles.optionContainer}>
-            <button
-              className={styles.optionButton}
-              onClick={() => toggleSection("editProfile")}
-            >
-              회원 정보 수정
-            </button>
-            <button
-              className={styles.optionButton}
-              onClick={() => toggleSection("changePassword")}
-            >
-              비밀번호 변경
-            </button>
-            <button
-              className={styles.optionButton}
-              onClick={() => toggleSection("orderHistory")}
-            >
-              주문 배송 현황
-            </button>
-            <button
-              className={styles.optionButton}
-              onClick={() => toggleSection("groupPurchase")}
-            >
-              공동구매 신청 내역
-            </button>
-            <button
-              className={styles.optionButton}
-              onClick={() => toggleSection("sellerApplication")}
-            >
-              판매자 신청
-            </button>
+            {[
+              "editProfile",
+              "changePassword",
+              "orderHistory",
+              "groupPurchase",
+              "sellerApplication",
+            ].map((section) => (
+              <button
+                key={section}
+                className={`${styles.optionButton} ${
+                  activeSection === section ? styles.active : ""
+                }`}
+                onClick={() => toggleSection(section)}
+              >
+                {getButtonLabel(section)}
+              </button>
+            ))}
           </div>
           <div className={styles.sectionContent}>{renderSectionContent()}</div>
         </div>
@@ -88,5 +77,22 @@ function MyPage() {
     </div>
   );
 }
+
+const getButtonLabel = (section) => {
+  switch (section) {
+    case "editProfile":
+      return "회원 정보 수정";
+    case "changePassword":
+      return "비밀번호 변경";
+    case "orderHistory":
+      return "주문 배송 현황";
+    case "groupPurchase":
+      return "공동구매 신청 내역";
+    case "sellerApplication":
+      return "판매자 신청";
+    default:
+      return "";
+  }
+};
 
 export default MyPage;
