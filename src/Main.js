@@ -18,7 +18,7 @@ import ProductGroupDetailPage from "./pages/ProductGroupDetailPage";
 import Description from "./components/detail/Description";
 import InquiryListPage from "./pages/InquiryListPage";
 import ReviewListPage from "./pages/ReviewListPage";
-import CartPage from "./pages/CartPage";
+import CartPage from "./pages/cartpages/CartPage";
 import ProductRegistrationPage from "./pages/ProductRegistrationPage";
 import PostRegistrationPage from "./pages/PostRegistrationPage";
 import SellerIntroductionPage from "./pages/SellerIntroductionPage";
