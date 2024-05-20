@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 // import Modal from "../components/shared/Modal";
-import styles from "./RegistrationPage.module.css";
+import styles from "./ProductRegistrationPage.module.css";
 
-function RegistrationPage() {
+function ProductRegistrationPage() {
   const [mainImage, setMainImage] = useState(null);
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -11,6 +11,7 @@ function RegistrationPage() {
   const [isGroupPurchase, setIsGroupPurchase] = useState(false);
   const [targetQuantity, setTargetQuantity] = useState("");
   const [detailImages, setDetailImages] = useState([]);
+  // eslint-disable-next-line
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleSubmit = (e) => {
@@ -155,7 +156,8 @@ function RegistrationPage() {
                 value={targetQuantity}
                 onChange={(e) => setTargetQuantity(e.target.value)}
                 required={isGroupPurchase}
-              />
+              />{" "}
+              <span className={styles.member}>명</span>
             </div>
           </div>
         )}
@@ -190,4 +192,4 @@ function RegistrationPage() {
   );
 }
 
-export default RegistrationPage;
+export default ProductRegistrationPage;

@@ -3,7 +3,8 @@
   margin: 50px auto 150px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 0.5px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {
@@ -60,6 +61,7 @@
   padding: 12px 15px;
   margin-bottom: 15px;
   background-color: #48735d;
+  opacity: 70%;
   color: white;
   border: none;
   border-radius: 5px;
@@ -124,4 +126,10 @@
 
 .modalButton:hover {
   background-color: #48735d;
+}
+
+.member {
+  font-size: 17px;
+  margin-left: 10px;
+  color: #494949;
 }
