@@ -1,12 +1,14 @@
 .container {
-  margin: 50px auto 100px;
+  margin: 50px auto 150px;
   text-align: center;
 }
 
 .Heading {
-  font-size: 30px;
-  margin: 32px auto 70px;
+  font-size: 35px;
+  margin: 70px auto 50px;
   text-align: center;
+  font-weight: 300;
+  padding: 20px;
 }
 
 .Label,
