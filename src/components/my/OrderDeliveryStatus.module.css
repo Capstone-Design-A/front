@@ -1,0 +1,38 @@
+.orderDeliveryStatusContainer {
+  margin-top: 50px;
+}
+
+.orderDeliveryStatusContainer h2 {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 300;
+  margin-bottom: 50px;
+}
+
+.orderList {
+  display: flex;
+  flex-direction: column;
+}
+
+.orderItem {
+  border: 0.1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.orderDetails {
+  display: flex;
+  flex-direction: column;
+  color: #333;
+}
+
+.orderDetails p {
+  margin-bottom: 8px;
+}
+
+.orderDetails p strong {
+  margin-right: 10px;
+}
