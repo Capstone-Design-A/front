@@ -34,7 +34,9 @@ function Nav() {
         <Link to="/">
           <img src={logoImg} alt="Main Logo" className={styles.logo} />
         </Link>
-        <SearchBar />
+        <div className={styles.search}>
+          <SearchBar />
+        </div>
         <ul className={styles.nav_bottom}>
           <li>
             <NavLink to="/my">마이 페이지</NavLink>
