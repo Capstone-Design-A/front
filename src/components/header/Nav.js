@@ -22,7 +22,7 @@ function Nav() {
           </li>
           <li> | </li>
           <li>
-            <NavLink to="/order">주문배송</NavLink>
+            <NavLink to="/seller">판매자관리</NavLink>
           </li>
           <li> | </li>
           <li>
