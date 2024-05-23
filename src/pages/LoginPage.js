@@ -1,63 +1,51 @@
-// LoginPage2 -> Login으로 이름 변경 (기존 Login, LoginPage 삭제)
-// RegisterPage -> SignUp으로 이름 변경 (기존 SignUP 삭제)
-// 두 페이지를 pages 폴더로 이동
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { login } from "../api/api";
+import { Link } from "react-router-dom";
+import Container from "../components/shared/Container";
 import Label from "../components/shared/Label";
 import Input from "../components/shared/Input";
 import Button2 from "../components/button/Button2";
-import HorizontalRule from "../components/shared/HorizontalRule";
-import { Link } from "react-router-dom";
-import GoogleImage from "../assets/google.svg";
 import styles from "./LoginPage.module.css";
-import { useAuth } from "../contexts/AuthProvider";
-import Container from "../components/shared/Container";
 
-function LoginPage() {
-  const { user, login } = useAuth();
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
+const LoginPage = () => {
+  const [loginId, setLoginId] = useState("");
+  const [password, setPassword] = useState("");
+  // eslint-disable-next-line
+  const [error, setError] = useState("");
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  }
-
-  async function handleSubmit(e) {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    await login(values);
-    navigate("/");
-  }
+    setError("");
 
-  useEffect(() => {
-    if (user) {
-      navigate("/");
+    try {
+      const { accessToken, refreshToken } = await login(loginId, password);
+      console.log("accessToken:", accessToken);
+      console.log("refreshToken:", refreshToken);
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      console.log("토큰이 로컬 스토리지에 저장되었습니다.");
+      console.log("로그인 성공");
+    } catch (error) {
+      setError(`로그인 실패: ${error.message}`);
+      console.log("로그인 실패", error.message);
     }
-  }, [user, navigate]);
+  };
 
   return (
     <>
       <Container className={styles.container}>
         <h1 className={styles.Heading}>로그인</h1>
-        <form className={styles.Form} onSubmit={handleSubmit}>
+        <form className={styles.Form} onSubmit={handleLogin}>
           <Label className={styles.Label} htmlFor="email">
-            이메일
+            아이디
           </Label>
           <Input
-            id="email"
+            id="loginId"
             className={styles.Input}
-            name="email"
-            type="email"
+            type="text"
             placeholder="이메일"
-            value={values.email}
-            onChange={handleChange}
+            value={loginId}
+            onChange={(e) => setLoginId(e.target.value)}
           />
           <Label className={styles.Label} htmlFor="password">
             비밀번호
@@ -65,37 +53,24 @@ function LoginPage() {
           <Input
             id="password"
             className={styles.Input}
-            name="password"
             type="password"
             placeholder="비밀번호"
-            value={values.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <Button2 className={styles.Button}>로그인</Button2>
+          <Button2 className={styles.Button} type="submit">
+            로그인
+          </Button2>
           <div className={styles.register}>
             회원이 아니신가요?{" "}
             <Link to="/register">
               <span>회원가입하기</span>
             </Link>
           </div>
-          <HorizontalRule className={styles.HorizontalRule}>
-            또는
-          </HorizontalRule>
-          <Button2
-            className={styles.GoogleButton}
-            type="button"
-            appearance="outline"
-            as={Link}
-            to="/api/auth/google"
-            reloadDocument
-          >
-            <img src={GoogleImage} alt="Google" />
-            구글로 시작하기
-          </Button2>
         </form>
       </Container>
     </>
   );
-}
+};
 
 export default LoginPage;

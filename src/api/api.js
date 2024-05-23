@@ -842,3 +842,81 @@ export const checkSubscription = async (fromMemberId, toMemberId) => {
   }
 };
 */
+
+export const login = async (loginId, password) => {
+  const response = await fetch(`${BASE_URL}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ loginId, password }),
+    mode: "no-cors",
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(`Login failed: ${errorData.message}`);
+  }
+
+  const data = await response.json();
+  return data.result;
+};
+
+export const refreshAccessToken = async (refreshToken) => {
+  const response = await fetch(`${BASE_URL}/refresh`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ refreshToken }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(`Token refresh failed: ${errorData.message}`);
+  }
+
+  const data = await response.json();
+  return data.result;
+};
+
+export const fetchWithAuth = async (url, options = {}) => {
+  const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  if (!accessToken) {
+    throw new Error("Access Token이 존재하지 않습니다.");
+  }
+
+  options.headers = {
+    ...options.headers,
+    Authorization: `bearer ${accessToken}`,
+  };
+
+  let response = await fetch(`${BASE_URL}${url}`, options);
+
+  if (response.status === 401) {
+    const errorData = await response.json();
+    if (errorData.code === "JWT_400_5") {
+      try {
+        const newTokens = await refreshAccessToken(refreshToken);
+        localStorage.setItem("accessToken", newTokens.accessToken);
+        localStorage.setItem("refreshToken", newTokens.refreshToken);
+
+        options.headers.Authorization = `bearer ${newTokens.accessToken}`;
+        response = await fetch(`${BASE_URL}${url}`, options);
+      } catch (refreshError) {
+        throw new Error("토큰 갱신 실패: " + refreshError.message);
+      }
+    } else {
+      throw new Error(errorData.message);
+    }
+  }
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message);
+  }
+
+  return response.json();
+};
