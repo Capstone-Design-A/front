@@ -540,38 +540,16 @@ export const getCartItems = async (memberId, token) => {
   }
 };
 
-// 리뷰
-export const getReviews = async ({
-  order = "createdAt",
-  offset = 0,
-  limit = 6,
-}) => {
-  const query = `order=${order}&offset=${offset}&limit=${limit}`;
+export const getPostItems = async (postId, token) => {
+  const POST_ITEMS_ENDPOINT = "/posts";
+
   try {
-    const response = await fetch(`${BASE_URL}/film-reviews?${query}`, {
+    const response = await fetch(`${POST_ITEMS_ENDPOINT}/${postId}`, {
       method: "GET",
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const responseData = await response.json();
-
-    return responseData;
-  } catch (error) {
-    throw new Error("리뷰를 불러오는데 실패했습니다");
-  }
-};
-
-export const createReview = async (formData) => {
-  try {
-    const response = await fetch(`${BASE_URL}/film-reviews`, {
-      method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-type": "application/json",
+        "X-ACCESS-TOKEN": token,
       },
-      body: JSON.stringify(formData),
     });
 
     if (!response.ok) {
@@ -580,49 +558,24 @@ export const createReview = async (formData) => {
 
     const responseData = await response.json();
 
-    return responseData;
-  } catch (error) {
-    throw new Error("정보를 생성하는데 실패했습니다.");
-  }
-};
-
-export const updateReview = async (id, formData) => {
-  try {
-    const response = await fetch(`${BASE_URL}/film-reviews/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
     }
 
-    const responseData = await response.json();
+    const { result } = responseData;
+    console.log("PostItems:", result);
 
-    return responseData;
+    return {
+      postId: result.postId,
+      content: result.content,
+      createdAt: result.createdAt,
+      imageUrlList: result.imageUrlList,
+    };
   } catch (error) {
-    throw new Error("정보를 수정하는데 실패했습니다.");
-  }
-};
-
-export const deleteReview = async (id) => {
-  try {
-    const response = await fetch(`${BASE_URL}/film-reviews/${id}`, {
-      method: "DELETE",
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const responseData = await response.json();
-
-    return responseData;
-  } catch (error) {
-    throw new Error("정보를 삭제하는데 실패했습니다.");
+    console.error("Error fetching item detail:", error);
+    throw error;
   }
 };
 
