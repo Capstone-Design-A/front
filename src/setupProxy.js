@@ -78,4 +78,11 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    "/posts",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
 };
