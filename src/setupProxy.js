@@ -80,11 +80,4 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
-  app.use(
-    "/ImageURL1",
-    createProxyMiddleware({
-      target: "https://dev.agriculturalproducts.store",
-      changeOrigin: true,
-    })
-  );
 };
