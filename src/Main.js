@@ -28,6 +28,9 @@ import SellerItemListPage from "./pages/SellerItemListPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function Main() {
+  const token =
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoibG9naW5JZDI5IiwiaWF0IjoxNzE2MTA0MTIzLCJleHAiOjE3NDc2NDAxMjN9.P19eKG9RcGmDOkMmcf252ZoyeYCmizv1np2EiaHcPwo";
+
   return (
     <BrowserRouter>
       <Routes>
@@ -60,7 +63,10 @@ function Main() {
             path="registration-product"
             element={<ProductRegistrationPage />}
           />
-          <Route path="registration-post" element={<PostRegistrationPage />} />
+          <Route
+            path="auth/posts"
+            element={<PostRegistrationPage token={token} />}
+          />
           <Route path="introduction" element={<SellerIntroductionPage />} />
           <Route path="seller" element={<ManagementPage />} />
           <Route path="seller/order-status" element={<SellerOrderListPage />} />

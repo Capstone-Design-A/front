@@ -126,3 +126,8 @@
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 1000;
 }
+
+.registration {
+  font-size: 20px;
+  color: #494949;
+}
