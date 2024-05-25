@@ -542,7 +542,6 @@ export const getCartItems = async (memberId, token) => {
 
 export const getPostItems = async (postId, token) => {
   const POST_ITEMS_ENDPOINT = "/posts";
-
   try {
     const response = await fetch(`${POST_ITEMS_ENDPOINT}/${postId}`, {
       method: "GET",

@@ -91,5 +91,4 @@ function PostModal({ token, onClose }) {
     </div>
   );
 }
-
 export default PostModal;
