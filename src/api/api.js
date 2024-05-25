@@ -626,6 +626,26 @@ export const deleteReview = async (id) => {
   }
 };
 
+export const createPost = async (token, mainImage, postContent) => {
+  const formData = new FormData();
+  formData.append("files", mainImage);
+  formData.append("request", JSON.stringify({ content: postContent }));
+
+  const response = await fetch("/auth/posts", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create post");
+  }
+
+  return response.json();
+};
+
 /*
 export const getOrderStatus = async (sellerId, page, size, token) => {
   const ORDER_STATUS_ENDPOINT = "/seller/order-status";
@@ -850,7 +870,6 @@ export const login = async (loginId, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ loginId, password }),
-    mode: "no-cors",
   });
 
   if (!response.ok) {

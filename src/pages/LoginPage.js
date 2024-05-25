@@ -27,7 +27,7 @@ const LoginPage = () => {
       console.log("로그인 성공");
     } catch (error) {
       setError(`로그인 실패: ${error.message}`);
-      console.log("로그인 실패", error.message);
+      // console.log("로그인 실패", error.message);
     }
   };
 

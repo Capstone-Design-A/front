@@ -8,6 +8,7 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+
   app.use(
     "/groupItem",
     createProxyMiddleware({
@@ -15,15 +16,9 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+
   app.use(
     "/seller",
-    createProxyMiddleware({
-      target: "https://dev.agriculturalproducts.store",
-      changeOrigin: true,
-    })
-  );
-  app.use(
-    "/imageURLtest1",
     createProxyMiddleware({
       target: "https://dev.agriculturalproducts.store",
       changeOrigin: true,
@@ -73,6 +68,20 @@ module.exports = function (app) {
   );
   app.use(
     "/auth",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/posts",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/ImageURL1",
     createProxyMiddleware({
       target: "https://dev.agriculturalproducts.store",
       changeOrigin: true,
