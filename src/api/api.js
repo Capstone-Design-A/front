@@ -542,7 +542,6 @@ export const getCartItems = async (memberId, token) => {
 
 export const getPostItems = async (postId, token) => {
   const POST_ITEMS_ENDPOINT = "/posts";
-
   try {
     const response = await fetch(`${POST_ITEMS_ENDPOINT}/${postId}`, {
       method: "GET",
@@ -577,6 +576,26 @@ export const getPostItems = async (postId, token) => {
     console.error("Error fetching item detail:", error);
     throw error;
   }
+};
+
+export const createPost = async (token, mainImage, postContent) => {
+  const formData = new FormData();
+  formData.append("files", mainImage);
+  formData.append("request", JSON.stringify({ content: postContent }));
+
+  const response = await fetch("/auth/posts", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create post");
+  }
+
+  return response.json();
 };
 
 /*
@@ -803,7 +822,6 @@ export const login = async (loginId, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ loginId, password }),
-    mode: "no-cors",
   });
 
   if (!response.ok) {
