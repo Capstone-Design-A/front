@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { login } from "../api/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../components/shared/Container";
 import Label from "../components/shared/Label";
 import Input from "../components/shared/Input";
 import Button2 from "../components/button/Button2";
 import styles from "./LoginPage.module.css";
 
-const LoginPage = () => {
+const LoginPage = ({ onLogin }) => {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
   // eslint-disable-next-line
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,11 +20,10 @@ const LoginPage = () => {
 
     try {
       const { accessToken, refreshToken } = await login(loginId, password);
-      console.log("accessToken:", accessToken);
-      console.log("refreshToken:", refreshToken);
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-      console.log("토큰이 로컬 스토리지에 저장되었습니다.");
+      onLogin();
+      navigate("/");
       console.log("로그인 성공");
     } catch (error) {
       setError(`로그인 실패: ${error.message}`);

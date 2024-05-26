@@ -637,8 +637,8 @@ export const getOrderStatus = async (sellerId, page, size, token) => {
 */
 
 export const getDashboard = async (sellerId) => {
-  const DASHBOARD_ENDPOINT = "/seller";
-  const token = localStorage.getItem("JWT_TOKEN");
+  const DASHBOARD_ENDPOINT = "/auth/seller";
+  const token = localStorage.getItem("accessToken");
 
   try {
     const response = await fetch(
@@ -647,7 +647,7 @@ export const getDashboard = async (sellerId) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          "X-ACCESS-TOKEN": token,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -674,8 +674,9 @@ export const getDashboard = async (sellerId) => {
 };
 
 export const getOrderStatus = async (sellerId, page, size) => {
-  const ORDER_STATUS_ENDPOINT = "/seller/order-status";
-  const token = localStorage.getItem("JWT_TOKEN");
+  const ORDER_STATUS_ENDPOINT = "/auth/seller/order-status";
+  const token = localStorage.getItem("accessToken");
+  console.log("Access token being used:", token);
 
   try {
     const response = await fetch(
@@ -684,7 +685,7 @@ export const getOrderStatus = async (sellerId, page, size) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          "X-ACCESS-TOKEN": token,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -711,8 +712,8 @@ export const getOrderStatus = async (sellerId, page, size) => {
 };
 
 export const getSellerItemList = async (sellerId, page, size) => {
-  const SELLER_ITEM_LIST_ENDPOINT = "/seller/items";
-  const token = localStorage.getItem("JWT_TOKEN");
+  const SELLER_ITEM_LIST_ENDPOINT = "/auth/seller/items";
+  const token = localStorage.getItem("accessToken");
 
   try {
     const response = await fetch(
