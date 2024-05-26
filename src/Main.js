@@ -1,4 +1,4 @@
-// 최상위 컴포넌트
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./components/shared/App";
 import HomePage from "./pages/HomePage";
@@ -28,15 +28,40 @@ import SellerItemListPage from "./pages/SellerItemListPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function Main() {
-  const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoibG9naW5JZDI5IiwiaWF0IjoxNzE2MTA0MTIzLCJleHAiOjE3NDc2NDAxMjN9.P19eKG9RcGmDOkMmcf252ZoyeYCmizv1np2EiaHcPwo";
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    setIsLoggedIn(false);
+  };
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}>
+        <Route
+          path="/"
+          element={
+            <App
+              isLoggedIn={isLoggedIn}
+              onLogout={handleLogout}
+              onLogin={handleLogin}
+            />
+          }
+        >
           <Route index element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
+          <Route path="login" element={<LoginPage onLogin={handleLogin} />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="order" element={<OrderPage />} />
           <Route path="item" element={<ProductCategoryPage />} />
@@ -63,13 +88,13 @@ function Main() {
             path="registration-product"
             element={<ProductRegistrationPage />}
           />
-          <Route
-            path="auth/posts"
-            element={<PostRegistrationPage token={token} />}
-          />
+          <Route path="auth/posts" element={<PostRegistrationPage />} />
           <Route path="introduction" element={<SellerIntroductionPage />} />
-          <Route path="seller" element={<ManagementPage />} />
-          <Route path="seller/order-status" element={<SellerOrderListPage />} />
+          <Route path="/auth/seller" element={<ManagementPage />} />
+          <Route
+            path="/auth/seller/order-status"
+            element={<SellerOrderListPage />}
+          />
           <Route path="seller/items" element={<SellerItemListPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

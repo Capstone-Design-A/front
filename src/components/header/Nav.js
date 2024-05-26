@@ -1,4 +1,4 @@
-// 헤더(네비바) 컴포넌트
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Container from "../shared/Container";
 import Notifications from "./Notifications";
@@ -6,28 +6,48 @@ import logoImg from "../../assets/logoVer2.png";
 import styles from "./Nav.module.css";
 import SearchBar from "./SearchBar";
 
-function Nav() {
+function Nav({ isLoggedIn, onLogout }) {
   return (
     <div className={styles.nav}>
       <Container className={styles.container_top}>
         <ul className={styles.nav_top}>
-          <li>
-            <NavLink className={styles.font} to="/login">
-              로그인
-            </NavLink>
-          </li>
-          <li> | </li>
-          <li>
-            <NavLink to="/signup">회원가입</NavLink>
-          </li>
-          <li> | </li>
-          <li>
-            <NavLink to="/seller">판매자관리</NavLink>
-          </li>
-          <li> | </li>
-          <li>
-            <NavLink to="/signup">고객센터</NavLink>
-          </li>
+          {isLoggedIn ? (
+            <>
+              <li>
+                <NavLink className={styles.font} to="/" onClick={onLogout}>
+                  로그아웃
+                </NavLink>
+              </li>
+              <li> | </li>
+              <li>
+                <NavLink to="/auth/seller">판매자관리</NavLink>
+              </li>
+              <li> | </li>
+              <li>
+                <NavLink to="/support">고객센터</NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink className={styles.font} to="/login">
+                  로그인
+                </NavLink>
+              </li>
+              <li> | </li>
+              <li>
+                <NavLink to="/signup">회원가입</NavLink>
+              </li>
+              <li> | </li>
+              <li>
+                <NavLink to="/auth/seller">판매자관리</NavLink>
+              </li>
+              <li> | </li>
+              <li>
+                <NavLink to="/support">고객센터</NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </Container>
       <Container className={styles.container}>

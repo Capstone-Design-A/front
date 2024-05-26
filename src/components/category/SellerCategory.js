@@ -31,11 +31,14 @@ function SellerCategory({ page = 1, size = 1 }) {
             <div className={styles.line}>
               <HorizontalRule />
             </div>
-            <Link to={`/seller?seller-id=${sellerId}`} className={styles.link}>
+            <Link
+              to={`/auth/seller?seller-id=${sellerId}`}
+              className={styles.link}
+            >
               <h2 className={styles.title}>대시보드</h2>
             </Link>
             <Link
-              to={`/seller/order-status?seller-id=${sellerId}&page=${page}&size=${size}`}
+              to={`/auth/seller/order-status?seller-id=${sellerId}&page=${page}&size=${size}`}
               className={styles.link}
             >
               <h2 className={styles.title}>주문 현황</h2>
