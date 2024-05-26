@@ -5,7 +5,6 @@ import styles from "./SellerOrderListPage.module.css";
 
 function SellerOrderListPage() {
   const [products, setProducts] = useState([]);
-  const sellerId = "1";
   const page = 1;
   const size = 10;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
@@ -13,7 +12,7 @@ function SellerOrderListPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const orderStatus = await getOrderStatus(sellerId, page, size);
+        const orderStatus = await getOrderStatus(page, size);
         setProducts(orderStatus);
       } catch (error) {
         console.error("Error fetching order status list: ", error);
@@ -38,7 +37,7 @@ function SellerOrderListPage() {
         }`}
       >
         <div className={styles.categoryContent}>
-          <SellerCategory sellerId={sellerId} page={page} size={size} />
+          <SellerCategory page={page} size={size} />
         </div>
       </div>
       <div className={styles.container}>

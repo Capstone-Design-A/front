@@ -40,7 +40,7 @@ const UserProfile = ({ user }) => {
         />
         <div className={styles.userInfo}>
           <div className={styles.userHeader}>
-            <h1 className={styles.username}>{user.username}</h1>
+            <h1 className={styles.username}>{user.memberName}</h1>
             <button
               className={styles.subscribeButton}
               onClick={handleSubscribeClick}
@@ -51,10 +51,10 @@ const UserProfile = ({ user }) => {
           <p className={styles.subscriptionInfo}>
             <span>{user.subscriptionInfo}</span> 명이 구독하고 있어요
           </p>
-          <p className={styles.introduction}>{user.introduction}</p>
-          <p className={styles.content}>{user.content}</p>
+          <p className={styles.introduction}>{user.simpleIntro}</p>
+          <p className={styles.content}>{user.detailIntro}</p>
           <button className={styles.productButton}>
-            <p className={styles.product}>{user.product}</p>
+            <p className={styles.product}>{user.memberImageUrl}</p>
           </button>
           {errorMessage && <p className={styles.error}>{errorMessage}</p>}
         </div>

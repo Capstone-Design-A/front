@@ -7,6 +7,7 @@ import styles from "./SellerCategory.module.css";
 
 function SellerCategory({ page = 1, size = 1 }) {
   const sellerId = 1;
+  const memberId = 1;
   return (
     <>
       <Container>
@@ -38,13 +39,13 @@ function SellerCategory({ page = 1, size = 1 }) {
               <h2 className={styles.title}>대시보드</h2>
             </Link>
             <Link
-              to={`/auth/seller/order-status?seller-id=${sellerId}&page=${page}&size=${size}`}
+              to={`/auth/seller/order-status?page=${page}&size=${size}`}
               className={styles.link}
             >
               <h2 className={styles.title}>주문 현황</h2>
             </Link>
             <Link
-              to={`/seller/items?seller-id=${sellerId}?page=${page}&size=${size}`}
+              to={`/auth/seller/items?page=${page}&size=${size}`}
               className={styles.link}
             >
               <h2 className={styles.title}>판매 상품 관리</h2>
@@ -52,7 +53,7 @@ function SellerCategory({ page = 1, size = 1 }) {
             <div className={styles.line}>
               <HorizontalRule />
             </div>
-            <Link to={`/introduction`} className={styles.link}>
+            <Link to={`/intro/${memberId}`} className={styles.link}>
               <h2 className={styles.title}>소개 페이지</h2>
             </Link>
           </div>

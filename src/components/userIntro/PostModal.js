@@ -3,11 +3,10 @@ import HorizontalRule from "../../components/shared/HorizontalRule";
 import styles from "./PostModal.module.css";
 import { getPostItems } from "../../api/api";
 
-function PostModal({ token, onClose }) {
+function PostModal({ postId, token, onClose }) {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const postId = 253;
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -91,4 +90,5 @@ function PostModal({ token, onClose }) {
     </div>
   );
 }
+
 export default PostModal;

@@ -89,13 +89,13 @@ function Main() {
             element={<ProductRegistrationPage />}
           />
           <Route path="auth/posts" element={<PostRegistrationPage />} />
-          <Route path="introduction" element={<SellerIntroductionPage />} />
-          <Route path="/auth/seller" element={<ManagementPage />} />
+          <Route path="intro/:memberId" element={<SellerIntroductionPage />} />
+          <Route path="auth/seller" element={<ManagementPage />} />
           <Route
-            path="/auth/seller/order-status"
+            path="auth/seller/order-status"
             element={<SellerOrderListPage />}
           />
-          <Route path="seller/items" element={<SellerItemListPage />} />
+          <Route path="auth/seller/items" element={<SellerItemListPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

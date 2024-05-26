@@ -5,91 +5,38 @@ import PostModal from "../components/userIntro/PostModal";
 import styles from "./SellerIntroductionPage.module.css";
 import SellerCategory from "../components/category/SellerCategory";
 import Container from "../components/shared/Container";
+import { getSellerInfo, getPostList } from "../api/api";
 
 function SellerIntroductionPage() {
   const [userData, setUserData] = useState(null);
   const [postList, setPostList] = useState([]);
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPostId, setSelectedPostId] = useState(null);
+
+  const memberId = 1;
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async () => {
       try {
-        // mock 데이터
-        const userData = {
-          fromMemberId: 1,
-          username: "user123",
-          subscriptionInfo: "2.4천",
-          introduction: "한 줄 소개란입니다.",
-          content: "상세 소개란입니다.",
-          profilePicture: null,
-          product: "판매 중인 상품 보러가기",
-          isSubscribed: true,
-        };
-        setUserData(userData);
+        const sellerInfo = await getSellerInfo(memberId);
+        setUserData(sellerInfo);
+
+        const posts = await getPostList(memberId);
+        setPostList(posts.postPreviews);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    const fetchPostData = async () => {
-      try {
-        // mock 데이터
-        const postList = [
-          {
-            id: 1,
-            imageUrl: null,
-            content:
-              "첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.첫 번째 게시물입니다.",
-            createdAt: "2024.03.14",
-          },
-          {
-            id: 2,
-            imageUrl: null,
-            content: "두 번째 게시물입니다.",
-            createdAt: "2024.03.14",
-          },
-          {
-            id: 3,
-            imageUrl: null,
-            content: "세 번째 게시물입니다.",
-            createdAt: "2024.03.14",
-          },
-          {
-            id: 4,
-            imageUrl: null,
-            content: "네 번째 게시물입니다.",
-            createdAt: "2024.03.14",
-          },
-          {
-            id: 5,
-            imageUrl: null,
-            content: "다섯 번째 게시물입니다.",
-            createdAt: "2024.03.14",
-          },
-          {
-            id: 6,
-            imageUrl: null,
-            content: "여섯 번째 게시물입니다.",
-            createdAt: "2024.03.14",
-          },
-        ];
-        setPostList(postList);
-      } catch (error) {
-        console.error("Error fetching post data:", error);
-      }
-    };
-
-    fetchUserData();
-    fetchPostData();
+    fetchData();
   }, []);
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);
   };
 
-  const handlePostClick = (post) => {
-    setSelectedPost(post);
+  const handlePostClick = (postId) => {
+    setSelectedPostId(postId);
   };
 
   return (
@@ -118,7 +65,7 @@ function SellerIntroductionPage() {
               </div>
             </div>
             <div className={styles.count}>
-              <h1>게시물 {postList.length}개</h1>
+              <h1>게시물 {userData && userData.numberPosts}개</h1>
             </div>
             <div className={styles.postListTitle}>
               <PostList postList={postList} onPostClick={handlePostClick} />
@@ -126,11 +73,14 @@ function SellerIntroductionPage() {
           </div>
         </Container>
       </div>
-      {selectedPost && (
-        <div className={styles.backdrop} onClick={() => setSelectedPost(null)}>
+      {selectedPostId && (
+        <div
+          className={styles.backdrop}
+          onClick={() => setSelectedPostId(null)}
+        >
           <PostModal
-            post={selectedPost}
-            onClose={() => setSelectedPost(null)}
+            postId={selectedPostId}
+            onClose={() => setSelectedPostId(null)}
           />
         </div>
       )}

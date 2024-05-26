@@ -636,21 +636,18 @@ export const getOrderStatus = async (sellerId, page, size, token) => {
 };
 */
 
-export const getDashboard = async (sellerId) => {
+export const getDashboard = async () => {
   const DASHBOARD_ENDPOINT = "/auth/seller";
   const token = localStorage.getItem("accessToken");
 
   try {
-    const response = await fetch(
-      `${DASHBOARD_ENDPOINT}?seller-id=${sellerId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await fetch(`${DASHBOARD_ENDPOINT}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -673,14 +670,14 @@ export const getDashboard = async (sellerId) => {
   }
 };
 
-export const getOrderStatus = async (sellerId, page, size) => {
+export const getOrderStatus = async (page, size) => {
   const ORDER_STATUS_ENDPOINT = "/auth/seller/order-status";
   const token = localStorage.getItem("accessToken");
-  console.log("Access token being used:", token);
+  console.log("Access token: ", token);
 
   try {
     const response = await fetch(
-      `${ORDER_STATUS_ENDPOINT}?seller-id=${sellerId}&page=${page}&size=${size}`,
+      `${ORDER_STATUS_ENDPOINT}?page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
@@ -711,18 +708,18 @@ export const getOrderStatus = async (sellerId, page, size) => {
   }
 };
 
-export const getSellerItemList = async (sellerId, page, size) => {
+export const getSellerItemList = async (page, size) => {
   const SELLER_ITEM_LIST_ENDPOINT = "/auth/seller/items";
   const token = localStorage.getItem("accessToken");
 
   try {
     const response = await fetch(
-      `${SELLER_ITEM_LIST_ENDPOINT}?seller-id=${sellerId}&page=${page}&size=${size}`,
+      `${SELLER_ITEM_LIST_ENDPOINT}?page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          "X-ACCESS-TOKEN": token,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -891,4 +888,104 @@ export const fetchWithAuth = async (url, options = {}) => {
   }
 
   return response.json();
+};
+
+export const convertToSeller = async () => {
+  const CONVERT_TO_SELLER_ENDPOINT = "/auth/member/to-seller";
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(CONVERT_TO_SELLER_ENDPOINT, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result;
+    console.log("Converted to seller: ", result);
+    return result;
+  } catch (error) {
+    console.error("Error converting to seller:", error);
+    throw error;
+  }
+};
+
+export const getSellerInfo = async (memberId) => {
+  const SELLER_INFO_ENDPOINT = "/intro";
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(`${SELLER_INFO_ENDPOINT}/${memberId}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result;
+    return result;
+  } catch (error) {
+    console.error("Error fetching seller info:", error);
+    throw error;
+  }
+};
+
+export const getPostList = async (memberId) => {
+  const POST_LIST_ENDPOINT = "/intro";
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(`${POST_LIST_ENDPOINT}/${memberId}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result;
+    return result;
+  } catch (error) {
+    console.error("Error fetching post list:", error);
+    throw error;
+  }
 };
