@@ -80,4 +80,18 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    "/intro",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/ImageURL1",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
 };
