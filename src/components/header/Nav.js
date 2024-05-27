@@ -63,7 +63,7 @@ function Nav({ isLoggedIn, onLogout }) {
           </li>
           <li> | </li>
           <li>
-            <NavLink to="/cart">장바구니</NavLink>
+            <NavLink to="/auth/cart">장바구니</NavLink>
           </li>
           <li className={styles.user}>
             <Notifications />

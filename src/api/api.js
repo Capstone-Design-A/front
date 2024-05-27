@@ -540,6 +540,31 @@ export const getCartItems = async (memberId, token) => {
   }
 };
 
+export const addToCart = async (itemId, quantity) => {
+  const ADD_TO_CART_ENDPOINT = "/auth/cart";
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(ADD_TO_CART_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ itemId, quantity }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to add item to cart");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error adding item to cart:", error);
+    throw error;
+  }
+};
+
 export const getSellerInfo = async (memberId) => {
   const SELLER_INFO_ENDPOINT = "/intro";
 
