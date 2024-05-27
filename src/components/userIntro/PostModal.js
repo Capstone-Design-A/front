@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import HorizontalRule from "../../components/shared/HorizontalRule";
 import styles from "./PostModal.module.css";
-import { getPostItems } from "../../api/api";
+import { getPostItems, deletePost } from "../../api/api";
 
-function PostModal({ postId, token, onClose }) {
+function PostModal({ postId, token, onClose, onDelete }) {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -37,6 +38,19 @@ function PostModal({ postId, token, onClose }) {
         (prevIndex) =>
           (prevIndex - 1 + post.imageUrlList.length) % post.imageUrlList.length
       );
+    }
+  };
+
+  const handleDeletePost = async () => {
+    setIsDeleting(true);
+    try {
+      const result = await deletePost(postId, token);
+      console.log("게시물이 삭제되었습니다.", result);
+      onDelete(postId);
+      onClose();
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      setIsDeleting(false);
     }
   };
 
@@ -73,7 +87,16 @@ function PostModal({ postId, token, onClose }) {
           </button>
         </div>
         <div className={styles.content}>
-          <p className={styles.postCreatedAt}>작성일 {createdAt}</p>
+          <div className={styles.header}>
+            <p className={styles.postCreatedAt}>작성일 {createdAt}</p>
+            <button
+              className={styles.deleteButton}
+              onClick={handleDeletePost}
+              disabled={isDeleting}
+            >
+              {isDeleting ? "삭제 중..." : "삭제"}
+            </button>
+          </div>
           <div className={styles.line}>
             <HorizontalRule />
           </div>
