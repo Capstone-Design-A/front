@@ -39,6 +39,13 @@ function SellerIntroductionPage() {
     setSelectedPostId(postId);
   };
 
+  const handlePostDelete = (deletedPostId) => {
+    setPostList((prevPosts) =>
+      prevPosts.filter((post) => post.postId !== deletedPostId)
+    );
+    setSelectedPostId(null);
+  };
+
   return (
     <>
       <div className={styles.pageContainer}>
@@ -80,7 +87,9 @@ function SellerIntroductionPage() {
         >
           <PostModal
             postId={selectedPostId}
+            token={localStorage.getItem("accessToken")}
             onClose={() => setSelectedPostId(null)}
+            onDelete={handlePostDelete}
           />
         </div>
       )}

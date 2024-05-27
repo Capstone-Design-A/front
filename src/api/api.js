@@ -540,6 +540,68 @@ export const getCartItems = async (memberId, token) => {
   }
 };
 
+export const getSellerInfo = async (memberId) => {
+  const SELLER_INFO_ENDPOINT = "/intro";
+
+  try {
+    const response = await fetch(`${SELLER_INFO_ENDPOINT}/${memberId}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result;
+    return result;
+  } catch (error) {
+    console.error("Error fetching seller info:", error);
+    throw error;
+  }
+};
+
+export const getPostList = async (memberId) => {
+  const POST_LIST_ENDPOINT = "/intro";
+
+  try {
+    const response = await fetch(`${POST_LIST_ENDPOINT}/${memberId}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result;
+    return result;
+  } catch (error) {
+    console.error("Error fetching post list:", error);
+    throw error;
+  }
+};
+
 export const getPostItems = async (postId, token) => {
   const POST_ITEMS_ENDPOINT = "/posts";
   try {
@@ -578,63 +640,61 @@ export const getPostItems = async (postId, token) => {
   }
 };
 
-export const createPost = async (token, mainImage, postContent) => {
+export const createPost = async (mainImage, postContent) => {
+  const CREATE_POST_ENDPOINT = "/auth/posts";
+  const token = localStorage.getItem("accessToken");
+
   const formData = new FormData();
-  formData.append("files", mainImage);
-  formData.append("request", JSON.stringify({ content: postContent }));
-
-  const response = await fetch("/auth/posts", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: formData,
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to create post");
-  }
-
-  return response.json();
-};
-
-/*
-export const getOrderStatus = async (sellerId, page, size, token) => {
-  const ORDER_STATUS_ENDPOINT = "/seller/order-status";
+  formData.append("files", mainImage, mainImage.name);
+  formData.append(
+    "request",
+    new Blob([JSON.stringify({ content: postContent })], {
+      type: "application/json",
+    })
+  );
 
   try {
-    const response = await fetch(
-      `${ORDER_STATUS_ENDPOINT}?seller-id=${sellerId}&page=${page}&size=${size}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "X-ACCESS-TOKEN": token,
-        },
-      }
-    );
+    const response = await fetch(CREATE_POST_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error("Failed to create post");
     }
 
-    const responseData = await response.json();
-
-    if (!responseData.isSuccess) {
-      throw new Error(
-        `API error! code: ${responseData.code}, message: ${responseData.message}`
-      );
-    }
-
-    const result = responseData.result.orderItemStatusList;
-    console.log("Order-status:", result);
-    return result;
+    return response.json();
   } catch (error) {
-    console.error("Error fetching item detail:", error);
+    console.error("Error creating post:", error);
     throw error;
   }
 };
-*/
+
+export const deletePost = async (postId) => {
+  const DELETE_POST_ENDPOINT = `/auth/posts/${postId}`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(DELETE_POST_ENDPOINT, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete post");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    throw error;
+  }
+};
 
 export const getDashboard = async () => {
   const DASHBOARD_ENDPOINT = "/auth/seller";
@@ -920,72 +980,6 @@ export const convertToSeller = async () => {
     return result;
   } catch (error) {
     console.error("Error converting to seller:", error);
-    throw error;
-  }
-};
-
-export const getSellerInfo = async (memberId) => {
-  const SELLER_INFO_ENDPOINT = "/intro";
-  const token = localStorage.getItem("accessToken");
-
-  try {
-    const response = await fetch(`${SELLER_INFO_ENDPOINT}/${memberId}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const responseData = await response.json();
-
-    if (!responseData.isSuccess) {
-      throw new Error(
-        `API error! code: ${responseData.code}, message: ${responseData.message}`
-      );
-    }
-
-    const result = responseData.result;
-    return result;
-  } catch (error) {
-    console.error("Error fetching seller info:", error);
-    throw error;
-  }
-};
-
-export const getPostList = async (memberId) => {
-  const POST_LIST_ENDPOINT = "/intro";
-  const token = localStorage.getItem("accessToken");
-
-  try {
-    const response = await fetch(`${POST_LIST_ENDPOINT}/${memberId}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const responseData = await response.json();
-
-    if (!responseData.isSuccess) {
-      throw new Error(
-        `API error! code: ${responseData.code}, message: ${responseData.message}`
-      );
-    }
-
-    const result = responseData.result;
-    return result;
-  } catch (error) {
-    console.error("Error fetching post list:", error);
     throw error;
   }
 };
