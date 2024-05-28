@@ -27,34 +27,46 @@
   font-weight: 700;
 }
 
-/* 폰트 색상 #fff 적용해야 함 */
 .home {
-  padding: 10px 10px 10px 30px;
-  color: #fff !important;
-  font-size: 18px;
-  font-weight: 700;
-  background-color: rgba(108, 93, 211, 0.4);
-  width: 170px;
-  border-radius: 8px;
-  opacity: 60%;
-}
-
-button {
-  background-color: rgba(108, 93, 211, 0);
-  border-style: hidden;
-  cursor: pointer;
+  margin-top: 0px;
   color: #fff;
+  padding: 12px 10px 12px 30px;
   font-size: 18px;
+  font-weight: 500;
+  background-color: rgb(177, 172, 245);
+  width: 170px;
+  border-radius: 0px 0px 8px 8px;
+  opacity: 100%;
 }
 
 .title:hover {
-  background-color: rgba(108, 93, 211, 0.4);
+  background-color: rgb(177, 172, 245);
   border-radius: 10px;
-  margin: 5px;
+  width: 90%;
+  transition: background-color 0.3s ease;
+}
+
+.homeIntro {
+  margin-top: 0px;
+  color: #fff;
+  padding: 12px 10px 12px 30px;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: rgb(179, 197, 187);
+  width: 170px;
+  border-radius: 0px 0px 8px 8px;
+  opacity: 100%;
+}
+
+.titleIntro:hover {
+  background-color: rgb(179, 197, 187);
+  border-radius: 10px;
   width: 90%;
 }
 
 .line {
   margin-top: 20px;
   margin-bottom: 20px;
+  margin-right: 12px;
+  opacity: 70%;
 }

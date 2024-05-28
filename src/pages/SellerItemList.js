@@ -4,7 +4,7 @@ import { getSellerItemList } from "../api/api";
 import SellerCategory from "../components/category/SellerCategory";
 import styles from "./SellerItemListPage.module.css";
 
-function SellerItemListPage() {
+function SellerItemList() {
   const [products, setProducts] = useState([]);
   const sellerId = "1";
   const page = 1;
@@ -45,8 +45,8 @@ function SellerItemListPage() {
       <div className={styles.container}>
         <div className={styles.title}>
           <h1>판매 상품 관리</h1>
-          <Link to="/registration-product">
-            <button className={styles.addButton}>상품 등록하기</button>
+          <Link to="/auth/seller/items?page=1&size=10">
+            <h1> > </h1>
           </Link>
         </div>
         <div className={styles.table}>
@@ -108,4 +108,4 @@ function SellerItemListPage() {
   );
 }
 
-export default SellerItemListPage;
+export default SellerItemList;

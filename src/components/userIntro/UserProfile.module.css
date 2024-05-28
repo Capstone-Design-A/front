@@ -68,6 +68,11 @@
   width: 400px;
 }
 
+.productButton {
+  background-color: #fff;
+  border: none;
+}
+
 .product {
   font-weight: 500;
   color: #494949;

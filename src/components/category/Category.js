@@ -48,8 +48,10 @@ function Category() {
             ))}
           </div>
         </div>
-        <div className={styles.home}>
-          <Link to="/">홈으로</Link>
+        <div>
+          <Link to="/">
+            <h1 className={styles.home}>홈으로</h1>
+          </Link>
         </div>
       </Container>
     </>
