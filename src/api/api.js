@@ -352,6 +352,7 @@ export const getSubscriptionItems = async (
   }
 };
 
+/*
 export const getItemDetail = async (itemId, token) => {
   const ITEM_DETAIL_ENDPOINT = "/item";
 
@@ -384,6 +385,57 @@ export const getItemDetail = async (itemId, token) => {
     console.log("ItemDetail:", result);
 
     return result;
+  } catch (error) {
+    console.error("Error fetching item detail:", error);
+    throw error;
+  }
+};
+*/
+
+export const getItemDetail = async (itemId, token) => {
+  const ITEM_DETAIL_ENDPOINT = "/item";
+
+  try {
+    const response = await fetch(`${ITEM_DETAIL_ENDPOINT}/${itemId}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "X-ACCESS-TOKEN": token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const { result } = responseData;
+
+    const imageUrls = result.imageUrl.map((image) => image.imageUrl);
+
+    const itemDetail = {
+      id: result.id,
+      memberId: result.memberId,
+      name: result.name,
+      category: result.category,
+      stock: result.stock,
+      price: result.price,
+      discountPrice: result.discountPrice,
+      imageUrls: imageUrls,
+      deadline: result.deadline,
+      itemDetailsImageUrl: result.itemDetailsImageUrl,
+    };
+
+    console.log("ItemDetail:", itemDetail);
+
+    return itemDetail;
   } catch (error) {
     console.error("Error fetching item detail:", error);
     throw error;
@@ -826,19 +878,18 @@ export const getSellerItemList = async (page, size) => {
   }
 };
 
-export const subscribe = async (fromMemberId, toMemberId) => {
-  const SUBSCRIBE_ENDPOINT = `/subscription/${toMemberId}`;
+export const subscribe = async (toMemberId) => {
+  const SUBSCRIBE_ENDPOINT = `/auth/subscription/${toMemberId}`;
+  const token = localStorage.getItem("accessToken");
 
   try {
-    const response = await fetch(
-      `${SUBSCRIBE_ENDPOINT}?from-member-id=${fromMemberId}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${SUBSCRIBE_ENDPOINT}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -847,19 +898,18 @@ export const subscribe = async (fromMemberId, toMemberId) => {
   }
 };
 
-export const unsubscribe = async (fromMemberId, toMemberId) => {
-  const SUBSCRIBE_ENDPOINT = `/subscription/${toMemberId}`;
+export const unsubscribe = async (toMemberId) => {
+  const SUBSCRIBE_ENDPOINT = `/auth/subscription/${toMemberId}`;
+  const token = localStorage.getItem("accessToken");
 
   try {
-    const response = await fetch(
-      `${SUBSCRIBE_ENDPOINT}?from-member-id=${fromMemberId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${SUBSCRIBE_ENDPOINT}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     return data;
   } catch (error) {

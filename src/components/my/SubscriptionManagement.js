@@ -16,6 +16,7 @@ const mockData = [
 ];
 
 function SubscriptionManagement() {
+  // eslint-disable-next-line
   const [sellers, setSellers] = useState(mockData);
 
   return (

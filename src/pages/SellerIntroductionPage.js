@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import UserProfile from "../components/userIntro/UserProfile";
 import PostList from "../components/userIntro/PostList";
 import PostModal from "../components/userIntro/PostModal";
@@ -8,12 +9,11 @@ import Container from "../components/shared/Container";
 import { getSellerInfo, getPostList } from "../api/api";
 
 function SellerIntroductionPage() {
+  const { memberId } = useParams();
   const [userData, setUserData] = useState(null);
   const [postList, setPostList] = useState([]);
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
-
-  const memberId = 1;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +29,7 @@ function SellerIntroductionPage() {
     };
 
     fetchData();
-  }, []);
+  }, [memberId]);
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);
