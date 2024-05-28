@@ -3,7 +3,7 @@ import UserProfile from "../components/userIntro/UserProfile";
 import PostList from "../components/userIntro/PostList";
 import PostModal from "../components/userIntro/PostModal";
 import styles from "./SellerIntroductionPage.module.css";
-import SellerCategory from "../components/category/SellerCategory";
+import SellerIntroCategory from "../components/category/SellerIntroCategory";
 import Container from "../components/shared/Container";
 import { getSellerInfo, getPostList } from "../api/api";
 
@@ -61,7 +61,7 @@ function SellerIntroductionPage() {
           }`}
         >
           <div className={styles.categoryContent}>
-            <SellerCategory />
+            <SellerIntroCategory />
           </div>
         </div>
         <Container>

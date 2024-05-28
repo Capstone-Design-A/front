@@ -154,7 +154,6 @@ export const getItemsByCategory = async (categoryId, page, size, token) => {
 
 export const getCategories = async () => {
   try {
-    // api 연결 전 카테고리 데이터 - "기타" 항목 추가
     const categories = [
       { id: 1, name: "채소" },
       { id: 2, name: "과일" },
@@ -747,7 +746,6 @@ export const getDashboard = async () => {
     }
 
     const result = responseData.result;
-    console.log("dashboard: ", result);
     return result;
   } catch (error) {
     console.error("Error fetching item detail:", error);
@@ -785,7 +783,6 @@ export const getOrderStatus = async (page, size) => {
     }
 
     const result = responseData.result.orderItemStatusList;
-    console.log("seller order status: ", result);
     return result;
   } catch (error) {
     console.error("Error fetching item detail:", error);
@@ -822,7 +819,6 @@ export const getSellerItemList = async (page, size) => {
     }
 
     const result = responseData.result.salesItemList;
-    console.log("seller item list:", result);
     return result;
   } catch (error) {
     console.error("Error fetching item detail:", error);
