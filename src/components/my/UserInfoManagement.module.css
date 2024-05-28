@@ -34,7 +34,6 @@
 
 .formGroup input[type="text"],
 .formGroup input[type="email"],
-.formGroup input[type="password"],
 .formGroup select {
   padding: 10px;
   border: 1px solid #ccc;
@@ -42,6 +41,16 @@
   font-size: 16px;
   width: 100%;
   box-sizing: border-box;
+}
+
+.formGroup input[type="password"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 .formGroup input[type="checkbox"] {
