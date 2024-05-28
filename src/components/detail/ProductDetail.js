@@ -53,7 +53,7 @@ function ProductDetail({ item }) {
         <Container className={styles.content}>
           <div className={styles.image}>
             <img className={styles.img} src={item.imageUrl} alt={item.name} />
-            <Link to="/introduction">
+            <Link to={`/intro/${item.memberId}`}>
               <button className={styles.button}>판매자 소개 바로가기</button>
             </Link>
           </div>
