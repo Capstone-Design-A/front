@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.container h2 {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+.sellerGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.sellerCard {
+  text-align: center;
+  width: calc(20% - 20px);
+  text-decoration: none;
+  color: inherit;
+}
+
+.profileImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sellerName {
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .sellerCard {
+    width: calc(25% - 20px);
+  }
+}
+
+@media (max-width: 900px) {
+  .sellerCard {
+    width: calc(33.33% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .sellerCard {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 400px) {
+  .sellerCard {
+    width: calc(100% - 20px);
+  }
+}
