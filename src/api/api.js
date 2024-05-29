@@ -878,6 +878,27 @@ export const getSellerItemList = async (page, size) => {
   }
 };
 
+export const getSubscriptionStatus = async (toMemberId) => {
+  const SUBSCRIPTION_STATUS_ENDPOINT = `/auth/subscription/check/${toMemberId}`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(`${SUBSCRIPTION_STATUS_ENDPOINT}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    console.log("subscription status:", result);
+    return result;
+  } catch (error) {
+    console.error("Error checking subscription status:", error);
+    throw error;
+  }
+};
+
 export const subscribe = async (toMemberId) => {
   const SUBSCRIBE_ENDPOINT = `/auth/subscription/${toMemberId}`;
   const token = localStorage.getItem("accessToken");
@@ -890,8 +911,9 @@ export const subscribe = async (toMemberId) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    const data = await response.json();
-    return data;
+    const result = await response.json();
+    console.log("subscribe:", result);
+    return result;
   } catch (error) {
     console.error("Error subscribing:", error);
     throw error;
@@ -910,8 +932,9 @@ export const unsubscribe = async (toMemberId) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    const data = await response.json();
-    return data;
+    const result = await response.json();
+    console.log("unsubscribe:", result);
+    return result;
   } catch (error) {
     console.error("Error unsubscribing:", error);
     throw error;

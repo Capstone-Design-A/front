@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import Modal from "../components/shared/Modal";
 import styles from "./ProductRegistrationPage.module.css";
 
 function ProductRegistrationPage() {
@@ -174,20 +173,6 @@ function ProductRegistrationPage() {
           상품 등록
         </button>
       </form>
-      {/*
-      <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
-        <div className={styles.modalContent}>
-          <h2>경고</h2>
-          <p>모든 필수 항목을 입력하세요.</p>
-          <button
-            className={styles.modalButton}
-            onClick={() => setModalIsOpen(false)}
-          >
-            확인
-          </button>
-        </div>
-      </Modal>
-        */}
     </div>
   );
 }
