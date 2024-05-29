@@ -45,7 +45,7 @@ function SellerItemListPage() {
       <div className={styles.container}>
         <div className={styles.title}>
           <h1>판매 상품 관리</h1>
-          <Link to="/registration-product">
+          <Link to="/auth/item">
             <button className={styles.addButton}>상품 등록하기</button>
           </Link>
         </div>

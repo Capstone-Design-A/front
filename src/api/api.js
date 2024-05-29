@@ -878,6 +878,65 @@ export const getSellerItemList = async (page, size) => {
   }
 };
 
+export const registerItem = async (
+  itemName,
+  simpleExplanation,
+  categoryId,
+  price,
+  stock,
+  deliveryPrice,
+  deadLine,
+  isGroupPurchase,
+  targetQuantity,
+  groupPurchasePrice,
+  itemImages,
+  itemDetailsImage
+) => {
+  const REGISTER_ITEM_ENDPOINT = "/auth/item";
+  const token = localStorage.getItem("accessToken");
+
+  const formData = new FormData();
+  formData.append("itemImages", itemImages, itemImages.name);
+  formData.append("itemDetailsImage", itemDetailsImage, itemDetailsImage.name);
+
+  const requestObject = {
+    itemName: itemName,
+    simpleExplanation: simpleExplanation,
+    categoryId: categoryId,
+    price: price,
+    stock: stock,
+    deliveryPrice: deliveryPrice,
+    deadLine: deadLine,
+    isGroupPurchase: isGroupPurchase,
+    targetQuantity: targetQuantity,
+    groupPurchasePrice: groupPurchasePrice,
+  };
+
+  formData.append(
+    "request",
+    new Blob([JSON.stringify(requestObject)], { type: "application/json" })
+  );
+
+  try {
+    const response = await fetch(REGISTER_ITEM_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to register item");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error registering item:", error);
+    throw error;
+  }
+};
+
 export const getSubscriptionStatus = async (toMemberId) => {
   const SUBSCRIPTION_STATUS_ENDPOINT = `/auth/subscription/check/${toMemberId}`;
   const token = localStorage.getItem("accessToken");
