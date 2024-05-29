@@ -83,11 +83,8 @@ function Main() {
           <Route path="inquiry" element={<InquiryListPage />} />
           <Route path="review" element={<ReviewListPage />} />
           <Route path="my" element={<MyPage />} />
-          <Route path="/auth/cart" element={<CartPage />} />
-          <Route
-            path="registration-product"
-            element={<ProductRegistrationPage />}
-          />
+          <Route path="auth/cart" element={<CartPage />} />
+          <Route path="auth/item" element={<ProductRegistrationPage />} />
           <Route path="auth/posts" element={<PostRegistrationPage />} />
           <Route path="intro/:memberId" element={<SellerIntroductionPage />} />
           <Route path="auth/seller" element={<ManagementPage />} />
