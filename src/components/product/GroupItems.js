@@ -1,4 +1,3 @@
-// 공동 구매 상품 목록
 import React from "react";
 import Container from "../shared/Container";
 import ProductGroupItem from "./ProductGroupItem";

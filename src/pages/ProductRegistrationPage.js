@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./ProductRegistrationPage.module.css";
 import { registerItem } from "../api/api";
 
@@ -16,45 +17,45 @@ function ProductRegistrationPage() {
   const [itemImages, setItemImages] = useState(null);
   const [itemDetailsImage, setItemDetailsImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const request = new FormData();
-    request.append("itemName", itemName);
-    request.append("simpleExplanation", simpleExplanation);
-    request.append("categoryId", categoryId);
-    request.append("price", price);
-    request.append("stock", stock);
-    request.append("deliveryPrice", deliveryPrice);
-    request.append("deadLine", deadline);
-    request.append("isGroupPurchase", isGroupPurchase);
-    if (isGroupPurchase) {
-      request.append("targetQuantity", targetQuantity);
-      request.append("groupPurchasePrice", groupPurchasePrice);
+    if (
+      !itemName ||
+      !simpleExplanation ||
+      !categoryId ||
+      !price ||
+      !stock ||
+      !deliveryPrice ||
+      !deadline ||
+      !itemImages ||
+      !itemDetailsImage ||
+      (isGroupPurchase && (!targetQuantity || !groupPurchasePrice))
+    ) {
+      setErrorMessage("모든 필수 항목을 입력하세요.");
+      return;
     }
-    request.append("itemImages", itemImages, itemImages.name);
-    request.append("itemDetailsImage", itemDetailsImage, itemDetailsImage.name);
 
     try {
       const result = await registerItem(
         itemName,
         simpleExplanation,
-        categoryId,
-        price,
-        stock,
-        deliveryPrice,
+        parseInt(categoryId),
+        parseInt(price),
+        parseInt(stock),
+        parseInt(deliveryPrice),
         deadline,
         isGroupPurchase,
-        targetQuantity,
-        groupPurchasePrice,
+        parseInt(targetQuantity),
+        parseInt(groupPurchasePrice),
         itemImages,
-        itemDetailsImage,
-        request
+        itemDetailsImage
       );
       if (result.isSuccess) {
         console.log("상품이 등록되었습니다:", result);
         setErrorMessage("");
+        navigate("/auth/seller/items?page=1&size=10");
       } else {
         setErrorMessage(result.message);
       }

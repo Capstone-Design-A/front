@@ -21,7 +21,7 @@ function ProductGroupPage() {
           null,
           "JWT_TOKEN"
         );
-        // 더보기 버튼 클릭 시 기존 데이터 유지
+        // 더보기 버튼 클릭 시 기존 데이터 유지 - 수정 필요
         setProducts((prevProducts) => [...prevProducts, ...fetchedProducts]);
       } catch (error) {
         console.error("Error fetching products:", error);
