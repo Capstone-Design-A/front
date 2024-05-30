@@ -201,15 +201,21 @@ export const getGroupItems = async (page, size, keyword, token) => {
     let items = responseData.result.groupItemList;
 
     if (keyword) {
-      items = items.filter((item) =>
-        item.item.name.toLowerCase().includes(keyword.toLowerCase())
+      items = items.filter((groupItem) =>
+        groupItem.item.name.toLowerCase().includes(keyword.toLowerCase())
       );
     }
 
-    items = items.map((item) => ({
-      ...item.item,
-      targetQuantity: item.targetQuantity,
-      discountPrice: item.discountPrice,
+    items = items.map((groupItem) => ({
+      id: groupItem.id,
+      name: groupItem.item.name,
+      category: groupItem.item.category,
+      stock: groupItem.item.stock,
+      price: groupItem.item.price,
+      discountPrice: groupItem.discountPrice,
+      imageUrl: groupItem.item.imageUrl,
+      deadline: groupItem.item.deadline,
+      targetQuantity: groupItem.targetQuantity,
     }));
 
     return items;
@@ -474,6 +480,7 @@ export const getGroupItemDetail = async (itemId, token) => {
     console.log("GroupItemDetail:", result);
 
     return {
+      id: result.id,
       item: result.item,
       orderSum: result.orderSum,
       targetQuantity: result.targetQuantity,

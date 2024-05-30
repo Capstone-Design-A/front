@@ -1,4 +1,3 @@
-// 공동 구매 상품 아이템 컴포넌트
 import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../shared/Card";
@@ -48,9 +47,11 @@ function ProductGroupItem({
               <p className={styles.price}>
                 {price.toLocaleString()}
                 <span className={styles.won}>원</span>
-                <span className={styles.origin}>
-                  {discountPrice.toLocaleString()}원
-                </span>
+                {discountPrice && (
+                  <span className={styles.origin}>
+                    {discountPrice.toLocaleString()}원
+                  </span>
+                )}
               </p>
             )}
           </div>
