@@ -1,5 +1,6 @@
 const BASE_URL = "https://dev.agriculturalproducts.store";
 
+// 메인 섹션
 export const getSearchItems = async (page, size, keyword, token) => {
   const SEARCH_ITEMS_ENDPOINT = "/item/search";
 
@@ -358,46 +359,6 @@ export const getSubscriptionItems = async (
   }
 };
 
-/*
-export const getItemDetail = async (itemId, token) => {
-  const ITEM_DETAIL_ENDPOINT = "/item";
-
-  try {
-    const response = await fetch(`${ITEM_DETAIL_ENDPOINT}/${itemId}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "X-ACCESS-TOKEN": token,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const responseData = await response.json();
-
-    if (!responseData.isSuccess) {
-      throw new Error(
-        `API error! code: ${responseData.code}, message: ${responseData.message}`
-      );
-    }
-
-    const { result } = responseData;
-
-    const imageUrls = result.imageUrl.map((image) => image.imageUrl);
-
-    result.imageUrls = imageUrls;
-    console.log("ItemDetail:", result);
-
-    return result;
-  } catch (error) {
-    console.error("Error fetching item detail:", error);
-    throw error;
-  }
-};
-*/
-
 export const getItemDetail = async (itemId, token) => {
   const ITEM_DETAIL_ENDPOINT = "/item";
 
@@ -623,6 +584,7 @@ export const addToCart = async (itemId, quantity) => {
   }
 };
 
+// 판매자 소개 섹션
 export const getSellerInfo = async (memberId) => {
   const SELLER_INFO_ENDPOINT = "/intro";
 
@@ -779,6 +741,7 @@ export const deletePost = async (postId) => {
   }
 };
 
+// 판매자 관리 섹션
 export const getDashboard = async () => {
   const DASHBOARD_ENDPOINT = "/auth/seller";
   const token = localStorage.getItem("accessToken");
@@ -980,6 +943,7 @@ export const registerItem = async (
   }
 };
 
+// 소비자 개인 섹션
 export const getSubscriptionStatus = async (toMemberId) => {
   const SUBSCRIPTION_STATUS_ENDPOINT = `/auth/subscription/check/${toMemberId}`;
   const token = localStorage.getItem("accessToken");
@@ -1043,32 +1007,41 @@ export const unsubscribe = async (toMemberId) => {
   }
 };
 
-/* 로그인 구현 후 구독 상태 관리 필요 시 사용
-export const checkSubscription = async (fromMemberId, toMemberId) => {
-  const SUBSCRIBE_ENDPOINT = `/subscription/${toMemberId}`;
+export const getUserOrderStatus = async (orderId) => {
+  const ORDER_STATUS_ENDPOINT = `/auth/member/order/${orderId}`;
+  const token = localStorage.getItem("accessToken");
+  console.log("Access token: ", token);
 
   try {
-    const response = await fetch(
-      `${SUBSCRIBE_ENDPOINT}?from-member-id=${fromMemberId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await response.json();
+    const response = await fetch(`${ORDER_STATUS_ENDPOINT}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     if (!response.ok) {
-      throw new Error(data.message || "Failed to check subscription status");
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return data;
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result;
+    return result;
   } catch (error) {
-    console.error("Error checking subscription status:", error);
+    console.error("Error fetching order status:", error);
     throw error;
   }
 };
-*/
 
+// auth
 export const login = async (loginId, password) => {
   const response = await fetch(`${BASE_URL}/login`, {
     method: "POST",

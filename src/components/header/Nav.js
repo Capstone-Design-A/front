@@ -59,7 +59,7 @@ function Nav({ isLoggedIn, onLogout }) {
         </div>
         <ul className={styles.nav_bottom}>
           <li>
-            <NavLink to="/my">마이 페이지</NavLink>
+            <NavLink to="/auth/member">마이 페이지</NavLink>
           </li>
           <li> | </li>
           <li>
