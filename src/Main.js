@@ -62,7 +62,7 @@ function Main() {
         >
           <Route index element={<HomePage />} />
           <Route path="login" element={<LoginPage onLogin={handleLogin} />} />
-          <Route path="signup" element={<SignUpPage />} />
+          <Route path="member/signUp" element={<SignUpPage />} />
           <Route path="order" element={<OrderPage />} />
           <Route path="item" element={<ProductCategoryPage />} />
           <Route path="item/search" element={<ProductSearchPage />} />

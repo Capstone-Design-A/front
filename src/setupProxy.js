@@ -87,4 +87,18 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    "/member",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/tempMember",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
 };

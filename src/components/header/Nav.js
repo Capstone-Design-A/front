@@ -36,7 +36,7 @@ function Nav({ isLoggedIn, onLogout }) {
               </li>
               <li> | </li>
               <li>
-                <NavLink to="/signup">회원가입</NavLink>
+                <NavLink to="/member/signUp">회원가입</NavLink>
               </li>
               <li> | </li>
               <li>
