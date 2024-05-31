@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import UserInfoManagement from "../components/my/UserInfoManagement";
-import PasswordManagement from "../components/my/PasswordManagement";
+import SubscriptionManagement from "../components/my/SubscriptionManagement";
 import OrderDeliveryStatus from "../components/my/OrderDeliveryStatus";
+import { convertToSeller } from "../api/api";
 import styles from "./MyPage.module.css";
 
 function MyPage() {
@@ -23,16 +24,34 @@ function MyPage() {
     switch (activeSection) {
       case "editProfile":
         return <UserInfoManagement />;
-      case "changePassword":
-        return <PasswordManagement />;
+      case "subscriptionManagement":
+        return <SubscriptionManagement />;
       case "orderHistory":
         return <OrderDeliveryStatus />;
       case "groupPurchase":
         return <div>공동구매 신청 내역</div>;
       case "sellerApplication":
-        return <div>판매자 신청하기</div>;
+        return (
+          <div>
+            <button
+              className={styles.convert}
+              onClick={handleSellerApplication}
+            >
+              판매자 신청하기
+            </button>
+          </div>
+        );
       default:
         return null;
+    }
+  };
+
+  const handleSellerApplication = async () => {
+    try {
+      await convertToSeller();
+      setIsSeller(true);
+    } catch (error) {
+      console.error("Error applying as seller:", error);
     }
   };
 
@@ -50,7 +69,7 @@ function MyPage() {
           <div className={styles.optionContainer}>
             {[
               "editProfile",
-              "changePassword",
+              "subscriptionManagement",
               "orderHistory",
               "groupPurchase",
               "sellerApplication",
@@ -82,8 +101,8 @@ const getButtonLabel = (section) => {
   switch (section) {
     case "editProfile":
       return "회원 정보 수정";
-    case "changePassword":
-      return "비밀번호 변경";
+    case "subscriptionManagement":
+      return "구독 관리";
     case "orderHistory":
       return "주문 배송 현황";
     case "groupPurchase":

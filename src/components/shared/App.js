@@ -1,16 +1,16 @@
-// 모든 페이지에 상단 Nav, 하단 Footer 컴포넌트를 고정해준다
+import React from "react";
 import { Outlet } from "react-router-dom";
 import Nav from "../../components/header/Nav";
 import Footer from "../../components/footer/Footer";
 import styles from "./App.module.css";
 import "./App.font.css";
 
-function App() {
+function App({ isLoggedIn, onLogout, onLogin }) {
   return (
     <>
-      <Nav className={styles.nav} />
+      <Nav className={styles.nav} isLoggedIn={isLoggedIn} onLogout={onLogout} />
       <div className={styles.body}>
-        <Outlet />
+        <Outlet context={{ onLogin }} />
       </div>
       <Footer className={styles.footer} />
     </>

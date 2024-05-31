@@ -8,12 +8,13 @@
 
 .categoryList {
   color: #fff;
+  white-space: nowrap;
+  display: block;
 }
 
 .menu {
   display: relative;
   padding: 30px;
-  margin-bottom: 100px;
   list-style: none;
   font-size: 13px;
   background-color: #000;

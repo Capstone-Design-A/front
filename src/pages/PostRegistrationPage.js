@@ -1,37 +1,30 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./PostRegistrationPage.module.css";
+import { createPost } from "../api/api";
 
 function PostRegistrationPage() {
   const [mainImage, setMainImage] = useState(null);
   const [postContent, setPostContent] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const memberId = 1;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!mainImage || !postContent) {
       setModalIsOpen(true);
       return;
     }
-    const formData = new FormData();
-    formData.append("mainImage", mainImage);
-    formData.append("postContent", postContent);
 
-    console.log(
-      "게시물이 등록되었습니다.",
-      Object.fromEntries(formData.entries())
-    );
-
-    fetch("/api/posts", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    try {
+      const data = await createPost(mainImage, postContent);
+      console.log("게시물이 등록되었습니다.", data);
+      navigate(`/intro/${memberId}`);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleMainImageChange = (e) => {

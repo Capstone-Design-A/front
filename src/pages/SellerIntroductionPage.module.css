@@ -56,7 +56,6 @@
   left: 10px;
   z-index: 1000;
   display: block;
-  opacity: 80%;
 }
 
 .toggleCategory .icon {
@@ -82,30 +81,6 @@
   display: none;
 }
 
-.category {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200px;
-  padding: 20px;
-  background-color: #fff;
-  z-index: 1;
-}
-
-.categoryList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.categoryItem {
-  margin-bottom: 10px;
-}
-
-.categoryItem:last-child {
-  margin-bottom: 0;
-}
-
 .container {
   display: flex;
   justify-content: center;
@@ -125,4 +100,9 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 1000;
+}
+
+.registration {
+  font-size: 20px;
+  color: #494949;
 }

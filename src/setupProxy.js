@@ -8,6 +8,7 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+
   app.use(
     "/groupItem",
     createProxyMiddleware({
@@ -15,15 +16,9 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+
   app.use(
     "/seller",
-    createProxyMiddleware({
-      target: "https://dev.agriculturalproducts.store",
-      changeOrigin: true,
-    })
-  );
-  app.use(
-    "/imageURLtest1",
     createProxyMiddleware({
       target: "https://dev.agriculturalproducts.store",
       changeOrigin: true,
@@ -52,6 +47,55 @@ module.exports = function (app) {
   );
   app.use(
     "/alarm",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/login",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/refresh",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/auth",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/posts",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/intro",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/member",
+    createProxyMiddleware({
+      target: "https://dev.agriculturalproducts.store",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/tempMember",
     createProxyMiddleware({
       target: "https://dev.agriculturalproducts.store",
       changeOrigin: true,

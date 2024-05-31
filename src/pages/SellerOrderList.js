@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getOrderStatus } from "../api/api";
 import SellerCategory from "../components/category/SellerCategory";
 import styles from "./SellerOrderListPage.module.css";
@@ -41,7 +42,12 @@ function SellerOrderListPage() {
         </div>
       </div>
       <div className={styles.container}>
-        <h1>주문 현황</h1>
+        <div className={styles.title}>
+          <h1>주문 현황</h1>
+          <Link to="/auth/seller/order-status?page=1&size=10">
+            <h1> > </h1>
+          </Link>
+        </div>
         <table>
           <thead>
             <tr>

@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 import SellerCategory from "../components/category/SellerCategory";
 import MonthlySales from "../components/managements/MonthlySales";
 import styles from "./ManagementPage.module.css";
-import SellerOrderListPage from "./SellerOrderListPage";
-import SellerItemListPage from "./SellerItemListPage";
+import SellerOrderList from "./SellerOrderList";
+import SellerImminentItemList from "./SellerImminentItemList";
 import DashboardPage from "./DashboardPage";
 
 function ManagementPage() {
@@ -38,10 +38,10 @@ function ManagementPage() {
         <DashboardPage />
       </div>
       <div className={styles.orderList}>
-        <SellerOrderListPage />
+        <SellerOrderList />
       </div>
       <div className={styles.productList}>
-        <SellerItemListPage />
+        <SellerImminentItemList />
       </div>
       <div className={styles.monthlySales}>
         <MonthlySales />

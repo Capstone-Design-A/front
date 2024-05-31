@@ -76,7 +76,7 @@
 
 .flexRow {
   display: flex;
-  gap: 20px;
+  gap: 60px;
   flex-direction: row;
   margin-bottom: 30px;
 }

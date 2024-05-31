@@ -13,6 +13,9 @@ function UserInfoManagement() {
     email: false,
     sms: false,
   });
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
   const handleImageChange = (e) => {
     setProfileImage(URL.createObjectURL(e.target.files[0]));
@@ -32,12 +35,35 @@ function UserInfoManagement() {
     });
   };
 
+  const handleNewPasswordChange = (e) => setNewPassword(e.target.value);
+  const handleConfirmNewPasswordChange = (e) =>
+    setConfirmNewPassword(e.target.value);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // eslint-disable-next-line
+
+    if (newPassword !== confirmNewPassword) {
+      alert("새 비밀번호와 확인용 비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
     const email = `${emailLocal}@${emailDomain}`;
-    // eslint-disable-next-line
     const contact = `${contactCountryCode} ${contactNumber}`;
+    console.log("회원 정보 변경 요청:", {
+      profileImage,
+      email,
+      address,
+      detailedAddress,
+      contact,
+      notificationSettings,
+      currentPassword,
+      newPassword,
+    });
+
+    // Reset password fields after submission
+    setCurrentPassword("");
+    setNewPassword("");
+    setConfirmNewPassword("");
   };
 
   return (
@@ -89,9 +115,8 @@ function UserInfoManagement() {
             onChange={handleContactCountryCodeChange}
           >
             <option value="+82">+82 (South Korea)</option>
-            {/* 어디까지 필요할까?
+            {/* 필요한 국가 코드를 추가하세요 */}
             <option value="+1">+1 (USA)</option>
-            */}
           </select>
           <input
             type="text"
@@ -123,6 +148,21 @@ function UserInfoManagement() {
             SMS 알림 동의
           </label>
         </div>
+      </div>
+      <div className={styles.formGroup}>
+        <label>비밀번호 변경</label>
+        <input
+          type="password"
+          value={newPassword}
+          onChange={handleNewPasswordChange}
+          placeholder="새 비밀번호"
+        />
+        <input
+          type="password"
+          value={confirmNewPassword}
+          onChange={handleConfirmNewPasswordChange}
+          placeholder="새 비밀번호 확인"
+        />
       </div>
       <button type="submit" className={styles.submitButton}>
         변경 내용 저장

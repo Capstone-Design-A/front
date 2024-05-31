@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getSellerItemList } from "../api/api";
+import { getSellerImminentItemList } from "../api/api";
 import SellerCategory from "../components/category/SellerCategory";
 import styles from "./SellerItemListPage.module.css";
 
-function SellerItemListPage() {
+function SellerImminentItemList() {
   const [products, setProducts] = useState([]);
   const sellerId = "1";
   const page = 1;
@@ -14,7 +14,11 @@ function SellerItemListPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sellerItemList = await getSellerItemList(sellerId, page, size);
+        const sellerItemList = await getSellerImminentItemList(
+          sellerId,
+          page,
+          size
+        );
         setProducts(sellerItemList);
       } catch (error) {
         console.error("Error fetching seller item list: ", error);
@@ -44,9 +48,9 @@ function SellerItemListPage() {
       </div>
       <div className={styles.container}>
         <div className={styles.title}>
-          <h1>판매 상품 관리</h1>
-          <Link to="/auth/item">
-            <button className={styles.addButton}>상품 등록하기</button>
+          <h1>판매 마감 임박 상품</h1>
+          <Link to="/auth/seller/items?page=1&size=10">
+            <h1> > </h1>
           </Link>
         </div>
         <div className={styles.table}>
@@ -108,4 +112,4 @@ function SellerItemListPage() {
   );
 }
 
-export default SellerItemListPage;
+export default SellerImminentItemList;

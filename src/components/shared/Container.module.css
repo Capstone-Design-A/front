@@ -2,12 +2,11 @@
   width: 100%;
   max-width: 840px;
   margin: 0 auto;
-  /* overflow: hidden; */
   flex-shrink: 0;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 720px) {
   .container {
-    padding: 0 calc(14px * 5);
+    padding: auto calc(14px * 5);
   }
 }

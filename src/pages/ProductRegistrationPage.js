@@ -1,69 +1,76 @@
 import React, { useState } from "react";
-// import Modal from "../components/shared/Modal";
+import { useNavigate } from "react-router-dom";
 import styles from "./ProductRegistrationPage.module.css";
+import { registerItem } from "../api/api";
 
 function ProductRegistrationPage() {
-  const [mainImage, setMainImage] = useState(null);
-  const [productName, setProductName] = useState("");
-  const [productDescription, setProductDescription] = useState("");
-  const [productCategory, setProductCategory] = useState("");
-  const [productPrice, setProductPrice] = useState("");
+  const [itemName, setItemName] = useState("");
+  const [simpleExplanation, setSimpleExplanation] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
+  const [deliveryPrice, setDeliveryPrice] = useState("");
+  const [deadline, setDeadline] = useState("");
   const [isGroupPurchase, setIsGroupPurchase] = useState(false);
   const [targetQuantity, setTargetQuantity] = useState("");
-  const [detailImages, setDetailImages] = useState([]);
-  // eslint-disable-next-line
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [groupPurchasePrice, setGroupPurchasePrice] = useState("");
+  const [itemImages, setItemImages] = useState(null);
+  const [itemDetailsImage, setItemDetailsImage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
-      !mainImage ||
-      !productName ||
-      !productDescription ||
-      !productCategory ||
-      !productPrice ||
-      !detailImages.length
+      !itemName ||
+      !simpleExplanation ||
+      !categoryId ||
+      !price ||
+      !stock ||
+      !deliveryPrice ||
+      !deadline ||
+      !itemImages ||
+      !itemDetailsImage ||
+      (isGroupPurchase && (!targetQuantity || !groupPurchasePrice))
     ) {
-      setModalIsOpen(true);
+      setErrorMessage("모든 필수 항목을 입력하세요.");
       return;
     }
-    const formData = new FormData();
-    formData.append("mainImage", mainImage);
-    formData.append("productName", productName);
-    formData.append("productDescription", productDescription);
-    formData.append("productCategory", productCategory);
-    formData.append("productPrice", productPrice);
-    formData.append("isGroupPurchase", isGroupPurchase);
-    formData.append("targetQuantity", targetQuantity);
-    detailImages.forEach((image, index) => {
-      formData.append(`detailImages[${index}]`, image);
-    });
 
-    console.log(
-      "상품이 등록되었습니다.",
-      Object.fromEntries(formData.entries())
-    );
-
-    fetch("/api/products", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    try {
+      const result = await registerItem(
+        itemName,
+        simpleExplanation,
+        parseInt(categoryId),
+        parseInt(price),
+        parseInt(stock),
+        parseInt(deliveryPrice),
+        deadline,
+        isGroupPurchase,
+        parseInt(targetQuantity),
+        parseInt(groupPurchasePrice),
+        itemImages,
+        itemDetailsImage
+      );
+      if (result.isSuccess) {
+        console.log("상품이 등록되었습니다:", result);
+        setErrorMessage("");
+        navigate("/auth/seller/items?page=1&size=10");
+      } else {
+        setErrorMessage(result.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorMessage("상품 등록에 실패했습니다.");
+    }
   };
 
-  const handleMainImageChange = (e) => {
-    setMainImage(e.target.files[0]);
+  const handleItemImageChange = (e) => {
+    setItemImages(e.target.files[0]);
   };
 
   const handleDetailImagesChange = (e) => {
-    const files = Array.from(e.target.files);
-    setDetailImages((prevImages) => [...prevImages, ...files]);
+    setItemDetailsImage(e.target.files[0]);
   };
 
   const formatPrice = (price) => {
@@ -72,7 +79,7 @@ function ProductRegistrationPage() {
 
   const handlePriceChange = (e) => {
     const newPrice = e.target.value.replace(/\D/g, "");
-    setProductPrice(newPrice);
+    setPrice(newPrice);
   };
 
   return (
@@ -80,60 +87,90 @@ function ProductRegistrationPage() {
       <h1 className={styles.title}>상품 등록</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
-          <label htmlFor="mainImage">메인 이미지</label>
+          <label htmlFor="itemImage">메인 이미지</label>
           <input
             type="file"
-            id="mainImage"
-            onChange={handleMainImageChange}
+            id="itemImage"
+            onChange={handleItemImageChange}
             required
           />
         </div>
         <div className={styles.formGroup}>
-          <label className={styles.label} htmlFor="productName">
+          <label className={styles.label} htmlFor="itemName">
             상품명
           </label>
           <input
             type="text"
-            id="productName"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
+            id="itemName"
+            value={itemName}
+            onChange={(e) => setItemName(e.target.value)}
             required
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="productDescription">상품 설명</label>
+          <label htmlFor="simpleExplanation">상품 설명</label>
           <textarea
-            id="productDescription"
-            value={productDescription}
-            onChange={(e) => setProductDescription(e.target.value)}
+            id="simpleExplanation"
+            value={simpleExplanation}
+            onChange={(e) => setSimpleExplanation(e.target.value)}
             required
           ></textarea>
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="productCategory">카테고리</label>
+          <label htmlFor="categoryId">카테고리</label>
           <select
-            id="productCategory"
-            value={productCategory}
-            onChange={(e) => setProductCategory(e.target.value)}
+            id="categoryId"
+            value={categoryId}
+            onChange={(e) => setCategoryId(e.target.value)}
             required
           >
             <option value="">카테고리를 선택하세요</option>
-            <option value="vegetable">채소</option>
-            <option value="fruit">과일</option>
-            <option value="meat">축산</option>
-            <option value="grain">쌀/잡곡</option>
-            <option value="processed">가공</option>
-            <option value="kimchi">김치</option>
-            <option value="etc">기타</option>
+            <option value="1">채소</option>
+            <option value="2">과일</option>
+            <option value="3">축산</option>
+            <option value="4">쌀/잡곡</option>
+            <option value="5">가공</option>
+            <option value="6">김치</option>
+            <option value="7">기타</option>
           </select>
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="productPrice">가격</label>
+          <label htmlFor="price">가격</label>
           <input
             type="text"
-            id="productPrice"
-            value={formatPrice(productPrice)}
+            id="price"
+            value={formatPrice(price)}
             onChange={handlePriceChange}
+            required
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="stock">재고</label>
+          <input
+            type="number"
+            id="stock"
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
+            required
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="deliveryPrice">배송비</label>
+          <input
+            type="text"
+            id="deliveryPrice"
+            value={formatPrice(deliveryPrice)}
+            onChange={(e) => setDeliveryPrice(e.target.value)}
+            required
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="deadline">마감일</label>
+          <input
+            type="datetime-local"
+            id="deadline"
+            value={deadline}
+            onChange={(e) => setDeadline(e.target.value)}
             required
           />
         </div>
@@ -155,9 +192,18 @@ function ProductRegistrationPage() {
                 id="targetQuantity"
                 value={targetQuantity}
                 onChange={(e) => setTargetQuantity(e.target.value)}
-                required={isGroupPurchase}
+                required
               />{" "}
-              <span className={styles.member}>명</span>
+            </div>
+            <div className={styles.formGroup}>
+              <label htmlFor="groupPurchasePrice">공동구매 가격</label>
+              <input
+                type="text"
+                id="groupPurchasePrice"
+                value={formatPrice(groupPurchasePrice)}
+                onChange={(e) => setGroupPurchasePrice(e.target.value)}
+                required
+              />
             </div>
           </div>
         )}
@@ -166,28 +212,15 @@ function ProductRegistrationPage() {
           <input
             type="file"
             id="detailImages"
-            multiple
             onChange={handleDetailImagesChange}
+            required
           />
         </div>
         <button className={styles.button} type="submit">
           상품 등록
         </button>
       </form>
-      {/*
-      <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
-        <div className={styles.modalContent}>
-          <h2>경고</h2>
-          <p>모든 필수 항목을 입력하세요.</p>
-          <button
-            className={styles.modalButton}
-            onClick={() => setModalIsOpen(false)}
-          >
-            확인
-          </button>
-        </div>
-      </Modal>
-        */}
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>}
     </div>
   );
 }

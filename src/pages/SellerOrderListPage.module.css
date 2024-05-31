@@ -45,6 +45,7 @@
   margin-bottom: 150px;
   margin-left: 215px;
   flex-shrink: 0;
+  justify-content: center;
 }
 
 .container h1 {
@@ -52,6 +53,7 @@
   font-weight: 300;
   margin-bottom: 30px;
   margin-left: 10px;
+  display: inline-block;
 }
 
 table {
@@ -120,4 +122,33 @@ td .orderStatus.completed {
 
 .noItem {
   margin: 100px auto;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #f2f2f2;
+}
+
+.pagination button:disabled {
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.pagination button.active {
+  background-color: #5c59e8;
+  color: #fff;
 }
