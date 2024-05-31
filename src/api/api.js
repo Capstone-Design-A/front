@@ -1143,3 +1143,82 @@ export const convertToSeller = async () => {
     throw error;
   }
 };
+
+export const signUp = async (
+  id,
+  loginId,
+  password,
+  name,
+  nickName,
+  phone,
+  address,
+  details
+) => {
+  const SIGN_UP_ENDPOINT = "/member/signUp";
+
+  try {
+    const response = await fetch(SIGN_UP_ENDPOINT, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        loginId,
+        password,
+        name,
+        nickName,
+        phone,
+        address,
+        details,
+      }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error signing up:", error);
+    return null;
+  }
+};
+
+export const checkDuplicate = async (id, type, value) => {
+  const CHECK_DUPLICATE_ENDPOINT = "/member/dupCheck";
+
+  try {
+    const response = await fetch(CHECK_DUPLICATE_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        type,
+        [type]: value,
+      }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error checking duplicate:", error);
+    return false;
+  }
+};
+
+export const removeMember = async (memberId) => {
+  const REMOVE_MEMBER_ENDPOINT = `/tempMember/${memberId}`;
+
+  try {
+    const response = await fetch(`${REMOVE_MEMBER_ENDPOINT}`, {
+      method: "DELETE",
+    });
+    const data = await response.json();
+
+    if (data.isSuccess) {
+      console.log("Member removed successfully:", data);
+    } else {
+      console.error("Failed to remove member:", data.message);
+    }
+  } catch (error) {
+    console.error("Error removing member:", error);
+  }
+};
