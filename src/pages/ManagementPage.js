@@ -5,7 +5,7 @@ import SellerCategory from "../components/category/SellerCategory";
 import MonthlySales from "../components/managements/MonthlySales";
 import styles from "./ManagementPage.module.css";
 import SellerOrderList from "./SellerOrderList";
-import SellerItemList from "./SellerItemList";
+import SellerImminentItemList from "./SellerImminentItemList";
 import DashboardPage from "./DashboardPage";
 
 function ManagementPage() {
@@ -41,7 +41,7 @@ function ManagementPage() {
         <SellerOrderList />
       </div>
       <div className={styles.productList}>
-        <SellerItemList />
+        <SellerImminentItemList />
       </div>
       <div className={styles.monthlySales}>
         <MonthlySales />

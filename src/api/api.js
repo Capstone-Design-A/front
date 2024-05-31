@@ -849,6 +849,42 @@ export const getOrderStatus = async (page, size) => {
   }
 };
 
+export const getSellerImminentItemList = async (page, size) => {
+  const SELLER_ITEM_LIST_ENDPOINT = "/auth/seller/imminent-item";
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(
+      `${SELLER_ITEM_LIST_ENDPOINT}?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result.imminentItemList;
+    return result;
+  } catch (error) {
+    console.error("Error fetching item detail:", error);
+    throw error;
+  }
+};
+
 export const getSellerItemList = async (page, size) => {
   const SELLER_ITEM_LIST_ENDPOINT = "/auth/seller/items";
   const token = localStorage.getItem("accessToken");
