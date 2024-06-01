@@ -1,12 +1,21 @@
 import styles from "./TotalCart.module.css";
 import plus from "../../assets/icon-plus-line.svg";
+import { useNavigate } from "react-router-dom";
 
 function TotalCart({ products }) {
+  const navigate = useNavigate();
+
   const checkedProducts = products.filter((product) => product.isChecked);
   const totalAmount = checkedProducts.reduce(
     (total, product) => total + product.price * product.quantity,
     0
   );
+
+  const handleOrderClick = () => {
+    if (checkedProducts.length > 0) {
+      navigate("/auth/pay");
+    }
+  };
 
   return (
     <div className={styles.total}>
@@ -28,7 +37,15 @@ function TotalCart({ products }) {
       <div className={styles.cart_product_price}>
         <p className={styles.total_price}></p>
         <p>
-          <button className={styles.btn_submit}>주문하기</button>
+          <button
+            className={`${styles.btn_submit} ${
+              checkedProducts.length === 0 ? styles.disabled : ""
+            }`}
+            onClick={handleOrderClick}
+            disabled={checkedProducts.length === 0}
+          >
+            주문하기
+          </button>
         </p>
       </div>
     </div>
