@@ -1,51 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./OrderDeliveryStatus.module.css";
+import { getUserOrderStatus } from "../../api/api";
 
 function OrderDeliveryStatus() {
-  // 임의의 주문 배송 현황 데이터
-  const dummyData = [
-    {
-      id: 1,
-      orderNumber: "A1234",
-      productName: "사과",
-      orderDate: "2024-05-25",
-      deliveryStatus: "배송중",
-    },
-    {
-      id: 2,
-      orderNumber: "AB234",
-      productName: "참외",
-      orderDate: "2024-05-20",
-      deliveryStatus: "배송완료",
-    },
-    {
-      id: 3,
-      orderNumber: "ADD23",
-      productName: "당근",
-      orderDate: "2024-05-15",
-      deliveryStatus: "배송준비중",
-    },
-  ];
+  const [orderId, setOrderId] = useState(null);
+  const [orderData, setOrderData] = useState([]);
+
+  useEffect(() => {
+    const fetchOrderStatus = async () => {
+      try {
+        const { orderId, itemStatusList } = await getUserOrderStatus(1);
+        setOrderId(orderId);
+        setOrderData(itemStatusList);
+      } catch (error) {
+        console.error("Error fetching order status:", error);
+      }
+    };
+    fetchOrderStatus();
+  }, []);
 
   return (
     <div className={styles.orderDeliveryStatusContainer}>
       <h2>주문 배송 현황</h2>
+      {orderId && (
+        <p>
+          <strong>주문 ID:</strong> {orderId}
+        </p>
+      )}
       <div className={styles.orderList}>
-        {dummyData.length > 0 ? (
-          dummyData.map((order) => (
-            <div key={order.id} className={styles.orderItem}>
+        {orderData.length > 0 ? (
+          orderData.map((order) => (
+            <div key={order.orderItemId} className={styles.orderItem}>
               <div className={styles.orderDetails}>
                 <p>
-                  <strong>주문 번호</strong> {order.orderNumber}
+                  <strong>주문 번호:</strong> {order.orderItemId}
                 </p>
                 <p>
-                  <strong>상품명</strong> {order.productName}
+                  <strong>상품명:</strong> {order.itemName}
                 </p>
                 <p>
-                  <strong>주문 일자</strong> {order.orderDate}
+                  <strong>상품 가격:</strong> {order.itemPrice}원
                 </p>
                 <p>
-                  <strong>배송 상태</strong> {order.deliveryStatus}
+                  <strong>수량:</strong> {order.quantity}
+                </p>
+                <p>
+                  <strong>배송비:</strong> {order.deliveryCharge}원
+                </p>
+                <p>
+                  <strong>총 가격:</strong> {order.totalPrice}원
+                </p>
+                <p>
+                  <strong>주문 상태:</strong> {order.orderStatus}
                 </p>
               </div>
             </div>

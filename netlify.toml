@@ -1,0 +1,61 @@
+[[redirects]]
+  from = "/proxy/*"
+  to = "https://sunny-dango-95ba65.netlify.app/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+[[headers]]
+# HTML 파일에 대해 올바른 Content-Type 설정
+for = "/*.html"
+[headers.values]
+  Content-Type = "text/html; charset=UTF-8"
+
+# JavaScript 파일에 대해 올바른 Content-Type 설정
+[[headers]]
+for = "/*.js"
+[headers.values]
+  Content-Type = "application/javascript; charset=UTF-8"
+
+# CSS 파일에 대해 올바른 Content-Type 설정
+[[headers]]
+for = "/*.css"
+[headers.values]
+  Content-Type = "text/css; charset=UTF-8"
+
+# JSON 응답이 필요한 경로에 대해 헤더 설정
+[[headers]]
+for = "/member/*"
+[headers.values]
+  Content-Type = "application/json; charset=UTF-8"
+
+# JSON 응답이 필요한 나머지 모든 경로에 대해 헤더 설정
+[[headers]]
+for = "/login/*"
+[headers.values]
+  Content-Type = "application/json; charset=UTF-8"
+
+[[headers]]
+for = "/item/*"
+[headers.values]
+  Content-Type = "application/json; charset=UTF-8"
+  
+[[headers]]
+for = "/auth/*"
+[headers.values]
+  Content-Type = "application/json; charset=UTF-8"
+
+[[headers]]
+for = "/seller/*"
+[headers.values]
+  Content-Type = "application/json; charset=UTF-8"
+
+[[headers]]
+for = "/posts/*"
+[headers.values]
+  Content-Type = "application/json; charset=UTF-8"

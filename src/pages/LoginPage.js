@@ -10,7 +10,6 @@ import styles from "./LoginPage.module.css";
 const LoginPage = ({ onLogin }) => {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
-  // eslint-disable-next-line
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -22,14 +21,36 @@ const LoginPage = ({ onLogin }) => {
       const { accessToken, refreshToken } = await login(loginId, password);
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
+
+      const tokenPayload = parseJwt(accessToken);
+      const memberId = tokenPayload.id;
+      localStorage.setItem("memberId", memberId);
+
       onLogin();
       navigate("/");
       console.log("로그인 성공");
     } catch (error) {
       setError(`로그인 실패: ${error.message}`);
-      // console.log("로그인 실패", error.message);
     }
   };
+
+  function parseJwt(token) {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+
+    const tokenPayload = JSON.parse(jsonPayload);
+    console.log("Token Payload:", tokenPayload);
+
+    return tokenPayload;
+  }
 
   return (
     <>
@@ -61,6 +82,7 @@ const LoginPage = ({ onLogin }) => {
           <Button2 className={styles.Button} type="submit">
             로그인
           </Button2>
+          {error && <p className={styles.ErrorMsg}>{error}</p>}
           <div className={styles.register}>
             회원이 아니신가요?{" "}
             <Link to="/register">

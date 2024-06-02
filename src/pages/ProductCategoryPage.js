@@ -8,6 +8,7 @@ import Category from "../components/category/Category";
 
 function ProductCategoryPage() {
   const location = useLocation();
+  // eslint-disable-next-line
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);

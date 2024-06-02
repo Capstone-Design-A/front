@@ -6,8 +6,8 @@ import HorizontalRule from "../shared/HorizontalRule";
 import styles from "./SellerCategory.module.css";
 
 function SellerCategory({ page = 1, size = 1 }) {
-  const sellerId = 1;
-  const memberId = 1;
+  const memberId = localStorage.getItem("memberId");
+
   return (
     <>
       <Container>
@@ -18,13 +18,13 @@ function SellerCategory({ page = 1, size = 1 }) {
               <h2 className={styles.title}>회원 정보</h2>
             </Link>
             <Link
-              to={`/seller/seller-id=${sellerId}&page=${page}&size=${size}`}
+              to={`/seller/seller-id=${memberId}&page=${page}&size=${size}`}
               className={styles.link}
             >
               <h2 className={styles.title}>구독 관리</h2>
             </Link>
             <Link
-              to={`/seller/seller-id=${sellerId}&page=${page}&size=${size}`}
+              to={`/seller/seller-id=${memberId}&page=${page}&size=${size}`}
               className={styles.link}
             >
               <h2 className={styles.title}>주문 조회</h2>
@@ -33,7 +33,7 @@ function SellerCategory({ page = 1, size = 1 }) {
               <HorizontalRule />
             </div>
             <Link
-              to={`/auth/seller?seller-id=${sellerId}`}
+              to={`/auth/seller?seller-id=${memberId}`}
               className={styles.link}
             >
               <h2 className={styles.title}>대시보드</h2>

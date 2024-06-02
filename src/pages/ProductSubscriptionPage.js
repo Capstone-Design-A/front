@@ -8,20 +8,24 @@ import Category from "../components/category/Category";
 function ProductSubscriptionPage() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
-  const size = 10;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
+
+  const token = localStorage.getItem("accessToken");
+  const isLoggedIn = !!token;
+  const id = localStorage.getItem("memberId");
+  const memberId = isLoggedIn ? id : null;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const currentPage = page || 1;
+        const size = 10;
+        const type = isLoggedIn ? 0 : 1;
         const fetchedProducts = await getSubscriptionItems(
-          2, // 임의로 설정한 값
-          null,
           currentPage,
           size,
-          0, // 로그인한 유저의 경우 type을 0으로 설정
-          "JWT_TOKEN"
+          type,
+          memberId
         );
         setProducts(fetchedProducts);
       } catch (error) {
@@ -30,7 +34,7 @@ function ProductSubscriptionPage() {
     };
 
     fetchData();
-  }, [page, size]);
+  }, [page, isLoggedIn, memberId]);
 
   const handleLoadMore = () => {
     const nextPage = page !== undefined ? page + 1 : 1;

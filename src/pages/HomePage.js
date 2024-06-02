@@ -1,4 +1,3 @@
-// 메인(Home) 페이지입니다.
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Lined from "../components/shared/Lined";
@@ -30,23 +29,19 @@ function HomePage() {
   const [groupProducts, setGroupProducts] = useState([]);
   // eslint-disable-next-line
   const [page, setPage] = useState(1);
-  // eslint-disable-next-line
-  const [size, setSize] = useState(10);
-  // eslint-disable-next-line
-  const [type, setType] = useState(0); // 0: 로그인한 유저, 1: 비로그인한 유저
-  // eslint-disable-next-line
-  const [fromMember, setFromMember] = useState(2); // 로그인이 구현 전이므로 임의의 값으로 설정
+  const size = 10;
   const displayLimit = 6;
+
+  const token = localStorage.getItem("accessToken");
+  const isLoggedIn = !!token;
+  const id = localStorage.getItem("memberId");
+  const memberId = isLoggedIn ? id : null;
+  const type = isLoggedIn ? 0 : 1;
 
   useEffect(() => {
     const fetchDeadlineItems = async () => {
       try {
-        const fetchedProducts = await getDeadlineItems(
-          page,
-          size,
-          null,
-          "JWT_TOKEN"
-        );
+        const fetchedProducts = await getDeadlineItems(page, size, null, token);
         setDeadlineProducts(fetchedProducts.slice(0, displayLimit));
       } catch (error) {
         console.error("Error fetching deadline items:", error);
@@ -55,12 +50,7 @@ function HomePage() {
 
     const fetchRankingItems = async () => {
       try {
-        const fetchedProducts = await getRankingItems(
-          page,
-          size,
-          null,
-          "JWT_TOKEN"
-        );
+        const fetchedProducts = await getRankingItems(page, size, null, token);
         setRankingProducts(fetchedProducts.slice(0, displayLimit));
       } catch (error) {
         console.error("Error fetching ranking items:", error);
@@ -69,21 +59,13 @@ function HomePage() {
 
     const fetchSubscriptionItems = async () => {
       try {
-        let fetchedProducts;
-        // (로그인 상태 && fromMember 값이 null이 아닌 경우) API 호출
-        if (type === 0 && fromMember !== null) {
-          fetchedProducts = await getSubscriptionItems(
-            fromMember,
-            null,
-            page,
-            size,
-            type,
-            "JWT_TOKEN"
-          );
-          setSubscriptionProducts(fetchedProducts.slice(0, displayLimit));
-        } else {
-          console.error("Invalid fromMember value:", fromMember);
-        }
+        const fetchedProducts = await getSubscriptionItems(
+          page,
+          size,
+          type,
+          memberId
+        );
+        setSubscriptionProducts(fetchedProducts.slice(0, displayLimit));
       } catch (error) {
         console.error("Error fetching subscription items:", error);
       }
@@ -91,12 +73,7 @@ function HomePage() {
 
     const fetchGroupItems = async () => {
       try {
-        const fetchedProducts = await getGroupItems(
-          page,
-          size,
-          null,
-          "JWT_TOKEN"
-        );
+        const fetchedProducts = await getGroupItems(page, size, null, token);
         setGroupProducts(fetchedProducts);
       } catch (error) {
         console.error("Error fetching group items:", error);
@@ -107,7 +84,7 @@ function HomePage() {
     fetchRankingItems();
     fetchSubscriptionItems();
     fetchGroupItems();
-  }, [page, size, type, fromMember, displayLimit]);
+  }, [page, size, type, memberId, displayLimit, token]);
 
   return (
     <>
@@ -152,17 +129,13 @@ function HomePage() {
           <Lined>New! 구독하고 있는 판매자의 새 상품</Lined>
           <NavLink
             style={getLinkStyle}
-            to={`/item/subscription?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`}
+            to={`/item/subscription?type=${type}&fromMember=${memberId}&page=${page}&size=${size}`}
           >
             >
           </NavLink>
         </h1>
       </Container>
-      <SubscriptionItems
-        products={subscriptionProducts}
-        type={type}
-        fromMember={fromMember}
-      />
+      <SubscriptionItems products={subscriptionProducts} />
     </>
   );
 }

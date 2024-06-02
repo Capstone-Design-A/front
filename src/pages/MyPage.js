@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import UserInfoManagement from "../components/my/UserInfoManagement";
 import SubscriptionManagement from "../components/my/SubscriptionManagement";
 import OrderDeliveryStatus from "../components/my/OrderDeliveryStatus";
-import { convertToSeller } from "../api/api";
+import GroupItemStatus from "../components/my/GroupItemStatus";
+import ConvertToSeller from "../components/my/ConvertToSeller";
 import styles from "./MyPage.module.css";
 
 function MyPage() {
@@ -29,29 +30,11 @@ function MyPage() {
       case "orderHistory":
         return <OrderDeliveryStatus />;
       case "groupPurchase":
-        return <div>공동구매 신청 내역</div>;
+        return <GroupItemStatus />;
       case "sellerApplication":
-        return (
-          <div>
-            <button
-              className={styles.convert}
-              onClick={handleSellerApplication}
-            >
-              판매자 신청하기
-            </button>
-          </div>
-        );
+        return <ConvertToSeller setIsSeller={setIsSeller} />;
       default:
         return null;
-    }
-  };
-
-  const handleSellerApplication = async () => {
-    try {
-      await convertToSeller();
-      setIsSeller(true);
-    } catch (error) {
-      console.error("Error applying as seller:", error);
     }
   };
 

@@ -1,5 +1,8 @@
-const BASE_URL = "https://dev.agriculturalproducts.store";
+const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
+const URL = `${PROXY}`;
+const BASE_URL = URL;
 
+// 메인 섹션
 export const getSearchItems = async (page, size, keyword, token) => {
   const SEARCH_ITEMS_ENDPOINT = "/item/search";
 
@@ -10,6 +13,7 @@ export const getSearchItems = async (page, size, keyword, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -42,15 +46,17 @@ export const getSearchItems = async (page, size, keyword, token) => {
   }
 };
 
-export const getAlarmCount = async (memberId) => {
-  const ALARM_ITEMS_ENDPOINT = "/alarm";
+export const getAlarmCount = async () => {
+  const ALARM_COUNT_ENDPOINT = "/auth/alarm";
+  const token = localStorage.getItem("accessToken");
 
   try {
-    const response = await fetch(`${ALARM_ITEMS_ENDPOINT}/${memberId}`, {
+    const response = await fetch(`${ALARM_COUNT_ENDPOINT}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
-        // "X-ACCESS-TOKEN": token,
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -75,24 +81,19 @@ export const getAlarmCount = async (memberId) => {
   }
 };
 
-export const getAlarmItems = async (
-  fromMember,
-  keyword,
-  page,
-  size,
-  type,
-  token
-) => {
-  const ALARM_ITEMS_ENDPOINT = "/alarm";
+export const getAlarmItems = async (page, size, type, memberId) => {
+  const ALARM_ITEMS_ENDPOINT = "/auth/alarms";
+  const token = localStorage.getItem("accessToken");
 
   try {
     const response = await fetch(
-      `${ALARM_ITEMS_ENDPOINT}?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`,
+      `${ALARM_ITEMS_ENDPOINT}?type=${type}&memberId=${memberId}&page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          "X-ACCESS-TOKEN": token,
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -128,6 +129,7 @@ export const getItemsByCategory = async (categoryId, page, size, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -152,25 +154,6 @@ export const getItemsByCategory = async (categoryId, page, size, token) => {
   }
 };
 
-export const getCategories = async () => {
-  try {
-    const categories = [
-      { id: 1, name: "채소" },
-      { id: 2, name: "과일" },
-      { id: 3, name: "축산" },
-      { id: 4, name: "쌀/잡곡" },
-      { id: 5, name: "가공" },
-      { id: 6, name: "김치" },
-      { id: 7, name: "기타" },
-    ];
-
-    return categories;
-  } catch (error) {
-    console.error("Error fetching categories:", error);
-    return [];
-  }
-};
-
 export const getGroupItems = async (page, size, keyword, token) => {
   const GROUP_ITEMS_ENDPOINT = "/groupItem";
 
@@ -181,6 +164,7 @@ export const getGroupItems = async (page, size, keyword, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -235,6 +219,7 @@ export const getDeadlineItems = async (page, size, keyword, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -277,6 +262,7 @@ export const getRankingItems = async (page, size, keyword, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -310,26 +296,34 @@ export const getRankingItems = async (page, size, keyword, token) => {
 };
 
 export const getSubscriptionItems = async (
-  fromMember,
-  keyword,
   page,
   size,
   type,
-  token
+  fromMember = null
 ) => {
   const SUBSCRIPTION_ITEMS_ENDPOINT = "/item/subscription";
+  const token = localStorage.getItem("accessToken");
 
   try {
-    const response = await fetch(
-      `${SUBSCRIPTION_ITEMS_ENDPOINT}?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "X-ACCESS-TOKEN": token,
-        },
-      }
-    );
+    let url = `${window.location.origin}${SUBSCRIPTION_ITEMS_ENDPOINT}?type=${type}&page=${page}&size=${size}`;
+
+    if (type === 0 && fromMember) {
+      url += `&fromMember=${fromMember}`;
+    }
+
+    const headers = {
+      "Content-type": "application/json",
+      Accept: "application/json",
+    };
+
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: headers,
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -345,58 +339,12 @@ export const getSubscriptionItems = async (
 
     let items = responseData.result.itemList;
 
-    if (keyword) {
-      items = items.filter((item) =>
-        item.name.toLowerCase().includes(keyword.toLowerCase())
-      );
-    }
-
     return items;
   } catch (error) {
-    console.error("Error fetching deadline items:", error);
+    console.error("Error fetching subscription items:", error);
     throw error;
   }
 };
-
-/*
-export const getItemDetail = async (itemId, token) => {
-  const ITEM_DETAIL_ENDPOINT = "/item";
-
-  try {
-    const response = await fetch(`${ITEM_DETAIL_ENDPOINT}/${itemId}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "X-ACCESS-TOKEN": token,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const responseData = await response.json();
-
-    if (!responseData.isSuccess) {
-      throw new Error(
-        `API error! code: ${responseData.code}, message: ${responseData.message}`
-      );
-    }
-
-    const { result } = responseData;
-
-    const imageUrls = result.imageUrl.map((image) => image.imageUrl);
-
-    result.imageUrls = imageUrls;
-    console.log("ItemDetail:", result);
-
-    return result;
-  } catch (error) {
-    console.error("Error fetching item detail:", error);
-    throw error;
-  }
-};
-*/
 
 export const getItemDetail = async (itemId, token) => {
   const ITEM_DETAIL_ENDPOINT = "/item";
@@ -406,6 +354,7 @@ export const getItemDetail = async (itemId, token) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
         "X-ACCESS-TOKEN": token,
       },
     });
@@ -428,7 +377,7 @@ export const getItemDetail = async (itemId, token) => {
 
     const itemDetail = {
       id: result.id,
-      memberId: result.memberId,
+      sellerId: result.sellerId,
       name: result.name,
       category: result.category,
       stock: result.stock,
@@ -456,6 +405,7 @@ export const getGroupItemDetail = async (itemId, token) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
         "X-ACCESS-TOKEN": token,
       },
     });
@@ -502,6 +452,7 @@ export const getInquiryList = async (itemId, page, size, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -538,6 +489,7 @@ export const getReviewList = async (itemId, page, size, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -564,16 +516,17 @@ export const getReviewList = async (itemId, page, size, token) => {
   }
 };
 
-// 장바구니의 물건 종류 수 조회
-export const getCartItems = async (memberId, token) => {
-  const CART_ITEMS_ENDPOINT = "/cart";
+export const countCartItems = async (memberId) => {
+  const CART_ITEMS_ENDPOINT = "/auth/cart";
+  const token = localStorage.getItem("accessToken");
 
   try {
     const response = await fetch(`${CART_ITEMS_ENDPOINT}/${memberId}`, {
       method: "GET",
       headers: {
-        "Content-type": "application/json",
-        "X-ACCESS-TOKEN": token,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
     });
 
@@ -590,7 +543,6 @@ export const getCartItems = async (memberId, token) => {
     }
 
     const result = responseData.result;
-    console.log("CartItems:", result);
     return result;
   } catch (error) {
     console.error("Error fetching item detail:", error);
@@ -608,6 +560,7 @@ export const addToCart = async (itemId, quantity) => {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({ itemId, quantity }),
     });
@@ -623,6 +576,63 @@ export const addToCart = async (itemId, quantity) => {
   }
 };
 
+export const getCartItems = async () => {
+  const CART_ITEMS_ENDPOINT = "/auth/cart/item";
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(`${CART_ITEMS_ENDPOINT}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error("Error fetching deadline items:", error);
+    throw error;
+  }
+};
+
+export const deleteCartItems = async (cartId) => {
+  const DELETE_CART_ITEMS_ENDPOINT = `/auth/cart/${cartId}`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(DELETE_CART_ITEMS_ENDPOINT, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete post");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    throw error;
+  }
+};
+
+// 판매자 소개 섹션
 export const getSellerInfo = async (memberId) => {
   const SELLER_INFO_ENDPOINT = "/intro";
 
@@ -631,6 +641,7 @@ export const getSellerInfo = async (memberId) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
       },
     });
 
@@ -662,6 +673,7 @@ export const getPostList = async (memberId) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
       },
     });
 
@@ -692,6 +704,7 @@ export const getPostItems = async (postId, token) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
         "X-ACCESS-TOKEN": token,
       },
     });
@@ -779,6 +792,7 @@ export const deletePost = async (postId) => {
   }
 };
 
+// 판매자 관리 섹션
 export const getDashboard = async () => {
   const DASHBOARD_ENDPOINT = "/auth/seller";
   const token = localStorage.getItem("accessToken");
@@ -788,6 +802,7 @@ export const getDashboard = async () => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -824,6 +839,7 @@ export const getOrderStatus = async (page, size) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -860,6 +876,7 @@ export const getSellerImminentItemList = async (page, size) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -896,6 +913,7 @@ export const getSellerItemList = async (page, size) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -980,6 +998,7 @@ export const registerItem = async (
   }
 };
 
+// 소비자 개인 섹션
 export const getSubscriptionStatus = async (toMemberId) => {
   const SUBSCRIPTION_STATUS_ENDPOINT = `/auth/subscription/check/${toMemberId}`;
   const token = localStorage.getItem("accessToken");
@@ -989,6 +1008,7 @@ export const getSubscriptionStatus = async (toMemberId) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -1010,6 +1030,7 @@ export const subscribe = async (toMemberId) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -1031,6 +1052,7 @@ export const unsubscribe = async (toMemberId) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -1043,37 +1065,84 @@ export const unsubscribe = async (toMemberId) => {
   }
 };
 
-/* 로그인 구현 후 구독 상태 관리 필요 시 사용
-export const checkSubscription = async (fromMemberId, toMemberId) => {
-  const SUBSCRIBE_ENDPOINT = `/subscription/${toMemberId}`;
+export const getUserOrderStatus = async (orderId) => {
+  const ORDER_STATUS_ENDPOINT = `/auth/member/order/${orderId}`;
+  const token = localStorage.getItem("accessToken");
 
   try {
-    const response = await fetch(
-      `${SUBSCRIBE_ENDPOINT}?from-member-id=${fromMemberId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await response.json();
+    const response = await fetch(`${ORDER_STATUS_ENDPOINT}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     if (!response.ok) {
-      throw new Error(data.message || "Failed to check subscription status");
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return data;
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const result = responseData.result;
+    return result;
   } catch (error) {
-    console.error("Error checking subscription status:", error);
+    console.error("Error fetching order status:", error);
     throw error;
   }
 };
-*/
 
+export const getUserGroupStatus = async (page, size) => {
+  const ORDER_GROUP_ITEMS_ENDPOINT = "/auth/orderGroupItems";
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(
+      `${ORDER_GROUP_ITEMS_ENDPOINT}?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const orderGroupItems = responseData.result.orderGroupItemList;
+    return orderGroupItems;
+  } catch (error) {
+    console.error("Error fetching order group items:", error);
+    throw error;
+  }
+};
+
+// auth
 export const login = async (loginId, password) => {
   const response = await fetch(`${BASE_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({ loginId, password }),
   });
@@ -1092,6 +1161,7 @@ export const refreshAccessToken = async (refreshToken) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({ refreshToken }),
   });
@@ -1146,17 +1216,26 @@ export const fetchWithAuth = async (url, options = {}) => {
   return response.json();
 };
 
-export const convertToSeller = async () => {
+export const convertToSeller = async (profileImage, introduction) => {
   const CONVERT_TO_SELLER_ENDPOINT = "/auth/member/to-seller";
   const token = localStorage.getItem("accessToken");
+
+  const formData = new FormData();
+  formData.append("multipartFile", profileImage);
+  formData.append(
+    "request",
+    new Blob([JSON.stringify(introduction)], {
+      type: "application/json",
+    })
+  );
 
   try {
     const response = await fetch(CONVERT_TO_SELLER_ENDPOINT, {
       method: "PATCH",
       headers: {
-        "Content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: formData,
     });
 
     if (!response.ok) {
@@ -1197,6 +1276,7 @@ export const signUp = async (
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         id,
@@ -1225,6 +1305,7 @@ export const checkDuplicate = async (id, type, value) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         id,
@@ -1233,7 +1314,7 @@ export const checkDuplicate = async (id, type, value) => {
       }),
     });
     const data = await response.json();
-    return data;
+    return data.result;
   } catch (error) {
     console.error("Error checking duplicate:", error);
     return false;
@@ -1256,5 +1337,41 @@ export const removeMember = async (memberId) => {
     }
   } catch (error) {
     console.error("Error removing member:", error);
+  }
+};
+
+export const getSubscribedSellers = async (memberId, page = 1, size = 10) => {
+  const SUBSCRIBED_SELLERS_ENDPOINT = `/auth/subscribedSeller`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(
+      `${SUBSCRIBED_SELLERS_ENDPOINT}?memberId=${memberId}&page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    return responseData.result.sellerList;
+  } catch (error) {
+    console.error("Error fetching subscribed sellers:", error);
+    throw error;
   }
 };

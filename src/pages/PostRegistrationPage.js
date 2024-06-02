@@ -9,7 +9,7 @@ function PostRegistrationPage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  const memberId = 1;
+  const memberId = localStorage.getItem("memberId");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
