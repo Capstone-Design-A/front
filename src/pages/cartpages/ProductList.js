@@ -2,7 +2,6 @@ import styles from "./ProductList.module.css";
 import closeButton from "../../assets/closeButton.svg";
 import plus from "../../assets/icon-plus-line.svg";
 import minus from "../../assets/icon-minus-line.svg";
-import tmpImage from "../../assets/img-meat-4.png";
 
 function ProductList({ product, products, setProducts, onProductChecked }) {
   const handleDelete = (productId) => {
@@ -39,7 +38,7 @@ function ProductList({ product, products, setProducts, onProductChecked }) {
       />
       <div className={styles.cart_product_wrap}>
         <div className={styles.cart_product_image}>
-          <img src={tmpImage} alt="product-img" />
+          <img src={product.image} alt="product-img" />
         </div>
         <div className={styles.cart_product_info}>
           <p>{product.name}</p>
@@ -68,7 +67,6 @@ function ProductList({ product, products, setProducts, onProductChecked }) {
         <p className={styles.total_price}>
           {product.price * product.quantity}원
         </p>
-        
       </div>
 
       <div className={styles.product_remove}>

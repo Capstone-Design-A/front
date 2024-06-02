@@ -7,34 +7,37 @@ import ProductList from "./ProductList";
 import Button from "../../components/button/Button";
 import Warn from "../../components/shared/Warn";
 import styles from "./CartPage.module.css";
+import meatImg from "../../assets/img-meat-4.png";
+import appleImg from "../../assets/img.png";
+import pearImg from "../../assets/img5.png";
 
 function CartPage() {
-  //추후 productdetail페이지에서 장바구니 담기 시
-  //새롭게 정보저장을 위한 cart페이지를 만들고 모두 거기서 빼오도록 수정 필요
-  //아니면 여기다 바로 products라는 배열로 저장
+  // 추후 productdetail페이지에서 장바구니 담기 시
+  // 새롭게 정보저장을 위한 cart페이지를 만들고 모두 거기서 빼오도록 수정 필요
+  // 아니면 여기다 바로 products라는 배열로 저장
   const [products, setProducts] = useState([
     {
       id: 1,
-      name: "item1",
+      name: "농수 축산 가공 한우",
       price: 20000,
       quantity: 1,
-      image: "imageURL1",
+      image: meatImg,
       isChecked: false,
     },
     {
       id: 2,
-      name: "item2",
+      name: "단맛 꿀 배",
       price: 18000,
       quantity: 2,
-      image: "imageUrl2",
+      image: pearImg,
       isChecked: false,
     },
     {
       id: 3,
-      name: "item 3",
+      name: "무농약 무가네 사과",
       price: 18000,
       quantity: 2,
-      image: "imageUrl3",
+      image: appleImg,
       isChecked: false,
     },
   ]);

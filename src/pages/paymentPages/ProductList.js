@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import styles from "./ProductList.module.css";
-import imageURL from "../../assets/img-meat-4.png";
+import meatImg from "../../assets/img-meat-4.png";
+import pearImg from "../../assets/img5.png";
 
 function ProductList() {
   const [products] = useState([
     {
       id: 1,
-      name: "item1",
+      name: "농수 축산 가공 한우",
       price: 20000,
       quantity: 1,
-      image: imageURL,
+      image: meatImg,
     },
     {
       id: 2,
-      name: "item2",
+      name: "단맛 꿀 배",
       price: 18000,
       quantity: 2,
-      image: imageURL,
+      image: pearImg,
     },
   ]);
 
