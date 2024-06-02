@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/proxy/*"
-  to = "https://dev.agriculturalproducts.store/:splat"
+  to = "https://sunny-dango-95ba65.netlify.app/:splat"
   status = 200
   force = true
 
