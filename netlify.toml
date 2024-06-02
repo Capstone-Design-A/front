@@ -30,12 +30,32 @@ for = "/*.css"
 
 # JSON 응답이 필요한 경로에 대해 헤더 설정
 [[headers]]
-for = "/api/*"
+for = "/member/*"
 [headers.values]
   Content-Type = "application/json; charset=UTF-8"
 
 # JSON 응답이 필요한 나머지 모든 경로에 대해 헤더 설정
 [[headers]]
-for = "/"
+for = "/login/*"
+[headers.values]
+  Content-Type = "application/json; charset=UTF-8"
+
+[[headers]]
+for = "/item/*"
+[headers.values]
+  Content-Type = "application/json; charset=UTF-8"
+  
+[[headers]]
+for = "/auth/*"
+[headers.values]
+  Content-Type = "application/json; charset=UTF-8"
+
+[[headers]]
+for = "/seller/*"
+[headers.values]
+  Content-Type = "application/json; charset=UTF-8"
+
+[[headers]]
+for = "/posts/*"
 [headers.values]
   Content-Type = "application/json; charset=UTF-8"
