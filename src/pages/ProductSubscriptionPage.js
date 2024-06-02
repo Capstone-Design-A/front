@@ -12,7 +12,8 @@ function ProductSubscriptionPage() {
 
   const token = localStorage.getItem("accessToken");
   const isLoggedIn = !!token;
-  const memberId = isLoggedIn ? 1 : null;
+  const id = localStorage.getItem("memberId");
+  const memberId = isLoggedIn ? id : null;
 
   useEffect(() => {
     const fetchData = async () => {

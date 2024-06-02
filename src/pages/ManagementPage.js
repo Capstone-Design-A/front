@@ -1,6 +1,5 @@
 // 판매자 관리 페이지입니다.
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import SellerCategory from "../components/category/SellerCategory";
 import MonthlySales from "../components/managements/MonthlySales";
 import styles from "./ManagementPage.module.css";
@@ -9,7 +8,7 @@ import SellerImminentItemList from "./SellerImminentItemList";
 import DashboardPage from "./DashboardPage";
 
 function ManagementPage() {
-  const { sellerId } = useParams();
+  const sellerId = localStorage.getItem("memberId");
   // eslint-disable-next-line
   const [page, setPage] = useState(1);
   // eslint-disable-next-line

@@ -10,7 +10,7 @@ import img4 from "../assets/managementHeader4.png";
 
 function DashboardPage() {
   const [datas, setDatas] = useState({});
-  const sellerId = "1";
+  const sellerId = localStorage.getItem("memberId");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +23,7 @@ function DashboardPage() {
     };
 
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   const cardsInfo = [
