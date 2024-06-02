@@ -1,11 +1,5 @@
 [[redirects]]
-  from = "/proxy/*"
+  from = "/*"
   to = "https://sunny-dango-95ba65.netlify.app/:splat"
   status = 200
   force = true
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-	force = false
