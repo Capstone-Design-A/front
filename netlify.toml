@@ -9,3 +9,8 @@
   to = "/index.html"
   status = 200
 	force = false
+
+[[headers]]
+for = "/*"
+[headers.values]
+Content-Type = "application/json; charset=UTF-8"
