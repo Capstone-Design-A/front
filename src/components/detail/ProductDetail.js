@@ -27,7 +27,7 @@ function ProductDetail({ item }) {
   };
 
   const handleConfirm = () => {
-    navigate("/auth/cart");
+    navigate("/auth/cart/item");
     setShowModal(false);
   };
 

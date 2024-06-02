@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Container from "../shared/Container";
 import Notifications from "./Notifications";
 import logoImg from "../../assets/logoVer2.png";
 import styles from "./Nav.module.css";
 import SearchBar from "./SearchBar";
+import { countCartItems } from "../../api/api";
 
 function Nav({ isLoggedIn, onLogout }) {
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  const memberId = 1;
+
+  useEffect(() => {
+    fetchCartItemsCount();
+  }, []);
+
+  const fetchCartItemsCount = async () => {
+    try {
+      const cartCount = await countCartItems(memberId);
+      setCartItemsCount(cartCount);
+    } catch (error) {
+      console.error("Error fetching cart items count:", error);
+    }
+  };
+
   return (
     <div className={styles.nav}>
       <Container className={styles.container_top}>
@@ -24,7 +41,7 @@ function Nav({ isLoggedIn, onLogout }) {
               </li>
               <li> | </li>
               <li>
-                <NavLink to="/support">고객센터</NavLink>
+                <NavLink to="/">고객센터</NavLink>
               </li>
             </>
           ) : (
@@ -44,7 +61,7 @@ function Nav({ isLoggedIn, onLogout }) {
               </li>
               <li> | </li>
               <li>
-                <NavLink to="/support">고객센터</NavLink>
+                <NavLink to="/">고객센터</NavLink>
               </li>
             </>
           )}
@@ -63,7 +80,12 @@ function Nav({ isLoggedIn, onLogout }) {
           </li>
           <li> | </li>
           <li>
-            <NavLink to="/auth/cart">장바구니</NavLink>
+            <NavLink to="/auth/cart/item">
+              장바구니
+              {cartItemsCount > 0 && (
+                <div className={styles.cartItemsCount}>{cartItemsCount}</div>
+              )}
+            </NavLink>
           </li>
           <li className={styles.user}>
             <Notifications />
