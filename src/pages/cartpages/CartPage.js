@@ -7,14 +7,13 @@ import ProductList from "./ProductList";
 import Button from "../../components/button/Button";
 import Warn from "../../components/shared/Warn";
 import styles from "./CartPage.module.css";
-import { getCartItems, deleteCartItems } from "../../api/api"; // import deleteCartItems 함수 추가
+import { getCartItems, deleteCartItems } from "../../api/api";
 
 function CartPage() {
   const [products, setProducts] = useState([]);
   const [allChecked, setAllChecked] = useState(false);
   const [totalDeliveryCharge, setTotalDeliveryCharge] = useState(0);
 
-  // 장바구니 데이터를 가져오는 함수
   const fetchCartItems = async () => {
     try {
       const response = await getCartItems();
@@ -40,16 +39,13 @@ function CartPage() {
   };
 
   useEffect(() => {
-    // 페이지가 마운트될 때 장바구니 데이터를 가져옴
     fetchCartItems();
   }, []);
 
-  // 장바구니 상품 삭제 함수
   const handleDeleteProduct = async (productId) => {
     try {
       const response = await deleteCartItems(productId);
       if (response.isSuccess) {
-        // 상품 삭제 후 장바구니 데이터 다시 가져옴
         fetchCartItems();
       } else {
         console.error("Failed to delete product:", response.message);
