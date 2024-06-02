@@ -45,12 +45,12 @@ export const getSearchItems = async (page, size, keyword, token) => {
   }
 };
 
-export const getAlarmCount = async (memberId) => {
+export const getAlarmCount = async () => {
   const ALARM_COUNT_ENDPOINT = "/auth/alarm";
   const token = localStorage.getItem("accessToken");
 
   try {
-    const response = await fetch(`${ALARM_COUNT_ENDPOINT}/${memberId}`, {
+    const response = await fetch(`${ALARM_COUNT_ENDPOINT}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -298,13 +298,10 @@ export const getSubscriptionItems = async (
   const token = localStorage.getItem("accessToken");
 
   try {
-    const url = new URL(SUBSCRIPTION_ITEMS_ENDPOINT, window.location.origin);
-    url.searchParams.append("type", type);
-    url.searchParams.append("page", page);
-    url.searchParams.append("size", size);
+    let url = `${window.location.origin}${SUBSCRIPTION_ITEMS_ENDPOINT}?type=${type}&page=${page}&size=${size}`;
 
     if (type === 0 && fromMember) {
-      url.searchParams.append("fromMember", fromMember);
+      url += `&fromMember=${fromMember}`;
     }
 
     const headers = {
@@ -315,7 +312,7 @@ export const getSubscriptionItems = async (
       headers["Authorization"] = `Bearer ${token}`;
     }
 
-    const response = await fetch(url.toString(), {
+    const response = await fetch(url, {
       method: "GET",
       headers: headers,
     });
