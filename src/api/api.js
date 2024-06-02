@@ -13,6 +13,7 @@ export const getSearchItems = async (page, size, keyword, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -54,6 +55,7 @@ export const getAlarmCount = async () => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -90,6 +92,7 @@ export const getAlarmItems = async (page, size, type, memberId) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -126,6 +129,7 @@ export const getItemsByCategory = async (categoryId, page, size, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -160,6 +164,7 @@ export const getGroupItems = async (page, size, keyword, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -214,6 +219,7 @@ export const getDeadlineItems = async (page, size, keyword, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -256,6 +262,7 @@ export const getRankingItems = async (page, size, keyword, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -306,6 +313,7 @@ export const getSubscriptionItems = async (
 
     const headers = {
       "Content-type": "application/json",
+      Accept: "application/json",
     };
 
     if (token) {
@@ -346,6 +354,7 @@ export const getItemDetail = async (itemId, token) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
         "X-ACCESS-TOKEN": token,
       },
     });
@@ -396,6 +405,7 @@ export const getGroupItemDetail = async (itemId, token) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
         "X-ACCESS-TOKEN": token,
       },
     });
@@ -442,6 +452,7 @@ export const getInquiryList = async (itemId, page, size, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -478,6 +489,7 @@ export const getReviewList = async (itemId, page, size, token) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           "X-ACCESS-TOKEN": token,
         },
       }
@@ -514,6 +526,7 @@ export const countCartItems = async (memberId) => {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
     });
 
@@ -547,6 +560,7 @@ export const addToCart = async (itemId, quantity) => {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({ itemId, quantity }),
     });
@@ -571,6 +585,7 @@ export const getCartItems = async () => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -626,6 +641,7 @@ export const getSellerInfo = async (memberId) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
       },
     });
 
@@ -657,6 +673,7 @@ export const getPostList = async (memberId) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
       },
     });
 
@@ -687,6 +704,7 @@ export const getPostItems = async (postId, token) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
         "X-ACCESS-TOKEN": token,
       },
     });
@@ -784,6 +802,7 @@ export const getDashboard = async () => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -820,6 +839,7 @@ export const getOrderStatus = async (page, size) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -856,6 +876,7 @@ export const getSellerImminentItemList = async (page, size) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -892,6 +913,7 @@ export const getSellerItemList = async (page, size) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -986,6 +1008,7 @@ export const getSubscriptionStatus = async (toMemberId) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -1007,6 +1030,7 @@ export const subscribe = async (toMemberId) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -1028,6 +1052,7 @@ export const unsubscribe = async (toMemberId) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -1049,6 +1074,7 @@ export const getUserOrderStatus = async (orderId) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -1084,6 +1110,7 @@ export const getUserGroupStatus = async (page, size) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -1115,6 +1142,7 @@ export const login = async (loginId, password) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({ loginId, password }),
   });
@@ -1133,6 +1161,7 @@ export const refreshAccessToken = async (refreshToken) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({ refreshToken }),
   });
@@ -1247,6 +1276,7 @@ export const signUp = async (
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         id,
@@ -1275,6 +1305,7 @@ export const checkDuplicate = async (id, type, value) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         id,
@@ -1320,6 +1351,8 @@ export const getSubscribedSellers = async (memberId, page = 1, size = 10) => {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
       }
     );
