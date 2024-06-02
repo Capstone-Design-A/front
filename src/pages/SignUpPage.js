@@ -26,46 +26,63 @@ function SignUpPage() {
   const [isLoginIdChecked, setIsLoginIdChecked] = useState(false);
   const [isNickNameChecked, setIsNickNameChecked] = useState(false);
   const [phoneError, setPhoneError] = useState("");
+  const [loginIdError, setLoginIdError] = useState("");
   const [nickNameError, setNickNameError] = useState("");
+  const [generalErrorMessage, setGeneralErrorMessage] = useState("");
+  const [isLoginIdCheckComplete, setIsLoginIdCheckComplete] = useState(false);
+  const [isNickNameCheckComplete, setIsNickNameCheckComplete] = useState(false);
   const navigate = useNavigate();
   const { user, login } = useAuth();
   const location = useLocation();
 
   async function handleCheckDuplicate(type) {
-    const id = values.id;
+    try {
+      const id = values.id;
 
-    const temporaryMemberId = await checkDuplicate(id, type, values[type]);
+      const temporaryMemberId = await checkDuplicate(id, type, values[type]);
 
-    if (type === "loginId") {
-      setIsLoginIdDuplicate(temporaryMemberId.isDuplicate);
-      setIsLoginIdChecked(true);
-      if (!temporaryMemberId.isDuplicate) {
-        setValues((prevValues) => ({
-          ...prevValues,
-          id: temporaryMemberId.id,
-        }));
-        localStorage.setItem("temporaryMemberId", temporaryMemberId.id);
-      } else {
-        setValues((prevValues) => ({
-          ...prevValues,
-          id: "",
-        }));
+      if (type === "loginId") {
+        setIsLoginIdDuplicate(temporaryMemberId.isDuplicate);
+        setIsLoginIdChecked(true);
+        setIsLoginIdCheckComplete(true);
+        if (!temporaryMemberId.isDuplicate) {
+          setValues((prevValues) => ({
+            ...prevValues,
+            id: temporaryMemberId.id,
+          }));
+          localStorage.setItem("temporaryMemberId", temporaryMemberId.id);
+          setLoginIdError("");
+        } else {
+          setValues((prevValues) => ({
+            ...prevValues,
+            id: "",
+          }));
+          setLoginIdError("이미 사용 중인 아이디입니다.");
+        }
+      } else if (type === "nickName") {
+        setIsNickNameDuplicate(temporaryMemberId.isDuplicate);
+        setIsNickNameChecked(true);
+        setIsNickNameCheckComplete(true);
+        if (!temporaryMemberId.isDuplicate) {
+          setValues((prevValues) => ({
+            ...prevValues,
+            id: temporaryMemberId.id,
+          }));
+          localStorage.setItem("temporaryMemberId", temporaryMemberId.id);
+          setNickNameError("");
+        } else {
+          setValues((prevValues) => ({
+            ...prevValues,
+            id: "",
+          }));
+          setNickNameError("이미 사용 중인 닉네임입니다.");
+        }
       }
-    } else if (type === "nickName") {
-      setIsNickNameDuplicate(temporaryMemberId.isDuplicate);
-      setIsNickNameChecked(true);
-      if (!temporaryMemberId.isDuplicate) {
-        setValues((prevValues) => ({
-          ...prevValues,
-          id: temporaryMemberId.id,
-        }));
-        localStorage.setItem("temporaryMemberId", temporaryMemberId.id);
-      } else {
-        setValues((prevValues) => ({
-          ...prevValues,
-          id: "",
-        }));
-        localStorage.removeItem("temporaryMemberId");
+    } catch (error) {
+      if (type === "loginId") {
+        setLoginIdError("중복 체크 중 오류가 발생했습니다.");
+      } else if (type === "nickName") {
+        setNickNameError("중복 체크 중 오류가 발생했습니다.");
       }
     }
   }
@@ -74,22 +91,22 @@ function SignUpPage() {
     e.preventDefault();
 
     if (values.password !== values.passwordRepeat) {
-      alert("비밀번호가 일치하지 않습니다.");
+      setGeneralErrorMessage("비밀번호가 일치하지 않습니다.");
       return;
     }
 
     if (!isLoginIdChecked || !isNickNameChecked) {
-      alert("아이디와 닉네임 중복 체크를 진행해주세요.");
+      setGeneralErrorMessage("아이디와 닉네임 중복 체크를 진행해주세요.");
       return;
     }
 
     if (isLoginIdDuplicate) {
-      alert("이미 사용 중인 아이디입니다.");
+      setGeneralErrorMessage("이미 사용 중인 아이디입니다.");
       return;
     }
 
     if (isNickNameDuplicate) {
-      alert("이미 사용 중인 닉네임입니다.");
+      setGeneralErrorMessage("이미 사용 중인 닉네임입니다.");
       return;
     }
 
@@ -127,12 +144,14 @@ function SignUpPage() {
       }
     } catch (error) {
       console.error("회원가입 에러:", error);
+      setGeneralErrorMessage("회원가입 중 오류가 발생했습니다.");
     }
   }
 
   useEffect(() => {
     setIsLoginIdChecked(false);
     setIsNickNameChecked(false);
+    setGeneralErrorMessage("");
   }, [location.pathname]);
 
   useEffect(() => {
@@ -193,22 +212,28 @@ function SignUpPage() {
           <Label className={styles.Label} htmlFor="loginId">
             로그인 아이디
           </Label>
-          <Input
-            id="loginId"
-            className={styles.Input}
-            name="loginId"
-            type="text"
-            placeholder="로그인 아이디"
-            value={values.loginId}
-            onChange={handleChange}
-          />
-          <Button2
-            className={styles.Button2}
-            type="button"
-            onClick={() => handleCheckDuplicate("loginId")}
-          >
-            중복 체크
-          </Button2>
+          <div className={styles.ButtonWrapper}>
+            <Input
+              id="loginId"
+              className={styles.Input}
+              name="loginId"
+              type="text"
+              placeholder="로그인 아이디"
+              value={values.loginId}
+              onChange={handleChange}
+            />
+            <Button2
+              className={styles.button2}
+              type="button"
+              onClick={() => handleCheckDuplicate("loginId")}
+            >
+              {isLoginIdCheckComplete ? "중복 체크 완료" : "중복 체크"}
+            </Button2>
+          </div>
+          {isLoginIdDuplicate && (
+            <p className={styles.ErrorMsg}>이미 사용 중인 아이디입니다.</p>
+          )}
+          {loginIdError && <p className={styles.ErrorMsg}>{loginIdError}</p>}
           <Label className={styles.Label} htmlFor="password">
             비밀번호
           </Label>
@@ -233,28 +258,27 @@ function SignUpPage() {
             value={values.passwordRepeat}
             onChange={handleChange}
           />
-          {isLoginIdDuplicate && (
-            <p className={styles.ErrorMsg}>이미 사용 중인 아이디입니다.</p>
-          )}
           <Label className={styles.Label} htmlFor="nickName">
             닉네임
           </Label>
-          <Input
-            id="nickName"
-            className={styles.Input}
-            name="nickName"
-            type="text"
-            placeholder="닉네임"
-            value={values.nickName}
-            onChange={handleChange}
-          />
-          <Button2
-            className={styles.Button2}
-            type="button"
-            onClick={() => handleCheckDuplicate("nickName")}
-          >
-            중복 체크
-          </Button2>
+          <div className={styles.ButtonWrapper}>
+            <Input
+              id="nickName"
+              className={styles.Input}
+              name="nickName"
+              type="text"
+              placeholder="닉네임"
+              value={values.nickName}
+              onChange={handleChange}
+            />
+            <Button2
+              className={styles.button2}
+              type="button"
+              onClick={() => handleCheckDuplicate("nickName")}
+            >
+              {isNickNameCheckComplete ? "중복 체크 완료" : "중복 체크"}
+            </Button2>
+          </div>
           {isNickNameDuplicate && (
             <p className={styles.ErrorMsg}>이미 사용 중인 닉네임입니다.</p>
           )}
@@ -296,7 +320,9 @@ function SignUpPage() {
             value={values.details}
             onChange={handleChange}
           />
-
+          {generalErrorMessage && (
+            <p className={styles.ErrorMsg}>{generalErrorMessage}</p>
+          )}
           <Button2 className={styles.Button2} type="submit">
             회원가입
           </Button2>

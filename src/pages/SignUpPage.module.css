@@ -53,16 +53,6 @@
   margin: 50px 0;
 }
 
-.GoogleButton {
-  display: flex;
-  font-size: 18px;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin: 24px 0;
-  color: #000000;
-}
-
 .login {
   margin: 5px 0 40px;
   text-align: center;
@@ -73,4 +63,42 @@
   text-align: center;
   font-weight: 600;
   margin: 0 0 0 5px;
+}
+
+.button2 {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  opacity: 70%;
+  border-color: #000;
+  border-width: 0.05px;
+  border-radius: 8px;
+  color: #48735d;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+  width: auto;
+  padding: 10px 20px;
+}
+
+.button2:hover {
+  opacity: 100%;
+}
+
+.ButtonWrapper {
+  position: relative;
+  display: inline;
+  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ErrorMsg {
+  color: red;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }

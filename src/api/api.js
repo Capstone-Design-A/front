@@ -1,5 +1,5 @@
 const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
-const URL = `${PROXY}.json`;
+const URL = `${PROXY}`;
 const BASE_URL = URL;
 
 // 메인 섹션
