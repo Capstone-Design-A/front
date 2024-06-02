@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Container from "../../components/shared/Container";
 import TotalCart from "./TotalCart";
@@ -7,39 +7,53 @@ import ProductList from "./ProductList";
 import Button from "../../components/button/Button";
 import Warn from "../../components/shared/Warn";
 import styles from "./CartPage.module.css";
+import { getCartItems, deleteCartItems } from "../../api/api";
 
 function CartPage() {
-  //추후 productdetail페이지에서 장바구니 담기 시
-  //새롭게 정보저장을 위한 cart페이지를 만들고 모두 거기서 빼오도록 수정 필요
-  //아니면 여기다 바로 products라는 배열로 저장
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: "item1",
-      price: 20000,
-      quantity: 1,
-      image: "imageURL1",
-      isChecked: false,
-    },
-    {
-      id: 2,
-      name: "item2",
-      price: 18000,
-      quantity: 2,
-      image: "imageUrl2",
-      isChecked: false,
-    },
-    {
-      id: 3,
-      name: "item 3",
-      price: 18000,
-      quantity: 2,
-      image: "imageUrl3",
-      isChecked: false,
-    },
-  ]);
-
+  const [products, setProducts] = useState([]);
   const [allChecked, setAllChecked] = useState(false);
+  const [totalDeliveryCharge, setTotalDeliveryCharge] = useState(0);
+
+  const fetchCartItems = async () => {
+    try {
+      const response = await getCartItems();
+      if (response.isSuccess) {
+        const carts = response.result.carts;
+        setProducts(
+          carts.map((cart) => ({
+            id: cart.id,
+            name: cart.item.name,
+            price: cart.item.price,
+            quantity: cart.quantity,
+            image: cart.item.imageUrl,
+            isChecked: false,
+          }))
+        );
+        setTotalDeliveryCharge(response.result.sumDeliveryCharge);
+      } else {
+        console.error("Failed to fetch cart items:", response.message);
+      }
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
+
+  const handleDeleteProduct = async (productId) => {
+    try {
+      const response = await deleteCartItems(productId);
+      if (response.isSuccess) {
+        fetchCartItems();
+      } else {
+        console.error("Failed to delete product:", response.message);
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
 
   const handleAllChecked = () => {
     const newAllChecked = !allChecked;
@@ -59,6 +73,8 @@ function CartPage() {
     setProducts(nextProducts);
     setAllChecked(nextProducts.every((product) => product.isChecked));
   };
+
+  // 나머지 함수들은 유지됨
 
   return (
     <Container className={styles.container}>
@@ -80,20 +96,26 @@ function CartPage() {
           </div>
         </>
       ) : (
-        <ul className={styles.items}>
-          {products.map((product) => (
-            <li key={product.id} className={styles.item}>
-              <ProductList
-                product={product}
-                products={products}
-                setProducts={setProducts}
-                onProductChecked={handleProductChecked}
-              />
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul className={styles.items}>
+            {products.map((product) => (
+              <li key={product.id} className={styles.item}>
+                <ProductList
+                  product={product}
+                  products={products}
+                  setProducts={setProducts}
+                  onProductChecked={handleProductChecked}
+                  onDeleteProduct={handleDeleteProduct}
+                />
+              </li>
+            ))}
+          </ul>
+          <TotalCart
+            products={products}
+            totalDeliveryCharge={totalDeliveryCharge}
+          />
+        </>
       )}
-      {products.length === 0 ? "" : <TotalCart products={products} />}
     </Container>
   );
 }

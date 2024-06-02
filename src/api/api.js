@@ -520,16 +520,16 @@ export const getReviewList = async (itemId, page, size, token) => {
   }
 };
 
-// 장바구니의 물건 종류 수 조회
-export const getCartItems = async (memberId, token) => {
-  const CART_ITEMS_ENDPOINT = "/cart";
+export const countCartItems = async (memberId) => {
+  const CART_ITEMS_ENDPOINT = "/auth/cart";
+  const token = localStorage.getItem("accessToken");
 
   try {
     const response = await fetch(`${CART_ITEMS_ENDPOINT}/${memberId}`, {
       method: "GET",
       headers: {
-        "Content-type": "application/json",
-        "X-ACCESS-TOKEN": token,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
     });
 
@@ -546,7 +546,6 @@ export const getCartItems = async (memberId, token) => {
     }
 
     const result = responseData.result;
-    console.log("CartItems:", result);
     return result;
   } catch (error) {
     console.error("Error fetching item detail:", error);
@@ -575,6 +574,61 @@ export const addToCart = async (itemId, quantity) => {
     return response.json();
   } catch (error) {
     console.error("Error adding item to cart:", error);
+    throw error;
+  }
+};
+
+export const getCartItems = async () => {
+  const CART_ITEMS_ENDPOINT = "/auth/cart/item";
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(`${CART_ITEMS_ENDPOINT}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error("Error fetching deadline items:", error);
+    throw error;
+  }
+};
+
+export const deleteCartItems = async (cartId) => {
+  const DELETE_CART_ITEMS_ENDPOINT = `/auth/cart/${cartId}`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(DELETE_CART_ITEMS_ENDPOINT, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete post");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error deleting post:", error);
     throw error;
   }
 };

@@ -1,5 +1,5 @@
 .nav {
-  position: flex;
+  position: relative;
   z-index: 1;
   padding: 10px 0px 30px 0px;
   background-color: #fff;
@@ -54,6 +54,10 @@ ul.nav_bottom {
   white-space: nowrap;
 }
 
+.nav_bottom li {
+  position: relative;
+}
+
 ul.nav_bottom > li:not(:last-child) {
   margin-right: 20px;
 }
@@ -65,4 +69,20 @@ ul.nav_bottom > li:not(:last-child) {
 
 .font {
   color: #b3b3b3;
+}
+
+.cartItemsCount {
+  position: absolute;
+  top: -10%;
+  left: calc(100% + 5px);
+  transform: translate(-50%, -50%);
+  background-color: #e35252;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 11px;
 }
