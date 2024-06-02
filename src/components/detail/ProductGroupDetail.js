@@ -1,24 +1,52 @@
+import React, { useState } from "react";
 import Button from "../button/Button";
+import { addToCart } from "../../api/api";
 import OrderButton from "../button/OrderButton";
-import { Navigate, Link } from "react-router-dom";
-import { addWishlist } from "../../api";
+import { useNavigate, Link } from "react-router-dom";
 import Container from "../shared/Container";
 import styles from "./ProductGroupDetail.module.css";
-import { useNavigate } from "react-router-dom";
 import HorizontalRule from "../shared/HorizontalRule";
-import Amount from "./Amount";
 
 function ProductGroupDetail({ item, orderSum, targetQuantity, discountPrice }) {
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
-  if (!item) {
-    return <Navigate to="/product" />;
-  }
-
-  const handleAddWishlistClick = () => {
-    addWishlist(item?.id);
-    navigate("/cart");
+  const handleAddToCartClick = async () => {
+    try {
+      const result = await addToCart(item.id, quantity);
+      console.log("Item added to cart:", {
+        itemId: item.id,
+        quantity: quantity,
+      });
+      console.log(result.message);
+      setShowModal(true);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
   };
+
+  const handleConfirm = () => {
+    navigate("/auth/cart/item");
+    setShowModal(false);
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
+  };
+
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const totalPrice = quantity * item.price;
+  const totalDiscountPrice = quantity * discountPrice;
 
   return (
     <>
@@ -31,20 +59,22 @@ function ProductGroupDetail({ item, orderSum, targetQuantity, discountPrice }) {
             </Link>
           </div>
           <h1 className={styles.title}>{item.name}</h1>
-          <div className={styles.amountWrapper}>
-            <Amount className={styles.amount} />
+          <div className={styles.quantityControls}>
+            <Button onClick={decreaseQuantity}>-</Button>
+            <span className={styles.quantity}>{quantity}</span>
+            <Button onClick={increaseQuantity}>+</Button>
           </div>
           <HorizontalRule />
           <p className={styles.price}>
             총 상품 금액
             {discountPrice && (
               <span className={styles.discountPrice}>
-                {discountPrice.toLocaleString()}
+                {totalDiscountPrice.toLocaleString()}
               </span>
             )}{" "}
             원
             <span className={styles.originPrice}>
-              {item.price.toLocaleString()}원
+              {totalPrice.toLocaleString()}원
             </span>
           </p>
           <div className={styles.container}>
@@ -64,19 +94,30 @@ function ProductGroupDetail({ item, orderSum, targetQuantity, discountPrice }) {
           <OrderButton
             className={styles.orderbutton}
             variant="round"
-            onClick={handleAddWishlistClick}
+            onClick={handleAddToCartClick}
           >
             바로구매
           </OrderButton>
           <Button
             className={styles.cartbutton}
             variant="round"
-            onClick={handleAddWishlistClick}
+            onClick={handleAddToCartClick}
           >
             장바구니 담기
           </Button>
         </Container>
       </div>
+      {showModal && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <h2>장바구니로 이동하시겠습니까?</h2>
+            <div>
+              <Button onClick={handleCancel}>취소</Button>
+              <Button onClick={handleConfirm}>확인</Button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

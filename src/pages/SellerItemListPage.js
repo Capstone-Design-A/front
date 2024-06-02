@@ -6,7 +6,7 @@ import styles from "./SellerItemListPage.module.css";
 
 function SellerItemListPage() {
   const [products, setProducts] = useState([]);
-  const sellerId = "1";
+  const sellerId = localStorage.getItem("memberId");
   const page = 1;
   const size = 10;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
@@ -22,7 +22,7 @@ function SellerItemListPage() {
     };
 
     fetchData();
-  }, []);
+  }, [sellerId]);
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);
