@@ -9,7 +9,7 @@ import Container from "../components/shared/Container";
 import { getSellerInfo, getPostList } from "../api/api";
 
 function SellerIntroductionPage() {
-  const { memberId } = useParams();
+  const { sellerId } = useParams();
   const [userData, setUserData] = useState(null);
   const [postList, setPostList] = useState([]);
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
@@ -18,10 +18,10 @@ function SellerIntroductionPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sellerInfo = await getSellerInfo(memberId);
+        const sellerInfo = await getSellerInfo(sellerId);
         setUserData(sellerInfo);
 
-        const posts = await getPostList(memberId);
+        const posts = await getPostList(sellerId);
         setPostList(posts.postPreviews);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -29,7 +29,7 @@ function SellerIntroductionPage() {
     };
 
     fetchData();
-  }, [memberId]);
+  }, [sellerId]);
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);

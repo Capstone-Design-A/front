@@ -44,14 +44,15 @@ export const getSearchItems = async (page, size, keyword, token) => {
 };
 
 export const getAlarmCount = async (memberId) => {
-  const ALARM_ITEMS_ENDPOINT = "/alarm";
+  const ALARM_COUNT_ENDPOINT = "/auth/alarm";
+  const token = localStorage.getItem("accessToken");
 
   try {
-    const response = await fetch(`${ALARM_ITEMS_ENDPOINT}/${memberId}`, {
+    const response = await fetch(`${ALARM_COUNT_ENDPOINT}/${memberId}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
-        // "X-ACCESS-TOKEN": token,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -76,24 +77,18 @@ export const getAlarmCount = async (memberId) => {
   }
 };
 
-export const getAlarmItems = async (
-  fromMember,
-  keyword,
-  page,
-  size,
-  type,
-  token
-) => {
-  const ALARM_ITEMS_ENDPOINT = "/alarm";
+export const getAlarmItems = async (page, size, type, memberId) => {
+  const ALARM_ITEMS_ENDPOINT = "/auth/alarms";
+  const token = localStorage.getItem("accessToken");
 
   try {
     const response = await fetch(
-      `${ALARM_ITEMS_ENDPOINT}?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`,
+      `${ALARM_ITEMS_ENDPOINT}?type=${type}&memberId=${memberId}&page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          "X-ACCESS-TOKEN": token,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -389,7 +384,7 @@ export const getItemDetail = async (itemId, token) => {
 
     const itemDetail = {
       id: result.id,
-      memberId: result.memberId,
+      sellerId: result.sellerId,
       name: result.name,
       category: result.category,
       stock: result.stock,

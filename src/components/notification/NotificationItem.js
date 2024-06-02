@@ -3,26 +3,23 @@ import { Link } from "react-router-dom";
 import styles from "./NotificationItem.module.css";
 
 function NotificationItem({
-  postId,
-  profileImage,
+  id,
+  title,
   content,
-  time,
-  postImage,
+  isConfirmed,
   /* onDelete, */
 }) {
   return (
-    <Link to={`/post/${postId}`} className={styles.notificationLink}>
-      <div className={styles.notificationItem}>
-        <img
-          src={profileImage}
-          alt="프로필 이미지"
-          className={styles.profileImage}
-        />
+    <Link to={`/post/${id}`} className={styles.notificationLink}>
+      <div
+        className={`${styles.notificationItem} ${
+          isConfirmed ? styles.read : styles.unread
+        }`}
+      >
         <div className={styles.info}>
+          <div className={styles.title}>{title}</div>
           <div className={styles.content}>{content}</div>
-          <div className={styles.time}>{time}</div>
         </div>
-        <img src={postImage} alt="게시물 이미지" className={styles.postImage} />
         {/* <button className={styles.deleteButton} onClick={onDelete}>
           삭제
         </button>*/}
