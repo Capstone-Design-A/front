@@ -9,10 +9,11 @@ import { countCartItems } from "../../api/api";
 
 function Nav({ isLoggedIn, onLogout }) {
   const [cartItemsCount, setCartItemsCount] = useState(0);
-  const memberId = 1;
+  const memberId = localStorage.getItem("memberId");
 
   useEffect(() => {
     fetchCartItemsCount();
+    // eslint-disable-next-line
   }, []);
 
   const fetchCartItemsCount = async () => {

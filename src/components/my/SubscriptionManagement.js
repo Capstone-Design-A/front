@@ -7,7 +7,7 @@ function SubscriptionManagement() {
   const [sellers, setSellers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const memberId = 1;
+  const memberId = localStorage.getItem("memberId");
 
   useEffect(() => {
     const fetchSellers = async () => {
@@ -22,6 +22,7 @@ function SubscriptionManagement() {
     };
 
     fetchSellers();
+    // eslint-disable-next-line
   }, []);
 
   if (loading) return <div>Loading...</div>;
