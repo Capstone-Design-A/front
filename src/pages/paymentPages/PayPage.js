@@ -10,6 +10,9 @@ function PayPage() {
       <PayAddress></PayAddress>
       <ProductList></ProductList>
       <PayMethod></PayMethod>
+      <div className={styles.buttonContainer}>
+        <button className={styles.paybutton}>결제</button>
+      </div>
     </div>
   );
 }

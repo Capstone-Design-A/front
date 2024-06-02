@@ -32,3 +32,12 @@
 .header {
   margin-top: 60px;
 }
+
+.buttonContainer {
+  text-align: right;
+  margin-top: 50px; /* 버튼과 다른 요소들 간의 간격을 위해 */
+}
+
+.paybutton {
+  /* 추가적인 버튼 스타일 */
+}

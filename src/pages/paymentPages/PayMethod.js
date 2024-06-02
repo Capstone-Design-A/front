@@ -1,10 +1,17 @@
 import React from "react";
-import styles from "./PayPage.module.css"; // 필요한 경우 스타일링 추가
+import styles from "./PayMethod.module.css"; // 필요한 경우 스타일링 추가
 
 function PayMethod() {
   return (
     <div>
-      <h2 className={styles.method}>결제방법</h2>
+      <h2 className={styles.header}>결제수단</h2>
+      <div className={styles.paylist}>
+        <input type="radio" id="bankPayment" name="paymentMethod" />
+        <label htmlFor="bankPayment">계좌 간편결제</label>
+        <hr className={styles.separator} />
+        <input type="radio" id="cardPayment" name="paymentMethod" />
+        <label htmlFor="cardPayment">카드 간편결제</label>
+      </div>
     </div>
   );
 }
