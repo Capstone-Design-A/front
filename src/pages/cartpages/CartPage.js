@@ -74,8 +74,6 @@ function CartPage() {
     setAllChecked(nextProducts.every((product) => product.isChecked));
   };
 
-  // 나머지 함수들은 유지됨
-
   return (
     <Container className={styles.container}>
       <h1 className={styles.title}>장바구니</h1>

@@ -2,7 +2,6 @@ import styles from "./ProductList.module.css";
 import closeButton from "../../assets/closeButton.svg";
 import plus from "../../assets/icon-plus-line.svg";
 import minus from "../../assets/icon-minus-line.svg";
-import tmpImage from "../../assets/img-meat-4.png";
 
 function ProductList({
   product,
@@ -48,7 +47,7 @@ function ProductList({
       />
       <div className={styles.cart_product_wrap}>
         <div className={styles.cart_product_image}>
-          <img src={tmpImage} alt="product-img" />
+          <img src={product.imageUrl} alt="product-img" />
         </div>
         <div className={styles.cart_product_info}>
           <p>{product.name}</p>

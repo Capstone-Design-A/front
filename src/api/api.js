@@ -1324,3 +1324,37 @@ export const removeMember = async (memberId) => {
     console.error("Error removing member:", error);
   }
 };
+
+export const getSubscribedSellers = async (memberId, page = 1, size = 10) => {
+  const SUBSCRIBED_SELLERS_ENDPOINT = `/auth/subscribedSeller`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(
+      `${SUBSCRIBED_SELLERS_ENDPOINT}?memberId=${memberId}&page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    return responseData.result.sellerList;
+  } catch (error) {
+    console.error("Error fetching subscribed sellers:", error);
+    throw error;
+  }
+};

@@ -1,23 +1,31 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getSubscribedSellers } from "../../api/api";
 import styles from "./SubscriptionManagement.module.css";
 
-const mockData = [
-  { id: 1, name: "판매자1", image: "https://via.placeholder.com/150" },
-  { id: 2, name: "판매자2", image: "https://via.placeholder.com/150" },
-  { id: 3, name: "판매자3", image: "https://via.placeholder.com/150" },
-  { id: 4, name: "판매자4", image: "https://via.placeholder.com/150" },
-  { id: 5, name: "판매자5", image: "https://via.placeholder.com/150" },
-  { id: 6, name: "판매자6", image: "https://via.placeholder.com/150" },
-  { id: 7, name: "판매자7", image: "https://via.placeholder.com/150" },
-  { id: 8, name: "판매자8", image: "https://via.placeholder.com/150" },
-  { id: 9, name: "판매자9", image: "https://via.placeholder.com/150" },
-  { id: 10, name: "판매자10", image: "https://via.placeholder.com/150" },
-];
-
 function SubscriptionManagement() {
-  // eslint-disable-next-line
-  const [sellers, setSellers] = useState(mockData);
+  const [sellers, setSellers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const memberId = 1;
+
+  useEffect(() => {
+    const fetchSellers = async () => {
+      try {
+        const sellersList = await getSubscribedSellers(memberId);
+        setSellers(sellersList);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSellers();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className={styles.container}>
@@ -30,11 +38,11 @@ function SubscriptionManagement() {
             className={styles.sellerCard}
           >
             <img
-              src={seller.image}
-              alt={seller.name}
+              src={seller.imageUrl}
+              alt={seller.introduction}
               className={styles.profileImage}
             />
-            <p className={styles.sellerName}>{seller.name}</p>
+            <p className={styles.sellerName}>{seller.introduction}</p>
           </Link>
         ))}
       </div>
