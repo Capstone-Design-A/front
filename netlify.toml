@@ -8,9 +8,28 @@
   from = "/*"
   to = "/index.html"
   status = 200
-	force = false
+  force = false
 
 [[headers]]
-for = "/*"
+# JSON 응답이 필요한 특정 경로에 대해 헤더 설정
+for = "/api/*"
 [headers.values]
-Content-Type = "application/json; charset=UTF-8"
+  Content-Type = "application/json; charset=UTF-8"
+
+# HTML 파일에 대해 올바른 Content-Type 설정
+[[headers]]
+for = "/*.html"
+[headers.values]
+  Content-Type = "text/html; charset=UTF-8"
+
+# 추가로 필요한 다른 파일 형식에 대해서도 헤더를 설정할 수 있습니다.
+[[headers]]
+for = "/*.js"
+[headers.values]
+  Content-Type = "application/javascript; charset=UTF-8"
+
+[[headers]]
+for = "/*.css"
+[headers.values]
+  Content-Type = "text/css; charset=UTF-8"
+
