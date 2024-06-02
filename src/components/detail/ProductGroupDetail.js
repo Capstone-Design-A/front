@@ -53,7 +53,11 @@ function ProductGroupDetail({ item, orderSum, targetQuantity, discountPrice }) {
       <div className={styles.layout}>
         <Container className={styles.content}>
           <div className={styles.image}>
-            <img className={styles.img} src={item.imageUrl} alt={item.name} />
+            <img
+              className={styles.img}
+              src={item.itemDetailsImageUrl}
+              alt={item.name}
+            />
             <Link to={`/intro/${item.sellerId}`}>
               <button className={styles.button}>판매자 소개 바로가기</button>
             </Link>
