@@ -59,6 +59,7 @@ ul.nav_bottom > li:not(:last-child) {
 }
 
 .user {
+  z-index: 999;
   margin: 0px 0px 0px 10px;
 }
 

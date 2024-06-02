@@ -1005,7 +1005,6 @@ export const unsubscribe = async (toMemberId) => {
 export const getUserOrderStatus = async (orderId) => {
   const ORDER_STATUS_ENDPOINT = `/auth/member/order/${orderId}`;
   const token = localStorage.getItem("accessToken");
-  console.log("Access token: ", token);
 
   try {
     const response = await fetch(`${ORDER_STATUS_ENDPOINT}`, {
@@ -1032,6 +1031,42 @@ export const getUserOrderStatus = async (orderId) => {
     return result;
   } catch (error) {
     console.error("Error fetching order status:", error);
+    throw error;
+  }
+};
+
+export const getUserGroupStatus = async (page, size) => {
+  const ORDER_GROUP_ITEMS_ENDPOINT = "/auth/orderGroupItems";
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(
+      `${ORDER_GROUP_ITEMS_ENDPOINT}?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+
+    if (!responseData.isSuccess) {
+      throw new Error(
+        `API error! code: ${responseData.code}, message: ${responseData.message}`
+      );
+    }
+
+    const orderGroupItems = responseData.result.orderGroupItemList;
+    return orderGroupItems;
+  } catch (error) {
+    console.error("Error fetching order group items:", error);
     throw error;
   }
 };
@@ -1114,17 +1149,26 @@ export const fetchWithAuth = async (url, options = {}) => {
   return response.json();
 };
 
-export const convertToSeller = async () => {
+export const convertToSeller = async (profileImage, introduction) => {
   const CONVERT_TO_SELLER_ENDPOINT = "/auth/member/to-seller";
   const token = localStorage.getItem("accessToken");
+
+  const formData = new FormData();
+  formData.append("multipartFile", profileImage);
+  formData.append(
+    "request",
+    new Blob([JSON.stringify(introduction)], {
+      type: "application/json",
+    })
+  );
 
   try {
     const response = await fetch(CONVERT_TO_SELLER_ENDPOINT, {
       method: "PATCH",
       headers: {
-        "Content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: formData,
     });
 
     if (!response.ok) {
