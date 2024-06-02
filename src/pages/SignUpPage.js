@@ -44,6 +44,7 @@ function SignUpPage() {
           ...prevValues,
           id: temporaryMemberId.id,
         }));
+        localStorage.setItem("temporaryMemberId", temporaryMemberId.id);
       } else {
         setValues((prevValues) => ({
           ...prevValues,
@@ -58,11 +59,13 @@ function SignUpPage() {
           ...prevValues,
           id: temporaryMemberId.id,
         }));
+        localStorage.setItem("temporaryMemberId", temporaryMemberId.id);
       } else {
         setValues((prevValues) => ({
           ...prevValues,
           id: "",
         }));
+        localStorage.removeItem("temporaryMemberId");
       }
     }
   }
@@ -116,8 +119,9 @@ function SignUpPage() {
 
       if (data) {
         console.log("회원가입 성공:", data);
+        localStorage.setItem("memberId", data.result.id);
         await login({ loginId, password });
-        navigate("/");
+        navigate("/login");
       } else {
         console.error("회원가입 실패");
       }
@@ -133,8 +137,9 @@ function SignUpPage() {
 
   useEffect(() => {
     const handleBeforeUnload = () => {
-      if (values.id) {
-        removeMember(values.id);
+      const tempMemberId = localStorage.getItem("temporaryMemberId");
+      if (tempMemberId) {
+        removeMember(tempMemberId);
       }
     };
 
@@ -143,7 +148,7 @@ function SignUpPage() {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [values.id]);
+  }, []);
 
   function handleChange(e) {
     const { name, value } = e.target;

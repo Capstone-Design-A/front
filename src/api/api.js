@@ -306,26 +306,36 @@ export const getRankingItems = async (page, size, keyword, token) => {
 };
 
 export const getSubscriptionItems = async (
-  fromMember,
-  keyword,
   page,
   size,
   type,
-  token
+  fromMember = null
 ) => {
   const SUBSCRIPTION_ITEMS_ENDPOINT = "/item/subscription";
+  const token = localStorage.getItem("accessToken");
 
   try {
-    const response = await fetch(
-      `${SUBSCRIPTION_ITEMS_ENDPOINT}?type=${type}&fromMember=${fromMember}&page=${page}&size=${size}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "X-ACCESS-TOKEN": token,
-        },
-      }
-    );
+    const url = new URL(SUBSCRIPTION_ITEMS_ENDPOINT, window.location.origin);
+    url.searchParams.append("type", type);
+    url.searchParams.append("page", page);
+    url.searchParams.append("size", size);
+
+    if (type === 0 && fromMember) {
+      url.searchParams.append("fromMember", fromMember);
+    }
+
+    const headers = {
+      "Content-type": "application/json",
+    };
+
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(url.toString(), {
+      method: "GET",
+      headers: headers,
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -341,15 +351,9 @@ export const getSubscriptionItems = async (
 
     let items = responseData.result.itemList;
 
-    if (keyword) {
-      items = items.filter((item) =>
-        item.name.toLowerCase().includes(keyword.toLowerCase())
-      );
-    }
-
     return items;
   } catch (error) {
-    console.error("Error fetching deadline items:", error);
+    console.error("Error fetching subscription items:", error);
     throw error;
   }
 };
@@ -1299,7 +1303,7 @@ export const checkDuplicate = async (id, type, value) => {
       }),
     });
     const data = await response.json();
-    return data;
+    return data.result;
   } catch (error) {
     console.error("Error checking duplicate:", error);
     return false;
