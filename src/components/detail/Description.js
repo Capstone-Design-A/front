@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Description.module.css";
 
-function Description({ itemDetailsImageUrl }) {
+function Description({ item }) {
   return (
     <div className={styles.img}>
-      <img src={itemDetailsImageUrl} alt="itemDetailsImageUrl" />
+      <img src={item.itemDetailsImageUrl} alt="itemDetailsImageUrl" />
     </div>
   );
 }
