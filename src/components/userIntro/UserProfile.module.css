@@ -36,6 +36,7 @@
 .subscribeButton {
   padding: 8px 14px;
   background-color: #48735d;
+  opacity: 90%;
   color: white;
   border: none;
   border-radius: 4px;
@@ -86,4 +87,16 @@
   cursor: pointer;
   padding: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.createButton {
+  width: 380px;
+  padding: 10px 14px;
+  background-color: #48735d;
+  opacity: 90%;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
 }

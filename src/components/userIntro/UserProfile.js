@@ -77,12 +77,14 @@ const UserProfile = ({ user }) => {
           <button className={styles.productButton}>
             <p className={styles.product}>{user.memberImageUrl}</p>
           </button>
+          <div>
+            <Link to="/auth/posts">
+              <button className={styles.createButton}>게시물 작성하기</button>
+            </Link>
+          </div>
           {errorMessage && <p className={styles.error}>{errorMessage}</p>}
         </div>
       </div>
-      <Link to="/auth/posts">
-        <button className={styles.subscribeButton}>게시물 작성하기</button>
-      </Link>
     </>
   );
 };

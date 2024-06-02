@@ -17,20 +17,22 @@
 .tab_title input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  border: 2px solid #19ce60;
+  border: 2px solid #48735d;
+  opacity: 60%;
   border-radius: 50%;
   appearance: none;
   cursor: pointer;
 }
 
 .tab_title input[type="checkbox"]:checked {
-  background: #19ce60;
+  background: #48735d;
+  opacity: 60%;
   border: none;
 }
 
 .tab_title p {
   display: none;
   background: #f2f2f2;
-  font-size: 18px;
+  font-size: 20px;
   color: #767676;
 }
