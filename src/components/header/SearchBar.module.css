@@ -2,6 +2,7 @@
   display: flex;
   height: 37px;
   box-shadow: var(--box-shadow);
+  border-radius: 999px;
 }
 
 .form input {
@@ -9,7 +10,6 @@
   padding: 12px 20px;
   font-size: 14px;
   font-weight: 500;
-  /* border: none; */
   border-width: 0.05px;
   border-color: #878787;
   border-radius: 999px 0 0 999px;
@@ -25,7 +25,6 @@
 .form button[type="submit"] {
   flex: none;
   padding: 8px 10px;
-  color: #fff;
   cursor: pointer;
   background-color: #c4c4c4;
   border: none;

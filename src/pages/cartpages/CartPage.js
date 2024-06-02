@@ -76,7 +76,7 @@ function CartPage() {
 
   return (
     <Container className={styles.container}>
-      <h1 className={styles.title}>장바구니</h1>
+      <h2 className={styles.title}>장바구니</h2>
       <CartHeader allChecked={allChecked} onAllChecked={handleAllChecked} />
       {products.length === 0 ? (
         <>
@@ -95,7 +95,7 @@ function CartPage() {
         </>
       ) : (
         <>
-          <ul className={styles.items}>
+          <div className={styles.items}>
             {products.map((product) => (
               <li key={product.id} className={styles.item}>
                 <ProductList
@@ -107,7 +107,7 @@ function CartPage() {
                 />
               </li>
             ))}
-          </ul>
+          </div>
           <TotalCart
             products={products}
             totalDeliveryCharge={totalDeliveryCharge}

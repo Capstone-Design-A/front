@@ -38,12 +38,12 @@
   height: 400px;
   display: flex;
   margin: 0 auto;
-  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .navButton {
   border: none;
   color: #878787;
+  background-color: #fff;
   font-size: 2rem;
   cursor: pointer;
   position: absolute;

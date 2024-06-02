@@ -26,14 +26,16 @@
 .tab_title input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  border: 2px solid #19ce60;
+  border: 2px solid #48735d;
+  opacity: 60%;
   border-radius: 50%;
   appearance: none;
   cursor: pointer;
 }
 
 .tab_title input[type="checkbox"]:checked {
-  background: #19ce60;
+  background: #48735d;
+  opacity: 60%;
   border: none;
 }
 
@@ -61,14 +63,14 @@
 .cart_product_list input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  border: 2px solid #19ce60;
+  border: 2px solid #48735d;
   border-radius: 50%;
   appearance: none;
   cursor: pointer;
 }
 
 .cart_product_list input[type="checkbox"]:checked {
-  background: #19ce60;
+  background: #48735d;
   border: none;
 }
 
@@ -104,14 +106,14 @@
 .cart_product_info .product_name {
   font-size: 15px;
   line-height: 22px;
-  color: #000000;
+  color: #494949;
   margin-bottom: 10px;
 }
 
 .cart_product_info .price {
   font-size: 15px;
   line-height: 20px;
-  color: #000000;
+  color: #494949;
   margin-bottom: 25px;
 }
 
@@ -130,13 +132,13 @@
 }
 
 .btn_submit {
-  /* 기존 버튼 스타일 */
   cursor: pointer;
+  opacity: 90%;
 }
 
 .btn_submit.disabled {
   cursor: not-allowed;
-  opacity: 0.5; /* 비활성화된 상태를 시각적으로 구분 */
+  opacity: 50%;
 }
 
 .cart_product_count .minus {
@@ -193,7 +195,7 @@
 .cart_product_price .btn_submit {
   width: 130px;
   height: 40px;
-  background: #19ce60;
+  background: #48735d;
   border-radius: 5px;
   border: none;
   font-weight: 500;
@@ -218,7 +220,7 @@
 .not h2 {
   font-size: 18px;
   line-height: 23px;
-  color: #000000;
+  color: #494949;
 }
 
 .not p {
@@ -234,6 +236,8 @@
   background: #f2f2f2;
   border-radius: 10px;
   margin: 0 auto;
+  padding: 0 30px;
+  margin-bottom: 50px;
   margin-top: 35px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -264,7 +268,7 @@
 .delivery .cart_product_delivery {
   font-size: 16px;
   line-height: 20px;
-  color: #000000;
+  color: #494949;
   margin-bottom: 12px;
 }
 
@@ -272,8 +276,12 @@
 .sale .cart_product_sale_price,
 .delivery .cart_product_delivery_price {
   font-size: 24px;
-  line-height: 30px;
-  color: #000000;
+  line-height: 20px;
+  color: #494949;
+}
+
+.delivery {
+  margin-right: 30px;
 }
 
 .pay_minus {
@@ -314,42 +322,26 @@
   background: #ffffff;
 }
 
+.payment {
+  margin-left: 30px;
+}
+
 .payment .cart_prouct_payment {
-  font-size: 16px;
+  text-align: center;
+  width: 150px;
+  margin-top: 25px;
+  font-size: 20px;
   font-weight: bold;
-  line-height: 20px;
-  color: #000000;
-  margin-bottom: 12px;
+  line-height: 1px;
+  color: #494949;
   margin-right: 0px;
 }
 
 .payment .cart_prouct_payment_price {
-  font-size: 36px;
+  font-size: 28px;
   font-weight: bold;
-  line-height: 30px;
+  line-height: 15px;
   color: #eb5757;
-}
-
-.btn {
-  width: 1280px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  margin-top: 40px;
-}
-
-.btn .btn_submit {
-  margin: 0 auto;
-  width: 220px;
-  height: 68px;
-  background: #19ce60;
-  border-radius: 5px;
-  border: none;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 30px;
-  color: #ffffff;
 }
 
 .product_remove {
