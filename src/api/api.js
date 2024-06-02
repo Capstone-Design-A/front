@@ -1,4 +1,6 @@
-const BASE_URL = "https://dev.agriculturalproducts.store";
+const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
+const URL = `${PROXY}`;
+const BASE_URL = URL;
 
 // 메인 섹션
 export const getSearchItems = async (page, size, keyword, token) => {
@@ -145,25 +147,6 @@ export const getItemsByCategory = async (categoryId, page, size, token) => {
   } catch (error) {
     console.error("Error fetching items:", error);
     throw error;
-  }
-};
-
-export const getCategories = async () => {
-  try {
-    const categories = [
-      { id: 1, name: "채소" },
-      { id: 2, name: "과일" },
-      { id: 3, name: "축산" },
-      { id: 4, name: "쌀/잡곡" },
-      { id: 5, name: "가공" },
-      { id: 6, name: "김치" },
-      { id: 7, name: "기타" },
-    ];
-
-    return categories;
-  } catch (error) {
-    console.error("Error fetching categories:", error);
-    return [];
   }
 };
 

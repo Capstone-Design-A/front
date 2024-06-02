@@ -12,7 +12,7 @@ function Notifications() {
   const [notificationCount, setNotificationCount] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [iconSrc, setIconSrc] = useState(notificationIcon);
-  const memberId = 2;
+  const memberId = localStorage.getItem("memberId");
 
   const fetchUnreadCount = useCallback(async () => {
     try {

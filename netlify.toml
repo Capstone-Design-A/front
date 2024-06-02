@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/proxy/*"
+  to = "https://dev.agriculturalproducts.store/:splat"
+  status = 200
+  force = true

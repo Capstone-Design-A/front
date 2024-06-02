@@ -1,37 +1,24 @@
-// 메인페이지 카테고리 아이템 컴포넌트
-// 페이지 사이즈 줄이면 CategoryList가 오른쪽으로 이동함 - 수정 필요
-import React, { useState, useEffect } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import Container from "../shared/Container";
 import styles from "./Category.module.css";
-import { getCategories } from "../../api/api.js";
-// import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import CategoryItem from "./CategoryItem";
 
 function Category() {
-  // eslint-disable-next-line
-  const [searchParams, setSearchParams] = useSearchParams();
-  const initKeyword = searchParams.get("keyword");
-  const [categories, setCategories] = useState([]);
+  const categories = [
+    { id: 1, name: "채소" },
+    { id: 2, name: "과일" },
+    { id: 3, name: "축산" },
+    { id: 4, name: "쌀/잡곡" },
+    { id: 5, name: "가공" },
+    { id: 6, name: "김치" },
+    { id: 7, name: "기타" },
+  ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const categoriesData = await getCategories(initKeyword);
-        setCategories(categoriesData);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-
-    fetchData();
-  }, [initKeyword]);
-
-  /*
   if (!categories || !categories.length) {
     return <Navigate to="/" />;
   }
-  */
 
   return (
     <>
