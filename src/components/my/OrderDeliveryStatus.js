@@ -9,7 +9,7 @@ function OrderDeliveryStatus() {
   useEffect(() => {
     const fetchOrderStatus = async () => {
       try {
-        const { orderId, itemStatusList } = await getUserOrderStatus(1652); // 임시 orderId 사용
+        const { orderId, itemStatusList } = await getUserOrderStatus(1652);
         setOrderId(orderId);
         setOrderData(itemStatusList);
       } catch (error) {
