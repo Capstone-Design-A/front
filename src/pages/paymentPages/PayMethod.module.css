@@ -1,0 +1,18 @@
+.header {
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-top: 30px;
+}
+
+.paylist {
+  max-width: 800px;
+  margin-left: 50px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.separator {
+  border: 1px solid rgba(0, 0, 0, 0.2); /* 투명한 검은색 */
+  margin: 10px 0;
+}
