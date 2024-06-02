@@ -1,5 +1,5 @@
 const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
-const URL = `${PROXY}`;
+const URL = `${PROXY}.json`;
 const BASE_URL = URL;
 
 // 메인 섹션
@@ -41,7 +41,7 @@ export const getSearchItems = async (page, size, keyword, token) => {
 
     return items;
   } catch (error) {
-    console.error("Error fetching deadline items:", error);
+    console.error("Error fetching search items:", error);
     throw error;
   }
 };

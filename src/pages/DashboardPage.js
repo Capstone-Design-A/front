@@ -23,8 +23,7 @@ function DashboardPage() {
     };
 
     fetchData();
-    // eslint-disable-next-line
-  }, []);
+  }, [sellerId]);
 
   const cardsInfo = [
     {

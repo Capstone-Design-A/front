@@ -6,7 +6,7 @@ import styles from "./SellerItemListPage.module.css";
 
 function SellerImminentItemList() {
   const [products, setProducts] = useState([]);
-  const sellerId = "1";
+  const sellerId = localStorage.getItem("memberId");
   const page = 1;
   const size = 10;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
@@ -26,7 +26,7 @@ function SellerImminentItemList() {
     };
 
     fetchData();
-  }, []);
+  }, [sellerId]);
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);

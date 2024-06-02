@@ -64,7 +64,6 @@ function ProductDetail({ item }) {
             <Button onClick={increaseQuantity}>+</Button>
           </div>
           <HorizontalRule />
-
           <p className={styles.price}>
             총 상품 금액<span>{totalPrice.toLocaleString()}</span>원
           </p>
