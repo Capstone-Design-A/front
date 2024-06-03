@@ -15,7 +15,7 @@
   padding: 7px;
   width: 267px;
   text-align: center;
-  margin: 0 0 25px 0;
+  margin: 0 0 30px 0;
   font-size: 15px;
   height: 305x;
   border-radius: 9999px;
@@ -28,7 +28,7 @@
 }
 
 .name {
-  margin: 20px auto;
+  margin: 10px auto 30px;
 }
 
 .price {
@@ -64,7 +64,7 @@
   border: none;
   border-radius: 5px;
   outline: none;
-  margin: 15px 0 0 0;
+  margin: 20px 0 0 0;
   opacity: 80%;
 }
 

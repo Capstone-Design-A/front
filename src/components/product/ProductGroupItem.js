@@ -24,7 +24,7 @@ function ProductGroupItem({
 
   return (
     <Card className={styles.groupItem}>
-      <div className={styles.img}>
+      <div className={styles.imgGroup}>
         <Link
           to={{
             pathname: `/groupItem/${id}`,

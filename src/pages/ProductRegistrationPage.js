@@ -82,6 +82,16 @@ function ProductRegistrationPage() {
     setPrice(newPrice);
   };
 
+  const handleDeliveryPriceChange = (e) => {
+    const newDeliveryPrice = e.target.value.replace(/\D/g, "");
+    setDeliveryPrice(newDeliveryPrice);
+  };
+
+  const handleGroupPurchasePriceChange = (e) => {
+    const newGroupPurchasePrice = e.target.value.replace(/\D/g, "");
+    setGroupPurchasePrice(newGroupPurchasePrice);
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>상품 등록</h1>
@@ -160,7 +170,7 @@ function ProductRegistrationPage() {
             type="text"
             id="deliveryPrice"
             value={formatPrice(deliveryPrice)}
-            onChange={(e) => setDeliveryPrice(e.target.value)}
+            onChange={handleDeliveryPriceChange}
             required
           />
         </div>
@@ -201,7 +211,7 @@ function ProductRegistrationPage() {
                 type="text"
                 id="groupPurchasePrice"
                 value={formatPrice(groupPurchasePrice)}
-                onChange={(e) => setGroupPurchasePrice(e.target.value)}
+                onChange={handleGroupPurchasePriceChange}
                 required
               />
             </div>
