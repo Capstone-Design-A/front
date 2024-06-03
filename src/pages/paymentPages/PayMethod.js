@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./PayMethod.module.css"; // 필요한 경우 스타일링 추가
+import styles from "./PayMethod.module.css";
 
 function PayMethod() {
   return (

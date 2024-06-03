@@ -16,3 +16,40 @@
   border: 1px solid rgba(0, 0, 0, 0.2); /* 투명한 검은색 */
   margin: 10px 0;
 }
+
+.paylist {
+  display: flex;
+  flex-direction: column;
+}
+
+.paylist input[type="radio"] {
+  display: none;
+}
+
+.paylist label {
+  display: block;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.paylist label:hover {
+  background: #e0e0e0;
+}
+
+.paylist input[type="radio"]:checked + label {
+  background: #48735d;
+  color: #ffffff;
+  border-color: #48735d;
+}
+
+.separator {
+  border: 0;
+  height: 1px;
+  background: #ccc;
+  margin: 10px 0;
+}
