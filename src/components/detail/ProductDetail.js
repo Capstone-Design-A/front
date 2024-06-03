@@ -57,7 +57,7 @@ function ProductDetail({ item }) {
               src={item.itemDetailsImageUrl}
               alt={item.name}
             />
-            <Link to={`/intro/${item.sellerId}`}>
+            <Link to={`/intro/${item.memberId}`}>
               <button className={styles.button}>판매자 소개 바로가기</button>
             </Link>
           </div>

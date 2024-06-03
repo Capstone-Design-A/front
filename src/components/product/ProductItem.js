@@ -26,8 +26,8 @@ function ProductItem({ id, name, price, discountPrice, imageUrl, category }) {
           }}
         >
           <h2 className={styles.name}>{name}</h2>
-          <div className={styles.price}>
-            {price && (
+          {discountPrice !== 0 ? (
+            <div className={styles.price}>
               <p className={styles.price}>
                 {price.toLocaleString()}
                 <span className={styles.won}>원</span>
@@ -35,8 +35,15 @@ function ProductItem({ id, name, price, discountPrice, imageUrl, category }) {
                   {discountPrice.toLocaleString()}원
                 </span>
               </p>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className={styles.price}>
+              <p className={styles.price}>
+                {price.toLocaleString()}
+                <span className={styles.won}>원</span>
+              </p>
+            </div>
+          )}
         </Link>
       </div>
     </Card>

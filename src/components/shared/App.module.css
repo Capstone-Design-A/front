@@ -35,6 +35,7 @@ a:not(.home):visited {
 .nav,
 .footer {
   flex: none;
+  z-index: 1000;
 }
 
 .body {

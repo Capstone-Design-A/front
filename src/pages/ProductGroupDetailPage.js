@@ -86,12 +86,7 @@ function ProductGroupDetailPage() {
         <div className={styles.container}>
           <div className={styles.content}>
             <div>
-              <ProductGroupDetail
-                item={item.item}
-                orderSum={item.orderSum}
-                targetQuantity={item.targetQuantity}
-                discountPrice={item.discountPrice}
-              />
+              <ProductGroupDetail item={item} />
             </div>
             <ul className={styles.menu}>
               <li className={styles.line}>
@@ -120,7 +115,7 @@ function ProductGroupDetailPage() {
               </li>
             </ul>
             <div ref={descriptionRef} className={styles.description}>
-              <Description item={item.item} className={styles.description} />
+              <Description item={item} />
             </div>
             <div ref={reviewRef} className={styles.review}>
               <ReviewListPage itemId={id} />

@@ -104,18 +104,24 @@ function Notifications() {
       {isOpen && (
         <div className={styles.popup}>
           <div className={styles.notificationHeader}>알림</div>
-          <div className={styles.notificationList}>
-            {notifications.map((notification) => (
-              <NotificationItem
-                key={notification.id}
-                id={notification.id}
-                title={notification.title}
-                content={notification.content}
-                isConfirmed={notification.isConfirmed}
-                onDelete={() => handleDeleteNotification(notification.id)}
-              />
-            ))}
-          </div>
+          {notifications.length === 0 ? (
+            <div className={styles.noNotification}>
+              읽지 않은 알림이 없습니다.
+            </div>
+          ) : (
+            <div className={styles.notificationList}>
+              {notifications.map((notification) => (
+                <NotificationItem
+                  key={notification.id}
+                  id={notification.id}
+                  title={notification.title}
+                  content={notification.content}
+                  isConfirmed={notification.isConfirmed}
+                  onDelete={() => handleDeleteNotification(notification.id)}
+                />
+              ))}
+            </div>
+          )}
           <Link to="/cart" className={styles.notificationLink}>
             알림 전체 보기
           </Link>

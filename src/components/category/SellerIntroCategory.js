@@ -18,13 +18,13 @@ function SellerIntroCategory({ page = 1, size = 1 }) {
               <h2 className={styles.titleIntro}>회원 정보</h2>
             </Link>
             <Link
-              to={`/seller/seller-id=${memberId}&page=${page}&size=${size}`}
+              to={`/seller/member-id=${memberId}&page=${page}&size=${size}`}
               className={styles.link}
             >
               <h2 className={styles.titleIntro}>구독 관리</h2>
             </Link>
             <Link
-              to={`/seller/seller-id=${memberId}&page=${page}&size=${size}`}
+              to={`/seller/member-id=${memberId}&page=${page}&size=${size}`}
               className={styles.link}
             >
               <h2 className={styles.titleIntro}>주문 조회</h2>
@@ -33,7 +33,7 @@ function SellerIntroCategory({ page = 1, size = 1 }) {
               <HorizontalRule />
             </div>
             <Link
-              to={`/auth/seller?seller-id=${memberId}`}
+              to={`/auth/seller?member-id=${memberId}`}
               className={styles.link}
             >
               <h2 className={styles.titleIntro}>대시보드</h2>

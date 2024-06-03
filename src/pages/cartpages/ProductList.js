@@ -37,6 +37,8 @@ function ProductList({
     setProducts(nextProducts);
   };
 
+  console.log("products:", products);
+
   return (
     <div className={styles.cart_product_list_container}>
       {products.map((product) => (
@@ -48,7 +50,7 @@ function ProductList({
           />
           <div className={styles.cart_product_wrap}>
             <div className={styles.cart_product_image}>
-              <img src={product.imageUrl} alt="product-img" />
+              <img src={product.image} alt="product-img" />
             </div>
             <div className={styles.cart_product_info}>
               <p>{product.name}</p>
