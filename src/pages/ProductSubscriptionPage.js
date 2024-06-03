@@ -18,16 +18,15 @@ function ProductSubscriptionPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const currentPage = page || 1;
         const size = 10;
         const type = isLoggedIn ? 0 : 1;
         const fetchedProducts = await getSubscriptionItems(
-          currentPage,
+          page,
           size,
           type,
           memberId
         );
-        setProducts(fetchedProducts);
+        setProducts((prevProducts) => [...prevProducts, ...fetchedProducts]);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -37,8 +36,7 @@ function ProductSubscriptionPage() {
   }, [page, isLoggedIn, memberId]);
 
   const handleLoadMore = () => {
-    const nextPage = page !== undefined ? page + 1 : 1;
-    setPage(nextPage);
+    setPage((prevPage) => prevPage + 1);
   };
 
   const toggleCategoryVisibility = () => {

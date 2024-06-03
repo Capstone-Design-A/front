@@ -13,7 +13,6 @@ function GroupPurchaseItem({ item }) {
             남은 수량
             <span>{item.targetQuantity}</span>개
           </div>
-          <h1>[4월 11일 순차출고]</h1>
           <h2 className={styles.name}>{item.name}</h2>
           <HorizontalRule />
           <div className={styles.price}>

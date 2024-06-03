@@ -17,6 +17,16 @@
   align-items: center;
   padding: 0;
   border-top: 0px;
+  height: 210px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.imgGroup {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border-top: 0px;
   height: 180px;
   background-color: #fff;
   overflow: hidden;
@@ -78,7 +88,7 @@
 .price .origin {
   position: absolute;
   top: -2px;
-  right: -4.2em;
+  right: -4.7em;
   font-size: 0.9em;
   color: #888;
   text-decoration: line-through;
