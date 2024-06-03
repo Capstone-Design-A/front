@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Button from "../button/Button";
+import { Link, useNavigate } from "react-router-dom";
 import { addToCart } from "../../api/api";
+import Button from "../button/Button";
 import OrderButton from "../button/OrderButton";
-import { useNavigate, Link } from "react-router-dom";
 import Container from "../shared/Container";
-import styles from "./ProductGroupDetail.module.css";
 import HorizontalRule from "../shared/HorizontalRule";
+import styles from "./ProductGroupDetail.module.css";
 
-function ProductGroupDetail({ item, orderSum, targetQuantity, discountPrice }) {
+function ProductGroupDetail({ item }) {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -46,7 +46,6 @@ function ProductGroupDetail({ item, orderSum, targetQuantity, discountPrice }) {
   };
 
   const totalPrice = quantity * item.price;
-  const totalDiscountPrice = quantity * discountPrice;
 
   return (
     <>
@@ -58,7 +57,7 @@ function ProductGroupDetail({ item, orderSum, targetQuantity, discountPrice }) {
               src={item.itemDetailsImageUrl}
               alt={item.name}
             />
-            <Link to={`/intro/${item.sellerId}`}>
+            <Link to={`/intro/${item.memberId}`}>
               <button className={styles.button}>판매자 소개 바로가기</button>
             </Link>
           </div>
@@ -70,28 +69,8 @@ function ProductGroupDetail({ item, orderSum, targetQuantity, discountPrice }) {
           </div>
           <HorizontalRule />
           <p className={styles.price}>
-            총 상품 금액
-            {discountPrice && (
-              <span className={styles.discountPrice}>
-                {totalDiscountPrice.toLocaleString()}
-              </span>
-            )}{" "}
-            원
-            <span className={styles.originPrice}>
-              {totalPrice.toLocaleString()}원
-            </span>
+            총 상품 금액<span>{totalPrice.toLocaleString()}</span>원
           </p>
-          <div className={styles.container}>
-            목표 수량
-            <p className={styles.orderSum}>
-              <span>{orderSum}</span>
-            </p>
-            /
-            <p className={styles.targetQuantity}>
-              <span>{targetQuantity}</span>
-            </p>
-            개
-          </div>
         </Container>
         <HorizontalRule />
         <Container className={styles.order}>

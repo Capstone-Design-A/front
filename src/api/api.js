@@ -182,27 +182,27 @@ export const getGroupItems = async (page, size, keyword, token) => {
       );
     }
 
-    let items = responseData.result.groupItemList;
+    const items = responseData.result.groupItemList || [];
 
     if (keyword) {
-      items = items.filter((groupItem) =>
-        groupItem.item.name.toLowerCase().includes(keyword.toLowerCase())
+      return items.filter((groupItem) =>
+        groupItem.item?.name.toLowerCase().includes(keyword.toLowerCase())
       );
     }
 
-    items = items.map((groupItem) => ({
-      id: groupItem.id,
-      name: groupItem.item.name,
-      category: groupItem.item.category,
-      stock: groupItem.item.stock,
-      price: groupItem.item.price,
-      discountPrice: groupItem.discountPrice,
-      imageUrl: groupItem.item.imageUrl,
-      deadline: groupItem.item.deadline,
-      targetQuantity: groupItem.targetQuantity,
-    }));
-
-    return items;
+    return items
+      .map((groupItem) => ({
+        id: groupItem.id,
+        name: groupItem.item?.name,
+        category: groupItem.item?.category,
+        stock: groupItem.item?.stock,
+        price: groupItem.item?.price,
+        discountPrice: groupItem.discountPrice,
+        imageUrl: groupItem.item?.imageUrl,
+        deadline: groupItem.item?.deadline,
+        targetQuantity: groupItem.targetQuantity,
+      }))
+      .filter((item) => item.name);
   } catch (error) {
     console.error("Error fetching group items:", error);
     throw error;
@@ -379,7 +379,7 @@ export const getItemDetail = async (itemId, token) => {
 
     const item = {
       id: result.id,
-      sellerId: result.sellerId,
+      memberId: result.memberId,
       name: result.name,
       category: result.category,
       stock: result.stock,
@@ -426,18 +426,25 @@ export const getGroupItemDetail = async (itemId, token) => {
 
     const { result } = responseData;
 
-    const imageUrls = result.item.imageUrl.map((image) => image.imageUrl);
+    const imageUrls = Array.isArray(result.item.imageUrl)
+      ? result.item.imageUrl.map((image) => image.imageUrl)
+      : [];
 
-    result.imageUgrls = imageUrls;
-    console.log("GroupItemDetail:", result);
-
-    return {
-      id: result.id,
-      item: result.item,
-      orderSum: result.orderSum,
-      targetQuantity: result.targetQuantity,
+    const item = {
+      id: result.item.id,
+      memberId: result.item.memberId,
+      name: result.item.name,
+      category: result.item.category,
+      stock: result.item.stock,
+      price: result.item.price,
       discountPrice: result.discountPrice,
+      imageUrls: imageUrls,
+      deadline: result.deadline,
+      itemDetailsImageUrl: result.item.itemDetailsImageUrl,
+      targetQuantity: result.targetQuantity,
     };
+
+    return item;
   } catch (error) {
     console.error("Error fetching item detail:", error);
     throw error;

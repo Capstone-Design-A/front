@@ -89,7 +89,7 @@ function Main() {
 
           <Route path="auth/item" element={<ProductRegistrationPage />} />
           <Route path="auth/posts" element={<PostRegistrationPage />} />
-          <Route path="intro/:sellerId" element={<SellerIntroductionPage />} />
+          <Route path="intro/:memberId" element={<SellerIntroductionPage />} />
           <Route path="auth/seller" element={<ManagementPage />} />
           <Route
             path="auth/seller/order-status"

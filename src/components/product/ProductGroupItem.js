@@ -21,7 +21,6 @@ function ProductGroupItem({
     discountPrice,
     category,
   };
-
   return (
     <Card className={styles.groupItem}>
       <div className={styles.imgGroup}>
