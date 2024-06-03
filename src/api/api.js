@@ -373,9 +373,11 @@ export const getItemDetail = async (itemId, token) => {
 
     const { result } = responseData;
 
-    const imageUrls = result.imageUrl.map((image) => image.imageUrl);
+    const imageUrls = Array.isArray(result.imageUrl)
+      ? result.imageUrl.map((image) => image.imageUrl)
+      : [];
 
-    const itemDetail = {
+    const item = {
       id: result.id,
       sellerId: result.sellerId,
       name: result.name,
@@ -388,9 +390,9 @@ export const getItemDetail = async (itemId, token) => {
       itemDetailsImageUrl: result.itemDetailsImageUrl,
     };
 
-    console.log("ItemDetail:", itemDetail);
+    console.log("ItemDetail:", item);
 
-    return itemDetail;
+    return item;
   } catch (error) {
     console.error("Error fetching item detail:", error);
     throw error;
