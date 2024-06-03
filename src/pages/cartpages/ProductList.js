@@ -4,7 +4,6 @@ import plus from "../../assets/icon-plus-line.svg";
 import minus from "../../assets/icon-minus-line.svg";
 
 function ProductList({
-  product,
   products,
   setProducts,
   onProductChecked,
@@ -39,53 +38,57 @@ function ProductList({
   };
 
   return (
-    <section className={styles.cart_product_list}>
-      <input
-        type="checkbox"
-        checked={product.isChecked}
-        onChange={() => onProductChecked(product.id)}
-      />
-      <div className={styles.cart_product_wrap}>
-        <div className={styles.cart_product_image}>
-          <img src={product.imageUrl} alt="product-img" />
-        </div>
-        <div className={styles.cart_product_info}>
-          <p>{product.name}</p>
-        </div>
-      </div>
+    <div className={styles.cart_product_list_container}>
+      {products.map((product) => (
+        <section key={product.id} className={styles.cart_product_list}>
+          <input
+            type="checkbox"
+            checked={product.isChecked}
+            onChange={() => onProductChecked(product.id)}
+          />
+          <div className={styles.cart_product_wrap}>
+            <div className={styles.cart_product_image}>
+              <img src={product.imageUrl} alt="product-img" />
+            </div>
+            <div className={styles.cart_product_info}>
+              <p>{product.name}</p>
+            </div>
+          </div>
 
-      <div className={styles.cart_product_count}>
-        <img
-          className={styles.minus}
-          src={minus}
-          alt="minus"
-          onClick={() => handleDecrease(product.id)}
-        />
-        <div className={styles.count}>
-          <span>{product.quantity}</span>
-        </div>
-        <img
-          className={styles.plus}
-          src={plus}
-          alt="plus"
-          onClick={() => handleIncrease(product.id)}
-        />
-      </div>
+          <div className={styles.cart_product_count}>
+            <img
+              className={styles.minus}
+              src={minus}
+              alt="minus"
+              onClick={() => handleDecrease(product.id)}
+            />
+            <div className={styles.count}>
+              <span>{product.quantity}</span>
+            </div>
+            <img
+              className={styles.plus}
+              src={plus}
+              alt="plus"
+              onClick={() => handleIncrease(product.id)}
+            />
+          </div>
 
-      <div className={styles.cart_product_price}>
-        <p className={styles.total_price}>
-          {product.price * product.quantity}원
-        </p>
-      </div>
+          <div className={styles.cart_product_price}>
+            <p className={styles.total_price}>
+              {product.price * product.quantity}원
+            </p>
+          </div>
 
-      <div className={styles.product_remove}>
-        <img
-          src={closeButton}
-          alt="닫기"
-          onClick={() => handleDelete(product.id)}
-        />
-      </div>
-    </section>
+          <div className={styles.product_remove}>
+            <img
+              src={closeButton}
+              alt="닫기"
+              onClick={() => handleDelete(product.id)}
+            />
+          </div>
+        </section>
+      ))}
+    </div>
   );
 }
 
