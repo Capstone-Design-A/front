@@ -56,7 +56,7 @@ const UserProfile = ({ user }) => {
       <div className={styles.userProfileContainer}>
         <img
           className={styles.profilePicture}
-          src={user.profilePicture}
+          src={user.memberImageUrl} // 변경된 부분
           alt="Profile"
         />
         <div className={styles.userInfo}>
