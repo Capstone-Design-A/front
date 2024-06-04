@@ -22,6 +22,7 @@ function CartPage() {
         setProducts(
           carts.map((cart) => ({
             id: cart.id,
+            itemId: cart.item.id,
             name: cart.item.name,
             price: cart.item.price,
             quantity: cart.quantity,
