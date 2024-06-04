@@ -641,6 +641,33 @@ export const deleteCartItems = async (cartId) => {
   }
 };
 
+export const fakePayment = async (orderData) => {
+  const FAKE_PAYMENT_ENDPOINT = `/auth/payment`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(FAKE_PAYMENT_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to make payment");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.error("Error making payment:", error);
+    throw error;
+  }
+};
+
 // 판매자 소개 섹션
 export const getSellerInfo = async (memberId) => {
   const SELLER_INFO_ENDPOINT = "/intro";

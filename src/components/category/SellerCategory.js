@@ -14,19 +14,13 @@ function SellerCategory({ page = 1, size = 1 }) {
         <div className={styles.menu}>
           <h1 className={styles.category}>카테고리</h1>
           <div className={styles.categoryList}>
-            <Link to={`/my`} className={styles.link}>
+            <Link to={`/auth/member`} className={styles.link}>
               <h2 className={styles.title}>회원 정보</h2>
             </Link>
-            <Link
-              to={`/seller/member-id=${memberId}&page=${page}&size=${size}`}
-              className={styles.link}
-            >
+            <Link to={`/auth/member`} className={styles.link}>
               <h2 className={styles.title}>구독 관리</h2>
             </Link>
-            <Link
-              to={`/seller/member-id=${memberId}&page=${page}&size=${size}`}
-              className={styles.link}
-            >
+            <Link to={`/auth/member`} className={styles.link}>
               <h2 className={styles.title}>주문 조회</h2>
             </Link>
             <div className={styles.line}>

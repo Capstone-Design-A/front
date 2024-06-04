@@ -6,8 +6,8 @@ function PayAddress() {
     <div>
       <h1 className={styles.title}>결제 페이지</h1>
       <br />
-      <h2>배송지</h2>
       <div className={styles.addressList}>
+        <h2>배송지</h2>
         <p className={styles.user_name}>손영호</p>
         <p className={styles.user_phone}>010-6402-1140</p>
         <p className={styles.user_address}>
