@@ -74,6 +74,26 @@ function CartPage() {
     setAllChecked(nextProducts.every((product) => product.isChecked));
   };
 
+  const handleIncreaseQuantity = (productId) => {
+    const nextProducts = products.map((product) => {
+      if (product.id === productId) {
+        return { ...product, quantity: product.quantity + 1 };
+      }
+      return product;
+    });
+    setProducts(nextProducts);
+  };
+
+  const handleDecreaseQuantity = (productId) => {
+    const nextProducts = products.map((product) => {
+      if (product.id === productId && product.quantity > 1) {
+        return { ...product, quantity: product.quantity - 1 };
+      }
+      return product;
+    });
+    setProducts(nextProducts);
+  };
+
   return (
     <Container className={styles.container}>
       <h2 className={styles.title}>장바구니</h2>
@@ -100,10 +120,10 @@ function CartPage() {
               <li key={product.id} className={styles.item}>
                 <ProductList
                   product={product}
-                  products={products}
-                  setProducts={setProducts}
                   onProductChecked={handleProductChecked}
                   onDeleteProduct={handleDeleteProduct}
+                  onIncreaseQuantity={handleIncreaseQuantity}
+                  onDecreaseQuantity={handleDecreaseQuantity}
                 />
               </li>
             ))}
