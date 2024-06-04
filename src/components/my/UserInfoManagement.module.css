@@ -25,6 +25,37 @@
   color: #555;
 }
 
+.nicknameInputGroup {
+  display: flex;
+  align-items: center;
+}
+
+.nicknameInput {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.checkDuplicateButton {
+  margin-left: 20px;
+  padding: 8px 15px;
+  background-color: #48735d;
+  opacity: 70%;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.checkDuplicateButton:hover {
+  background-color: #7d9b8b;
+}
+
 .emailInputContainer,
 .contactInputContainer {
   display: flex;
@@ -79,7 +110,7 @@
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
-  align-self: flex-end;
+  text-align: center;
 }
 
 .submitButton:hover {
