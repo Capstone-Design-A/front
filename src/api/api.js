@@ -1384,3 +1384,48 @@ export const getSubscribedSellers = async (memberId, page = 1, size = 10) => {
     throw error;
   }
 };
+
+// api.js
+
+export const fetchUserInfo = async () => {
+  const FETCH_USER_INFO_ENDPOINT = `/auth/member`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(FETCH_USER_INFO_ENDPOINT, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
+
+export const updateUserInfo = async (updatedData) => {
+  const UPDATE_USER_INFO_ENDPOINT = `/auth/member`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(UPDATE_USER_INFO_ENDPOINT, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error updating user data:", error);
+    throw error;
+  }
+};
