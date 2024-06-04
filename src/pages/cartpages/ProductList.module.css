@@ -77,9 +77,12 @@
 .cart_product_wrap {
   display: flex;
   align-items: center;
+  margin-left: -70px;
+  margin-right: -60px;
 }
 
 .cart_product_image {
+  margin-left: 80px;
   width: 140px;
   height: 140px;
   border-radius: 10px;
@@ -126,7 +129,7 @@
 }
 
 .cart_product_count {
-  margin-left: -50px;
+  margin-left: 50px;
   position: relative;
   width: 100px;
   height: 45px;
@@ -173,6 +176,8 @@
 }
 
 .cart_product_price {
+  margin-left: 50px;
+  margin-right: -90px;
   display: flex;
   flex-direction: column;
   align-items: center;
