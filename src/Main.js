@@ -85,7 +85,7 @@ function Main() {
           <Route path="review" element={<ReviewListPage />} />
           <Route path="auth/member" element={<MyPage />} />
           <Route path="auth/cart/item" element={<CartPage />} />
-          <Route path="pay" element={<PayPage />} />
+          <Route path="/auth/paymemt" element={<PayPage />} />
 
           <Route path="auth/item" element={<ProductRegistrationPage />} />
           <Route path="auth/posts" element={<PostRegistrationPage />} />

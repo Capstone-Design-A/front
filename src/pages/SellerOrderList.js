@@ -4,7 +4,7 @@ import { getOrderStatus } from "../api/api";
 import SellerCategory from "../components/category/SellerCategory";
 import styles from "./SellerOrderListPage.module.css";
 
-function SellerOrderListPage() {
+function SellerOrderList() {
   const [products, setProducts] = useState([]);
   const page = 1;
   const size = 10;
@@ -109,4 +109,4 @@ function SellerOrderListPage() {
   );
 }
 
-export default SellerOrderListPage;
+export default SellerOrderList;

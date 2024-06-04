@@ -1,38 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./ProductList.module.css";
-import meatImg from "../../assets/img-meat-4.png";
-import pearImg from "../../assets/img5.png";
 
-function ProductList() {
-  const [products] = useState([
-    {
-      id: 1,
-      name: "농수 축산 가공 한우",
-      price: 20000,
-      quantity: 1,
-      image: meatImg,
-    },
-    {
-      id: 2,
-      name: "단맛 꿀 배",
-      price: 18000,
-      quantity: 2,
-      image: pearImg,
-    },
-  ]);
-
-  // 각 제품의 총 가격 계산
+function ProductList({ products, totalAmount }) {
   const totalPricePerProduct = products.map(
     (product) => product.price * product.quantity
   );
 
-  // 총 가격 합계 계산
-  const totalPrice = totalPricePerProduct.reduce((acc, curr) => acc + curr, 0);
-
   return (
     <div>
-      <h2 className={styles.header}>주문상품</h2>
       <div className={styles.ordered_productList}>
+        <h2 className={styles.header}>주문상품</h2>
         {products.map((product, index) => (
           <div key={product.id} className={styles.product}>
             <img
@@ -52,7 +29,7 @@ function ProductList() {
       </div>
       <div className={styles.totalPriceContainer}>
         <div className={styles.totalPriceText}>총 주문금액</div>
-        <div className={styles.totalPriceValue}>{totalPrice}원</div>
+        <div className={styles.totalPriceValue}>{totalAmount}원</div>
       </div>
     </div>
   );

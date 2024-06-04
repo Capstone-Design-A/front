@@ -1,19 +1,18 @@
-.header {
-  font-size: 24px;
-  margin-bottom: 20px;
-  padding-top: 30px;
-}
-
 .paylist {
   max-width: 800px;
-  margin-left: 50px;
+  margin-left: 30px;
+  margin-right: 30px;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.paylist h2 {
+  margin-bottom: 30px;
+}
+
 .separator {
-  border: 1px solid rgba(0, 0, 0, 0.2); /* 투명한 검은색 */
+  border: 1px solid rgba(0, 0, 0, 0.2);
   margin: 10px 0;
 }
 
@@ -31,25 +30,27 @@
   padding: 10px 20px;
   margin-bottom: 10px;
   background: #f0f0f0;
+  opacity: 80%;
   border-radius: 5px;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: background 0.3s, border-color 0.3s;
 }
 
 .paylist label:hover {
   background: #e0e0e0;
+  opacity: 80%;
 }
 
 .paylist input[type="radio"]:checked + label {
   background: #48735d;
   color: #ffffff;
   border-color: #48735d;
+  opacity: 70%;
 }
 
 .separator {
   border: 0;
   height: 1px;
   background: #ccc;
-  margin: 10px 0;
+  margin: 5px 0 12px;
 }
