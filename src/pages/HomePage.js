@@ -65,7 +65,9 @@ function HomePage() {
           type,
           memberId
         );
-        setSubscriptionProducts(fetchedProducts.slice(0, displayLimit));
+        setSubscriptionProducts(
+          fetchedProducts.itemList.slice(0, displayLimit)
+        );
       } catch (error) {
         console.error("Error fetching subscription items:", error);
       }

@@ -14,6 +14,7 @@ function SubscriptionManagement() {
       try {
         const sellersList = await getSubscribedSellers(memberId);
         setSellers(sellersList);
+        console.log("sellersList: ", sellersList);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -43,6 +44,7 @@ function SubscriptionManagement() {
               className={styles.profileImage}
             />
             <p className={styles.sellerName}>{seller.introduction}</p>
+            <p className={styles.sellerName}>{seller.details}</p>
           </Link>
         ))}
       </div>

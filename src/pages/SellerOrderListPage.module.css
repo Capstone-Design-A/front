@@ -111,13 +111,13 @@ td .orderStatus {
 }
 
 td .orderStatus.waiting {
-  background-color: #5c59e8;
-}
-
-td .orderStatus.completed {
   background-color: #fff;
   color: #5c59e8;
   border: 0.5px solid #5c59e8;
+}
+
+td .orderStatus.orderStatus.completed {
+  background-color: #5c59e8;
 }
 
 .noItem {

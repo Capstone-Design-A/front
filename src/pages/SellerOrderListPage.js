@@ -13,7 +13,7 @@ function SellerOrderListPage() {
     const fetchData = async () => {
       try {
         const orderStatus = await getOrderStatus(page, size);
-        setProducts(orderStatus);
+        setProducts(orderStatus.orderItemStatusList);
       } catch (error) {
         console.error("Error fetching order status list: ", error);
       }
@@ -79,7 +79,7 @@ function SellerOrderListPage() {
                   <td>
                     <div
                       className={`${styles.orderStatus} ${
-                        product.status === "주문 대기"
+                        product.status === "PENDING"
                           ? styles.waiting
                           : styles.completed
                       }`}

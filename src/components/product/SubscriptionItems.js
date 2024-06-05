@@ -1,10 +1,9 @@
-// 구독하고 있는 판매자의 새 상품 목록
 import React from "react";
 import Container from "../shared/Container";
 import ProductItem from "./ProductItem";
 import styles from "./ProductList.module.css";
 
-function SubscriptionItems({ products, type, fromMember }) {
+function SubscriptionItems({ products }) {
   return (
     <Container className={styles.container}>
       <div className={styles.productList}>
@@ -17,8 +16,9 @@ function SubscriptionItems({ products, type, fromMember }) {
               price={product.price}
               discountPrice={product.discountPrice}
               imageUrl={product.imageUrl}
-              type={type}
-              fromMember={fromMember}
+              category={product.category}
+              stock={product.stock}
+              deadline={product.deadline}
             />
           ))}
       </div>

@@ -9,6 +9,9 @@ function ProductSubscriptionPage() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [totalProducts, setTotalProducts] = useState(0);
 
   const token = localStorage.getItem("accessToken");
   const isLoggedIn = !!token;
@@ -18,17 +21,25 @@ function ProductSubscriptionPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const size = 10;
         const type = isLoggedIn ? 0 : 1;
-        const fetchedProducts = await getSubscriptionItems(
+        const { itemList, totalElement } = await getSubscriptionItems(
           page,
           size,
           type,
           memberId
         );
-        setProducts((prevProducts) => [...prevProducts, ...fetchedProducts]);
+        if (itemList.length === 0) {
+          setHasMore(false);
+          return;
+        }
+        setProducts((prevProducts) => [...prevProducts, ...itemList]);
+        setTotalProducts(totalElement);
       } catch (error) {
         console.error("Error fetching products:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -36,7 +47,9 @@ function ProductSubscriptionPage() {
   }, [page, isLoggedIn, memberId]);
 
   const handleLoadMore = () => {
-    setPage((prevPage) => prevPage + 1);
+    if (!isLoading && hasMore) {
+      setPage((prevPage) => prevPage + 1);
+    }
   };
 
   const toggleCategoryVisibility = () => {
@@ -64,15 +77,21 @@ function ProductSubscriptionPage() {
         <div className={styles.pageContainer}>
           <ListPage title="New! 구독하고 있는 판매자의 새 상품">
             <div className={styles.content}>
-              <p className={styles.count}>총 {products.length}개의 상품</p>
+              <p className={styles.count}>총 {totalProducts}개의 상품</p>
               <div>
                 <SubscriptionItems products={products} />
               </div>
-              <div className={styles.loadMore}>
-                <button className={styles.button} onClick={handleLoadMore}>
-                  더보기
-                </button>
-              </div>
+              {hasMore && (
+                <div className={styles.loadMore}>
+                  <button
+                    className={styles.button}
+                    onClick={handleLoadMore}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "로딩 중..." : "더보기"}
+                  </button>
+                </div>
+              )}
             </div>
           </ListPage>
         </div>
