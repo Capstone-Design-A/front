@@ -6,25 +6,36 @@ import styles from "./SellerOrderListPage.module.css";
 
 function SellerOrderList() {
   const [products, setProducts] = useState([]);
-  const page = 1;
-  const size = 10;
+  const [page, setPage] = useState(1);
+  const [totalElements, setTotalElements] = useState(0);
+  const size = 5;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const orderStatus = await getOrderStatus(page, size);
-        setProducts(orderStatus);
+        console.log("orderStatus: ", orderStatus);
+        setProducts(orderStatus.orderItemStatusList);
+        setTotalElements(orderStatus.totalElement);
       } catch (error) {
         console.error("Error fetching order status list: ", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [page, size]);
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);
+  };
+
+  const handlePrevPage = () => {
+    if (page > 1) setPage(page - 1);
+  };
+
+  const handleNextPage = () => {
+    if (page * size < totalElements) setPage(page + 1);
   };
 
   return (
@@ -44,7 +55,7 @@ function SellerOrderList() {
       <div className={styles.container}>
         <div className={styles.title}>
           <h1>주문 현황</h1>
-          <Link to="/auth/seller/order-status?page=1&size=10">
+          <Link to={`/auth/seller/order-status?page=${page}&size=${size}`}>
             <h1> > </h1>
           </Link>
         </div>
@@ -85,9 +96,11 @@ function SellerOrderList() {
                   <td>
                     <div
                       className={`${styles.orderStatus} ${
-                        product.status === "주문 대기"
+                        product.status === "PENDING"
                           ? styles.waiting
-                          : styles.completed
+                          : product.status === "COMPLETED"
+                          ? styles.completed
+                          : ""
                       }`}
                     >
                       {product.status}
@@ -97,13 +110,25 @@ function SellerOrderList() {
               ))
             ) : (
               <tr>
-                <td colSpan="6">
+                <td colSpan="7">
                   <div className={styles.noItem}>등록된 상품이 없습니다.</div>
                 </td>
               </tr>
             )}
           </tbody>
         </table>
+        <div className={styles.pagination}>
+          <button onClick={handlePrevPage} disabled={page === 1}>
+            이전
+          </button>
+          <span>{page}</span>
+          <button
+            onClick={handleNextPage}
+            disabled={page * size >= totalElements}
+          >
+            다음
+          </button>
+        </div>
       </div>
     </>
   );

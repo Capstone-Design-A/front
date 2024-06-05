@@ -337,9 +337,10 @@ export const getSubscriptionItems = async (
       );
     }
 
-    let items = responseData.result.itemList;
-
-    return items;
+    return {
+      itemList: responseData.result.itemList,
+      totalElement: responseData.result.totalElement,
+    };
   } catch (error) {
     console.error("Error fetching subscription items:", error);
     throw error;
@@ -893,8 +894,7 @@ export const getOrderStatus = async (page, size) => {
       );
     }
 
-    const result = responseData.result.orderItemStatusList;
-    return result;
+    return responseData.result;
   } catch (error) {
     console.error("Error fetching item detail:", error);
     throw error;
