@@ -759,7 +759,6 @@ export const getPostItems = async (postId, token) => {
     }
 
     const { result } = responseData;
-    console.log("PostItems:", result);
 
     return {
       postId: result.postId,
@@ -1049,7 +1048,6 @@ export const getSubscriptionStatus = async (toMemberId) => {
       },
     });
     const result = await response.json();
-    console.log("subscription status:", result);
     return result;
   } catch (error) {
     console.error("Error checking subscription status:", error);
@@ -1071,7 +1069,6 @@ export const subscribe = async (toMemberId) => {
       },
     });
     const result = await response.json();
-    console.log("subscribe:", result);
     return result;
   } catch (error) {
     console.error("Error subscribing:", error);
@@ -1093,7 +1090,6 @@ export const unsubscribe = async (toMemberId) => {
       },
     });
     const result = await response.json();
-    console.log("unsubscribe:", result);
     return result;
   } catch (error) {
     console.error("Error unsubscribing:", error);

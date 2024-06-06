@@ -10,11 +10,12 @@ import { getSellerInfo, getPostList } from "../api/api";
 
 function SellerIntroductionPage() {
   const { memberId } = useParams();
-  console.log("memberId:", memberId);
   const [userData, setUserData] = useState(null);
   const [postList, setPostList] = useState([]);
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
+
+  const myMemberId = parseInt(localStorage.getItem("memberId"), 20);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,7 +70,9 @@ function SellerIntroductionPage() {
           <div className={styles.mainContainer}>
             <div className={styles.header}>
               <div className={styles.headerTitle}>
-                {userData && <UserProfile user={userData} />}
+                {userData && (
+                  <UserProfile user={userData} myMemberId={myMemberId} />
+                )}
               </div>
             </div>
             <div className={styles.count}>
