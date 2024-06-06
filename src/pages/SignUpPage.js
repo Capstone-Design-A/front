@@ -23,14 +23,19 @@ function SignUpPage() {
   });
   const [isLoginIdDuplicate, setIsLoginIdDuplicate] = useState(false);
   const [isNickNameDuplicate, setIsNickNameDuplicate] = useState(false);
+  // eslint-disable-next-line
   const [isLoginIdChecked, setIsLoginIdChecked] = useState(false);
+  // eslint-disable-next-line
   const [isNickNameChecked, setIsNickNameChecked] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [loginIdError, setLoginIdError] = useState("");
   const [nickNameError, setNickNameError] = useState("");
   const [generalErrorMessage, setGeneralErrorMessage] = useState("");
   const [isLoginIdCheckComplete, setIsLoginIdCheckComplete] = useState(false);
   const [isNickNameCheckComplete, setIsNickNameCheckComplete] = useState(false);
+  const [loginIdCheckError, setLoginIdCheckError] = useState("");
+  const [nickNameCheckError, setNickNameCheckError] = useState("");
   const navigate = useNavigate();
   const { user, login } = useAuth();
   const location = useLocation();
@@ -78,11 +83,19 @@ function SignUpPage() {
           setNickNameError("이미 사용 중인 닉네임입니다.");
         }
       }
+
+      if (type === "loginId") {
+        setIsLoginIdCheckComplete(true);
+        setLoginIdCheckError("");
+      } else if (type === "nickName") {
+        setIsNickNameCheckComplete(true);
+        setNickNameCheckError("");
+      }
     } catch (error) {
       if (type === "loginId") {
-        setLoginIdError("중복 체크 중 오류가 발생했습니다.");
+        setLoginIdCheckError("이미 사용 중인 아이디입니다.");
       } else if (type === "nickName") {
-        setNickNameError("중복 체크 중 오류가 발생했습니다.");
+        setNickNameCheckError("이미 사용 중인 닉네임입니다.");
       }
     }
   }
@@ -92,11 +105,6 @@ function SignUpPage() {
 
     if (values.password !== values.passwordRepeat) {
       setGeneralErrorMessage("비밀번호가 일치하지 않습니다.");
-      return;
-    }
-
-    if (!isLoginIdChecked || !isNickNameChecked) {
-      setGeneralErrorMessage("아이디와 닉네임 중복 체크를 진행해주세요.");
       return;
     }
 
@@ -110,13 +118,18 @@ function SignUpPage() {
       return;
     }
 
+    if (!validatePassword(values.password)) {
+      setPasswordError("비밀번호는 8~14자로, 영문과 숫자를 혼합해야 합니다.");
+      return;
+    }
+
     if (!validatePhoneNumber(values.phone)) {
-      setPhoneError("사용자의 전화번호 형식에 문제가 있습니다.");
+      setPhoneError("전화번호 형식은 000-0000-0000 입니다.");
       return;
     }
 
     if (!validateNickName(values.nickName)) {
-      setNickNameError("사용자의 닉네임 형식에 문제가 있습니다.");
+      setNickNameError("닉네임 형식은 4~14자로, 한글 또는 영문은 필수입니다.");
       return;
     }
 
@@ -152,6 +165,8 @@ function SignUpPage() {
     setIsLoginIdChecked(false);
     setIsNickNameChecked(false);
     setGeneralErrorMessage("");
+    setLoginIdCheckError("");
+    setNickNameCheckError("");
   }, [location.pathname]);
 
   useEffect(() => {
@@ -182,6 +197,11 @@ function SignUpPage() {
     if (user) navigate("/");
   }, [user, navigate]);
 
+  function validatePassword(password) {
+    const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,14}$/;
+    return regex.test(password);
+  }
+
   function validatePhoneNumber(phoneNumber) {
     const regex = /^\d{3}-\d{4}-\d{4}$/;
     return regex.test(phoneNumber);
@@ -191,6 +211,13 @@ function SignUpPage() {
     const regex = /^[a-zA-Z0-9가-힣]{4,14}$/;
     return regex.test(nickName);
   }
+
+  const loginButtonClassName = isLoginIdCheckComplete
+    ? `${styles.button2} ${styles.complete}`
+    : styles.button2;
+  const nickNameButtonClassName = isNickNameCheckComplete
+    ? `${styles.button2} ${styles.complete}`
+    : styles.button2;
 
   return (
     <>
@@ -209,31 +236,35 @@ function SignUpPage() {
             value={values.name}
             onChange={handleChange}
           />
-          <Label className={styles.Label} htmlFor="loginId">
-            로그인 아이디
-          </Label>
-          <div className={styles.ButtonWrapper}>
-            <Input
-              id="loginId"
-              className={styles.Input}
-              name="loginId"
-              type="text"
-              placeholder="로그인 아이디"
-              value={values.loginId}
-              onChange={handleChange}
-            />
-            <Button2
-              className={styles.button2}
-              type="button"
-              onClick={() => handleCheckDuplicate("loginId")}
-            >
-              {isLoginIdCheckComplete ? "중복 체크 완료" : "중복 체크"}
-            </Button2>
+          <div className={styles.formGroup}>
+            <Label className={styles.Label} htmlFor="loginId">
+              로그인 아이디
+            </Label>
+            <div className={styles.ButtonWrapper}>
+              <Input
+                id="loginId"
+                className={styles.Input}
+                name="loginId"
+                type="text"
+                placeholder="로그인 아이디"
+                value={values.loginId}
+                onChange={handleChange}
+              />
+              <Button2
+                className={loginButtonClassName}
+                type="button"
+                onClick={() => handleCheckDuplicate("loginId")}
+              >
+                {isLoginIdCheckComplete ? "중복 체크 완료" : "중복 체크"}
+              </Button2>
+            </div>
+            {isLoginIdDuplicate && (
+              <p className={styles.ErrorMsg}>{loginIdError}</p>
+            )}
+            {loginIdCheckError && (
+              <p className={styles.ErrorMsgCheck}>{loginIdCheckError}</p>
+            )}
           </div>
-          {isLoginIdDuplicate && (
-            <p className={styles.ErrorMsg}>이미 사용 중인 아이디입니다.</p>
-          )}
-          {loginIdError && <p className={styles.ErrorMsg}>{loginIdError}</p>}
           <Label className={styles.Label} htmlFor="password">
             비밀번호
           </Label>
@@ -246,6 +277,7 @@ function SignUpPage() {
             value={values.password}
             onChange={handleChange}
           />
+          {passwordError && <p className={styles.ErrorMsg}>{passwordError}</p>}
           <Label className={styles.Label} htmlFor="passwordRepeat">
             비밀번호 확인
           </Label>
@@ -272,7 +304,7 @@ function SignUpPage() {
               onChange={handleChange}
             />
             <Button2
-              className={styles.button2}
+              className={nickNameButtonClassName}
               type="button"
               onClick={() => handleCheckDuplicate("nickName")}
             >
@@ -280,9 +312,11 @@ function SignUpPage() {
             </Button2>
           </div>
           {isNickNameDuplicate && (
-            <p className={styles.ErrorMsg}>이미 사용 중인 닉네임입니다.</p>
+            <p className={styles.ErrorMsgCheck}>{nickNameError}</p>
           )}
-          {nickNameError && <p className={styles.ErrorMsg}>{nickNameError}</p>}
+          {nickNameCheckError && (
+            <p className={styles.ErrorMsgCheck}>{nickNameCheckError}</p>
+          )}
           <Label className={styles.Label} htmlFor="phone">
             전화번호
           </Label>
