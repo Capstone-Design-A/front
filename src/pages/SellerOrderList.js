@@ -15,7 +15,6 @@ function SellerOrderList() {
     const fetchData = async () => {
       try {
         const orderStatus = await getOrderStatus(page, size);
-        console.log("orderStatus: ", orderStatus);
         setProducts(orderStatus.orderItemStatusList);
         setTotalElements(orderStatus.totalElement);
       } catch (error) {

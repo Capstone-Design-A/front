@@ -6,7 +6,6 @@ import styles from "./SellerItemListPage.module.css";
 
 function SellerItemList() {
   const [products, setProducts] = useState([]);
-  const sellerId = localStorage.getItem("memberId");
   const page = 1;
   const size = 10;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
@@ -14,7 +13,7 @@ function SellerItemList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sellerItemList = await getSellerItemList(sellerId, page, size);
+        const sellerItemList = await getSellerItemList(page, size);
         setProducts(sellerItemList);
       } catch (error) {
         console.error("Error fetching seller item list: ", error);
@@ -22,7 +21,7 @@ function SellerItemList() {
     };
 
     fetchData();
-  }, [sellerId]);
+  }, []);
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);
@@ -39,7 +38,7 @@ function SellerItemList() {
         }`}
       >
         <div className={styles.categoryContent}>
-          <SellerCategory sellerId={sellerId} page={page} size={size} />
+          <SellerCategory page={page} size={size} />
         </div>
       </div>
       <div className={styles.container}>

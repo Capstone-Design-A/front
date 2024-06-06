@@ -930,7 +930,7 @@ export const getSellerImminentItemList = async (page, size) => {
       );
     }
 
-    const result = responseData.result.imminentItemList;
+    const result = responseData.result;
     return result;
   } catch (error) {
     console.error("Error fetching item detail:", error);
@@ -967,7 +967,7 @@ export const getSellerItemList = async (page, size) => {
       );
     }
 
-    const result = responseData.result.salesItemList;
+    const result = responseData.result;
     return result;
   } catch (error) {
     console.error("Error fetching item detail:", error);

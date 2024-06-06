@@ -11,6 +11,11 @@
   padding: 20px;
 }
 
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
 .Label,
 .Input,
 .Button,
@@ -19,13 +24,31 @@
   width: 100%;
 }
 
+.Label[name="loginId"],
+.Label[name="nickName"] {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.Input[name="loginId"],
+.Input[name="nickName"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
 .Label {
   margin: 0 0 0 5px;
   text-align: left;
 }
 
 .Input {
-  margin: 8px 0 30px;
+  margin: 8px 0 35px;
 }
 
 .Button2 {
@@ -66,39 +89,38 @@
 }
 
 .button2 {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  margin-left: 25px;
+  padding: 8px 20px;
+  border: 1px solid #48735d;
   background-color: #fff;
-  opacity: 70%;
-  border-color: #000;
-  border-width: 0.05px;
-  border-radius: 8px;
   color: #48735d;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
+  opacity: 70%;
+  border-radius: 4px;
   cursor: pointer;
-  width: auto;
-  padding: 10px 20px;
-}
-
-.button2:hover {
-  opacity: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 27px;
 }
 
 .ButtonWrapper {
-  position: relative;
-  display: inline;
-  width: 90%;
-  justify-content: space-between;
+  display: flex;
   align-items: center;
 }
 
+.ErrorMsgCheck {
+  color: #eb5757;
+  font-size: 15px;
+  margin: 0px auto 40px;
+}
+
 .ErrorMsg {
-  color: red;
-  margin-top: -10px;
-  margin-bottom: 10px;
+  color: #eb5757;
+  font-size: 15px;
+  margin: 30px auto 20px;
+}
+
+.button2.complete {
+  background-color: #48735d;
+  color: #fff;
+  opacity: 70%;
 }

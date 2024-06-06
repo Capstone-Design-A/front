@@ -8,6 +8,7 @@ import SellerImminentItemList from "./SellerImminentItemList";
 import DashboardPage from "./DashboardPage";
 
 function ManagementPage() {
+  // eslint-disable-next-line
   const sellerId = localStorage.getItem("memberId");
   // eslint-disable-next-line
   const [page, setPage] = useState(1);
@@ -30,7 +31,7 @@ function ManagementPage() {
         }`}
       >
         <div className={styles.categoryContent}>
-          <SellerCategory sellerId={sellerId} page={page} size={size} />
+          <SellerCategory page={page} size={size} />
         </div>
       </div>
       <div>

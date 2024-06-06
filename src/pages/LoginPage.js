@@ -85,7 +85,7 @@ const LoginPage = ({ onLogin }) => {
           {error && <p className={styles.ErrorMsg}>{error}</p>}
           <div className={styles.register}>
             회원이 아니신가요?{" "}
-            <Link to="/register">
+            <Link to="/member/signUp">
               <span>회원가입하기</span>
             </Link>
           </div>
