@@ -1,22 +1,28 @@
-// PayPage.js
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PayAddress from "./PayAddress";
 import ProductList from "./ProductList";
 import PayMethod from "./PayMethod";
 import styles from "./PayPage.module.css";
-import { fakePayment } from "../../api/api";
+import { fakePayment, clearCartItems } from "../../api/api";
 
 function PayPage() {
   const location = useLocation();
-  const { products } = location.state;
-  const { totalAmount } = location.state;
+  const navigate = useNavigate();
+  const { products, totalAmount } = location.state;
 
   const handlePayment = async () => {
     try {
       const response = await fakePayment({ itemInfoList: products });
       if (response.isSuccess) {
         console.log("결제 성공:", response.message);
+        const clearResponse = await clearCartItems();
+        if (clearResponse.isSuccess) {
+          console.log("장바구니 비우기 성공:", clearResponse.message);
+          navigate("/payment/complete", { state: { products, totalAmount } });
+        } else {
+          console.error("장바구니 비우기 실패:", clearResponse.message);
+        }
       } else {
         console.error("결제 실패:", response.message);
       }
