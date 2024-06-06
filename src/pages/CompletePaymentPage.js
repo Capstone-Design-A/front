@@ -8,8 +8,6 @@ function CompletePaymentPage() {
   const totalPricePerProduct = products.map(
     (product) => product.price * product.quantity
   );
-  console.log("products: ", products);
-  console.log("totalAmount: ", totalAmount);
 
   return (
     <div className={styles.container}>

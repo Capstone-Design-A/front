@@ -665,6 +665,28 @@ export const deleteCartItems = async (cartId) => {
   }
 };
 
+export const updateCartItemQuantity = async (id, quantity) => {
+  const UPDATE_CART_ITEMS_ENDPOINT = `/auth/cart/item/quantity`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(UPDATE_CART_ITEMS_ENDPOINT, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ id, quantity }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error updating cart item quantity:", error);
+    throw error;
+  }
+};
+
 export const clearCartItems = async () => {
   const CLEAR_CART_ITEMS_ENDPOINT = `/auth/cart/items`;
   const token = localStorage.getItem("accessToken");
@@ -674,6 +696,7 @@ export const clearCartItems = async () => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
