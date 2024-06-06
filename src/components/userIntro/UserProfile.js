@@ -7,7 +7,7 @@ import {
   getSubscriptionStatus,
 } from "../../api/api.js";
 
-const UserProfile = ({ user }) => {
+const UserProfile = ({ user, myMemberId }) => {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -56,7 +56,7 @@ const UserProfile = ({ user }) => {
       <div className={styles.userProfileContainer}>
         <img
           className={styles.profilePicture}
-          src={user.memberImageUrl} // 변경된 부분
+          src={user.memberImageUrl}
           alt="Profile"
         />
         <div className={styles.userInfo}>
@@ -77,11 +77,13 @@ const UserProfile = ({ user }) => {
           <button className={styles.productButton}>
             <p className={styles.product}>{user.memberImageUrl}</p>
           </button>
-          <div>
-            <Link to="/auth/posts">
-              <button className={styles.createButton}>게시물 작성하기</button>
-            </Link>
-          </div>
+          {myMemberId === user.memberId && (
+            <div>
+              <Link to="/auth/posts">
+                <button className={styles.createButton}>게시물 작성하기</button>
+              </Link>
+            </div>
+          )}
           {errorMessage && <p className={styles.error}>{errorMessage}</p>}
         </div>
       </div>
