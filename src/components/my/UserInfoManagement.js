@@ -7,12 +7,13 @@ function UserInfoManagement() {
   const [detailedAddress, setDetailedAddress] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [nickName, setNickName] = useState("");
-  const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   // eslint-disable-next-line
   const [isNicknameAvailable, setIsNicknameAvailable] = useState(true);
   const [isCheckingDuplicate, setIsCheckingDuplicate] = useState(false);
   const [duplicateMessage, setDuplicateMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,8 +39,8 @@ function UserInfoManagement() {
   const handleDetailedAddressChange = (e) => setDetailedAddress(e.target.value);
   const handleContactNumberChange = (e) => setContactNumber(e.target.value);
   const handleNickNameChange = (e) => setNickName(e.target.value);
-  const handleCurrentPasswordChange = (e) => setCurrentPassword(e.target.value);
   const handleNewPasswordChange = (e) => setNewPassword(e.target.value);
+  const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
 
   const handleCheckDuplicate = async () => {
     setIsCheckingDuplicate(true);
@@ -62,25 +63,34 @@ function UserInfoManagement() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage("");
+
+    if (newPassword !== confirmPassword) {
+      setErrorMessage("비밀번호가 일치하지 않습니다.");
+      console.error(errorMessage);
+      return;
+    }
 
     const updatedData = {
       address,
       details: detailedAddress,
       phone: contactNumber,
-      password: newPassword || currentPassword,
+      password: newPassword,
     };
 
     try {
       const data = await updateUserInfo(updatedData);
-      if (data) {
-        setAddress(data.address);
-        setDetailedAddress(data.details);
-        setContactNumber(data.phone);
-        alert("회원 정보가 성공적으로 수정되었습니다.");
+      if (data.isSuccess) {
+        setAddress(data.result.address);
+        setDetailedAddress(data.result.details);
+        setContactNumber(data.result.phone);
+        console.log("회원 정보가 성공적으로 수정되었습니다.");
       } else {
-        alert("회원 정보 수정에 실패했습니다.");
+        setErrorMessage("회원 정보 수정에 실패했습니다.");
+        console.error("회원 정보 수정에 실패했습니다.");
       }
     } catch (error) {
+      setErrorMessage("회원 정보 수정 중 오류가 발생했습니다.");
       console.error("Error updating user data:", error);
     }
   };
@@ -108,7 +118,7 @@ function UserInfoManagement() {
           </button>
         </div>
         {!isCheckingDuplicate && (
-          <p className={styles.duplicateMessage}>{duplicateMessage}</p>
+          <p className={styles.errorMessage}>{duplicateMessage}</p>
         )}
       </div>
       <div className={styles.formGroup}>
@@ -136,13 +146,7 @@ function UserInfoManagement() {
         />
       </div>
       <div className={styles.formGroup}>
-        <label>비밀번호 변경</label>
-        <input
-          type="password"
-          value={currentPassword}
-          onChange={handleCurrentPasswordChange}
-          placeholder="현재 비밀번호"
-        />
+        <label>새 비밀번호</label>
         <input
           type="password"
           value={newPassword}
@@ -150,6 +154,16 @@ function UserInfoManagement() {
           placeholder="새 비밀번호"
         />
       </div>
+      <div className={styles.formGroup}>
+        <label>비밀번호 확인</label>
+        <input
+          type="password"
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
+          placeholder="비밀번호 확인"
+        />
+      </div>
+      {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
       <button type="submit" className={styles.submitButton}>
         변경 내용 저장
       </button>
