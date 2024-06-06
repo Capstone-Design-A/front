@@ -1099,6 +1099,29 @@ export const registerItem = async (
 };
 
 // 소비자 개인 섹션
+export const checkPassword = async (password) => {
+  const CHECK_PASSWORD_ENDPOINT = "/auth/member/password";
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(CHECK_PASSWORD_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ password }),
+    });
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error checking password:", error);
+    throw error;
+  }
+};
+
 export const getSubscriptionStatus = async (toMemberId) => {
   const SUBSCRIPTION_STATUS_ENDPOINT = `/auth/subscription/check/${toMemberId}`;
   const token = localStorage.getItem("accessToken");

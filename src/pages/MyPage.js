@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { checkPassword } from "../api/api";
 import UserInfoManagement from "../components/my/UserInfoManagement";
 import SubscriptionManagement from "../components/my/SubscriptionManagement";
 import OrderDeliveryStatus from "../components/my/OrderDeliveryStatus";
@@ -9,6 +10,9 @@ import styles from "./MyPage.module.css";
 function MyPage() {
   const [isSeller, setIsSeller] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
+  const [isPasswordChecked, setIsPasswordChecked] = useState(false);
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const toggleUserType = () => {
     setIsSeller(!isSeller);
@@ -21,10 +25,48 @@ function MyPage() {
     );
   };
 
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handlePasswordValidation = async () => {
+    try {
+      const response = await checkPassword(password);
+      if (response.isSuccess) {
+        setIsPasswordChecked(true);
+        setErrorMessage("");
+      } else {
+        setErrorMessage("비밀번호가 일치하지 않습니다.");
+      }
+    } catch (error) {
+      setErrorMessage("비밀번호 확인 중 오류가 발생했습니다.");
+      console.error("Error validating password:", error);
+    }
+  };
+
   const renderSectionContent = () => {
+    if (!isPasswordChecked && activeSection === "editProfile") {
+      return (
+        <div className={styles.checkPassword}>
+          <h2>비밀번호를 입력해주세요</h2>
+          <div className={styles.inputContainer}>
+            <input
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+            <button onClick={handlePasswordValidation}>확인</button>
+          </div>
+          {errorMessage && (
+            <p className={styles.errorMessage}>{errorMessage}</p>
+          )}
+        </div>
+      );
+    }
+
     switch (activeSection) {
       case "editProfile":
-        return <UserInfoManagement />;
+        return isPasswordChecked ? <UserInfoManagement /> : null;
       case "subscriptionManagement":
         return <SubscriptionManagement />;
       case "orderHistory":
