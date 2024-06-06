@@ -489,6 +489,29 @@ export const getInquiryList = async (itemId, page, size, token) => {
   }
 };
 
+export const postInquiry = async (itemId, content) => {
+  const POST_INQUIRY_ENDPOINT = "/auth/inquiry";
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(POST_INQUIRY_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ itemId, content }),
+    });
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error post inquiry:", error);
+    throw error;
+  }
+};
+
 export const getReviewList = async (itemId, page, size, token) => {
   const REVIEW_LIST_ENDPOINT = "/review";
 
@@ -828,6 +851,48 @@ export const deletePost = async (postId) => {
   }
 };
 
+export const subscribe = async (toMemberId) => {
+  const SUBSCRIBE_ENDPOINT = `/auth/subscription/${toMemberId}`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(`${SUBSCRIBE_ENDPOINT}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error subscribing:", error);
+    throw error;
+  }
+};
+
+export const unsubscribe = async (toMemberId) => {
+  const SUBSCRIBE_ENDPOINT = `/auth/subscription/${toMemberId}`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(`${SUBSCRIBE_ENDPOINT}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error unsubscribing:", error);
+    throw error;
+  }
+};
+
 // 판매자 관리 섹션
 export const getDashboard = async () => {
   const DASHBOARD_ENDPOINT = "/auth/seller";
@@ -1051,48 +1116,6 @@ export const getSubscriptionStatus = async (toMemberId) => {
     return result;
   } catch (error) {
     console.error("Error checking subscription status:", error);
-    throw error;
-  }
-};
-
-export const subscribe = async (toMemberId) => {
-  const SUBSCRIBE_ENDPOINT = `/auth/subscription/${toMemberId}`;
-  const token = localStorage.getItem("accessToken");
-
-  try {
-    const response = await fetch(`${SUBSCRIBE_ENDPOINT}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.error("Error subscribing:", error);
-    throw error;
-  }
-};
-
-export const unsubscribe = async (toMemberId) => {
-  const SUBSCRIBE_ENDPOINT = `/auth/subscription/${toMemberId}`;
-  const token = localStorage.getItem("accessToken");
-
-  try {
-    const response = await fetch(`${SUBSCRIBE_ENDPOINT}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.error("Error unsubscribing:", error);
     throw error;
   }
 };
