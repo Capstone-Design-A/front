@@ -53,7 +53,10 @@ const InquiryListPage = ({ itemId }) => {
           </Button>
         </div>
         {isFormVisible && (
-          <InquiryForm onCancel={() => setIsFormVisible(false)} />
+          <InquiryForm
+            onCancel={() => setIsFormVisible(false)}
+            itemId={itemId}
+          />
         )}
         <InquiryList inquiryList={inquiryList} />
       </Container>
