@@ -27,6 +27,7 @@ import SellerOrderListPage from "./pages/SellerOrderListPage";
 import SellerItemListPage from "./pages/SellerItemListPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import PayPage from "./pages/paymentPages/PayPage";
+import CompletePaymentPage from "./pages/CompletePaymentPage";
 
 function Main() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -86,7 +87,7 @@ function Main() {
           <Route path="auth/member" element={<MyPage />} />
           <Route path="auth/cart/item" element={<CartPage />} />
           <Route path="/auth/paymemt" element={<PayPage />} />
-
+          <Route path="/payment/complete" element={<CompletePaymentPage />} />
           <Route path="auth/item" element={<ProductRegistrationPage />} />
           <Route path="auth/posts" element={<PostRegistrationPage />} />
           <Route path="intro/:memberId" element={<SellerIntroductionPage />} />

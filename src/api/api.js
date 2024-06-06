@@ -665,6 +665,31 @@ export const deleteCartItems = async (cartId) => {
   }
 };
 
+export const clearCartItems = async () => {
+  const CLEAR_CART_ITEMS_ENDPOINT = `/auth/cart/items`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(CLEAR_CART_ITEMS_ENDPOINT, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to clear cart items");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error clearing cart items:", error);
+    return { isSuccess: false, message: "Error clearing cart items" };
+  }
+};
+
 export const fakePayment = async (orderData) => {
   const FAKE_PAYMENT_ENDPOINT = `/auth/payment`;
   const token = localStorage.getItem("accessToken");
