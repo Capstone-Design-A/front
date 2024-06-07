@@ -33,7 +33,7 @@ function GroupItemStatus() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>공동구매 주문 내역</h2>
+      <h2 className={styles.title}>공동구매 신청 내역</h2>
       <div className={styles.orderList}>
         {orderGroupItems.map((item) => (
           <div key={item.id} className={styles.orderItem}>

@@ -979,7 +979,6 @@ export const getDashboard = async () => {
 export const getOrderStatus = async (page, size) => {
   const ORDER_STATUS_ENDPOINT = "/auth/seller/order-status";
   const token = localStorage.getItem("accessToken");
-  console.log("Access token: ", token);
 
   try {
     const response = await fetch(
@@ -1191,8 +1190,8 @@ export const getSubscriptionStatus = async (toMemberId) => {
   }
 };
 
-export const getUserOrderStatus = async (orderId) => {
-  const ORDER_STATUS_ENDPOINT = `/auth/member/order/${orderId}`;
+export const getUserOrderStatus = async () => {
+  const ORDER_STATUS_ENDPOINT = `/auth/member/order`;
   const token = localStorage.getItem("accessToken");
 
   try {

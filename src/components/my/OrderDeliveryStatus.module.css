@@ -14,11 +14,32 @@
   flex-direction: column;
 }
 
+.order {
+  border: 0.1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.orderId {
+  font-size: 18px;
+  font-weight: 300;
+  margin-right: 10px;
+  color: #48735d;
+  padding: 5px 8px;
+  border-radius: 8px;
+
+  opacity: 80%;
+  font-weight: 500;
+}
+
 .orderItem {
   border: 0.1px solid #ccc;
   border-radius: 5px;
   padding: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
@@ -35,4 +56,10 @@
 
 .orderDetails p strong {
   margin-right: 10px;
+  background-color: #48735d;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 8px;
+  opacity: 80%;
+  font-weight: 500;
 }
