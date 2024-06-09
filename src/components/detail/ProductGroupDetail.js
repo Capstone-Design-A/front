@@ -46,17 +46,17 @@ function ProductGroupDetail({ item }) {
   };
 
   const totalPrice = quantity * item.price;
+  const mainImageUrl =
+    item && item.imageUrls && item.imageUrls.length > 0
+      ? item.imageUrls[0]
+      : "";
 
   return (
     <>
       <div className={styles.layout}>
         <Container className={styles.content}>
           <div className={styles.image}>
-            <img
-              className={styles.img}
-              src={item.itemDetailsImageUrl}
-              alt={item.name}
-            />
+            <img className={styles.img} src={mainImageUrl} alt={item.name} />
             <Link to={`/intro/${item.memberId}`}>
               <button className={styles.button}>판매자 소개 바로가기</button>
             </Link>
