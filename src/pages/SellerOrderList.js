@@ -6,36 +6,42 @@ import styles from "./SellerOrderListPage.module.css";
 
 function SellerOrderList() {
   const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(1);
   const [totalElements, setTotalElements] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const size = 5;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const orderStatus = await getOrderStatus(page, size);
-        setProducts(orderStatus.orderItemStatusList);
+        const orderStatus = await getOrderStatus(currentPage, size);
+        const slicedProducts = orderStatus.orderItemStatusList;
+        setProducts(slicedProducts);
         setTotalElements(orderStatus.totalElement);
       } catch (error) {
         console.error("Error fetching order status list: ", error);
       }
     };
-
     fetchData();
-  }, [page, size]);
+    // eslint-disable-next-line
+  }, []);
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);
   };
 
   const handlePrevPage = () => {
-    if (page > 1) setPage(page - 1);
+    if (currentPage > 1) setCurrentPage((prevPage) => prevPage - 1);
   };
 
   const handleNextPage = () => {
-    if (page * size < totalElements) setPage(page + 1);
+    setCurrentPage((prevPage) => prevPage + 1);
   };
+
+  const indexOfLastItem = currentPage * size;
+  const indexOfFirstItem = indexOfLastItem - size;
+  const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(totalElements / size);
 
   return (
     <>
@@ -48,13 +54,15 @@ function SellerOrderList() {
         }`}
       >
         <div className={styles.categoryContent}>
-          <SellerCategory page={page} size={size} />
+          <SellerCategory page={currentPage} size={size} />
         </div>
       </div>
       <div className={styles.container}>
         <div className={styles.title}>
           <h1>주문 현황</h1>
-          <Link to={`/auth/seller/order-status?page=${page}&size=${size}`}>
+          <Link
+            to={`/auth/seller/order-status?page=${currentPage}&size=${size}`}
+          >
             <h1> > </h1>
           </Link>
         </div>
@@ -73,8 +81,8 @@ function SellerOrderList() {
             </tr>
           </thead>
           <tbody>
-            {products && products.length > 0 ? (
-              products.map((product, index) => (
+            {currentProducts && currentProducts.length > 0 ? (
+              currentProducts.map((product, index) => (
                 <tr key={index}>
                   <td>
                     <div className={styles.orderId}>#{product.orderNumber}</div>
@@ -117,13 +125,21 @@ function SellerOrderList() {
           </tbody>
         </table>
         <div className={styles.pagination}>
-          <button onClick={handlePrevPage} disabled={page === 1}>
+          <button onClick={handlePrevPage} disabled={currentPage === 1}>
             이전
           </button>
-          <span>{page}</span>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentPage(index + 1)}
+              className={currentPage === index + 1 ? styles.active : ""}
+            >
+              {index + 1}
+            </button>
+          ))}
           <button
             onClick={handleNextPage}
-            disabled={page * size >= totalElements}
+            disabled={currentPage === totalPages}
           >
             다음
           </button>

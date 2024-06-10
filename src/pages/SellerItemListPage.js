@@ -6,26 +6,43 @@ import styles from "./SellerItemListPage.module.css";
 
 function SellerItemListPage() {
   const [products, setProducts] = useState([]);
-  const page = 1;
-  const size = 10;
+  const [totalElements, setTotalElements] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const size = 20;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sellerItemList = await getSellerItemList(page, size);
-        setProducts(sellerItemList.salesItemList);
+        const sellerItemList = await getSellerItemList(currentPage, size);
+        console.log("Fetched data:", sellerItemList);
+        const slicedProducts = sellerItemList.salesItemList;
+        setProducts(slicedProducts);
+        setTotalElements(sellerItemList.totalElement);
       } catch (error) {
         console.error("Error fetching seller item list: ", error);
       }
     };
-
     fetchData();
-  }, []);
+  }, [currentPage, size]);
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);
   };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const indexOfLastItem = currentPage * size;
+  const indexOfFirstItem = indexOfLastItem - size;
+  const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
+  console.log("currentProducts: ", currentProducts);
+  const totalPages = Math.ceil(totalElements / size);
 
   return (
     <>
@@ -38,7 +55,7 @@ function SellerItemListPage() {
         }`}
       >
         <div className={styles.categoryContent}>
-          <SellerCategory page={page} size={size} />
+          <SellerCategory page={currentPage} size={size} />
         </div>
       </div>
       <div className={styles.container}>
@@ -63,8 +80,8 @@ function SellerItemListPage() {
               </tr>
             </thead>
             <tbody>
-              {products && products.length > 0 ? (
-                products.map((product, index) => (
+              {currentProducts && currentProducts.length > 0 ? (
+                currentProducts.map((product, index) => (
                   <tr key={index}>
                     <td>
                       <div className={styles.name}>
@@ -101,6 +118,26 @@ function SellerItemListPage() {
               )}
             </tbody>
           </table>
+          <div className={styles.pagination}>
+            <button onClick={handlePrevPage} disabled={currentPage === 1}>
+              이전
+            </button>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(index + 1)}
+                className={currentPage === index + 1 ? styles.active : ""}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              다음
+            </button>
+          </div>
         </div>
       </div>
     </>

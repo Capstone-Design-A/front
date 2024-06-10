@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Chart,
   CategoryScale,
@@ -9,11 +9,12 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import styles from "./MonthlySales.module.css";
+import { getDashboard } from "../../api/api";
 
 Chart.register(BarController, CategoryScale, LinearScale, BarElement, Title);
 
 function MonthlySales() {
-  const salesData = {
+  const [salesData, setSalesData] = useState({
     labels: [
       "1월",
       "2월",
@@ -31,7 +32,7 @@ function MonthlySales() {
     datasets: [
       {
         label: "월별 판매량",
-        data: [100, 150, 200, 180, 250, 220, 300, 230, 310, 170, 220, 250], // 판매량 데이터 (임의의 데이터)
+        data: Array(12).fill(0),
         backgroundColor: (context) => {
           const chart = context.chart;
           const { ctx, chartArea } = chart;
@@ -53,7 +54,36 @@ function MonthlySales() {
         },
       },
     ],
-  };
+  });
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const result = await getDashboard();
+        const monthlySales = result.monthlySalesVolumeList;
+        const newData = Array(12).fill(0);
+
+        monthlySales.forEach((item) => {
+          const monthIndex = new Date(item.month + "-01").getMonth();
+          newData[monthIndex] = item.salesVolume;
+        });
+
+        setSalesData((prevData) => ({
+          ...prevData,
+          datasets: [
+            {
+              ...prevData.datasets[0],
+              data: newData,
+            },
+          ],
+        }));
+      } catch (error) {
+        console.error("Error fetching sales data:", error);
+      }
+    }
+
+    getData();
+  }, []);
 
   const options = {
     scales: {
