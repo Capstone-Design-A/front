@@ -31,15 +31,10 @@ export const getSearchItems = async (page, size, keyword, token) => {
       );
     }
 
-    let items = responseData.result.itemList;
-
-    if (keyword) {
-      items = items.filter((item) =>
-        item.name.toLowerCase().includes(keyword.toLowerCase())
-      );
-    }
-
-    return items;
+    return {
+      itemList: responseData.result.itemList,
+      totalElement: responseData.result.totalElement,
+    };
   } catch (error) {
     console.error("Error fetching search items:", error);
     throw error;
