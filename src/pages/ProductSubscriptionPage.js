@@ -36,6 +36,7 @@ function ProductSubscriptionPage() {
         }
         setProducts((prevProducts) => [...prevProducts, ...itemList]);
         setTotalProducts(totalElement);
+        setHasMore(itemList.length === size && totalElement > products.length);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -44,7 +45,8 @@ function ProductSubscriptionPage() {
     };
 
     fetchData();
-  }, [page, isLoggedIn, memberId]);
+    // eslint-disable-next-line
+  }, [page, isLoggedIn, memberId, products.length]);
 
   const handleLoadMore = () => {
     if (!isLoading && hasMore) {

@@ -147,7 +147,10 @@ export const getItemsByCategory = async (categoryId, page, size, token) => {
       );
     }
 
-    return responseData.result.itemList;
+    return {
+      itemList: responseData.result.itemList,
+      totalElement: responseData.result.totalElement,
+    };
   } catch (error) {
     console.error("Error fetching items:", error);
     throw error;
@@ -183,26 +186,33 @@ export const getGroupItems = async (page, size, keyword, token) => {
     }
 
     const items = responseData.result.groupItemList || [];
+    const totalElement = responseData.result.totalElement || 0;
 
     if (keyword) {
-      return items.filter((groupItem) =>
-        groupItem.item?.name.toLowerCase().includes(keyword.toLowerCase())
-      );
+      return {
+        items: items.filter((groupItem) =>
+          groupItem.item?.name.toLowerCase().includes(keyword.toLowerCase())
+        ),
+        totalElement: totalElement,
+      };
     }
 
-    return items
-      .map((groupItem) => ({
-        id: groupItem.id,
-        name: groupItem.item?.name,
-        category: groupItem.item?.category,
-        stock: groupItem.item?.stock,
-        price: groupItem.item?.price,
-        discountPrice: groupItem.discountPrice,
-        imageUrl: groupItem.item?.imageUrl,
-        deadline: groupItem.item?.deadline,
-        targetQuantity: groupItem.targetQuantity,
-      }))
-      .filter((item) => item.name);
+    return {
+      items: items
+        .map((groupItem) => ({
+          id: groupItem.id,
+          name: groupItem.item?.name,
+          category: groupItem.item?.category,
+          stock: groupItem.item?.stock,
+          price: groupItem.item?.price,
+          discountPrice: groupItem.discountPrice,
+          imageUrl: groupItem.item?.imageUrl,
+          deadline: groupItem.item?.deadline,
+          targetQuantity: groupItem.targetQuantity,
+        }))
+        .filter((item) => item.name),
+      totalElement: totalElement,
+    };
   } catch (error) {
     console.error("Error fetching group items:", error);
     throw error;
@@ -237,15 +247,10 @@ export const getDeadlineItems = async (page, size, keyword, token) => {
       );
     }
 
-    let items = responseData.result.itemList;
-
-    if (keyword) {
-      items = items.filter((item) =>
-        item.name.toLowerCase().includes(keyword.toLowerCase())
-      );
-    }
-
-    return items;
+    return {
+      itemList: responseData.result.itemList,
+      totalElement: responseData.result.totalElement,
+    };
   } catch (error) {
     console.error("Error fetching deadline items:", error);
     throw error;
@@ -280,15 +285,10 @@ export const getRankingItems = async (page, size, keyword, token) => {
       );
     }
 
-    let items = responseData.result.itemList;
-
-    if (keyword) {
-      items = items.filter((item) =>
-        item.name.toLowerCase().includes(keyword.toLowerCase())
-      );
-    }
-
-    return items;
+    return {
+      itemList: responseData.result.itemList,
+      totalElement: responseData.result.totalElement,
+    };
   } catch (error) {
     console.error("Error fetching deadline items:", error);
     throw error;
@@ -1087,6 +1087,73 @@ export const getSellerItemList = async (page, size) => {
 };
 
 export const registerItem = async (
+  itemName,
+  simpleExplanation,
+  categoryId,
+  price,
+  stock,
+  deliveryPrice,
+  deadLine,
+  isGroupPurchase,
+  targetQuantity,
+  groupPurchasePrice,
+  itemDetailsImage,
+  itemImages
+) => {
+  const REGISTER_ITEM_ENDPOINT = "/auth/v1/item";
+  const token = localStorage.getItem("accessToken");
+
+  const formData = new FormData();
+  formData.append("itemDetailsImage", itemDetailsImage, itemDetailsImage.name);
+
+  itemImages.forEach((image, index) => {
+    formData.append(`itemImages[${index}].sequence`, image.sequence);
+    formData.append(
+      `itemImages[${index}].multipartFile`,
+      image.multipartFile,
+      image.multipartFile.name
+    );
+  });
+
+  const requestObject = {
+    itemName: itemName,
+    simpleExplanation: simpleExplanation,
+    categoryId: categoryId,
+    price: price,
+    stock: stock,
+    deliveryPrice: deliveryPrice,
+    deadLine: deadLine,
+    isGroupPurchase: isGroupPurchase,
+    targetQuantity: targetQuantity,
+    groupPurchasePrice: groupPurchasePrice,
+  };
+
+  formData.append(
+    "request",
+    new Blob([JSON.stringify(requestObject)], { type: "application/json" })
+  );
+
+  try {
+    const response = await fetch(REGISTER_ITEM_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to register item");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error registering item:", error);
+    throw error;
+  }
+};
+
+export const registerItem2 = async (
   itemName,
   simpleExplanation,
   categoryId,

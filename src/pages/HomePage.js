@@ -42,7 +42,7 @@ function HomePage() {
     const fetchDeadlineItems = async () => {
       try {
         const fetchedProducts = await getDeadlineItems(page, size, null, token);
-        setDeadlineProducts(fetchedProducts.slice(0, displayLimit));
+        setDeadlineProducts(fetchedProducts.itemList.slice(0, displayLimit));
       } catch (error) {
         console.error("Error fetching deadline items:", error);
       }
@@ -51,7 +51,7 @@ function HomePage() {
     const fetchRankingItems = async () => {
       try {
         const fetchedProducts = await getRankingItems(page, size, null, token);
-        setRankingProducts(fetchedProducts.slice(0, displayLimit));
+        setRankingProducts(fetchedProducts.itemList.slice(0, displayLimit));
       } catch (error) {
         console.error("Error fetching ranking items:", error);
       }
@@ -76,7 +76,7 @@ function HomePage() {
     const fetchGroupItems = async () => {
       try {
         const fetchedProducts = await getGroupItems(page, size, null, token);
-        setGroupProducts(fetchedProducts);
+        setGroupProducts(fetchedProducts.items);
       } catch (error) {
         console.error("Error fetching group items:", error);
       }

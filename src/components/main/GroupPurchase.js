@@ -13,17 +13,21 @@ SwipeCore.use([Navigation, Pagination, Autoplay]);
 
 function GroupPurchase() {
   const [groupPurchaseItems, setGroupPurchaseItems] = useState([]);
+  // eslint-disable-next-line
+  const [totalElement, setTotalElement] = useState(0);
+  const pageSize = 5;
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await getGroupItems(1, 5, null, "JWT_TOKEN");
+        const data = await getGroupItems(1, pageSize, null, "JWT_TOKEN");
 
-        const sortedItems = data.sort(
+        setTotalElement(data.totalElement);
+
+        const sortedItems = data.items.sort(
           (a, b) => a.targetQuantity - b.targetQuantity
         );
-
-        const top5Items = sortedItems.slice(0, 5);
+        const top5Items = sortedItems.slice(0, pageSize);
         setGroupPurchaseItems(top5Items);
       } catch (error) {
         console.error("Error fetching group purchase items:", error);

@@ -73,3 +73,9 @@
   font-weight: 600;
   margin: 0 0 0 5px;
 }
+
+.ErrorMsg {
+  color: #eb5757;
+  font-size: 15px;
+  margin: 30px auto 20px;
+}

@@ -30,7 +30,7 @@ const LoginPage = ({ onLogin }) => {
       navigate("/");
       console.log("로그인 성공");
     } catch (error) {
-      setError(`로그인 실패: ${error.message}`);
+      setError("아이디 또는 비밀번호가 잘못되었습니다.");
     }
   };
 
@@ -79,10 +79,10 @@ const LoginPage = ({ onLogin }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {error && <p className={styles.ErrorMsg}>{error}</p>}
           <Button2 className={styles.Button} type="submit">
             로그인
           </Button2>
-          {error && <p className={styles.ErrorMsg}>{error}</p>}
           <div className={styles.register}>
             회원이 아니신가요?{" "}
             <Link to="/member/signUp">
