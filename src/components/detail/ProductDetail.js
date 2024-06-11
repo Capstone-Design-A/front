@@ -45,6 +45,28 @@ function ProductDetail({ item }) {
     }
   };
 
+  const handleBuyNowClick = () => {
+    const quantityAsNumber = parseInt(quantity);
+    console.log("Quantity as number:", quantityAsNumber);
+
+    const totalAmount = quantityAsNumber * item.price;
+    console.log("Total amount:", totalAmount);
+
+    navigate("/auth/payment", {
+      state: {
+        products: [
+          {
+            id: item.id,
+            name: item.name,
+            image: item.itemDetailsImageUrl,
+            price: item.price,
+            quantity: quantity,
+          },
+        ],
+        totalAmount: totalAmount,
+      },
+    });
+  };
   const totalPrice = quantity * item.price;
 
   return (
@@ -77,7 +99,7 @@ function ProductDetail({ item }) {
           <OrderButton
             className={styles.orderbutton}
             variant="round"
-            onClick={handleAddToCartClick}
+            onClick={handleBuyNowClick}
           >
             바로구매
           </OrderButton>

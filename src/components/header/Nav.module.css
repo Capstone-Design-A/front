@@ -5,6 +5,7 @@
   background-color: #fff;
   box-shadow: var(--box-shadow);
   overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .container_top {

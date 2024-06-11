@@ -1,11 +1,12 @@
 .banner {
   position: relative;
-  height: 403px; /* 이미지의 높이 364px로 설정 */
+  height: 403px;
   background-image: url("../../assets/banner-sample.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   margin-bottom: 100px;
+  z-index: 1;
 }
 
 .category {
@@ -17,7 +18,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
 }
 
 @media (max-width: 768px) {

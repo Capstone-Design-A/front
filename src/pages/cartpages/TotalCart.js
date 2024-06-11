@@ -13,7 +13,7 @@ function TotalCart({ products, totalDeliveryCharge }) {
 
   const handleOrderClick = () => {
     if (checkedProducts.length > 0) {
-      navigate("/auth/paymemt", {
+      navigate("/auth/payment", {
         state: { products: checkedProducts, totalAmount: totalAmount },
       });
     }

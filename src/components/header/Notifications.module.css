@@ -41,14 +41,23 @@
 }
 
 .popup {
-  position: absolute;
-  top: 50px;
-  right: 15px;
+  position: fixed;
+  top: 170px;
+  right: 30px;
   z-index: 999;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   width: 400px;
+  max-width: calc(100% - 100px);
+}
+
+@media (max-width: 720px) {
+  .popup {
+    position: fixed;
+    top: 170px;
+    right: 30px;
+  }
 }
 
 .notificationHeader {
