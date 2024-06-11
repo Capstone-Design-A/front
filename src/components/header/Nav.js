@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Container from "../shared/Container";
 import Notifications from "./Notifications";
 import logoImg from "../../assets/logoVer2.png";
@@ -10,6 +10,7 @@ import { countCartItems } from "../../api/api";
 function Nav({ isLoggedIn, onLogout }) {
   const [cartItemsCount, setCartItemsCount] = useState(0);
   const memberId = localStorage.getItem("memberId");
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCartItemsCount();
@@ -22,6 +23,14 @@ function Nav({ isLoggedIn, onLogout }) {
       setCartItemsCount(cartCount);
     } catch (error) {
       console.error("Error fetching cart items count:", error);
+    }
+  };
+
+  const handleMyPageClick = (e) => {
+    if (!isLoggedIn) {
+      e.preventDefault();
+      alert("로그인이 필요합니다.");
+      navigate("/login");
     }
   };
 
@@ -77,11 +86,13 @@ function Nav({ isLoggedIn, onLogout }) {
         </div>
         <ul className={styles.nav_bottom}>
           <li>
-            <NavLink to="/auth/member">마이 페이지</NavLink>
+            <NavLink to="/auth/member" onClick={handleMyPageClick}>
+              마이 페이지
+            </NavLink>
           </li>
           <li> | </li>
           <li>
-            <NavLink to="/auth/cart/item">
+            <NavLink to="/auth/cart/item" onClick={handleMyPageClick}>
               장바구니
               {cartItemsCount > 0 && (
                 <div className={styles.cartItemsCount}>{cartItemsCount}</div>

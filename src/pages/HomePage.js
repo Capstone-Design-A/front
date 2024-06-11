@@ -90,54 +90,56 @@ function HomePage() {
 
   return (
     <>
-      <Banner />
-      <Container>
-        <h1 className={styles.group}>
-          <NavLink
-            style={getLinkStyle}
-            to={`/groupItem?page=${page}&size=${size}`}
-          >
-            공동 구매 상품을 둘러보세요 >
-          </NavLink>
-        </h1>
-      </Container>
-      <GroupPurchase className={styles.margin} />
-      <Container>
-        <h1 className={styles.title}>
-          <Lined>마감 임박 상품</Lined>
-          <NavLink
-            style={getLinkStyle}
-            to={`/item/deadline?page=${page}&size=${size}`}
-          >
+      <div className={styles.container}>
+        <Banner />
+        <Container>
+          <h1 className={styles.group}>
+            <NavLink
+              style={getLinkStyle}
+              to={`/groupItem?page=${page}&size=${size}`}
             >
-          </NavLink>
-        </h1>
-      </Container>
-      <DeadlineItems products={deadlineProducts} />
-      <Container>
-        <h1 className={styles.title}>
-          <Lined>구매 랭킹</Lined>
-          <NavLink
-            style={getLinkStyle}
-            to={`/item/ranking?page=${page}&size=${size}`}
-          >
+              공동 구매 상품을 둘러보세요 >
+            </NavLink>
+          </h1>
+        </Container>
+        <GroupPurchase className={styles.margin} />
+        <Container>
+          <h1 className={styles.title}>
+            <Lined>마감 임박 상품</Lined>
+            <NavLink
+              style={getLinkStyle}
+              to={`/item/deadline?page=${page}&size=${size}`}
             >
-          </NavLink>
-        </h1>
-      </Container>
-      <RankingItems products={rankingProducts} />
-      <Container>
-        <h1 className={styles.title}>
-          <Lined>New! 구독하고 있는 판매자의 새 상품</Lined>
-          <NavLink
-            style={getLinkStyle}
-            to={`/item/subscription?type=${type}&fromMember=${memberId}&page=${page}&size=${size}`}
-          >
+              >
+            </NavLink>
+          </h1>
+        </Container>
+        <DeadlineItems products={deadlineProducts} />
+        <Container>
+          <h1 className={styles.title}>
+            <Lined>구매 랭킹</Lined>
+            <NavLink
+              style={getLinkStyle}
+              to={`/item/ranking?page=${page}&size=${size}`}
             >
-          </NavLink>
-        </h1>
-      </Container>
-      <SubscriptionItems products={subscriptionProducts} />
+              >
+            </NavLink>
+          </h1>
+        </Container>
+        <RankingItems products={rankingProducts} />
+        <Container>
+          <h1 className={styles.title}>
+            <Lined>New! 구독하고 있는 판매자의 새 상품</Lined>
+            <NavLink
+              style={getLinkStyle}
+              to={`/item/subscription?type=${type}&fromMember=${memberId}&page=${page}&size=${size}`}
+            >
+              >
+            </NavLink>
+          </h1>
+        </Container>
+        <SubscriptionItems products={subscriptionProducts} />
+      </div>
     </>
   );
 }

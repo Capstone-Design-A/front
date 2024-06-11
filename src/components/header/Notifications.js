@@ -84,23 +84,24 @@ function Notifications() {
 
   return (
     <div className={styles.notification}>
-      <button
-        className={styles.icon}
-        onClick={handleButtonClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className={styles.iconContainer}>
+      <div className={styles.iconContainer}>
+        <button
+          className={styles.icon}
+          onClick={handleButtonClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <img
             src={iconSrc}
             alt="알림 아이콘"
             className={isHovered ? styles.iconHovered : styles.icon}
           />
-          {notificationCount > 0 && (
-            <div className={styles.notificationCount}>{notificationCount}</div>
-          )}
-        </div>
-      </button>
+        </button>
+        {notificationCount > 0 && (
+          <div className={styles.notificationCount}>{notificationCount}</div>
+        )}
+      </div>
+
       {isOpen && (
         <div className={styles.popup}>
           <div className={styles.notificationHeader}>알림</div>
