@@ -8,6 +8,7 @@ import Category from "../components/category/Category";
 function ProductDeadlinePage() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
+  const size = 10;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
