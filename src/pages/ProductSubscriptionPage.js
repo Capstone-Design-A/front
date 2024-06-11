@@ -46,7 +46,7 @@ function ProductSubscriptionPage() {
 
     fetchData();
     // eslint-disable-next-line
-  }, [page, isLoggedIn, memberId, products.length]);
+  }, [page, isLoggedIn, memberId]);
 
   const handleLoadMore = () => {
     if (!isLoading && hasMore) {

@@ -37,23 +37,43 @@ function ProductRegistrationPage() {
       return;
     }
 
+    const normalizedTargetQuantity = targetQuantity || "";
+
+    const formData = new FormData();
+    formData.append("itemName", itemName);
+    formData.append("simpleExplanation", simpleExplanation);
+    formData.append("categoryId", categoryId);
+    formData.append("price", price);
+    formData.append("stock", stock);
+    formData.append("deliveryPrice", deliveryPrice);
+    formData.append("deadLine", deadLine);
+    formData.append("isGroupPurchase", isGroupPurchase);
+    formData.append("targetQuantity", normalizedTargetQuantity);
+    formData.append("groupPurchasePrice", groupPurchasePrice);
+    formData.append("itemDetailsImage", itemDetailsImage);
+
+    itemImages.forEach((image, index) => {
+      formData.append(`itemImages[${index}].sequence`, image.sequence);
+      formData.append(
+        `itemImages[${index}].multipartFile`,
+        image.multipartFile
+      );
+    });
+
     try {
       const result = await registerItem(
         itemName,
         simpleExplanation,
-        parseInt(categoryId),
-        parseInt(price),
-        parseInt(stock),
-        parseInt(deliveryPrice),
+        categoryId,
+        price,
+        stock,
+        deliveryPrice,
         deadLine,
         isGroupPurchase,
-        parseInt(targetQuantity),
-        parseInt(groupPurchasePrice),
+        normalizedTargetQuantity,
+        groupPurchasePrice,
         itemDetailsImage,
-        itemImages.map((image) => ({
-          sequence: image.sequence,
-          multipartFile: image.multipartFile,
-        }))
+        itemImages
       );
       if (result.isSuccess) {
         console.log("상품이 등록되었습니다:", result);
@@ -69,7 +89,8 @@ function ProductRegistrationPage() {
   };
 
   const handleDetailImagesChange = (e) => {
-    setItemDetailsImage(e.target.files[0]);
+    const image = e.target.files[0];
+    setItemDetailsImage(image);
   };
 
   const handleItemImageChange = (e) => {
@@ -81,7 +102,6 @@ function ProductRegistrationPage() {
         multipartFile: image,
       })),
     ];
-
     setItemImages(updatedImages);
   };
 

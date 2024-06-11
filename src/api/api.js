@@ -1104,34 +1104,22 @@ export const registerItem = async (
   const token = localStorage.getItem("accessToken");
 
   const formData = new FormData();
-  formData.append("itemDetailsImage", itemDetailsImage, itemDetailsImage.name);
+  formData.append("itemName", itemName);
+  formData.append("simpleExplanation", simpleExplanation);
+  formData.append("categoryId", categoryId);
+  formData.append("price", price);
+  formData.append("stock", stock);
+  formData.append("deliveryPrice", deliveryPrice);
+  formData.append("deadLine", deadLine);
+  formData.append("isGroupPurchase", isGroupPurchase);
+  formData.append("targetQuantity", targetQuantity);
+  formData.append("groupPurchasePrice", groupPurchasePrice);
+  formData.append("itemDetailsImage", itemDetailsImage);
 
   itemImages.forEach((image, index) => {
     formData.append(`itemImages[${index}].sequence`, image.sequence);
-    formData.append(
-      `itemImages[${index}].multipartFile`,
-      image.multipartFile,
-      image.multipartFile.name
-    );
+    formData.append(`itemImages[${index}].multipartFile`, image.multipartFile);
   });
-
-  const requestObject = {
-    itemName: itemName,
-    simpleExplanation: simpleExplanation,
-    categoryId: categoryId,
-    price: price,
-    stock: stock,
-    deliveryPrice: deliveryPrice,
-    deadLine: deadLine,
-    isGroupPurchase: isGroupPurchase,
-    targetQuantity: targetQuantity,
-    groupPurchasePrice: groupPurchasePrice,
-  };
-
-  formData.append(
-    "request",
-    new Blob([JSON.stringify(requestObject)], { type: "application/json" })
-  );
 
   try {
     const response = await fetch(REGISTER_ITEM_ENDPOINT, {
