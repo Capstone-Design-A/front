@@ -36,10 +36,14 @@ function Nav({ isLoggedIn, onLogout }) {
                   로그아웃
                 </NavLink>
               </li>
-              <li> | </li>
-              <li>
-                <NavLink to="/auth/seller">판매자관리</NavLink>
-              </li>
+              {isLoggedIn && (
+                <>
+                  <li> | </li>
+                  <li>
+                    <NavLink to="/auth/seller">판매자관리</NavLink>
+                  </li>
+                </>
+              )}
               <li> | </li>
               <li>
                 <NavLink to="/">고객센터</NavLink>
@@ -55,10 +59,6 @@ function Nav({ isLoggedIn, onLogout }) {
               <li> | </li>
               <li>
                 <NavLink to="/member/signUp">회원가입</NavLink>
-              </li>
-              <li> | </li>
-              <li>
-                <NavLink to="/auth/seller">판매자관리</NavLink>
               </li>
               <li> | </li>
               <li>

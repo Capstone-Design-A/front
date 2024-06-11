@@ -8,13 +8,15 @@ import Category from "../components/category/Category";
 
 function ProductCategoryPage() {
   const location = useLocation();
-  // eslint-disable-next-line
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const size = 10;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
   const [categoryName, setCategoryName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [totalProducts, setTotalProducts] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,25 +61,54 @@ function ProductCategoryPage() {
 
         setCategory({ id: parsedCategoryId });
 
-        const currentPage = page || 1;
-        const productsData = await getItemsByCategory(
+        const { itemList, totalElement } = await getItemsByCategory(
           parsedCategoryId,
-          currentPage,
+          1,
           size,
           "JWT_TOKEN"
         );
-        setProducts(productsData);
+        setProducts(itemList);
+        setTotalProducts(totalElement);
+        setHasMore(itemList.length === size);
       } catch (error) {
         console.error("Error fetching category and products:", error);
       }
     };
 
     fetchData();
-  }, [location.search, page, size]);
+  }, [location.search]);
+
+  useEffect(() => {
+    const loadMore = async () => {
+      try {
+        setIsLoading(true);
+        if (page === 1) return;
+        const { itemList, totalElement } = await getItemsByCategory(
+          category.id,
+          page,
+          size,
+          "JWT_TOKEN"
+        );
+        if (itemList.length === 0) {
+          setHasMore(false);
+          return;
+        }
+        setProducts((prevProducts) => [...prevProducts, ...itemList]);
+        setTotalProducts(totalElement);
+        setHasMore(itemList.length === size && totalElement > products.length);
+      } catch (error) {
+        console.error("Error loading more products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadMore();
+    // eslint-disable-next-line
+  }, [page, category, size]);
 
   const handleLoadMore = () => {
-    const nextPage = page !== undefined ? page + 1 : 1;
-    setPage(nextPage);
+    setPage((prevPage) => prevPage + 1);
   };
 
   const toggleCategoryVisibility = () => {
@@ -105,15 +136,21 @@ function ProductCategoryPage() {
         <div className={styles.pageContainer}>
           <ListPage title={categoryName}>
             <div className={styles.content}>
-              <p className={styles.count}>총 {products.length}개의 상품</p>
+              <p className={styles.count}>총 {totalProducts}개의 상품</p>
               <div>
                 <CategoryProducts products={products} />
               </div>
-              <div className={styles.loadMore}>
-                <button className={styles.button} onClick={handleLoadMore}>
-                  더보기
-                </button>
-              </div>
+              {hasMore && (
+                <div className={styles.loadMore}>
+                  <button
+                    className={styles.button}
+                    onClick={handleLoadMore}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "로딩 중..." : "더보기"}
+                  </button>
+                </div>
+              )}
             </div>
           </ListPage>
         </div>

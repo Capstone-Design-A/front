@@ -10,13 +10,13 @@ function ProductRegistrationPage() {
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [deliveryPrice, setDeliveryPrice] = useState("");
-  const [deadline, setDeadline] = useState("");
+  const [deadLine, setDeadLine] = useState("");
   const [isGroupPurchase, setIsGroupPurchase] = useState(false);
   const [targetQuantity, setTargetQuantity] = useState("");
   const [groupPurchasePrice, setGroupPurchasePrice] = useState("");
-  const [itemImages, setItemImages] = useState(null);
-  const [itemDetailsImage, setItemDetailsImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [itemImages, setItemImages] = useState([]);
+  const [itemDetailsImage, setItemDetailsImage] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -28,9 +28,9 @@ function ProductRegistrationPage() {
       !price ||
       !stock ||
       !deliveryPrice ||
-      !deadline ||
-      !itemImages ||
+      !deadLine ||
       !itemDetailsImage ||
+      itemImages.length === 0 ||
       (isGroupPurchase && (!targetQuantity || !groupPurchasePrice))
     ) {
       setErrorMessage("모든 필수 항목을 입력하세요.");
@@ -45,12 +45,15 @@ function ProductRegistrationPage() {
         parseInt(price),
         parseInt(stock),
         parseInt(deliveryPrice),
-        deadline,
+        deadLine,
         isGroupPurchase,
         parseInt(targetQuantity),
         parseInt(groupPurchasePrice),
-        itemImages,
-        itemDetailsImage
+        itemDetailsImage,
+        itemImages.map((image) => ({
+          sequence: image.sequence,
+          multipartFile: image.multipartFile,
+        }))
       );
       if (result.isSuccess) {
         console.log("상품이 등록되었습니다:", result);
@@ -65,12 +68,21 @@ function ProductRegistrationPage() {
     }
   };
 
-  const handleItemImageChange = (e) => {
-    setItemImages(e.target.files[0]);
-  };
-
   const handleDetailImagesChange = (e) => {
     setItemDetailsImage(e.target.files[0]);
+  };
+
+  const handleItemImageChange = (e) => {
+    const images = Array.from(e.target.files);
+    const updatedImages = [
+      ...itemImages,
+      ...images.map((image, index) => ({
+        sequence: itemImages.length + index + 1,
+        multipartFile: image,
+      })),
+    ];
+
+    setItemImages(updatedImages);
   };
 
   const formatPrice = (price) => {
@@ -97,11 +109,11 @@ function ProductRegistrationPage() {
       <h1 className={styles.title}>상품 등록</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
-          <label htmlFor="itemImage">메인 이미지</label>
+          <label htmlFor="itemDetailsImage">메인 이미지</label>
           <input
             type="file"
-            id="itemImage"
-            onChange={handleItemImageChange}
+            id="itemDetailsImage"
+            onChange={handleDetailImagesChange}
             required
           />
         </div>
@@ -175,12 +187,12 @@ function ProductRegistrationPage() {
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="deadline">마감일</label>
+          <label htmlFor="deadLine">마감일</label>
           <input
             type="datetime-local"
-            id="deadline"
-            value={deadline}
-            onChange={(e) => setDeadline(e.target.value)}
+            id="deadLine"
+            value={deadLine}
+            onChange={(e) => setDeadLine(e.target.value)}
             required
           />
         </div>
@@ -218,12 +230,13 @@ function ProductRegistrationPage() {
           </div>
         )}
         <div className={styles.formGroup}>
-          <label htmlFor="detailImages">상품 상세 이미지</label>
+          <label htmlFor="itemImages">상품 상세 이미지</label>
           <input
             type="file"
-            id="detailImages"
-            onChange={handleDetailImagesChange}
+            id="itemImages"
+            onChange={handleItemImageChange}
             required
+            multiple
           />
         </div>
         <button className={styles.button} type="submit">
