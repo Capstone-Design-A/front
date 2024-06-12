@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
 import styles from "./UserInfoManagement.module.css";
-import { fetchUserInfo, updateUserInfo, checkDuplicate } from "../../api/api";
+import {
+  fetchUserInfo,
+  updateUserInfo,
+  updateUserNickname,
+} from "../../api/api";
 
 function UserInfoManagement() {
   const [address, setAddress] = useState("");
   const [detailedAddress, setDetailedAddress] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [nickName, setNickName] = useState("");
+  const [isNicknameUpdating, setIsNicknameUpdating] = useState(false);
+  const [nicknameButtonLabel, setNicknameButtonLabel] = useState("닉네임 변경");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  // eslint-disable-next-line
-  const [isNicknameAvailable, setIsNicknameAvailable] = useState(true);
-  const [isCheckingDuplicate, setIsCheckingDuplicate] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
   const [duplicateMessage, setDuplicateMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -41,23 +46,26 @@ function UserInfoManagement() {
   const handleNickNameChange = (e) => setNickName(e.target.value);
   const handleNewPasswordChange = (e) => setNewPassword(e.target.value);
   const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
+  const handleCurrentPasswordChange = (e) => setCurrentPassword(e.target.value);
 
-  const handleCheckDuplicate = async () => {
-    setIsCheckingDuplicate(true);
+  const handleNicknameUpdate = async () => {
+    setIsNicknameUpdating(true);
     try {
-      const isAvailable = await checkDuplicate(null, "nickName", nickName);
-      setIsNicknameAvailable(isAvailable);
-      setDuplicateMessage(
-        isAvailable
-          ? "사용 가능한 닉네임입니다."
-          : "이미 사용 중인 닉네임입니다."
-      );
+      const data = await updateUserNickname({ nickName });
+      if (data.isSuccess) {
+        console.log("닉네임이 성공적으로 수정되었습니다.");
+        setDuplicateMessage("닉네임이 성공적으로 수정되었습니다.");
+        setNicknameButtonLabel("닉네임 변경 완료");
+        document.getElementById("nicknameInput").disabled = true;
+      } else {
+        setDuplicateMessage("닉네임 수정에 실패했습니다.");
+        console.error("닉네임 수정에 실패했습니다.");
+      }
     } catch (error) {
-      console.error("Error checking nickname availability:", error);
-      setIsNicknameAvailable(false);
-      setDuplicateMessage("닉네임 중복 확인 중 오류가 발생했습니다.");
+      setDuplicateMessage("닉네임 수정 중 오류가 발생했습니다.");
+      console.error("Error updating nickname:", error);
     } finally {
-      setIsCheckingDuplicate(false);
+      setIsNicknameUpdating(false);
     }
   };
 
@@ -65,9 +73,13 @@ function UserInfoManagement() {
     e.preventDefault();
     setErrorMessage("");
 
-    if (newPassword !== confirmPassword) {
-      setErrorMessage("비밀번호가 일치하지 않습니다.");
-      console.error(errorMessage);
+    if (!currentPassword) {
+      setErrorMessage("현재 비밀번호를 입력하세요.");
+      return;
+    }
+
+    if (newPassword.trim() && newPassword !== confirmPassword) {
+      setErrorMessage("새 비밀번호가 일치하지 않습니다.");
       return;
     }
 
@@ -75,16 +87,18 @@ function UserInfoManagement() {
       address,
       details: detailedAddress,
       phone: contactNumber,
-      password: newPassword,
+      currentPassword,
     };
+
+    if (newPassword.trim()) {
+      updatedData.password = newPassword;
+    }
 
     try {
       const data = await updateUserInfo(updatedData);
       if (data.isSuccess) {
-        setAddress(data.result.address);
-        setDetailedAddress(data.result.details);
-        setContactNumber(data.result.phone);
         console.log("회원 정보가 성공적으로 수정되었습니다.");
+        setSuccessMessage("회원 정보가 성공적으로 수정되었습니다.");
       } else {
         setErrorMessage("회원 정보 수정에 실패했습니다.");
         console.error("회원 정보 수정에 실패했습니다.");
@@ -100,26 +114,27 @@ function UserInfoManagement() {
       <h2>회원 정보 수정</h2>
       <div className={styles.formGroup}>
         <label>닉네임 변경</label>
-        <div className={styles.nicknameInputGroup}>
-          <input
-            type="text"
-            value={nickName}
-            onChange={handleNickNameChange}
-            className={styles.nicknameInput}
-            placeholder="닉네임"
-          />
-          <button
-            type="button"
-            onClick={handleCheckDuplicate}
-            disabled={isCheckingDuplicate}
-            className={styles.checkDuplicateButton}
-          >
-            중복 체크
-          </button>
-        </div>
-        {!isCheckingDuplicate && (
-          <p className={styles.errorMessage}>{duplicateMessage}</p>
-        )}
+        <input
+          id="nicknameInput"
+          type="text"
+          value={nickName}
+          onChange={handleNickNameChange}
+          className={styles.nicknameInput}
+          placeholder="닉네임"
+        />
+        <p className={styles.errorMessage}>{duplicateMessage}</p>
+        <button
+          type="button"
+          onClick={handleNicknameUpdate}
+          className={`${styles.nickNameSubmitButton} ${
+            isNicknameUpdating || nicknameButtonLabel === "닉네임 변경 완료"
+              ? styles.inactiveButton
+              : ""
+          }`}
+          disabled={!nickName || isNicknameUpdating}
+        >
+          {nicknameButtonLabel}
+        </button>
       </div>
       <div className={styles.formGroup}>
         <label>배송지 변경</label>
@@ -146,6 +161,15 @@ function UserInfoManagement() {
         />
       </div>
       <div className={styles.formGroup}>
+        <label>현재 비밀번호</label>
+        <input
+          type="password"
+          value={currentPassword}
+          onChange={handleCurrentPasswordChange}
+          placeholder="현재 비밀번호"
+        />
+      </div>
+      <div className={styles.formGroup}>
         <label>새 비밀번호</label>
         <input
           type="password"
@@ -164,6 +188,9 @@ function UserInfoManagement() {
         />
       </div>
       {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+      {successMessage && (
+        <p className={styles.errorMessage}>{successMessage}</p>
+      )}
       <button type="submit" className={styles.submitButton}>
         변경 내용 저장
       </button>
