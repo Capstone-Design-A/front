@@ -8,23 +8,22 @@ function SellerItemListPage() {
   const [products, setProducts] = useState([]);
   const [totalElements, setTotalElements] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const size = 20;
+  const size = 7;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sellerItemList = await getSellerItemList(currentPage, size);
-        console.log("Fetched data:", sellerItemList);
-        const slicedProducts = sellerItemList.salesItemList;
-        setProducts(slicedProducts);
-        setTotalElements(sellerItemList.totalElement);
+        const sellerItemList = await getSellerItemList(1, 1000);
+        console.log("seller item list:", sellerItemList);
+        setProducts(sellerItemList.salesItemList);
+        setTotalElements(sellerItemList.salesItemList.length);
       } catch (error) {
         console.error("Error fetching seller item list: ", error);
       }
     };
     fetchData();
-  }, [currentPage, size]);
+  }, []);
 
   const toggleCategoryVisibility = () => {
     setIsCategoryVisible((prev) => !prev);
@@ -41,7 +40,6 @@ function SellerItemListPage() {
   const indexOfLastItem = currentPage * size;
   const indexOfFirstItem = indexOfLastItem - size;
   const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
-  console.log("currentProducts: ", currentProducts);
   const totalPages = Math.ceil(totalElements / size);
 
   return (
