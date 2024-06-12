@@ -1303,8 +1303,10 @@ export const getUserGroupStatus = async (page, size) => {
       );
     }
 
-    const orderGroupItems = responseData.result.orderGroupItemList;
-    return orderGroupItems;
+    return {
+      orderGroupItems: responseData.result.orderGroupItemList,
+      totalElements: responseData.result.totalElement,
+    };
   } catch (error) {
     console.error("Error fetching order group items:", error);
     throw error;

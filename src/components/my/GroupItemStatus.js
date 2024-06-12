@@ -4,32 +4,42 @@ import styles from "./GroupItemStatus.module.css";
 
 function GroupItemStatus() {
   const [orderGroupItems, setOrderGroupItems] = useState([]);
-  const [page, setPage] = useState(1);
-  // eslint-disable-next-line
-  const [size, setSize] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [size] = useState(5);
+  const [totalElements, setTotalElements] = useState(0);
 
   useEffect(() => {
     const fetchOrderGroupItems = async () => {
       try {
-        const items = await getUserGroupStatus(page, size);
-        setOrderGroupItems(items);
+        const { orderGroupItems, totalElements } = await getUserGroupStatus(
+          currentPage,
+          size
+        );
+        setOrderGroupItems(orderGroupItems);
+        setTotalElements(totalElements);
       } catch (error) {
         console.error("Error fetching order group items:", error);
       }
     };
 
     fetchOrderGroupItems();
-  }, [page, size]);
+  }, [currentPage, size]);
 
-  const nextPage = () => {
-    setPage((prevPage) => prevPage + 1);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(date.getDate()).padStart(2, "0")} ${String(
+      date.getHours()
+    ).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}:${String(
+      date.getSeconds()
+    ).padStart(2, "0")}`;
   };
 
-  const prevPage = () => {
-    if (page > 1) {
-      setPage((prevPage) => prevPage - 1);
-    }
-  };
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const totalPages = Math.ceil(totalElements / size);
 
   return (
     <div className={styles.container}>
@@ -40,19 +50,24 @@ function GroupItemStatus() {
             <div>상품명: {item.item.name}</div>
             <div>수량: {item.quantity}</div>
             <div>상태: {item.status}</div>
-            <div>주문일시: {item.createdAt}</div>
+            <div>주문일시: {formatDate(item.createdAt)}</div>
           </div>
         ))}
       </div>
       <div className={styles.pagination}>
-        <button
-          onClick={prevPage}
-          disabled={page === 1}
-          className={page === 1 ? styles.hide : ""}
-        >
-          이전
-        </button>
-        <button onClick={nextPage}>다음</button>
+        {totalPages > 1 && (
+          <ul className={styles.paginationList}>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => paginate(index + 1)}
+                className={currentPage === index + 1 ? styles.active : ""}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

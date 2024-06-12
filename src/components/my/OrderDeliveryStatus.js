@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./OrderDeliveryStatus.module.css";
 import { getUserOrderStatus } from "../../api/api";
 
 function OrderDeliveryStatus() {
   const [orderData, setOrderData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [ordersPerPage] = useState(1);
 
   useEffect(() => {
     const fetchOrderStatus = async () => {
@@ -32,12 +34,66 @@ function OrderDeliveryStatus() {
     }
   };
 
+  const renderPagination = () => {
+    const pageNumbers = [];
+    const lastPage = Math.ceil(orderData.length / ordersPerPage);
+    const maxPagesToShow = 10;
+    let startPage, endPage;
+
+    if (lastPage <= maxPagesToShow) {
+      startPage = 1;
+      endPage = lastPage;
+    } else {
+      const halfMaxPagesToShow = Math.floor(maxPagesToShow / 2);
+      if (currentPage <= halfMaxPagesToShow) {
+        startPage = 1;
+        endPage = maxPagesToShow;
+      } else if (currentPage + halfMaxPagesToShow >= lastPage) {
+        startPage = lastPage - maxPagesToShow + 1;
+        endPage = lastPage;
+      } else {
+        startPage = currentPage - halfMaxPagesToShow;
+        endPage = currentPage + halfMaxPagesToShow;
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    return (
+      <>
+        {currentPage > 1 && (
+          <button onClick={() => setCurrentPage(currentPage - 1)}>이전</button>
+        )}
+        {startPage > 1 && <span>...</span>}
+        {pageNumbers.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            onClick={() => setCurrentPage(pageNumber)}
+            className={currentPage === pageNumber ? styles.active : ""}
+          >
+            {pageNumber}
+          </button>
+        ))}
+        {endPage < lastPage && <span>...</span>}
+        {currentPage < lastPage && (
+          <button onClick={() => setCurrentPage(currentPage + 1)}>다음</button>
+        )}
+      </>
+    );
+  };
+
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = orderData.slice(indexOfFirstOrder, indexOfLastOrder);
+
   return (
     <div className={styles.orderDeliveryStatusContainer}>
       <h2>주문 배송 현황</h2>
       <div className={styles.orderList}>
-        {orderData.length > 0 ? (
-          orderData.map((order) => (
+        {currentOrders.length > 0 ? (
+          currentOrders.map((order) => (
             <div key={order.orderId} className={styles.order}>
               <p className={styles.orderId}>
                 <strong>주문 ID:</strong> {order.orderId}
@@ -76,6 +132,11 @@ function OrderDeliveryStatus() {
           ))
         ) : (
           <p>주문 정보가 없습니다.</p>
+        )}
+      </div>
+      <div className={styles.pagination}>
+        {orderData.length > 0 && (
+          <ul className={styles.paginationList}>{renderPagination()}</ul>
         )}
       </div>
     </div>
