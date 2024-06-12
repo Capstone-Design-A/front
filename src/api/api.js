@@ -1595,3 +1595,25 @@ export const updateUserInfo = async (updatedData) => {
     throw error;
   }
 };
+
+export const updateUserNickname = async (nickName) => {
+  const UPDATE_USER_NICKNAME_ENDPOINT = `/auth/member/nickName`;
+  const token = localStorage.getItem("accessToken");
+
+  try {
+    const response = await fetch(UPDATE_USER_NICKNAME_ENDPOINT, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(nickName),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error updating user data:", error);
+    throw error;
+  }
+};
