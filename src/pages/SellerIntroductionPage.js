@@ -15,7 +15,7 @@ function SellerIntroductionPage() {
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
 
-  const myMemberId = parseInt(localStorage.getItem("memberId"), 20);
+  const myMemberId = parseInt(localStorage.getItem("memberId"), 10);
 
   useEffect(() => {
     const fetchData = async () => {
