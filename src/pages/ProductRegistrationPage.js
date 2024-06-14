@@ -129,13 +129,17 @@ function ProductRegistrationPage() {
       <h1 className={styles.title}>상품 등록</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
-          <label htmlFor="itemDetailsImage">메인 이미지</label>
+          <label htmlFor="itemImages">메인 이미지</label>
           <input
             type="file"
-            id="itemDetailsImage"
-            onChange={handleDetailImagesChange}
+            id="itemImages"
+            onChange={handleItemImageChange}
             required
+            multiple
           />
+          <h3>
+            * 상품의 대표 이미지는 1:1 사이즈로, 여러 장 선택이 가능합니다.
+          </h3>
         </div>
         <div className={styles.formGroup}>
           <label className={styles.label} htmlFor="itemName">
@@ -250,14 +254,14 @@ function ProductRegistrationPage() {
           </div>
         )}
         <div className={styles.formGroup}>
-          <label htmlFor="itemImages">상품 상세 이미지</label>
+          <label htmlFor="itemDetailsImage">상품 상세 이미지</label>
           <input
             type="file"
-            id="itemImages"
-            onChange={handleItemImageChange}
+            id="itemDetailsImage"
+            onChange={handleDetailImagesChange}
             required
-            multiple
           />
+          <h3>* 상품을 설명하는 상세 이미지를 등록해주세요.</h3>
         </div>
         <button className={styles.button} type="submit">
           상품 등록

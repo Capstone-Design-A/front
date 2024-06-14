@@ -8,21 +8,66 @@
   padding: 65px 10px 20px;
 }
 
-.image {
+.arrowButton {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
+  justify-content: center;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #888;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-family: "slick";
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.75;
+  color: #888;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.nextArrow {
+  right: -55px;
+}
+
+.prevArrow {
+  left: -55px;
+}
+
+.nextArrow::before {
+  color: #c4c4c4;
+  font-size: 36px;
+}
+
+.prevArrow::before {
+  color: #c4c4c4;
+  font-size: 36px;
+}
+
+.image {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  max-height: 400px;
+  margin: auto;
 }
 
 .img {
-  width: 300px;
-  height: 300px;
-  /*border: 0.1px solid #888;*/
+  width: 400px;
+  height: 400px;
 }
 
 .title {
-  margin: 30px 0px;
+  margin: 80px 0px 30px;
   font-size: 22px;
   text-align: center;
 }
