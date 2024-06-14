@@ -1,11 +1,39 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Slider from "react-slick";
 import { addToCart } from "../../api/api";
 import Button from "../button/Button";
 import OrderButton from "../button/OrderButton";
 import Container from "../shared/Container";
 import HorizontalRule from "../shared/HorizontalRule";
 import styles from "./ProductDetail.module.css";
+import "slick-carousel/slick/slick.css";
+
+const NextArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} ${styles.arrowButton} ${styles.nextArrow}`}
+      style={{ ...style }}
+      onClick={onClick}
+    >
+      〉
+    </div>
+  );
+};
+
+const PrevArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} ${styles.arrowButton} ${styles.prevArrow}`}
+      style={{ ...style }}
+      onClick={onClick}
+    >
+      〈
+    </div>
+  );
+};
 
 function ProductDetail({ item }) {
   const navigate = useNavigate();
@@ -58,7 +86,7 @@ function ProductDetail({ item }) {
           {
             id: item.id,
             name: item.name,
-            image: item.itemDetailsImageUrl,
+            image: item.imageUrls,
             price: item.price,
             quantity: quantity,
           },
@@ -69,16 +97,40 @@ function ProductDetail({ item }) {
   };
   const totalPrice = quantity * item.price;
 
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+  };
+
+  if (!item || !item.imageUrls) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className={styles.layout}>
         <Container className={styles.content}>
           <div className={styles.image}>
-            <img
-              className={styles.img}
-              src={item.itemDetailsImageUrl}
-              alt={item.name}
-            />
+            {item.imageUrls.length > 0 ? (
+              <Slider {...settings}>
+                {item.imageUrls.map((url, index) => (
+                  <div key={index}>
+                    <img
+                      className={styles.img}
+                      src={url}
+                      alt={`${item.name} ${index + 1}`}
+                    />
+                  </div>
+                ))}
+              </Slider>
+            ) : (
+              <div>상품 이미지가 없습니다.</div>
+            )}
             <Link to={`/intro/${item.memberId}`}>
               <button className={styles.button}>판매자 소개 바로가기</button>
             </Link>
@@ -91,7 +143,7 @@ function ProductDetail({ item }) {
           </div>
           <HorizontalRule />
           <p className={styles.price}>
-            총 상품 금액<span>{totalPrice.toLocaleString()}</span>원
+            총 상품 금액<span>{totalPrice.toLocaleString()}원</span>
           </p>
         </Container>
         <HorizontalRule />

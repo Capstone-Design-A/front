@@ -15,9 +15,11 @@
 .img {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0;
   border-top: 0px;
-  height: 210px;
+  width: 267px;
+  height: 240px;
   background-color: #fff;
   overflow: hidden;
 }
@@ -25,11 +27,24 @@
 .imgGroup {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0;
   border-top: 0px;
   height: 180px;
   background-color: #fff;
   overflow: hidden;
+}
+
+.img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.imgGroup img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .text {

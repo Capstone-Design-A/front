@@ -133,3 +133,10 @@
   margin-left: 10px;
   color: #494949;
 }
+
+.formGroup h3 {
+  margin-top: 3px;
+  margin-left: 20px;
+  font-size: 14px;
+  color: #888;
+}
