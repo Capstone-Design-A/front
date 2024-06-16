@@ -51,6 +51,8 @@ function ProductGroupDetail({ item }) {
       ? item.imageUrls[0]
       : "";
 
+  const progressPercentage = (item.orderSum / item.targetQuantity) * 100;
+
   return (
     <>
       <div className={styles.layout}>
@@ -71,6 +73,18 @@ function ProductGroupDetail({ item }) {
           <p className={styles.price}>
             총 상품 금액<span>{totalPrice.toLocaleString()}</span>원
           </p>
+          <div className={styles.progressBar}>
+            <div
+              className={styles.progress}
+              style={{ width: `${progressPercentage}%` }}
+            />
+            <p className={styles.progressText}>
+              공동구매 진행 상황{" "}
+              <p>
+                {item.orderSum} / {item.targetQuantity}
+              </p>
+            </p>
+          </div>
         </Container>
         <HorizontalRule />
         <Container className={styles.order}>
