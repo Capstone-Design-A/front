@@ -8,7 +8,7 @@ import Category from "../components/category/Category";
 function ProductGroupPage() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
-  const size = 10;
+  const size = 6;
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);

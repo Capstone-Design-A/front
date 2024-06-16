@@ -438,6 +438,7 @@ export const getGroupItemDetail = async (itemId, token) => {
       deadline: result.deadline,
       itemDetailsImageUrl: result.item.itemDetailsImageUrl,
       targetQuantity: result.targetQuantity,
+      orderSum: result.orderSum,
     };
 
     return item;
